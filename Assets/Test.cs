@@ -6,26 +6,12 @@ public class Test : MonoBehaviour {
 	float speed = 6.0F;
 	float  jumpSpeed = 8.0F;
 	float  gravity = 20.0F;
-	int health = 10;
-	UnityEngine.UI.Text health_text;
 
 	private Vector3 moveDirection = Vector3.zero;
 
 	// Use this for initialization
 	void Start () {
-		RectTransform[] HUD_elements = GetComponentsInChildren<RectTransform>();
-		foreach (RectTransform r in HUD_elements){
-			if (r.name == "Health"){
-				health_text = r.GetComponent<UnityEngine.UI.Text> ();
-			}
-		}
-
-		health_text.text = health.ToString();
-		//Component[] temp = health_text.GetComponents<Component>();
-		//foreach (Component t in temp) {
-		//	print(t.GetType());
-		//	if t.GetType() == UnityEngine.UI.
-		//}
+		
 	}
 	
 	// Update is called once per frame
