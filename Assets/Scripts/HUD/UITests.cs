@@ -5,6 +5,7 @@ public class UITests : MonoBehaviour {
 
 	PlayerHealth playerHealth;
 	AmmoCounter ammoCounter;
+	Cooldown cooldown;
 	public GameObject player;
 	public int ammoToPickup;
 	public int damageToTake;
@@ -13,6 +14,7 @@ public class UITests : MonoBehaviour {
 	void Start () {
 		playerHealth = player.GetComponent <PlayerHealth> ();
 		ammoCounter = player.GetComponent <AmmoCounter>();
+		cooldown = player.GetComponent <Cooldown>();
 
 	}
 	
@@ -30,5 +32,9 @@ public class UITests : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.P)){
 			ammoCounter.PickupAmmo(ammoToPickup);
 		}
+		if (Input.GetKeyDown(KeyCode.C)){
+			cooldown.FireWeapon();
+		}
+
 	}
 }
