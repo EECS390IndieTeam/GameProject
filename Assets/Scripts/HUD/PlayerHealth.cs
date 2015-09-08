@@ -19,8 +19,7 @@ public class PlayerHealth : MonoBehaviour
 	float currentDelay;
 	
 	
-	void Awake ()
-	{
+	void Start () {
 
 		
 		// Set the initial health of the player.
@@ -28,34 +27,31 @@ public class PlayerHealth : MonoBehaviour
 	}
 	
 	
-	void Update ()
-	{
+	void Update () {
 		healthSlider.value = currentHealth;
 		// If the player has just been damaged...
-		if(damaged)
-		{
-			// ... set the colour of the damageImage to the flash colour.
-			damageImage.color = flashColour;
+		if(damaged) {
+			
+			damageImage.color = flashColour;				// set the colour of the damageImage to the flash colour.
 			currentDelay = regenDelay;
 		}
 		// Otherwise...
-		else
-		{
-			// ... transition the colour back to clear.
-			damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
+		else {
+			
+			damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);		
 		}
 		
-		// Reset the damaged flag.
-		damaged = false;
+		
+		damaged = false;										// Reset the damaged flag.
 
 		if (currentDelay > 0) {
 			
-			currentDelay -= Time.deltaTime;
+			currentDelay -= Time.deltaTime;						//wait the specified delay
 		} else {
-			if (currentHealth < startingHealth){
-				currentHealth += regenSpeed * Time.deltaTime;
+			if (currentHealth < startingHealth){				
+				currentHealth += regenSpeed * Time.deltaTime;	//and then restore specifed HP per second
 			} else {
-				currentHealth = startingHealth;		//to deal with Unity weirdness making the health greater than the specified value.
+				currentHealth = startingHealth;					//to deal with Unity weirdness making the health greater than the specified value.
 			}
 
 		}
@@ -68,16 +64,12 @@ public class PlayerHealth : MonoBehaviour
 	{
 		float currentDelay = regenDelay;
 
-		// Set the damaged flag so the screen will flash.
-		damaged = true;
 		
-		// Reduce the current health by the damage amount.
-		currentHealth -= amount;
+		damaged = true;					// Set the damaged flag so the screen will flash.
 		
-		// Set the health bar's value to the current health.
-		
+		currentHealth -= amount;		// Reduce the current health by the damage amount.
 
-		currentDelay -= Time.deltaTime;
+		currentDelay -= Time.deltaTime;	// Set the health bar's value to the current health.
 
 
 		
