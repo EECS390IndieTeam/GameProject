@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Gun : MonoBehaviour {
 
     public GameObject bulletPrefab;
+    public int maxBulletsBeforeRecycle = 5;
 
     private GameObject bullet;
+    private Queue<GameObject> activeBullets;
     private Rigidbody bulletRigidBody;
 
     private Vector3 offset = new Vector3(0.0f, 0.0f, 1.0f);
@@ -16,9 +19,10 @@ public class Gun : MonoBehaviour {
         
     void Start()
     {
+        activeBullets = new Queue<GameObject>();
     }
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.C))
         {
             Fire();
             StartCoroutine(TimeOut());
@@ -26,16 +30,19 @@ public class Gun : MonoBehaviour {
 	}
 	
 	private void Fire () {
-        if(bullet == null)
+        if(activeBullets.Count <= maxBulletsBeforeRecycle - 1)
         {
             bullet = Instantiate(bulletPrefab) as GameObject;
-            bulletRigidBody = bullet.GetComponent<Rigidbody>();
+            activeBullets.Enqueue(bullet);
         }
         else
         {
-            bulletRigidBody.isKinematic = true;
-            bulletRigidBody.isKinematic = false;
+            activeBullets.Enqueue(activeBullets.Dequeue());
+            bullet = activeBullets.Peek();
+            activeBullets.Enqueue(activeBullets.Dequeue());
         }
+        bulletRigidBody = bullet.GetComponent<Rigidbody>();
+
         bullet.transform.position = transform.position + offset;
         bulletRigidBody.AddForce(firingForce);
     }
@@ -45,7 +52,7 @@ public class Gun : MonoBehaviour {
         yield return bulletTimeout;
         if (bullet != null)
         {
-            Destroy(bullet);
+            Destroy(activeBullets.Dequeue());
         }
 
     }
