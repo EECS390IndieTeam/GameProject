@@ -7,6 +7,10 @@ public class Gun : MonoBehaviour {
     public GameObject bulletPrefab;
     public int maxBulletsBeforeRecycle = 5;
 
+	//Variables for Grenade
+	public GameObject grenadePrefab;
+	public int grenadeAmmo;
+
     private GameObject bullet;
     private Queue<GameObject> activeBullets;
     private Rigidbody bulletRigidBody;
@@ -27,6 +31,16 @@ public class Gun : MonoBehaviour {
             Fire();
             StartCoroutine(TimeOut());
         }
+
+		/*
+			 * --------------------------CREATE PROJECTILE---------------------------------------------------- 
+			 */
+		if (Input.GetKeyDown(KeyCode.G) && grenadeAmmo > 0) {
+			Vector3 grenadePosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+			Quaternion grenadeRotation = GameObject.FindGameObjectWithTag("Player").transform.rotation;
+			Instantiate(grenadePrefab, grenadePosition, grenadeRotation);
+			grenadeAmmo--;
+		}
 	}
 	
 	private void Fire () {
