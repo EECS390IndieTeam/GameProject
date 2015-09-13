@@ -28,7 +28,7 @@ MonoBehaviour:
     serverDejitterDelay: 6
     serverDejitterDelayMin: 3
     serverDejitterDelayMax: 9
-    serverConnectionLimit: 32
+    serverConnectionLimit: 16
     serverConnectionAcceptMode: 0
     commandDejitterDelay: 3
     commandQueueSize: 60
@@ -45,8 +45,8 @@ MonoBehaviour:
     connectionRequestAttempts: 20
   debugClientCount: 1
   debugStartPort: 54321
-  debugStartMapName: 4c6576656c31
-  debugPlayAsServer: 0
+  debugStartMapName: testScene
+  debugPlayAsServer: 1
   showDebugInfo: 1
   overrideTimeScale: 1
   logUncaughtExceptions: 0
