@@ -6,4 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scripts/Networking/Debug/testScene.unity
+    path: Assets/Scripts/Networking/Debug/lobby.unity
+  - enabled: 1
+    path: Assets/Scripts/Networking/Debug/ingame.unity

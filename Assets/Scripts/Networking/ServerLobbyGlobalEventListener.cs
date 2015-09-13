@@ -2,7 +2,7 @@
 using System.Collections;
 
 [BoltGlobalBehaviour(BoltNetworkModes.Host)]
-public class ServerGlobalEventListener : Bolt.GlobalEventListener {
+public class ServerLobbyGlobalEventListener : Bolt.GlobalEventListener {
 
     public static string ServerPassword = "dickbutt"; //this will be moved to a different class later
     //the password for literally everything is "dickbutt"!
@@ -20,7 +20,7 @@ public class ServerGlobalEventListener : Bolt.GlobalEventListener {
         if (token != null && token is ConnectionRequestData) {
             ConnectionRequestData data = (ConnectionRequestData)token;
             Debug.Log("connection request with token of type " + token.GetType().Name);
-            if (data.Password != ServerGlobalEventListener.ServerPassword) {
+            if (data.Password != ServerLobbyGlobalEventListener.ServerPassword) {
                 DisconnectReason reason = new DisconnectReason();
                 reason.Reason = "Server Refused Connection";
                 reason.Message = "Incorrect Password";

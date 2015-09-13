@@ -9,8 +9,8 @@ public class DebugClientConnectMenu : Bolt.GlobalEventListener {
 
 	// Use this for initialization
 	void Start () {
-        if(!BoltNetwork.isRunning)
-            BoltLauncher.StartClient();
+        //if(!BoltNetwork.isRunning)
+          //  BoltLauncher.StartClient();
 	}
 	
 	// Update is called once per frame
@@ -41,13 +41,20 @@ public class DebugClientConnectMenu : Bolt.GlobalEventListener {
         if (GUILayout.Button("Launch Client")) {
             BoltLauncher.StartClient();
         }
+        GUILayout.EndHorizontal();
+        EndBox();
     }
 
     private void DrawServerMenu() {
         StartBox();
         GUILayout.BeginHorizontal();
         GUILayout.Label("server password:");
-        ServerGlobalEventListener.ServerPassword = GUILayout.TextField(ServerGlobalEventListener.ServerPassword);
+        ServerLobbyGlobalEventListener.ServerPassword = GUILayout.TextField(ServerLobbyGlobalEventListener.ServerPassword);
+        GUILayout.EndHorizontal();
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Start")) {
+            BoltNetwork.LoadScene("ingame");
+        }
         GUILayout.EndHorizontal();
         EndBox();
     }

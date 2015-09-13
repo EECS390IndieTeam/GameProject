@@ -3,11 +3,18 @@ using System.Collections;
 
 public class LobbyBehaviour : Bolt.EntityBehaviour<ILobbyObject> {
 
+    public static ILobbyObject CurrentLobby {
+        get;
+        private set;
+    }
+
     public override void Attached() {
-        UpdateLobby();
+        //UpdateLobby();
+        CurrentLobby = state;
     }
 
     void UpdateLobby() {
+        Debug.Log("Updating lobby!");
         int i = 0;
         foreach (BoltPlayer p in PlayerRegistry.AllPlayers) {
             state.PlayerList[i].ConnectionName = p.ConnectionName;
@@ -31,7 +38,7 @@ public class LobbyBehaviour : Bolt.EntityBehaviour<ILobbyObject> {
             GUILayout.Label(p.Connected ? p.UserName + "Team: " + p.Team : "Disconnected");
             //GUILayout.EndHorizontal();
         }
-        DrawTeamChangeButtons();
+        //DrawTeamChangeButtons();
         GUILayout.EndVertical();
         GUILayout.EndArea();
     }
