@@ -2,7 +2,7 @@
 using System.Collections;
 
 [BoltGlobalBehaviour(BoltNetworkModes.Host)]
-public class ServerLobbyGlobalEventListener : Bolt.GlobalEventListener {
+public class ServerConnectionEventListener : Bolt.GlobalEventListener {
 
     public static string ServerPassword = "dickbutt"; //this will be moved to a different class later
     //the password for literally everything is "dickbutt"!
@@ -17,10 +17,23 @@ public class ServerLobbyGlobalEventListener : Bolt.GlobalEventListener {
 
     public override void Connected(BoltConnection connection) {
         Bolt.IProtocolToken token = connection.ConnectToken;
+
+        //if this is a development build or in the editor, user authorization is not required
+        //this should allow for much faster debugging and testing
+        if (Debug.isDebugBuild || Application.isEditor && token == null) {
+            var newToken = new ConnectionRequestData();
+            newToken.Password = ServerPassword;
+            string baseusername = "debug player ";
+            int suffix = 0;
+            while (PlayerRegistry.usernameConnected(baseusername + suffix)) suffix++;
+            newToken.PlayerName = baseusername + suffix;
+            token = newToken;
+        }
+
         if (token != null && token is ConnectionRequestData) {
             ConnectionRequestData data = (ConnectionRequestData)token;
             Debug.Log("connection request with token of type " + token.GetType().Name);
-            if (data.Password != ServerLobbyGlobalEventListener.ServerPassword) {
+            if (data.Password != ServerConnectionEventListener.ServerPassword) {
                 DisconnectReason reason = new DisconnectReason();
                 reason.Reason = "Server Refused Connection";
                 reason.Message = "Incorrect Password";

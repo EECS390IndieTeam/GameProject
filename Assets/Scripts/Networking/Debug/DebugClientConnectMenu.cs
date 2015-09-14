@@ -7,17 +7,6 @@ public class DebugClientConnectMenu : Bolt.GlobalEventListener {
     private string password = "dickbutt";
     private string ip = "127.0.0.1:54321";
 
-	// Use this for initialization
-	void Start () {
-        //if(!BoltNetwork.isRunning)
-          //  BoltLauncher.StartClient();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
     void OnGUI() {
         if (BoltNetwork.isRunning) {
             if (BoltNetwork.isClient) {
@@ -26,33 +15,19 @@ public class DebugClientConnectMenu : Bolt.GlobalEventListener {
                 DrawServerMenu();
             }
         } else {
-            DrawLaunchMenu();
+            Application.LoadLevel(0);
         }
     }
 
-    private void DrawLaunchMenu() {
-        StartBox();
-        GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Launch Server")) {
-            BoltLauncher.StartServer();
-        }
-        GUILayout.EndHorizontal();
-        GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Launch Client")) {
-            BoltLauncher.StartClient();
-        }
-        GUILayout.EndHorizontal();
-        EndBox();
-    }
 
     private void DrawServerMenu() {
         StartBox();
         GUILayout.BeginHorizontal();
         GUILayout.Label("server password:");
-        ServerLobbyGlobalEventListener.ServerPassword = GUILayout.TextField(ServerLobbyGlobalEventListener.ServerPassword);
+        ServerConnectionEventListener.ServerPassword = GUILayout.TextField(ServerConnectionEventListener.ServerPassword);
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Start")) {
+        if (GUILayout.Button("Start Game")) {
             BoltNetwork.LoadScene("ingame");
         }
         GUILayout.EndHorizontal();

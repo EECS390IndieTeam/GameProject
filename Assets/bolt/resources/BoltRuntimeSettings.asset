@@ -46,7 +46,7 @@ MonoBehaviour:
   debugClientCount: 1
   debugStartPort: 54321
   debugStartMapName: lobby
-  debugPlayAsServer: 1
+  debugPlayAsServer: 0
   showDebugInfo: 1
   overrideTimeScale: 1
   logUncaughtExceptions: 0
