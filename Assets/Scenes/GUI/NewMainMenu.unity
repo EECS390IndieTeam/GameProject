@@ -601,12 +601,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: back
-        m_Mode: 2
+      - m_Target: {fileID: 854847388}
+        m_MethodName: NavigateAndPopCanvas
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1959387029}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Canvas, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1118,6 +1118,7 @@ GameObject:
   - 114: {fileID: 854847386}
   - 114: {fileID: 854847385}
   - 114: {fileID: 854847384}
+  - 114: {fileID: 854847388}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1181,6 +1182,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+--- !u!114 &854847388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 854847383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f40e16072df9c64ebad1084e177dfb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialCanvas: {fileID: 1846086754}
 --- !u!1 &937405635
 GameObject:
   m_ObjectHideFlags: 0
@@ -1456,8 +1469,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1637344163}
-        m_MethodName: 
+      - m_Target: {fileID: 854847388}
+        m_MethodName: NavigateAndPushCanvas
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1959387029}
@@ -1571,12 +1584,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: back
-        m_Mode: 2
+      - m_Target: {fileID: 854847388}
+        m_MethodName: NavigateAndPopCanvas
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1604111827}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Canvas, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1800,12 +1813,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: back
-        m_Mode: 2
+      - m_Target: {fileID: 854847388}
+        m_MethodName: NavigateAndPopCanvas
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 594695019}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Canvas, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1915,12 +1928,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: settingsBack
-        m_Mode: 2
+      - m_Target: {fileID: 854847388}
+        m_MethodName: NavigateAndPopCanvas
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1582639511}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Canvas, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2159,8 +2172,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1637344163}
-        m_MethodName: 
+      - m_Target: {fileID: 854847388}
+        m_MethodName: NavigateAndPushCanvas
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1582639511}
@@ -2274,8 +2287,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1637344165}
-        m_MethodName: onClick
+      - m_Target: {fileID: 854847388}
+        m_MethodName: NavigateAndPushCanvas
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1604111827}
@@ -2586,8 +2599,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1637344163}
-        m_MethodName: 
+      - m_Target: {fileID: 854847388}
+        m_MethodName: ExitApplication
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3516,8 +3529,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1637344163}
-        m_MethodName: 
+      - m_Target: {fileID: 854847388}
+        m_MethodName: NavigateAndPushCanvas
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 594695019}
