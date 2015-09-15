@@ -59,11 +59,9 @@ public class MenuEffects : MonoBehaviour
 
         if (this.enableWiggle)
         {
-            // Create vector from center to mouse.
             // Float from -1.0f to 1.0f of mouse percentage distances from center.
             float xFromCenter = -((Input.mousePosition.x - (Screen.width / 2)) / (Screen.width / 2));
             float yFromCenter = (Input.mousePosition.y - (Screen.height / 2)) / (Screen.height / 2);
-
 
             gameObject.transform.Rotate(
                 new Vector3(maxWiggleDegrees * yFromCenter,
