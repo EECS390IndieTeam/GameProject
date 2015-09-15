@@ -52,16 +52,21 @@ public class MenuEffects : MonoBehaviour
         // Rotate object to original orientation.
         transform.rotation = Quaternion.FromToRotation(transform.rotation.eulerAngles, originalRotation);
 
-        // Float from -1.0f to 1.0f of mouse percentage distances from center.
-        float xFromCenter = -((Input.mousePosition.x - (Screen.width / 2)) / (Screen.width / 2));
-        float yFromCenter = (Input.mousePosition.y - (Screen.height / 2)) / (Screen.height / 2);
+        if (this.enableWiggle)
+        {
+            // Float from -1.0f to 1.0f of mouse percentage distances from center.
+            float xFromCenter = -((Input.mousePosition.x - (Screen.width / 2)) / (Screen.width / 2));
+            float yFromCenter = (Input.mousePosition.y - (Screen.height / 2)) / (Screen.height / 2);
 
-        // Rotation vectors:
-        var rotation = this.enableRotate ? rotationVector * Time.timeSinceLevelLoad 
-            * degreesPerSecond : Vector3.zero;
-        var wiggle = this.enableWiggle ? new Vector3(maxWiggleDegrees * yFromCenter, maxWiggleDegrees
-            * xFromCenter, 0) : Vector3.zero;
-
-        gameObject.transform.Rotate(rotation + wiggle);
+            gameObject.transform.Rotate(
+                new Vector3(maxWiggleDegrees * yFromCenter,
+                maxWiggleDegrees * xFromCenter,
+                0));
+        }
+        
+        if (this.enableRotate)
+        {
+            gameObject.transform.Rotate(rotationVector * Time.timeSinceLevelLoad * degreesPerSecond); 
+        }
     }
 }
