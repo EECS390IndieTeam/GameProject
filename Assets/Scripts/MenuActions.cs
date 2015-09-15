@@ -9,6 +9,12 @@ using UnityEngine;
 public class MenuActions : MonoBehaviour
 {
     /// <summary>
+    /// Default menu transition simply moves and scales the given menu into camera view
+    /// instantanously. Add an IMenuTransition component to a canvas to animate it.
+    /// </summary>
+    private static DefaultMenuTransistion defaultTransistion = new DefaultMenuTransistion();
+
+    /// <summary>
     /// The Editor assignable canvas.
     /// </summary>
     public Canvas initialCanvas;
@@ -35,13 +41,11 @@ public class MenuActions : MonoBehaviour
             return;
         }
 
-        // Disable current canvas and place on stack.
-        this.currentCanvas.enabled = false;
-        this.navigationStack.Push(this.currentCanvas);
+        var transition = this.currentCanvas.GetComponent<IMenuTransistion>() ?? defaultTransistion;
+        transition.Transistion(this.currentCanvas, canvas);
 
-        // Enable new canvas and make current.
+        this.navigationStack.Push(this.currentCanvas);
         this.currentCanvas = canvas;
-        this.currentCanvas.enabled = true;
     }
 
     /// <summary>
@@ -55,12 +59,11 @@ public class MenuActions : MonoBehaviour
             return;
         }
 
-        // Disable current canvas.
-        this.currentCanvas.enabled = false;
+        var previousCanvas = this.navigationStack.Pop();
+        var transition = this.currentCanvas.GetComponent<IMenuTransistion>() ?? defaultTransistion;
 
-        // Pop and enable previous menu.
-        this.currentCanvas = this.navigationStack.Pop();
-        this.currentCanvas.enabled = true;
+        transition.Transistion(this.currentCanvas, previousCanvas);
+        this.currentCanvas = previousCanvas;
     }
 
     /// <summary>
