@@ -472,7 +472,6 @@ GameObject:
   m_Component:
   - 224: {fileID: 356098255}
   - 222: {fileID: 356098257}
-  - 114: {fileID: 356098256}
   m_Layer: 5
   m_Name: AboutPanel
   m_TagString: Untagged
@@ -499,27 +498,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
---- !u!114 &356098256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 356098254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: .39199999}
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
 --- !u!222 &356098257
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -786,6 +764,7 @@ GameObject:
   - 223: {fileID: 594695019}
   - 114: {fileID: 594695018}
   - 114: {fileID: 594695017}
+  - 114: {fileID: 594695020}
   m_Layer: 5
   m_Name: AboutCanvas
   m_TagString: Untagged
@@ -856,7 +835,7 @@ Canvas:
   m_GameObject: {fileID: 594695015}
   m_Enabled: 0
   serializedVersion: 2
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -865,6 +844,22 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!114 &594695020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 594695015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b011ead9533bc7b4bab1181c51ee4482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableWiggle: 1
+  enableRotate: 1
+  rotationVector: {x: 0, y: 0, z: 1}
+  degreesPerSecond: 3
+  maxWiggleDegrees: 25
 --- !u!1 &631200690
 GameObject:
   m_ObjectHideFlags: 0
@@ -2648,7 +2643,6 @@ GameObject:
   m_Component:
   - 224: {fileID: 1569844118}
   - 222: {fileID: 1569844120}
-  - 114: {fileID: 1569844119}
   m_Layer: 5
   m_Name: SettingsPanel
   m_TagString: Untagged
@@ -2677,27 +2671,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
---- !u!114 &1569844119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1569844117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: .39199999}
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
 --- !u!222 &1569844120
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2715,6 +2688,7 @@ GameObject:
   - 223: {fileID: 1582639511}
   - 114: {fileID: 1582639510}
   - 114: {fileID: 1582639509}
+  - 114: {fileID: 1582639513}
   m_Layer: 5
   m_Name: SettingsCanvas
   m_TagString: Untagged
@@ -2767,7 +2741,7 @@ Canvas:
   m_GameObject: {fileID: 1582639508}
   m_Enabled: 0
   serializedVersion: 2
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -2794,6 +2768,22 @@ RectTransform:
   m_AnchoredPosition: {x: 318, y: 179}
   m_SizeDelta: {x: 800, y: 450}
   m_Pivot: {x: .5, y: .5}
+--- !u!114 &1582639513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1582639508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b011ead9533bc7b4bab1181c51ee4482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableWiggle: 1
+  enableRotate: 1
+  rotationVector: {x: 0, y: 0, z: 1}
+  degreesPerSecond: 3
+  maxWiggleDegrees: 25
 --- !u!1 &1604111824
 GameObject:
   m_ObjectHideFlags: 0
