@@ -19,6 +19,7 @@ public class MenuElement : MonoBehaviour {
 	public void onClick(Canvas clickedCanvas) {
 		menuCanvas.enabled = false;
 		clickedCanvas.enabled = true;
+        Debug.LogWarning("Switch");
 	}
 
 	public void changeResolution(Button button) {
