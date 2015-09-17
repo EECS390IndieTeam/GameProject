@@ -114,7 +114,7 @@ public class Stochasteroid : MonoBehaviour
     /// </summary>
     void Start()
     {
-        if (this.name.StartsWith("StochasteroidPen"))
+        if (this.name == "StochasteroidPen")
         {
             Debug.LogWarning("Stochasteroid must be on a dedicated object named StochasteroidPen*");
         }
