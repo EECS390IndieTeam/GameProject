@@ -7,6 +7,13 @@ public class DebugClientConnectMenu : Bolt.GlobalEventListener {
     private string password = "dickbutt";
     private string ip = "127.0.0.1:54321";
 
+    void Update() {
+        DebugHUD.setValue("IsSever", BoltNetwork.isServer);
+        if (BoltNetwork.isClient) {
+            DebugHUD.setValue("ping", BoltNetwork.server.PingNetwork);
+        }
+    }
+
     void OnGUI() {
         if (BoltNetwork.isRunning) {
             if (BoltNetwork.isClient) {
@@ -50,12 +57,11 @@ public class DebugClientConnectMenu : Bolt.GlobalEventListener {
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Connect")) {
-            if (!BoltNetwork.isRunning) BoltLauncher.StartClient();
-            ConnectionRequestData data = new ConnectionRequestData();
-            data.PlayerName = username;
-            data.Password = password;
-            BoltNetwork.Connect(UdpKit.UdpEndPoint.Parse(ip), data);
-            BoltPlayer.LocalPlayer.Name = username;
+            if (!BoltNetwork.isRunning) {
+                BoltLauncher.StartClient();
+            } else {
+                BoltNetwork.Connect(UdpKit.UdpEndPoint.Parse(ip), new ConnectionRequestData(username, password));
+            }
         }
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();

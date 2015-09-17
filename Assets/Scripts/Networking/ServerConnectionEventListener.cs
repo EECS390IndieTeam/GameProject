@@ -8,11 +8,12 @@ public class ServerConnectionEventListener : Bolt.GlobalEventListener {
     //the password for literally everything is "dickbutt"!
     private string ServerUsername = "Im the server look at me!"; //this will also be moved later
 
-    public override void BoltStartDone() {
-        var p = PlayerRegistry.CreatePlayer(null);
-        p.Name = ServerUsername;
+    private LobbyBehaviour lobby;
 
-        BoltPlayer.LocalPlayer = p;
+    public override void BoltStartDone() {
+        PlayerRegistry.CreatePlayer(null, ServerUsername);
+        lobby = BoltNetwork.Instantiate(BoltPrefabs.LobbyList).GetComponent<LobbyBehaviour>();
+        lobby.InitializeLobby();
     }
 
     public override void Connected(BoltConnection connection) {
@@ -25,7 +26,7 @@ public class ServerConnectionEventListener : Bolt.GlobalEventListener {
             newToken.Password = ServerPassword;
             string baseusername = "debug player ";
             int suffix = 0;
-            while (PlayerRegistry.usernameConnected(baseusername + suffix)) suffix++;
+            while (PlayerRegistry.UserConnected(baseusername + suffix)) suffix++;
             newToken.PlayerName = baseusername + suffix;
             token = newToken;
         }
@@ -34,34 +35,30 @@ public class ServerConnectionEventListener : Bolt.GlobalEventListener {
             ConnectionRequestData data = (ConnectionRequestData)token;
             Debug.Log("connection request with token of type " + token.GetType().Name);
             if (data.Password != ServerConnectionEventListener.ServerPassword) {
-                DisconnectReason reason = new DisconnectReason();
-                reason.Reason = "Server Refused Connection";
-                reason.Message = "Incorrect Password";
                 //BoltNetwork.Refuse(endpoint, reason);
-                connection.Disconnect(reason);
-            } else if (PlayerRegistry.usernameConnected(data.PlayerName)) {
-                DisconnectReason reason = new DisconnectReason();
-                reason.Reason = "Server Refused Connection";
-                reason.Message = "A player with that name is already connected";
+                connection.Disconnect(new DisconnectReason("Server Refused Connection", "Incorrect Password"));
+            } else if (PlayerRegistry.UserConnected(data.PlayerName)) {
                 //BoltNetwork.Refuse(endpoint, reason);
-                connection.Disconnect(reason);
+                connection.Disconnect(new DisconnectReason("Server Refused Connection", "A player with that name is already connected"));
             } else {
-                var p = PlayerRegistry.CreatePlayer(connection);
-                p.Name = data.PlayerName;
+                PlayerRegistry.CreatePlayer(connection, data.PlayerName);
+                lobby.AddPlayer(data.PlayerName);
                 //player connected successfully!
                 //BoltNetwork.Accept(endpoint);
             }
         } else {
-            DisconnectReason reason = new DisconnectReason();
-            reason.Reason = "Server Refused Connection";
-            reason.Message = "Invalid Connection Token";
             //BoltNetwork.Refuse(endpoint, reason);
-            connection.Disconnect(reason);
+            connection.Disconnect(new DisconnectReason("Server Refused Connection", "Invalid Connection Token"));
         }
     }
 
     public override void Disconnected(BoltConnection connection) {
+        lobby.RemovePlayer(PlayerRegistry.GetUserNameFromConnection(connection));
         PlayerRegistry.Remove(connection);
+    }
+
+    public override void OnEvent(TeamChangeEvent evnt) {
+        lobby.SetPlayerTeam(PlayerRegistry.GetUserNameFromConnection(evnt.RaisedBy), evnt.NewTeam);
     }
 
 }

@@ -1,58 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PlayerRegistry {
-    private static Dictionary<string, BoltPlayer> players = new Dictionary<string, BoltPlayer>();
+    private static Dictionary<string, BoltConnection> players = new Dictionary<string, BoltConnection>();
 
-    public static BoltPlayer CreatePlayer(BoltConnection connection) {
-        string name = connection == null ? "SERVER" : connection.ConnectionId.ToString();
+    public static void CreatePlayer(BoltConnection connection, string username) {
+        players[username] = connection;
 
-        BoltPlayer p;
-        if (players.ContainsKey(name)) {
-            p = players[name];
-        } else {
-            p = new BoltPlayer();
+        if (connection != null) {
+            connection.UserData = username;
         }
 
-        p.Connection = connection;
-
-        if (!p.IsServer) {
-            p.Connection.UserData = p;
-        }
-
-        p.ConnectionName = name;
-
-        players.Add(name, p);
-
-        UnityEngine.Debug.Log("Created player with name " + name);
-
-        Debug.Log("Player connected: " + name);
-
-        return p;
+        Debug.Log("Player connected: " + username);
     }
 
-    public static IEnumerable<BoltPlayer> AllPlayers {
-        get { return players.Values; }
+    public static IEnumerable<BoltConnection> Connections {
+        get { return players.Values.Where<BoltConnection>(c => c != null);}
     }
 
-    public static BoltPlayer GetPlayerFromConnection(BoltConnection connection) {
-        if (connection == null) return players["SERVER"];
-        return (BoltPlayer)connection.UserData;
+    public static IEnumerable<string> PlayerNames {
+        get { return players.Keys; }
+    }
+
+    public static string GetUserNameFromConnection(BoltConnection connection) {
+        if (connection == null) return players.First<KeyValuePair<string, BoltConnection>>(e => e.Value == null).Key;
+        return (string)connection.UserData; //we also store the username as the connection's userdata for even faster lookup
     }
 
     public static void Remove(BoltConnection connection) {
-        if (connection == null) {
-            players.Remove("SERVER");
-            return;
-        }
-        string name = connection.ConnectionId.ToString();
-        if(players.ContainsKey(name)) players.Remove(name);
+        string username = GetUserNameFromConnection(connection);
+        if(players.ContainsKey(username)) players.Remove(username);
     }
 
-    public static bool usernameConnected(string username) {
-        foreach (BoltPlayer p in AllPlayers) {
-            if (p.Name == username) return true;
-        }
-        return false;
+    public static bool UserConnected(string username) {
+        return players.ContainsKey(username);
     }
 }
