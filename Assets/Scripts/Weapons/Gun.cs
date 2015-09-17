@@ -2,34 +2,35 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/*Controls gunfire and grenade launch. To be hit by gun, target must have a Rigidbody component attached.*/
 public class Gun : MonoBehaviour {
-
-    public GameObject bulletPrefab;
-    public int maxBulletsBeforeRecycle = 5;
 
 	//Variables for Grenade
 	public GameObject grenadePrefab;
 	public int grenadeAmmo;
 
-    private GameObject bullet;
-    private Queue<GameObject> activeBullets;
-    private Rigidbody bulletRigidBody;
-
-    private Vector3 offset = new Vector3(0.0f, 0.0f, 1.0f);
-    private Vector3 firingForce = new Vector3(0.0f, 0.0f, 1000.0f);
-
-    private WaitForSeconds bulletTimeout = new WaitForSeconds(5.0f);
-    private bool firing = false;
+    // Variables for bullets
+    private RaycastHit hitInfo;
+    private RaycastHit resetTo = new RaycastHit();
+    private CharacterController controller;
+    private Transform playerCamera;
         
     void Start()
     {
-        activeBullets = new Queue<GameObject>();
+        if(transform.GetComponentInParent<CharacterController>() != null)
+        {
+            controller = transform.GetComponentInParent<CharacterController>();
+        }
+        else
+        {
+            Debug.LogError("Gun must be a child of the player object.");
+        }
+        playerCamera = GameObject.Find("Main Camera").transform;
     }
 	void Update () {
         if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.C))
         {
             Fire();
-            StartCoroutine(TimeOut());
         }
 
 		/*
@@ -44,31 +45,17 @@ public class Gun : MonoBehaviour {
 	}
 	
 	private void Fire () {
-        if(activeBullets.Count <= maxBulletsBeforeRecycle - 1)
+        Physics.Raycast(transform.position, playerCamera.forward, out hitInfo, 10.0f);
+        if(hitInfo.point != resetTo.point)
         {
-            bullet = Instantiate(bulletPrefab) as GameObject;
-            activeBullets.Enqueue(bullet);
+            Debug.Log("Object hit at: " + hitInfo.point);
         }
         else
         {
-            activeBullets.Enqueue(activeBullets.Dequeue());
-            bullet = activeBullets.Peek();
-            activeBullets.Enqueue(activeBullets.Dequeue());
+            Debug.Log("Nothing hit");
         }
-        bulletRigidBody = bullet.GetComponent<Rigidbody>();
-
-        bullet.transform.position = transform.position + offset;
-        bulletRigidBody.AddForce(firingForce);
-    }
-
-    private IEnumerator TimeOut()
-    {
-        yield return bulletTimeout;
-        if (bullet != null)
-        {
-            Destroy(activeBullets.Dequeue());
-        }
-
+        // Resets hitInfo
+        hitInfo = resetTo;
     }
     
 }
