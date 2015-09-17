@@ -112,7 +112,7 @@ public class Stochasteroid : MonoBehaviour
 	/// <summary>
     /// Initialize script.
     /// </summary>
-	void Start()
+    void Start()
     {
         if (this.name.StartsWith("StochasteroidPen"))
         {
@@ -159,12 +159,12 @@ public class Stochasteroid : MonoBehaviour
             this.PlaceAsteroid(asteroid);
             this.asteroidList.Add(asteroid);
         }
-	}
+    }
 	
 	/// <summary>
     /// Per frame update. Performs asteroid update.
     /// </summary>
-	void Update()
+    void Update()
     {
         if (!dead)
         {
@@ -173,7 +173,7 @@ public class Stochasteroid : MonoBehaviour
                 this.UpdateAsteroid(asteroid);
             }
         }
-	}
+    }
 
     /// <summary>
     /// Creates a new Asteroid object randomly from the avaiable templates.
