@@ -26,7 +26,7 @@ public class Grenade : MonoBehaviour {
 
 	//FixedUpdate called at a fixed framerate of 60
 	void FixedUpdate() {
-		//Enable body collision after 1 second.
+		//Enable body collision after 1 second. Shorten timing once proper model created and can test minimum time needed.
 		if (bodyTimer == 60) {
 			this.GetComponent<SphereCollider> ().enabled = true;
 		}

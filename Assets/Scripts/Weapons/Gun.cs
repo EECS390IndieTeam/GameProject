@@ -5,10 +5,6 @@ using System.Collections.Generic;
 /*Controls gunfire and grenade launch. To be hit by gun, target must have a Rigidbody component attached.*/
 public class Gun : MonoBehaviour {
 
-	//Variables for Grenade
-	public GameObject grenadePrefab;
-	public int grenadeAmmo;
-
     // Variables for bullets
     private RaycastHit hitInfo;
     private RaycastHit resetTo = new RaycastHit();
@@ -33,15 +29,6 @@ public class Gun : MonoBehaviour {
             Fire();
         }
 
-		/*
-			 * --------------------------CREATE PROJECTILE---------------------------------------------------- 
-			 */
-		if (Input.GetKeyDown(KeyCode.G) && grenadeAmmo > 0) {
-			Vector3 grenadePosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-			Quaternion grenadeRotation = GameObject.FindGameObjectWithTag("Player").transform.rotation;
-			Instantiate(grenadePrefab, grenadePosition, grenadeRotation);
-			grenadeAmmo--;
-		}
 	}
 	
 	private void Fire () {
