@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
 		GAME_RESULTS
 	}
 
+    //TODO replace with interfaces from Bolt
 	private GameObject Player;
 	private GameObject Lobby;
 	private GAME_STATE currentGameState;
@@ -59,7 +60,8 @@ public class GameManager : MonoBehaviour
 		//Setup the mapping of game state to level number
 		stateToSceneMap = new Dictionary<GAME_STATE, int>();
 		stateToSceneMap.Add (GAME_STATE.MAIN_MENU, 0);
-
+        stateToSceneMap.Add(GAME_STATE.GAME_MENU, 1);
+        stateToSceneMap.Add(GAME_STATE.FIND_GAME, 1);
 		//Set default game state
 		currentGameState = GAME_STATE.MAIN_MENU;
 

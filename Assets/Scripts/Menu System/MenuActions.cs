@@ -92,4 +92,9 @@ public class MenuActions : MonoBehaviour
 
         this.currentCanvas = this.initialCanvas;
     }
+
+    public void startMultiplayer()
+    {
+        GameManager.instance.transitionGameState(GameManager.GAME_STATE.GAME_MENU);
+    }
 }
