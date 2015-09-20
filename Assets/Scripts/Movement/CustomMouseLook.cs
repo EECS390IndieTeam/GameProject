@@ -12,10 +12,10 @@ public class CustomMouseLook
 
 
 
-    private Rigidbody character;
+    private Transform character;
 
 
-    public CustomMouseLook(Rigidbody character, float sensitivityX, float sensitivityY)
+    public CustomMouseLook(Transform character, float sensitivityX, float sensitivityY)
     {
         this.character = character;
         this.sensitivityX = sensitivityX;
@@ -26,7 +26,7 @@ public class CustomMouseLook
     {
         mouseX *= sensitivityX;
         mouseY *= sensitivityY;
-        character.transform.rotation *= Quaternion.Euler(-mouseY, mouseX, 0);
+        character.rotation *= Quaternion.Euler(-mouseY, mouseX, 0);
         
 
 

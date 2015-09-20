@@ -31,7 +31,7 @@ public class GrappleGun : MonoBehaviour {
 	}
 
 	public void fire() {
-		Physics.Raycast(controller.character.position, controller.transform.forward, out grappleHitInfo, maxDistance);
+		Physics.Raycast(controller.cameraTransform.position, controller.cameraTransform.forward, out grappleHitInfo, maxDistance);
 		if (grappleHitInfo.collider /*&& hit.collider.gameObject.something.grapplable*/) {
 			attach ();
 

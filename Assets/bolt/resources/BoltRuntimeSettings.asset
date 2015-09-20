@@ -45,7 +45,7 @@ MonoBehaviour:
     connectionRequestAttempts: 20
   debugClientCount: 1
   debugStartPort: 54321
-  debugStartMapName: lobby
+  debugStartMapName: ingame
   debugPlayAsServer: 1
   showDebugInfo: 1
   overrideTimeScale: 1

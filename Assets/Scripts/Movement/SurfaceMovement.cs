@@ -15,7 +15,7 @@ public class SurfaceMovement{
 
     float grabDistance;
 
-    Rigidbody attachedSurface;
+    //Rigidbody attachedSurface;
 
 
     public SurfaceMovement(Rigidbody character, float velocity, float maxXSpeed, float maxYSpeed, float grabDistance)
@@ -59,7 +59,7 @@ public class SurfaceMovement{
 
     internal void attachToSurface(RaycastHit hit)
     {
-        attachedSurface = hit.rigidbody;
+        //attachedSurface = hit.rigidbody;
         character.velocity = new Vector3(0, 0, 0);
     }
 }

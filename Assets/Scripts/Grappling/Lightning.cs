@@ -38,14 +38,16 @@ public class Lightning : MonoBehaviour {
 		lineRenderer.receiveShadows = false;
 		lineRenderer.material = lightningMaterial;
 		lineRenderer.useLightProbes = false;
-		lineRenderer.SetWidth(1, 1);
+		lineRenderer.SetWidth(0.2f, 0.2f);
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
 		if (frame == 0) {
 			draw ();
-		}
+		} else {
+            redraw();
+        }
 		frame++;
 		frame %= framesPerUpdate;
 	}
@@ -71,6 +73,11 @@ public class Lightning : MonoBehaviour {
 //			lineRenderer.SetPosition (j + numPoints, targetPoint - lineDirection * j * stepSize + Random.onUnitSphere * multiplier * curveMultiplier);
 //		}
 	}
+
+    void redraw() {
+        // may expand on this later to make it look better
+        lineRenderer.SetPosition(0, transform.position);
+    }
 
 	void OnEnable() {
 		Start ();

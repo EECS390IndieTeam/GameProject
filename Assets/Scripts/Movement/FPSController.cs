@@ -11,6 +11,7 @@ public class FPSController : MonoBehaviour {
     public float maxYSpeedSurface = 8;
 	public float rotationSpeed = 1;
 
+    public Transform cameraTransform;
 
     private CustomMouseLook mouseLook;
     private CharacterRotator rotator;
@@ -33,8 +34,8 @@ public class FPSController : MonoBehaviour {
     {
         Cursor.lockState = CursorLockMode.Locked;
 		character = GetComponent<Rigidbody>();
-        mouseLook = new CustomMouseLook(character, mouseSensitivityX, mouseSensitivityY);
-        rotator = new CharacterRotator(character);
+        mouseLook = new CustomMouseLook(cameraTransform, mouseSensitivityX, mouseSensitivityY);
+        rotator = new CharacterRotator(cameraTransform);
         sMovement = new SurfaceMovement(character, maxSurfaceSpeed, maxXSpeedSurface, maxXSpeedSurface, grabDistance);
         grappleGun = GetComponent<GrappleGun>();
 		if (grappleGun) grappleGun.controller = this;
