@@ -1,0 +1,99 @@
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+interface IPlayer {
+    void Die();
+    void RespawnAt(Transform location);
+    void MoveTo(Transform location);
+
+    void TakeDamage(float Damage, string OtherUser);
+
+    string Username {
+        get;
+        set;
+    }
+    int TeamID {
+        get;
+        set;
+    }
+
+    List<IWeapon> AvailableWeapons {
+        get;
+    }
+    IWeapon CurrentWeapon {
+        get;
+    }
+
+    float Health {
+        get;
+    }
+		
+}
+	
+interface IWeapon {
+    void Fire();
+    float CooldownRate {
+        get;
+    }
+    float EnergyPerShot {
+        get;
+    }
+    float DamagePerShort {
+        get;
+    }
+    bool IsOverheating {
+        get;
+    }
+    float CooldownDelay {
+        get;
+    }
+    int WeaponID {
+        get;
+    }
+}
+
+interface IGrenade {
+    float Strength {
+        get;
+    }
+
+    float Radius {
+        get;
+    }
+
+    float FuseTime {
+        get;
+    }
+
+    string Thrower {
+        get;
+    }
+
+}
+
+interface IGameMode {
+	int minPlayers
+	{
+		get;
+	}
+	int maxPlayers
+	{
+		get;
+	}
+	IGameLevel level {
+		get;
+		set; //Not sure if we need to be able to set this or not.
+	}
+	string gameModeName 
+	{
+		get;
+	}
+}
+	
+interface IGameLevel {
+	string levelName {
+		get;
+	}
+	void loadGameLevel();
+}

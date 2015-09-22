@@ -11,7 +11,7 @@ public class InGameEventListener : Bolt.GlobalEventListener {
     private bool running = false;
     public override void SceneLoadLocalBegin(string map) {
         DebugHUD.setValue("load state", "Soading scene");
-        FindObjectOfType<LobbyBehaviour>().HideDebugDraw = true;
+        FindObjectOfType<LobbyState>().HideDebugDraw = true;
         //display loading screen
     }
 

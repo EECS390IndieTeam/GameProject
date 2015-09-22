@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class LobbyBehaviour : Bolt.EntityBehaviour<ILobbyObject> {
+public class LobbyState : Bolt.EntityBehaviour<ILobbyObject> {
 
     private const int DEFAULT_TEAM = 0;
 

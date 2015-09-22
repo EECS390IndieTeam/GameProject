@@ -8,11 +8,11 @@ public class ServerConnectionEventListener : Bolt.GlobalEventListener {
     //the password for literally everything is "dickbutt"!
     private string ServerUsername = "Im the server look at me!"; //this will also be moved later
 
-    private LobbyBehaviour lobby;
+    private LobbyState lobby;
 
     public override void BoltStartDone() {
         PlayerRegistry.CreatePlayer(null, ServerUsername);
-        lobby = BoltNetwork.Instantiate(BoltPrefabs.LobbyList).GetComponent<LobbyBehaviour>();
+        lobby = BoltNetwork.Instantiate(BoltPrefabs.LobbyList).GetComponent<LobbyState>();
         lobby.InitializeLobby();
     }
 

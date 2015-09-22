@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerBehaviour : Bolt.EntityBehaviour<IPlayerState> {
+public class PlayerState : Bolt.EntityBehaviour<IPlayerState> {
 
     public GameObject OwnerPrefab, ProxyPrefab;
 

@@ -12,12 +12,12 @@ public class GameStartManager : Bolt.GlobalEventListener {
 
     private List<BoltEntity> controlledPlayers = new List<BoltEntity>();
 
-    private LobbyBehaviour lobby;
+    private LobbyState lobby;
 
     private bool running = false;
 
     void Start() {
-        lobby = FindObjectOfType<LobbyBehaviour>();
+        lobby = FindObjectOfType<LobbyState>();
     }
 
     public override void SceneLoadLocalDone(string map) {
