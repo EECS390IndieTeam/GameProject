@@ -1,0 +1,55 @@
+Beta 0.4.3.7
+
+Fixed: Issue causing servers to disconnect from Zeus after a specific interval was resolved.
+
+Beta 0.4.3.6
+
+Added: Bolt Release build to the package. It's a unitypackage in Assets\bolt-release folder. If you want only the release build, please unpack into an empty project and then import the .unitypackage where needed.
+Note: This version is just a re-packaging of 0.4.3.5 to add the Release build. No new features. 
+
+Beta 0.4.3.5
+
+Fixed: Entities getting frozen on clients after 10 seconds.
+Fixed: Int compression not being applied.
+Fixed: Delay on Zeus session list request after re-connecting.
+Fixed: ZeusDisconnected callback not being invoked if Zeus times out. 
+
+Beta 0.4.3.4
+
+Fixed: Issue with setting Animator to null causing crashes.
+Fixed: Issue with array properties not properly checking if the value actually changed before flagging a value for re-sending.
+Fixed: Issue with entity inspector not showing debug values.
+Fixed: Some smaller performance issues related to garbage generated in various places in code.
+
+Improved the performance of the initial scene object search algorithm. 
+
+Beta 0.4.3.3
+
+Fixed: Entity event unreliability issues where too many events would get discarded.
+Fixed: Debug Start will now respect 64 bit windows build settings.
+Fixed: Control of an entity will now be handed over properly in all circumstances.
+Fixed: ‘Proxy When Frozen’ should now work properly.
+Fixed: RemoveCallback will now work properly. 
+
+Added: New settings on the Bolt Entity component called ‘Detach Parent On Disconnect’ which if enabled automatically finds nested entities and de-parents them when the parent is detached.
+Added: New overloads to BoltLauncher.StartServer which takes a scene name as last parameter for a scene that will automatically loaded when server has started.
+Added: New method called BoltNetwork.PreLoadPrefabDb() which can be called as soon as the game starts to limit the lag spike that happens when starting Bolt. 
+
+Beta 0.4.3.1
+
+Added: Bolt.IEntityReplicationFilter that allows you direct boolean control over if an entity should be written into a packet or not.
+Added: Added the ability to pick between local and world transform replication.
+Added: You can now create IProtocolToken properties on events.
+Added: Added WriteBoltEntity and ReadBoltEntity extension methods for UdpPacket to easily write/read BoltEntity objects in IProtocolToken Read/Write method.
+Added: Added support for Matrix4x4, Color32 and GUID properties.
+Added: Two new Global callbacks exist EntityFrozen and EntityThawed for handling entities being frozen/thawed on a global level. 
+
+Fixed: Disconnect tokens are now available on the BoltConnection object.
+Fixed: ProtocolToken passed into BoltNetwork.Attached is not replaced by null by mistake anymore.
+Fixed: Resolved interpolation issues for properties on Commands.
+Fixed: The issues with connecting through Zeus should be solved.
+Fixed: Resolved several issues in related to nesting Bolt entities during run-time and Bolt callback methods such as Attached, etc.
+Fixed: BoltPhysicsHit now contains the approximate distance between the hitbox and sphere overlap origin instead of -Infinity. 
+
+Changed: Changed the way priority is accumulated for entities to give smoother data delivery.
+Changed: Changed the editor layout of the ‘Bolt Entity’ script on game objects.
