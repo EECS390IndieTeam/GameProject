@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-interface IPlayer {
+public interface IPlayer {
     void Die();
     void RespawnAt(Transform location);
     void MoveTo(Transform location);
@@ -28,10 +28,14 @@ interface IPlayer {
     float Health {
         get;
     }
+
+	float MaxHealth {
+		get;
+	}
 		
 }
 	
-interface IWeapon {
+public interface IWeapon {
     void Fire();
     float CooldownRate {
         get;
@@ -53,7 +57,7 @@ interface IWeapon {
     }
 }
 
-interface IGrenade {
+public interface IGrenade {
     float Strength {
         get;
     }
@@ -72,7 +76,7 @@ interface IGrenade {
 
 }
 
-interface IGameMode {
+public interface IGameMode {
 	int minPlayers
 	{
 		get;
@@ -91,7 +95,7 @@ interface IGameMode {
 	}
 }
 	
-interface IGameLevel {
+public interface IGameLevel {
 	string levelName {
 		get;
 	}

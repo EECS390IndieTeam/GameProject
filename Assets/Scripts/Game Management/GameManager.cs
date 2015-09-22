@@ -49,11 +49,17 @@ public class GameManager : MonoBehaviour
 	}
 
     //TODO replace with interfaces from Bolt
-	private GameObject Player;
-	private GameObject Lobby;
+	private IPlayer Player;
+	private LobbyState Lobby;
 	private GAME_STATE currentGameState;
 
 	private IDictionary<GAME_STATE,int> stateToSceneMap;
+
+	public IPlayer CurrentPlayer {
+		get {
+			return Player;
+		}
+	}
 
 	void Start ()
 	{
@@ -62,11 +68,10 @@ public class GameManager : MonoBehaviour
 		stateToSceneMap.Add (GAME_STATE.MAIN_MENU, 0);
         stateToSceneMap.Add(GAME_STATE.GAME_MENU, 1);
         stateToSceneMap.Add(GAME_STATE.FIND_GAME, 1);
+
 		//Set default game state
 		currentGameState = GAME_STATE.MAIN_MENU;
-
-		//Create a new player object
-
+		Player = GameObject.FindObjectOfType<Player>();
 	}
 
 	public void transitionGameState (GAME_STATE state)
