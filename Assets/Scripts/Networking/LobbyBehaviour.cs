@@ -24,6 +24,8 @@ public class LobbyBehaviour : Bolt.EntityBehaviour<ILobbyObject> {
         state.PlayerCount++;
     }
 
+    public bool HideDebugDraw = false;
+
     public void RemovePlayer(string username) {
         Debug.Log("removing player " + username);
         bool found = false;
@@ -82,6 +84,7 @@ public class LobbyBehaviour : Bolt.EntityBehaviour<ILobbyObject> {
     }
 
     void OnGUI() {
+        if (HideDebugDraw) return;
         GUILayout.BeginArea(new Rect(10,10,500,500), "connected players", GUI.skin.box);
         GUILayout.BeginVertical();
         GUILayout.Space(20f);

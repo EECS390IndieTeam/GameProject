@@ -94,7 +94,6 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -159,6 +158,7 @@ MonoBehaviour:
   maxXSpeedSurface: 8
   maxYSpeedSurface: 8
   rotationSpeed: 1
+  cameraTransform: {fileID: 481960}
 --- !u!114 &11428102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -288,6 +288,10 @@ Prefab:
       propertyPath: m_Drag
       value: .0500000007
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 481960}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 140712}

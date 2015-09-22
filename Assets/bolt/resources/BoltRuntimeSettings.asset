@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _config:
     framesPerSecond: 60
-    packetSize: 1200
+    packetSize: 1280
     packetMaxEventSize: 512
     maxEntityPriority: 65536
     maxPropertyPriority: 2048
@@ -28,14 +28,14 @@ MonoBehaviour:
     serverDejitterDelay: 6
     serverDejitterDelayMin: 3
     serverDejitterDelayMax: 9
-    serverConnectionLimit: 16
+    serverConnectionLimit: 64
     serverConnectionAcceptMode: 0
     commandDejitterDelay: 3
     commandQueueSize: 60
     commandDelayAllowed: 12
     commandRedundancy: 6
     commandPingMultiplier: 1.25
-    useNetworkSimulation: 0
+    useNetworkSimulation: 1
     simulatedLoss: 0
     simulatedPingMean: 0
     simulatedPingJitter: 0
@@ -45,8 +45,8 @@ MonoBehaviour:
     connectionRequestAttempts: 20
   debugClientCount: 1
   debugStartPort: 54321
-  debugStartMapName: ingame
-  debugPlayAsServer: 1
+  debugStartMapName: 
+  debugPlayAsServer: 0
   showDebugInfo: 1
   overrideTimeScale: 1
   logUncaughtExceptions: 0
@@ -58,8 +58,8 @@ MonoBehaviour:
   editorSkin: 4
   scopeModeHideWarningInGui: 0
   showHelpButtons: 1
-  masterServerGameId: 30394132303932362d363031412d344546342d424645452d333734373631423044324135
-  masterServerEndPoint: 37392e39392e362e3133363a3234303030
-  masterServerAutoConnect: 1
+  masterServerGameId: 4AEFA265-2854-4DD5-A56B-402CFE1E34E2
+  masterServerEndPoint: 79.99.6.136:24000
+  masterServerAutoConnect: 0
   masterServerAutoDisconnect: 1
   showBoltEntityHints: 1

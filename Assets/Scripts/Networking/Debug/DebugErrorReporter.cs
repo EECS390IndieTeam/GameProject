@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[BoltGlobalBehaviour(BoltNetworkModes.Client)]
 public class DebugErrorReporter : Bolt.GlobalEventListener {
     const int windowHeight = 150;
     const int windowWidth = 300;

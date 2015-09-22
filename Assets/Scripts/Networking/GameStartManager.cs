@@ -14,9 +14,10 @@ public class GameStartManager : Bolt.GlobalEventListener {
 
     private LobbyBehaviour lobby;
 
+    private bool running = false;
+
     void Start() {
         lobby = FindObjectOfType<LobbyBehaviour>();
-        enabled = false;
     }
 
     public override void SceneLoadLocalDone(string map) {
@@ -24,13 +25,15 @@ public class GameStartManager : Bolt.GlobalEventListener {
     }
 
     public void Begin() {
+        Debug.Log("GameStartManager.Begin()");
         timer = 0f;
-        enabled = true;
+        running = true;
     }
     
 	
 	// Update is called once per frame
 	void Update () {
+        if (!running) return;
         if(controlledPlayers.Count == lobby.PlayerCount){
             Finished();
             return;
@@ -43,11 +46,13 @@ public class GameStartManager : Bolt.GlobalEventListener {
 	}
 
     private void Finished() {
+        Debug.Log("GameStartManager.Finished()");
         MoveAllPlayersToSpawnPoint();
         float startTime = BoltNetwork.serverTime + SYNC_TIME;
         SyncEvent evnt = SyncEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.ReliableOrdered);
         evnt.StartTime = startTime;
         evnt.Send();
+
         Destroy(this);
     }
 
