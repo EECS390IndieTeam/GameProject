@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f6377af643aece34e908b945d4be2005
+timeCreated: 1442515419
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - lightningMaterial: {fileID: 2100000, guid: 34812b32841a255459f39511c1280354, type: 2}
+  - lineRenderer: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
