@@ -36,5 +36,6 @@ public class Test : MonoBehaviour {
 		
 		// Move the controller
 		controller.Move(moveDirection * Time.deltaTime);
+		
 	}
 }
