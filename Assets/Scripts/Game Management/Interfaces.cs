@@ -43,7 +43,7 @@ public interface IWeapon {
     float EnergyPerShot {
         get;
     }
-    float DamagePerShort {
+    float DamagePerShot {
         get;
     }
     bool IsOverheating {
