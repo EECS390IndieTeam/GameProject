@@ -3,21 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 
 /*Controls gunfire and grenade launch. To be hit by gun, target must have a Rigidbody component attached.*/
-public class Gun : MonoBehaviour, IWeapon {
+public class Gun : MonoBehaviour, IWeapon
+{
 
     //  Variables for getters
-    private float cooldownRate = 1.0f;
-    private float cooldownDelay = 1.0f;
+    private float cooldownRate = 20.0f;
+    private float cooldownDelay = 0.3f;
 
-    private float energyPerShot = 1.0f;
-    private float damagePerShot = 1.0f;
+    private float energyPerShot = 10.0f;
+    private float damagePerShot = 10.0f;
 
     private bool isOverheating = false;
+
     private int weaponID = 0;
 
     // Variables for bullets
     private RaycastHit hitInfo;
     private RaycastHit resetTo = new RaycastHit();
+
     private CharacterController controller;
     private Transform playerCamera;
 
@@ -98,7 +101,7 @@ public class Gun : MonoBehaviour, IWeapon {
 
     void Start()
     {
-        if(transform.GetComponentInParent<CharacterController>() != null)
+        if (transform.GetComponentInParent<CharacterController>() != null)
         {
             controller = transform.GetComponentInParent<CharacterController>();
         }
@@ -107,29 +110,40 @@ public class Gun : MonoBehaviour, IWeapon {
             Debug.LogError("Gun must be a child of the player object.");
             controller = null;
         }
-        playerCamera = GameObject.Find("Main Camera").transform;
+        playerCamera = transform.parent.GetComponentInChildren<Camera>().transform;
     }
-	void Update () {
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.F))
         {
             Fire();
         }
 
-	}
-	
-	public void Fire () {
+    }
+
+    public void Fire()
+    {
         Physics.Raycast(transform.position, playerCamera.forward, out hitInfo, 10.0f);
-        Debug.DrawRay(transform.position, playerCamera.forward * 10.0f, Color.green, 3.0f);
-        if(hitInfo.point != resetTo.point)
+        Debug.DrawRay(transform.position, playerCamera.forward * 10.0f, Color.cyan, 3.0f);
+        if (hitInfo.point != resetTo.point)
         {
             Debug.Log("Object hit at: " + hitInfo.point);
+            if (hitInfo.transform.GetComponent<Player>() != null)
+            {
+                hitInfo.transform.GetComponent<Player>().TakeDamage(damagePerShot, transform.parent.name);
+            }
         }
-        else
-        {
-            Debug.Log("Nothing hit");
+        if (transform.GetComponentInParent<Cooldown>() != null) {
+            
+            Cooldown temp = transform.GetComponentInParent<Cooldown>();
+
+            temp.cooldownDelay = cooldownDelay;
+            temp.cooldownSpeed = cooldownRate;
+            temp.degreesPerFire = energyPerShot;
+
+            isOverheating = temp.overheat;
+
+            temp.FireWeapon();
         }
-        // Resets hitInfo
-        hitInfo = resetTo;
     }
-    
 }
