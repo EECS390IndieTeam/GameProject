@@ -123,25 +123,29 @@ public class Gun : MonoBehaviour, IWeapon
 
     public void Fire()
     {
-        Physics.Raycast(transform.position, playerCamera.forward, out hitInfo, 10.0f);
-        Debug.DrawRay(transform.position, playerCamera.forward * 10.0f, Color.cyan, 3.0f);
         Vector3 endpoint;
-        if (hitInfo.point != resetTo.point)
+        if (Physics.Raycast(transform.position, playerCamera.forward, out hitInfo, 10.0f))
         {
-            Debug.Log("Object hit at: " + hitInfo.point);
             endpoint = hitInfo.point;
+
             if (hitInfo.transform.GetComponent<Player>() != null)
             {
                 hitInfo.transform.GetComponent<Player>().TakeDamage(damagePerShot, transform.parent.name);
             }
-        } else {
+        }
+        else
+        {
             endpoint = transform.position + playerCamera.forward * 1000000.0f;
         }
+
         WeaponFireEvent evnt = WeaponFireEvent.Create(Bolt.GlobalTargets.Everyone);
         evnt.EndPoint = endpoint;
         evnt.StartPoint = transform.position;
         evnt.Color = Color.red;
         evnt.Send();
+
+        Debug.DrawLine(transform.position, endpoint, Color.cyan, 0.5f);
+
         if (transform.GetComponentInParent<Cooldown>() != null) {
             
             Cooldown temp = transform.GetComponentInParent<Cooldown>();
