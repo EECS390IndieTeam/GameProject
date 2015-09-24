@@ -12,6 +12,7 @@ public class ServerConnectionEventListener : Bolt.GlobalEventListener {
 
     public override void BoltStartDone() {
         PlayerRegistry.CreatePlayer(null, ServerUsername);
+        GameManager.instance.CurrentUserName = ServerUsername;
         lobby = BoltNetwork.Instantiate(BoltPrefabs.LobbyList).GetComponent<LobbyState>();
         lobby.InitializeLobby();
     }
@@ -27,8 +28,12 @@ public class ServerConnectionEventListener : Bolt.GlobalEventListener {
             string baseusername = "debug player ";
             int suffix = 0;
             while (PlayerRegistry.UserConnected(baseusername + suffix)) suffix++;
-            newToken.PlayerName = baseusername + suffix;
+            string name = baseusername + suffix;
+            newToken.PlayerName = name;
             token = newToken;
+            DebugNameEvent evnt = DebugNameEvent.Create(connection, Bolt.ReliabilityModes.ReliableOrdered);
+            evnt.NewName = name;
+            evnt.Send();
         }
 
         if (token != null && token is ConnectionRequestData) {

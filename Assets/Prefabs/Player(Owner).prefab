@@ -34,8 +34,8 @@ GameObject:
   - 120: {fileID: 12016868}
   - 114: {fileID: 11491598}
   - 65: {fileID: 6552766}
-  - 114: {fileID: 11486706}
   - 114: {fileID: 11460822}
+  - 114: {fileID: 11409424}
   m_Layer: 0
   m_Name: Player(Owner)
   m_TagString: Untagged
@@ -266,6 +266,17 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105588}
   m_Enabled: 1
+--- !u!114 &11409424
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65e0a424e4e79ee4ba8ee32ffe8e20bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11414254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -277,6 +288,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f379a04d46b804bbcb264755ab3276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CooldownRate: 40
+  CooldownDelay: .0500000007
+  MaxTemperature: 100
+  HeatPerShot: 20
+  DamagePerShot: 10
+  Automatic: 0
+  MinDelayBetweenShots: .100000001
+  WeaponID: 0
+  SourceTransform: {fileID: 481960}
 --- !u!114 &11424186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -323,17 +343,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponFirePrefab: {fileID: 186558, guid: d9576bfce2f4a1f45b6795c59d0d963b, type: 2}
---- !u!114 &11486706
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 140712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa28aff1e59ce411aad6dbbb5932c396, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11491598
 MonoBehaviour:
   m_ObjectHideFlags: 1

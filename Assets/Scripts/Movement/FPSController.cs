@@ -66,12 +66,12 @@ public class FPSController : MonoBehaviour {
 			debounce = 0;
 		}
 		
-		if (Input.GetButtonDown("Fire1") && !grappled && debounce == 0) {
+		if (Input.GetButtonDown("Fire2") && !grappled && debounce == 0) {
 			grappleGun.fire();
 			debounce = debounceTime;
 		}
 		
-		if (Input.GetButtonDown("Fire1") && grappled && debounce == 0) {
+		if (Input.GetButtonDown("Fire2") && grappled && debounce == 0) {
 			grappleGun.detach();
 			debounce = debounceTime;
 		}

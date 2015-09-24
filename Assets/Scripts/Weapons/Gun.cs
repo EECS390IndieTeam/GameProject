@@ -7,156 +7,130 @@ public class Gun : MonoBehaviour, IWeapon
 {
 
     //  Variables for getters
-    private float cooldownRate = 20.0f;
-    private float cooldownDelay = 0.3f;
+    public float CooldownRate = 20.0f;
+    public float CooldownDelay = 0.1f;
+    public float MaxTemperature = 100f;
 
-    private float energyPerShot = 10.0f;
-    private float damagePerShot = 10.0f;
+    public float HeatPerShot = 10.0f;
+    public float DamagePerShot = 10.0f;
 
-    private bool isOverheating = false;
+    public bool IsOverheating {
+        get;
+        private set;
+    }
 
-    private int weaponID = 0;
+    public bool Automatic = false;
+
+    public float MinDelayBetweenShots = 0.1f;
+    private float timeUntilNextShot = 0f;
+    private float timeUntilCooldownBegins = 0f;
+
+    public float Temperature {
+        get;
+        private set;
+    }
+
+    public int WeaponID = 0;
 
     // Variables for bullets
     private RaycastHit hitInfo;
-    private RaycastHit resetTo = new RaycastHit();
 
-    private CharacterController controller;
-    private Transform playerCamera;
+    public Transform SourceTransform;
 
-    // Public weapon getters
-    // Everything has set ability. Future implementation: weapon factory for producing different weapon types. Appropriate cooldown/damage
-    // values will be looked up and set before gun is spawned.
-    public float CooldownRate
-    {
-        get
-        {
-            return cooldownRate;
-        }
-        set
-        {
-            cooldownRate = value;
-        }
-    }
-    public float CooldownDelay
-    {
-        get
-        {
-            return cooldownDelay;
-        }
-        set
-        {
-            cooldownDelay = value;
-        }
+    private IPlayer player;
+
+    void Start() {
+        player = GetComponentInParent<AbstractPlayer>();
+        IsOverheating = false;
+        Temperature = 0f;
     }
 
-    public float EnergyPerShot
-    {
-        get
-        {
-            return energyPerShot;
-        }
-        set
-        {
-            energyPerShot = value;
-        }
-    }
-    public float DamagePerShot
-    {
-        get
-        {
-            return damagePerShot;
-        }
-        set
-        {
-            damagePerShot = value;
-        }
-    }
-
-    public bool IsOverheating
-    {
-        get
-        {
-            return isOverheating;
-        }
-
-        set
-        {
-            isOverheating = value;
-        }
-    }
-
-    public int WeaponID
-    {
-        get
-        {
-            return weaponID;
-        }
-
-        set
-        {
-            weaponID = value;
-        }
-    }
-
-    void Start()
-    {
-        if (transform.GetComponentInParent<CharacterController>() != null)
-        {
-            controller = transform.GetComponentInParent<CharacterController>();
-        }
-        else
-        {
-            Debug.LogError("Gun must be a child of the player object.");
-            controller = null;
-        }
-        playerCamera = transform.parent.GetComponentInChildren<Camera>().transform;
-    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Fire();
+        DebugHUD.setValue("Gun temp", Temperature);
+        DebugHUD.setValue("Gun overheated", IsOverheating);
+        if (timeUntilCooldownBegins > 0f) timeUntilCooldownBegins = Mathf.Max(0f, timeUntilCooldownBegins - Time.deltaTime);
+        if (timeUntilCooldownBegins <= 0f && Temperature >= 0f) {
+            Temperature -= CooldownRate * Time.deltaTime * (IsOverheating ? 1.5f : 1.0f);
+            if (Temperature <= 0f) {
+                Temperature = 0f;
+                IsOverheating = false;
+            }
+        }
+        if (timeUntilNextShot > 0f) {
+            timeUntilNextShot = Mathf.Max(0f, timeUntilNextShot - Time.deltaTime);
+            return;
+        }
+        if (IsOverheating) return;
+        if (Automatic) {
+            if (Input.GetButton("Fire1")) {
+                Fire();
+            }
+        } else {
+            if (Input.GetButtonDown("Fire1")) {
+                Fire();
+            }
         }
 
     }
 
     public void Fire()
     {
+        timeUntilNextShot = MinDelayBetweenShots;
+        timeUntilCooldownBegins = CooldownDelay;
+        Temperature+=HeatPerShot;
+        if (Temperature >= MaxTemperature) {
+            IsOverheating = true;
+            Temperature = MaxTemperature;
+        }
         Vector3 endpoint;
-        if (Physics.Raycast(transform.position, playerCamera.forward, out hitInfo))
+        if (Physics.Raycast(SourceTransform.position, SourceTransform.forward, out hitInfo))
         {
+            Debug.Log("Hit " + hitInfo.transform.name);
             endpoint = hitInfo.point;
-
-            if (hitInfo.transform.GetComponentInParent<IPlayer>() != null)
+            IPlayer hitplayer = hitInfo.transform.GetComponent<AbstractPlayer>();
+            if (hitplayer == null) hitplayer = hitInfo.transform.GetComponentInParent<AbstractPlayer>();
+            if (hitplayer != null)
             {
-                hitInfo.transform.GetComponentInParent<IPlayer>().TakeDamage(damagePerShot, transform.parent.name);
+                hitplayer.TakeDamage(DamagePerShot, hitplayer.Username, -SourceTransform.forward);
             }
         }
         else
         {
-            endpoint = transform.position + playerCamera.forward * 1000000.0f;
+            endpoint = transform.position + SourceTransform.forward * 1000000.0f;
         }
 
-        WeaponFireEvent evnt = WeaponFireEvent.Create(Bolt.GlobalTargets.Everyone);
+        WeaponFireEvent evnt = WeaponFireEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.Unreliable);
         evnt.EndPoint = endpoint;
         evnt.StartPoint = transform.position;
         evnt.Color = Color.red;
         evnt.Send();
 
         Debug.DrawLine(transform.position, endpoint, Color.cyan, 0.5f);
+    }
 
-        if (transform.GetComponentInParent<Cooldown>() != null) {
-            
-            Cooldown temp = transform.GetComponentInParent<Cooldown>();
+    //doing it this way allows these properties to be set in the editor
+    float IWeapon.CooldownRate {
+        get { return CooldownRate; }
+    }
 
-            temp.cooldownDelay = cooldownDelay;
-            temp.cooldownSpeed = cooldownRate;
-            temp.degreesPerFire = energyPerShot;
+    public float EnergyPerShot {
+        get { return HeatPerShot; }
+    }
 
-            isOverheating = temp.overheat;
+    float IWeapon.DamagePerShot {
+        get { return DamagePerShot; }
+    }
 
-            temp.FireWeapon();
-        }
+    float IWeapon.CooldownDelay {
+        get { return CooldownDelay; }
+    }
+
+    int IWeapon.WeaponID {
+        get { return WeaponID; }
+    }
+
+    float IWeapon.MaxTemperature {
+        get { return MaxTemperature; }
     }
 }

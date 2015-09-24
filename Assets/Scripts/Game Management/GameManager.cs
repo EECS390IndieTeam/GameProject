@@ -10,7 +10,9 @@ public class GameManager : MonoBehaviour
 	public static GameManager instance {
 		get {
 			if (_instance == null) {
-				_instance = GameObject.FindObjectOfType<GameManager> ();
+                GameObject obj = new GameObject("GameManager", typeof(GameManager));
+                _instance = obj.GetComponent<GameManager>();
+
 				
 				//Tell unity not to destroy this object when loading a new scene!
 				DontDestroyOnLoad (_instance.gameObject);
@@ -53,6 +55,8 @@ public class GameManager : MonoBehaviour
 	private LobbyState Lobby;
 	private GAME_STATE currentGameState;
 
+    public string CurrentUserName;
+
 	private IDictionary<GAME_STATE,int> stateToSceneMap;
 
 	public IPlayer CurrentPlayer {
@@ -60,6 +64,10 @@ public class GameManager : MonoBehaviour
 			return Player;
 		}
 	}
+
+    public void SetCurrentPlayer(IPlayer p) {
+        Player = p;
+    }
 
 	void Start ()
 	{
@@ -71,7 +79,7 @@ public class GameManager : MonoBehaviour
 
 		//Set default game state
 		currentGameState = GAME_STATE.MAIN_MENU;
-		Player = GameObject.FindObjectOfType<Player>();
+		Player = GameObject.FindObjectOfType<AbstractPlayer>();
 	}
 
 	public void transitionGameState (GAME_STATE state)

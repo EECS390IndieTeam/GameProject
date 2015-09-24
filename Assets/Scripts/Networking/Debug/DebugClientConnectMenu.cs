@@ -12,6 +12,7 @@ public class DebugClientConnectMenu : Bolt.GlobalEventListener {
         if (BoltNetwork.isClient) {
             DebugHUD.setValue("ping", BoltNetwork.server.PingNetwork);
         }
+        DebugHUD.setValue("username", GameManager.instance.CurrentUserName);
     }
 
     void OnGUI() {
@@ -49,7 +50,7 @@ public class DebugClientConnectMenu : Bolt.GlobalEventListener {
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
         GUILayout.Label("Username:");
-        username = GUILayout.TextField(username);
+        GameManager.instance.CurrentUserName = GUILayout.TextField(GameManager.instance.CurrentUserName);
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
         GUILayout.Label("server password:");
@@ -60,7 +61,7 @@ public class DebugClientConnectMenu : Bolt.GlobalEventListener {
             if (!BoltNetwork.isRunning) {
                 BoltLauncher.StartClient();
             } else {
-                BoltNetwork.Connect(UdpKit.UdpEndPoint.Parse(ip), new ConnectionRequestData(username, password));
+                BoltNetwork.Connect(UdpKit.UdpEndPoint.Parse(ip), new ConnectionRequestData(GameManager.instance.CurrentUserName, password));
             }
         }
         GUILayout.EndHorizontal();
