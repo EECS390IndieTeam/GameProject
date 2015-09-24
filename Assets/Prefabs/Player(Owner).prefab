@@ -35,6 +35,7 @@ GameObject:
   - 114: {fileID: 11491598}
   - 65: {fileID: 6552766}
   - 114: {fileID: 11486706}
+  - 114: {fileID: 11460822}
   m_Layer: 0
   m_Name: Player(Owner)
   m_TagString: Untagged
@@ -310,6 +311,18 @@ MonoBehaviour:
   reelSpeed: 15
   stabilizer: 1.10000002
   maxReelMultiplier: 3
+--- !u!114 &11460822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70515169fe00896498335a3334db8ebb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponFirePrefab: {fileID: 186558, guid: d9576bfce2f4a1f45b6795c59d0d963b, type: 2}
 --- !u!114 &11486706
 MonoBehaviour:
   m_ObjectHideFlags: 1
