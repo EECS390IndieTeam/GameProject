@@ -124,13 +124,13 @@ public class Gun : MonoBehaviour, IWeapon
     public void Fire()
     {
         Vector3 endpoint;
-        if (Physics.Raycast(transform.position, playerCamera.forward, out hitInfo, 10.0f))
+        if (Physics.Raycast(transform.position, playerCamera.forward, out hitInfo))
         {
             endpoint = hitInfo.point;
 
-            if (hitInfo.transform.GetComponent<Player>() != null)
+            if (hitInfo.transform.GetComponentInParent<IPlayer>() != null)
             {
-                hitInfo.transform.GetComponent<Player>().TakeDamage(damagePerShot, transform.parent.name);
+                hitInfo.transform.GetComponentInParent<IPlayer>().TakeDamage(damagePerShot, transform.parent.name);
             }
         }
         else
