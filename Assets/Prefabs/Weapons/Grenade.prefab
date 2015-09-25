@@ -13,6 +13,7 @@ GameObject:
   - 23: {fileID: 2389444}
   - 54: {fileID: 5421178}
   - 114: {fileID: 11444944}
+  - 114: {fileID: 11474264}
   m_Layer: 0
   m_Name: Grenade
   m_TagString: Untagged
@@ -71,7 +72,7 @@ Rigidbody:
   m_GameObject: {fileID: 162282}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: .00999999978
   m_AngularDrag: .0500000007
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -89,6 +90,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 211cd1510ac81004f91396646040a429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartingFuseTime: 5
+  explosionRadius: 5
+  damage: 20
+--- !u!114 &11474264
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -36112512, guid: 5b00bf8b25851d440940a40ec23344f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneGuid: 
+  _serializerGuid: 1c44c8fa-e4a1-41a3-9372-b44987c91f3a
+  _prefabId: 3
+  _updateRate: 1
+  _autoFreezeProxyFrames: 0
+  _clientPredicted: 0
+  _allowInstantiateOnClient: 1
+  _persistThroughSceneLoads: 0
+  _sceneObjectDestroyOnDetach: 0
+  _sceneObjectAutoAttach: 1
+  _alwaysProxy: 0
+  _detachOnDisable: 1
+  _allowFirstReplicationWhenFrozen: 0
+  _autoRemoveChildEntities: 0
 --- !u!135 &13526126
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -107,7 +136,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Drag
+      value: .00999999978
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 162282}

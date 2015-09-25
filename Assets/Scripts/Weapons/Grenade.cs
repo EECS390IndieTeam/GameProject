@@ -1,49 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Grenade : MonoBehaviour, IGrenade 
+[RequireComponent(typeof(Rigidbody), typeof(Collider))]
+public class Grenade : Bolt.EntityBehaviour<IGrenadeState>, IGrenade 
 {
-	private int bodyTimer = 0;			//Private counter to use for time-based effects.
-	private float speed = 3;			//Speed at which the projectile moves.
-
-	//Variables that are also used by IGrenade
-	private float detonateTime = 5.0f;	//Time until grenade detonates, in Seconds. TODO: Set within the ThrowGrenade class.
+	//Properties of this specific Grenade instance
+    public float StartingFuseTime = 5.0f;
 	public float explosionRadius = 5.0f;
 	public float damage = 20.0f;
-	public string thrower = "N/A";
 
-	// Use this for initialization
-	void Start () {
-		// Provide velocity based on Rotation.
-		//Y-rotation: Horizontal, positive = clockwise.
-		//X-rotation: Up/down, positive = down.
-		//thus, X = Cos (Y-rotation) times speed
-		//Y = Sin (Y-rotation) times speed
-		//Z = -Sin (X-rotation) times speed
-		float zVel = Mathf.Cos(this.transform.eulerAngles.y * Mathf.Deg2Rad) * speed;
-		float xVel = Mathf.Sin(this.transform.eulerAngles.y * Mathf.Deg2Rad) * speed;
-		float yVel = 0 - (Mathf.Sin(this.transform.eulerAngles.x * Mathf.Deg2Rad) * speed);
-		this.GetComponent<Rigidbody> ().velocity = new Vector3 (xVel, yVel, zVel);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public override void Attached() {
+        state.Transform.SetTransforms(transform);
+        if (!entity.isOwner) {
+            GetComponent<Rigidbody>().isKinematic = true;
+        } else {
+            DetonateTime = BoltNetwork.serverTime + StartingFuseTime;
+        }
+    }
 
 	//FixedUpdate called at a fixed framerate of 60
-	void FixedUpdate() {
-		//Enable body collision after half a second. Shorten timing once proper model created and can test minimum time needed.
-		if (bodyTimer == 30) {
-			this.GetComponent<SphereCollider> ().enabled = true;
-		}
-		//Self-destroy object after 10 seconds.
-		//TODO: implement an array or something to allow recycling of the grenade projectiles.
-		if (bodyTimer == (int)(detonateTime * 60)) {
-			//Put code to detonate and harm nearby players here.
+    //SimulateOwner is called from FixedUpdate, but only for the owner of the object
+	public override void SimulateOwner() {
+        float timeSinceThrown = StartingFuseTime - FuseTimeRemaining;
+        DebugHUD.setValue("DetonateTime", DetonateTime);
+        DebugHUD.setValue("ServerTime", BoltNetwork.serverTime);
+        DebugHUD.setValue("FuseTimeRemaining", FuseTimeRemaining);
+
+		//Self-destroy object after its fuse is done.
+		if (FuseTimeRemaining <= 0f) {
 			Detonate();
 		}
-		bodyTimer++;
 	}
 
 	public void Detonate(){
@@ -51,36 +37,49 @@ public class Grenade : MonoBehaviour, IGrenade
 		int i = 0;
 		while (i < targets.Length) {
 			//If something in the radius is a player, deal damage to them.
-			if(targets[i].gameObject.tag == "Player"){
-				GameObject target = targets[i].gameObject;
-				IPlayer hitplayer = target.GetComponent<AbstractPlayer>();
-				hitplayer.TakeDamage(damage, hitplayer.Username, (target.transform.position - this.transform.position));
-			}
+			GameObject target = targets[i].gameObject;
+			IPlayer hitplayer = target.GetComponent<AbstractPlayer>();
+			if(hitplayer != null) hitplayer.TakeDamage(damage, Thrower, (target.transform.position - this.transform.position));
 			i++;
 		}
 		//--------Put in something here to create an explosion particle effect------------
-		//Once the whole array has been checked through, delete the grenade.
-		Destroy (this.gameObject);
-	}
+        //OK, I will, here goes:
+        ExplosionEvent evnt = ExplosionEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.Unreliable);
+        evnt.Position = transform.position;
+        evnt.Send();
+        //done
 
-	public void setDetonate(float time){
-		detonateTime = time;
+		//Once the whole array has been checked through, delete the grenade.
+		BoltNetwork.Destroy (this.gameObject);
 	}
 
 	//doing it this way allows these properties to be set in the editor
-	float IGrenade.Strength {
+	public float Strength {
 		get { return damage; }
 	}
 	
-	float IGrenade.Radius {
+	public float Radius {
 		get { return explosionRadius; }
 	}
 	
-	float IGrenade.FuseTime {
-		get { return detonateTime; }
+	public float FuseTimeRemaining {
+		get { return DetonateTime - BoltNetwork.serverTime; }
 	}
+
+    public float FuseTime {
+        get { return StartingFuseTime; }
+    }
 	
-	string IGrenade.Thrower {
-		get { return thrower; }
+	public string Thrower {
+        get { return state.Thrower; }
 	}
+
+    public void SetThrower(string t) {
+        state.Thrower = t;
+    }
+
+    public float DetonateTime {
+        get { return state.DetonateTime; }
+        set { state.DetonateTime = value; }
+    }
 }

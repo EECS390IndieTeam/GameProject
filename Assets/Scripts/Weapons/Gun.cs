@@ -37,10 +37,7 @@ public class Gun : MonoBehaviour, IWeapon
 
     public Transform SourceTransform;
 
-    private IPlayer player;
-
     void Start() {
-        player = GetComponentInParent<AbstractPlayer>();
         IsOverheating = false;
         Temperature = 0f;
     }

@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WeaponFireEventListener : Bolt.GlobalEventListener {
+public class VisualEffectsEventListener : Bolt.GlobalEventListener {
     public GameObject WeaponFirePrefab;
+    public GameObject ExplosionPrefab;
 
 
     public override void OnEvent(WeaponFireEvent evnt) {
@@ -11,5 +12,11 @@ public class WeaponFireEventListener : Bolt.GlobalEventListener {
         shot.StartPoint = evnt.StartPoint;
         shot.EndPoint = evnt.EndPoint;
         shot.BeamColor = evnt.Color;
+    }
+
+    public override void OnEvent(ExplosionEvent evnt) {
+        GameObject prefab = Instantiate(ExplosionPrefab);
+        prefab.transform.position = evnt.Position;
+        Destroy(prefab, 10f);
     }
 }

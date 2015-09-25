@@ -3,7 +3,6 @@ using System.Collections;
 
 public class DebugClientConnectMenu : Bolt.GlobalEventListener {
 
-    private string username = "";
     private string password = "dickbutt";
     private string ip = "127.0.0.1:54321";
 
@@ -44,27 +43,29 @@ public class DebugClientConnectMenu : Bolt.GlobalEventListener {
 
     private void DrawClientMenu() {
         StartBox();
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("IP:");
-        ip = GUILayout.TextField(ip);
-        GUILayout.EndHorizontal();
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("Username:");
-        GameManager.instance.CurrentUserName = GUILayout.TextField(GameManager.instance.CurrentUserName);
-        GUILayout.EndHorizontal();
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("server password:");
-        password = GUILayout.TextField(password);
-        GUILayout.EndHorizontal();
-        GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Connect")) {
-            if (!BoltNetwork.isRunning) {
-                BoltLauncher.StartClient();
-            } else {
-                BoltNetwork.Connect(UdpKit.UdpEndPoint.Parse(ip), new ConnectionRequestData(GameManager.instance.CurrentUserName, password));
+        if (!BoltNetwork.isConnected) {
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("IP:");
+            ip = GUILayout.TextField(ip);
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Username:");
+            GameManager.instance.CurrentUserName = GUILayout.TextField(GameManager.instance.CurrentUserName);
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("server password:");
+            password = GUILayout.TextField(password);
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Connect")) {
+                if (!BoltNetwork.isRunning) {
+                    BoltLauncher.StartClient();
+                } else {
+                    BoltNetwork.Connect(UdpKit.UdpEndPoint.Parse(ip), new ConnectionRequestData(GameManager.instance.CurrentUserName, password));
+                }
             }
+            GUILayout.EndHorizontal();
         }
-        GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Disconnect")) {
             BoltNetwork.server.Disconnect();

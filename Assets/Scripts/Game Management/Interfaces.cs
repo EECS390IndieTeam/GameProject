@@ -76,6 +76,10 @@ public interface IGrenade {
         get;
     }
 
+    float FuseTimeRemaining {
+        get;
+    }
+
     string Thrower {
         get;
     }
