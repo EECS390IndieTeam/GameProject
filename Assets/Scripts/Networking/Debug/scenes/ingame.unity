@@ -37,9 +37,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
---- !u!127 &3
-LevelGameManager:
-  m_ObjectHideFlags: 0
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -68,6 +65,7 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &5
@@ -99,6 +97,7 @@ GameObject:
   - 65: {fileID: 40422644}
   - 23: {fileID: 40422643}
   - 54: {fileID: 40422642}
+  - 114: {fileID: 40422646}
   m_Layer: 0
   m_Name: Big box (9)
   m_TagString: Untagged
@@ -180,6 +179,28 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 40422640}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &40422646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 40422640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57366464f18c9b84bacb1c1bb6b4ffae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render_lines_1st: 0
+  render_lines_2nd: 1
+  render_lines_3rd: 0
+  lineColor: {r: 0, g: 1, b: 1, a: 1}
+  backgroundColor: {r: 0, g: .5, b: .5, a: 1}
+  ZWrite: 1
+  AWrite: 1
+  blend: 1
+  lineWidth: 1
+  size: 0
+  lineMaterial: {fileID: 2100000, guid: cf1accb6b9c6054439558f1ca0d5d9d5, type: 2}
 --- !u!1 &113833764
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,6 +213,7 @@ GameObject:
   - 65: {fileID: 113833768}
   - 23: {fileID: 113833767}
   - 54: {fileID: 113833766}
+  - 114: {fileID: 113833770}
   m_Layer: 0
   m_Name: Big box (8)
   m_TagString: Untagged
@@ -273,6 +295,28 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 113833764}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &113833770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 113833764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57366464f18c9b84bacb1c1bb6b4ffae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render_lines_1st: 0
+  render_lines_2nd: 1
+  render_lines_3rd: 0
+  lineColor: {r: 0, g: 1, b: 1, a: 1}
+  backgroundColor: {r: 0, g: .5, b: .5, a: 1}
+  ZWrite: 1
+  AWrite: 1
+  blend: 1
+  lineWidth: 1
+  size: 0
+  lineMaterial: {fileID: 2100000, guid: cf1accb6b9c6054439558f1ca0d5d9d5, type: 2}
 --- !u!1 &284695124
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +329,7 @@ GameObject:
   - 65: {fileID: 284695128}
   - 23: {fileID: 284695127}
   - 54: {fileID: 284695126}
+  - 114: {fileID: 284695130}
   m_Layer: 0
   m_Name: Big box (5)
   m_TagString: Untagged
@@ -366,6 +411,28 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 284695124}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &284695130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 284695124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57366464f18c9b84bacb1c1bb6b4ffae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render_lines_1st: 0
+  render_lines_2nd: 1
+  render_lines_3rd: 0
+  lineColor: {r: 0, g: 1, b: 1, a: 1}
+  backgroundColor: {r: 0, g: .5, b: .5, a: 1}
+  ZWrite: 1
+  AWrite: 1
+  blend: 1
+  lineWidth: 1
+  size: 0
+  lineMaterial: {fileID: 2100000, guid: cf1accb6b9c6054439558f1ca0d5d9d5, type: 2}
 --- !u!1 &545495813
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,6 +525,7 @@ GameObject:
   - 65: {fileID: 697084568}
   - 23: {fileID: 697084567}
   - 54: {fileID: 697084566}
+  - 114: {fileID: 697084570}
   m_Layer: 0
   m_Name: Big box (1)
   m_TagString: Untagged
@@ -539,6 +607,28 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 697084564}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &697084570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 697084564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57366464f18c9b84bacb1c1bb6b4ffae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render_lines_1st: 0
+  render_lines_2nd: 1
+  render_lines_3rd: 0
+  lineColor: {r: 0, g: 1, b: 1, a: 1}
+  backgroundColor: {r: 0, g: .5, b: .5, a: 1}
+  ZWrite: 1
+  AWrite: 1
+  blend: 1
+  lineWidth: 1
+  size: 0
+  lineMaterial: {fileID: 2100000, guid: cf1accb6b9c6054439558f1ca0d5d9d5, type: 2}
 --- !u!1 &749595803
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,6 +641,7 @@ GameObject:
   - 65: {fileID: 749595807}
   - 23: {fileID: 749595806}
   - 54: {fileID: 749595805}
+  - 114: {fileID: 749595809}
   m_Layer: 0
   m_Name: Big box (10)
   m_TagString: Untagged
@@ -632,6 +723,28 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 749595803}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &749595809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 749595803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57366464f18c9b84bacb1c1bb6b4ffae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render_lines_1st: 0
+  render_lines_2nd: 1
+  render_lines_3rd: 0
+  lineColor: {r: 0, g: 1, b: 1, a: 1}
+  backgroundColor: {r: 0, g: .5, b: .5, a: 1}
+  ZWrite: 1
+  AWrite: 1
+  blend: 1
+  lineWidth: 1
+  size: 0
+  lineMaterial: {fileID: 2100000, guid: cf1accb6b9c6054439558f1ca0d5d9d5, type: 2}
 --- !u!1 &765978446
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,6 +757,7 @@ GameObject:
   - 65: {fileID: 765978450}
   - 23: {fileID: 765978449}
   - 54: {fileID: 765978448}
+  - 114: {fileID: 765978452}
   m_Layer: 0
   m_Name: Big box (4)
   m_TagString: Untagged
@@ -725,6 +839,28 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 765978446}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &765978452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 765978446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57366464f18c9b84bacb1c1bb6b4ffae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render_lines_1st: 0
+  render_lines_2nd: 1
+  render_lines_3rd: 0
+  lineColor: {r: 0, g: 1, b: 1, a: 1}
+  backgroundColor: {r: 0, g: .5, b: .5, a: 1}
+  ZWrite: 1
+  AWrite: 1
+  blend: 1
+  lineWidth: 1
+  size: 0
+  lineMaterial: {fileID: 2100000, guid: cf1accb6b9c6054439558f1ca0d5d9d5, type: 2}
 --- !u!1 &990374090
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,6 +873,7 @@ GameObject:
   - 65: {fileID: 990374094}
   - 23: {fileID: 990374093}
   - 54: {fileID: 990374092}
+  - 114: {fileID: 990374091}
   m_Layer: 0
   m_Name: Little box
   m_TagString: Untagged
@@ -744,6 +881,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &990374091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 990374090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57366464f18c9b84bacb1c1bb6b4ffae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render_lines_1st: 0
+  render_lines_2nd: 1
+  render_lines_3rd: 0
+  lineColor: {r: 0, g: 1, b: 1, a: 1}
+  backgroundColor: {r: 0, g: .5, b: .5, a: 1}
+  ZWrite: 1
+  AWrite: 1
+  blend: 1
+  lineWidth: 1
+  size: 0
+  lineMaterial: {fileID: 2100000, guid: cf1accb6b9c6054439558f1ca0d5d9d5, type: 2}
 --- !u!54 &990374092
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -830,6 +989,7 @@ GameObject:
   - 65: {fileID: 1050862555}
   - 23: {fileID: 1050862554}
   - 54: {fileID: 1050862553}
+  - 114: {fileID: 1050862557}
   m_Layer: 0
   m_Name: Big box (2)
   m_TagString: Untagged
@@ -911,6 +1071,28 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1050862551}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1050862557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1050862551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57366464f18c9b84bacb1c1bb6b4ffae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render_lines_1st: 0
+  render_lines_2nd: 1
+  render_lines_3rd: 0
+  lineColor: {r: 0, g: 1, b: 1, a: 1}
+  backgroundColor: {r: 0, g: .5, b: .5, a: 1}
+  ZWrite: 1
+  AWrite: 1
+  blend: 1
+  lineWidth: 1
+  size: 0
+  lineMaterial: {fileID: 2100000, guid: cf1accb6b9c6054439558f1ca0d5d9d5, type: 2}
 --- !u!1 &1104723862
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,6 +1105,7 @@ GameObject:
   - 65: {fileID: 1104723866}
   - 23: {fileID: 1104723865}
   - 54: {fileID: 1104723864}
+  - 114: {fileID: 1104723868}
   m_Layer: 0
   m_Name: Big box (6)
   m_TagString: Untagged
@@ -1004,6 +1187,28 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1104723862}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1104723868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1104723862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57366464f18c9b84bacb1c1bb6b4ffae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render_lines_1st: 0
+  render_lines_2nd: 1
+  render_lines_3rd: 0
+  lineColor: {r: 0, g: 1, b: 1, a: 1}
+  backgroundColor: {r: 0, g: .5, b: .5, a: 1}
+  ZWrite: 1
+  AWrite: 1
+  blend: 1
+  lineWidth: 1
+  size: 0
+  lineMaterial: {fileID: 2100000, guid: cf1accb6b9c6054439558f1ca0d5d9d5, type: 2}
 --- !u!1 &1167937247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,6 +1221,7 @@ GameObject:
   - 65: {fileID: 1167937253}
   - 23: {fileID: 1167937252}
   - 54: {fileID: 1167937251}
+  - 114: {fileID: 1167937249}
   m_Layer: 0
   m_Name: Big box
   m_TagString: Untagged
@@ -1035,6 +1241,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 545495814}
   m_RootOrder: 12
+--- !u!114 &1167937249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1167937247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57366464f18c9b84bacb1c1bb6b4ffae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render_lines_1st: 0
+  render_lines_2nd: 1
+  render_lines_3rd: 0
+  lineColor: {r: 0, g: 1, b: 1, a: 1}
+  backgroundColor: {r: 0, g: .5, b: .5, a: 1}
+  ZWrite: 1
+  AWrite: 1
+  blend: 1
+  lineWidth: 1
+  size: 0
+  lineMaterial: {fileID: 2100000, guid: cf1accb6b9c6054439558f1ca0d5d9d5, type: 2}
 --- !u!54 &1167937251
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1109,6 +1337,7 @@ GameObject:
   - 65: {fileID: 1385322064}
   - 23: {fileID: 1385322063}
   - 54: {fileID: 1385322062}
+  - 114: {fileID: 1385322066}
   m_Layer: 0
   m_Name: Big box (11)
   m_TagString: Untagged
@@ -1190,6 +1419,28 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1385322060}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1385322066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1385322060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57366464f18c9b84bacb1c1bb6b4ffae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render_lines_1st: 0
+  render_lines_2nd: 1
+  render_lines_3rd: 0
+  lineColor: {r: 0, g: 1, b: 1, a: 1}
+  backgroundColor: {r: 0, g: .5, b: .5, a: 1}
+  ZWrite: 1
+  AWrite: 1
+  blend: 1
+  lineWidth: 1
+  size: 0
+  lineMaterial: {fileID: 2100000, guid: cf1accb6b9c6054439558f1ca0d5d9d5, type: 2}
 --- !u!1001 &1560382987
 Prefab:
   m_ObjectHideFlags: 0
@@ -1296,6 +1547,7 @@ GameObject:
   - 65: {fileID: 1566132268}
   - 23: {fileID: 1566132267}
   - 54: {fileID: 1566132266}
+  - 114: {fileID: 1566132270}
   m_Layer: 0
   m_Name: Big box (3)
   m_TagString: Untagged
@@ -1377,6 +1629,28 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1566132264}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1566132270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1566132264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57366464f18c9b84bacb1c1bb6b4ffae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render_lines_1st: 0
+  render_lines_2nd: 1
+  render_lines_3rd: 0
+  lineColor: {r: 0, g: 1, b: 1, a: 1}
+  backgroundColor: {r: 0, g: .5, b: .5, a: 1}
+  ZWrite: 1
+  AWrite: 1
+  blend: 1
+  lineWidth: 1
+  size: 0
+  lineMaterial: {fileID: 2100000, guid: cf1accb6b9c6054439558f1ca0d5d9d5, type: 2}
 --- !u!1 &1768729055
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,6 +1663,7 @@ GameObject:
   - 65: {fileID: 1768729059}
   - 23: {fileID: 1768729058}
   - 54: {fileID: 1768729057}
+  - 114: {fileID: 1768729061}
   m_Layer: 0
   m_Name: Big box (12)
   m_TagString: Untagged
@@ -1470,6 +1745,28 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1768729055}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1768729061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1768729055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57366464f18c9b84bacb1c1bb6b4ffae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render_lines_1st: 0
+  render_lines_2nd: 1
+  render_lines_3rd: 0
+  lineColor: {r: 0, g: 1, b: 1, a: 1}
+  backgroundColor: {r: 0, g: .5, b: .5, a: 1}
+  ZWrite: 1
+  AWrite: 1
+  blend: 1
+  lineWidth: 1
+  size: 0
+  lineMaterial: {fileID: 2100000, guid: cf1accb6b9c6054439558f1ca0d5d9d5, type: 2}
 --- !u!1 &1821856777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1482,6 +1779,7 @@ GameObject:
   - 65: {fileID: 1821856781}
   - 23: {fileID: 1821856780}
   - 54: {fileID: 1821856779}
+  - 114: {fileID: 1821856783}
   m_Layer: 0
   m_Name: Big box (7)
   m_TagString: Untagged
@@ -1563,6 +1861,28 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1821856777}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1821856783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1821856777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57366464f18c9b84bacb1c1bb6b4ffae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render_lines_1st: 0
+  render_lines_2nd: 1
+  render_lines_3rd: 0
+  lineColor: {r: 0, g: 1, b: 1, a: 1}
+  backgroundColor: {r: 0, g: .5, b: .5, a: 1}
+  ZWrite: 1
+  AWrite: 1
+  blend: 1
+  lineWidth: 1
+  size: 0
+  lineMaterial: {fileID: 2100000, guid: cf1accb6b9c6054439558f1ca0d5d9d5, type: 2}
 --- !u!1 &2119761711
 GameObject:
   m_ObjectHideFlags: 0

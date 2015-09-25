@@ -16,7 +16,7 @@ public class Wireframe : MonoBehaviour {
 	
 	private Vector3[] lines ;
 	private ArrayList lines_List ;
-	public Material lineMaterial ;
+	public Material lineMaterial;
 
 	void Start () {
 		
