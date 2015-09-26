@@ -25,6 +25,7 @@ public class ThrowGrenade : MonoBehaviour {
             rgb.isKinematic = false;
             rgb.AddForce(transform.forward * ThrowForce);
             heldGrenade.transform.parent = null;
+            heldGrenade.GetComponent<Collider>().enabled = true;
             heldGrenade = null;
         }
     }
