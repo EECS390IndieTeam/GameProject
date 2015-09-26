@@ -40,7 +40,6 @@ public class SurfaceMovement : MonoBehaviour {
         if(movementSpeed < maxVelocity * maxVelocity)
         {
             RaycastHit hit;
-            //float maxDistance = Mathf.Sqrt((grabDistance + 1)*(grabDistance + 1) + attachedSurfac)
             if (Physics.Raycast(character.position + (desiredSpeed * worldSpaceVector * Time.deltaTime), characterToObject, out hit, grabDistance + .5f))
             {
                 if(Vector3.Angle(hit.normal, lastNormal) >= 90)
@@ -48,25 +47,19 @@ public class SurfaceMovement : MonoBehaviour {
                     character.velocity = new Vector3(0, 0, 0);
                 }
                 Vector3 moveVector = Vector3.ProjectOnPlane(worldSpaceVector, hit.normal);
-                character.MovePosition(character.position + desiredSpeed * moveVector * Time.fixedDeltaTime);
-                character.AddForce(moveVector * desiredSpeed * .3f);
+                character.AddForce(moveVector * desiredSpeed * .05f, ForceMode.Impulse);
+                lastNormal = hit.normal;
 
             } else
             {
-                character.AddForce(characterToObject * .5f);
+                character.AddForce(characterToObject * .2f, ForceMode.Impulse);
             }
             characterToObject =   attachedSurface.position - character.position;
-            //if (characterToObject.sqrMagnitude > (grabDistance + 1) * (grabDistance + 1))
-            //{
-            //    character.MovePosition(character.position + .1f * characterToObject * Time.fixedDeltaTime);
-            //}
-
-            
-
         }
         if (desiredSpeed == 0)
         {
-            character.AddForce(lastNormal * .1f);
+            Debug.Log("Velocity cancelling");
+            character.AddForce(-character.velocity, ForceMode.Impulse);
         }
 
     }

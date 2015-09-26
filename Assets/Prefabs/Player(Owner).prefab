@@ -218,7 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 5479222}
   pCamera: {fileID: 481960}
-  maxVelocity: 12
+  maxVelocity: 6
   maxXSpeed: 4
   maxYSpeed: 4
   grabDistance: 1
@@ -358,7 +358,7 @@ Prefab:
       objectReference: {fileID: 5479222}
     - target: {fileID: 0}
       propertyPath: maxVelocity
-      value: 12
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxXSpeed
