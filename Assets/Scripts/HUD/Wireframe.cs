@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Wireframe : MonoBehaviour {
 
+	//TODO Commenting
+	//Are these used anywhere? If so, comment what they are for
 	public bool render_lines_1st = false;
 	public bool render_lines_2nd = false;
 	public bool render_lines_3rd = false;
@@ -13,7 +15,9 @@ public class Wireframe : MonoBehaviour {
 	public bool blend = true;
 	public float lineWidth = 3;
 	public int size = 0;
-	
+
+	//Can we avoid storing this stuff twice? It's really costly....
+	//Maybe just use the list (as it's backed by an array anyways)
 	private Vector3[] lines ;
 	private ArrayList lines_List ;
 	public Material lineMaterial;
