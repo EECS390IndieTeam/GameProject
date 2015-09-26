@@ -2,20 +2,24 @@
 using System.Collections;
 using System;
 
-public class SurfaceMovement{
+public class SurfaceMovement : MonoBehaviour {
 
 
-    Rigidbody character;
+    public Rigidbody character;
 
-    float maxVelocity;
+    public Transform pCamera;
 
-    float maxXSpeed;
+    public float maxVelocity;
 
-    float maxYSpeed;
+    public float maxXSpeed;
 
-    float grabDistance;
+    public float maxYSpeed;
 
-    //Rigidbody attachedSurface;
+    public float grabDistance;
+
+    private Rigidbody attachedSurface;
+
+    private Vector3 lastNormal;
 
 
     public SurfaceMovement(Rigidbody character, float velocity, float maxXSpeed, float maxYSpeed, float grabDistance)
@@ -31,14 +35,33 @@ public class SurfaceMovement{
     {
         float movementSpeed  = character.velocity.sqrMagnitude;
         float desiredSpeed = calcupateDesiredSpeed(inputVector);
-        Vector3 worldSpaceVector = character.transform.TransformDirection(inputVector.x, inputVector.y, 0);
+        Vector3 worldSpaceVector = pCamera.transform.TransformDirection(inputVector.x, inputVector.y, 0);
+        Vector3 characterToObject = attachedSurface.position - character.position;
         if(movementSpeed < maxVelocity * maxVelocity)
         {
-            if (Physics.Raycast(character.position + desiredSpeed * worldSpaceVector * Time.deltaTime, character.transform.forward, grabDistance + 1))
+            RaycastHit hit;
+            if (Physics.Raycast(character.position + (desiredSpeed * worldSpaceVector * Time.deltaTime), characterToObject, out hit, grabDistance + .5f))
             {
-                character.MovePosition(character.position + desiredSpeed * worldSpaceVector * Time.deltaTime);
+                if(Vector3.Angle(hit.normal, lastNormal) >= 90)
+                {
+                    character.velocity = new Vector3(0, 0, 0);
+                }
+                Vector3 moveVector = Vector3.ProjectOnPlane(worldSpaceVector, hit.normal);
+                character.AddForce(moveVector * desiredSpeed * .05f, ForceMode.Impulse);
+                lastNormal = hit.normal;
+
+            } else
+            {
+                character.AddForce(characterToObject * .2f, ForceMode.Impulse);
             }
+            characterToObject =   attachedSurface.position - character.position;
         }
+        if (desiredSpeed == 0)
+        {
+            Debug.Log("Velocity cancelling");
+            character.AddForce(-character.velocity, ForceMode.Impulse);
+        }
+
     }
 
     private float calcupateDesiredSpeed(Vector2 inputVector)
@@ -59,7 +82,10 @@ public class SurfaceMovement{
 
     internal void attachToSurface(RaycastHit hit)
     {
-        //attachedSurface = hit.rigidbody;
+        
+        attachedSurface = hit.rigidbody;
+        character.MovePosition(((attachedSurface.position - character.position) * .3f * Time.deltaTime) + character.position);
         character.velocity = new Vector3(0, 0, 0);
+        lastNormal = hit.normal;
     }
 }

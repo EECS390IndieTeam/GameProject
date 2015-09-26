@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CharacterRotator {
+public class CharacterRotator : MonoBehaviour {
 
 
-    Transform character;
+    public Transform character;
 
     public CharacterRotator(Transform character)
     {
