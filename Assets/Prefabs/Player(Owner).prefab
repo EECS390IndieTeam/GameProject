@@ -29,17 +29,16 @@ GameObject:
   m_Component:
   - 4: {fileID: 421724}
   - 54: {fileID: 5479222}
-  - 136: {fileID: 13677370}
   - 114: {fileID: 11424186}
   - 114: {fileID: 11428102}
   - 120: {fileID: 12016868}
   - 114: {fileID: 11491598}
-  - 65: {fileID: 6552766}
   - 114: {fileID: 11460822}
   - 114: {fileID: 11409424}
   - 114: {fileID: 11490158}
   - 114: {fileID: 11475136}
   - 114: {fileID: 11487882}
+  - 135: {fileID: 13512118}
   m_Layer: 0
   m_Name: Player(Owner)
   m_TagString: Untagged
@@ -242,20 +241,8 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &6552766
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 140712}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!81 &8176246
 AudioListener:
   m_ObjectHideFlags: 1
@@ -344,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d5b1bf8fa04436c8ccf3489f7b0729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 200
+  maxDistance: 199999996000
   reelSpeed: 15
   stabilizer: 1.10000002
   maxReelMultiplier: 3
@@ -478,19 +465,18 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105588}
   m_Enabled: 1
---- !u!136 &13677370
-CapsuleCollider:
+--- !u!135 &13512118
+SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140712}
-  m_Material: {fileID: 13400000, guid: da8d70830362ee6499443095ec231917, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
+  serializedVersion: 2
   m_Radius: .5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: .5}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -566,6 +552,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: grabDistance
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
