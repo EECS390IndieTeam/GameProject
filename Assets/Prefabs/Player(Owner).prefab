@@ -34,6 +34,9 @@ GameObject:
   - 120: {fileID: 12016868}
   - 114: {fileID: 11491598}
   - 65: {fileID: 6552766}
+  - 114: {fileID: 11413030}
+  - 114: {fileID: 11415418}
+  - 114: {fileID: 11457604}
   m_Layer: 0
   m_Name: Player(Owner)
   m_TagString: Untagged
@@ -94,6 +97,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
+  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -140,6 +144,33 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105588}
   m_Enabled: 1
+--- !u!114 &11413030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 329aa2efea0883845b6313e5161b96cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensitivityX: 10
+  sensitivityY: 10
+  space: 0
+  character: {fileID: 481960}
+--- !u!114 &11415418
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d5e3c0d139aa724bbcc92e9d4ffcb67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 481960}
 --- !u!114 &11424186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivityX: 10
   mouseSensitivityY: 10
-  grabDistance: .5
+  grabDistance: 1
   maxSurfaceSpeed: 24
   maxXSpeedSurface: 8
   maxYSpeedSurface: 8
@@ -174,6 +205,23 @@ MonoBehaviour:
   reelSpeed: 15
   stabilizer: 1.10000002
   maxReelMultiplier: 3
+--- !u!114 &11457604
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb43830a38393ca4e91ddc0345552c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 5479222}
+  pCamera: {fileID: 481960}
+  maxVelocity: 12
+  maxXSpeed: 4
+  maxYSpeed: 4
+  grabDistance: 1
 --- !u!114 &11491598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -290,6 +338,38 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 481960}
+    - target: {fileID: 0}
+      propertyPath: grabDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: sensitivityX
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: sensitivityY
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 5479222}
+    - target: {fileID: 0}
+      propertyPath: maxVelocity
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxXSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxYSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: pCamera
       value: 
       objectReference: {fileID: 481960}
     m_RemovedComponents: []
