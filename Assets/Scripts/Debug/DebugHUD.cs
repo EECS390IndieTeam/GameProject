@@ -37,7 +37,7 @@ public class DebugHUD : MonoBehaviour {
 	}
 
 	void LateUpdate () {
-		if(Input.GetKeyDown(KeyCode.F3)){
+		if(Input.GetKeyDown(KeyCode.BackQuote)){
 			GetComponent<GUIText>().enabled = !GetComponent<GUIText>().enabled;
 		}
 		string s = "";
