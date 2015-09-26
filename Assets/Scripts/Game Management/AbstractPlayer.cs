@@ -10,6 +10,7 @@ public abstract class AbstractPlayer : MonoBehaviour, IPlayer {
 
     public void SetState(PlayerState newState) {
         state = newState;
+		//TODO check and see if this is supposed to be this.Health = newState.Health or something similar
         MaxHealth = Health;
     }
 

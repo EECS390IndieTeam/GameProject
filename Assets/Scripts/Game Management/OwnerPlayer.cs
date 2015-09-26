@@ -12,10 +12,15 @@ public class OwnerPlayer : AbstractPlayer {
     }
 
     public override void Die() {
+		//TODO check comments on Death
+		//Do we need to reset the available weapon list here like this? Probably not...
+		//Actually, do we need to reset the references on any of these components?
+		//I thought death was a simple death animation combined with being moved around to your new spawn location.
         AvailableWeapons = new List<IWeapon>();
         GrappleGun = GetComponent<GrappleGun>();
         Controller = GetComponent<FPSController>();
         Debug.Log("Player " + Username + " died a horrible, painful death");
+		//TODO add in movement back to a spawn location
     }
 
     public override void RespawnAt(Transform location) {

@@ -5,7 +5,10 @@ using System.Collections;
 public class DamageEventListener : Bolt.GlobalEventListener {
     //TODO these FindObjectOfTypes will need to be changed later
     public override void OnEvent(HurtEvent evnt) {
+		//TODO comment all this code so that others can understand what is going on
         if (BoltNetwork.isServer) {
+			//Direct damage events, either by consuming them here (if they were meant for the server player)
+			//Or by redirecting them to the right player
             if (evnt.FromAttacker) {
                 BoltConnection destConnection = PlayerRegistry.GetConnectionFromUserName(evnt.Player);
                 if (destConnection == null) {
@@ -19,6 +22,8 @@ public class DamageEventListener : Bolt.GlobalEventListener {
                     redir.Send();
                 }
             } else {
+				//TODO fix this line if necessary
+				//Is this where friendly fire occurs? This line probably isnt needed... right?
                 GameManager.instance.CurrentPlayer.TakeDamage(evnt.Amount, PlayerRegistry.GetUserNameFromConnection(evnt.RaisedBy), evnt.Direction);
             }
         } else {

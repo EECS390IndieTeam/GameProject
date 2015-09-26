@@ -46,7 +46,9 @@ public class Gun : MonoBehaviour, IWeapon
     {
         DebugHUD.setValue("Gun temp", Temperature);
         DebugHUD.setValue("Gun overheated", IsOverheating);
-        if (timeUntilCooldownBegins > 0f) timeUntilCooldownBegins = Mathf.Max(0f, timeUntilCooldownBegins - Time.deltaTime);
+		if (timeUntilCooldownBegins > 0f){
+			timeUntilCooldownBegins = Mathf.Max (0f, timeUntilCooldownBegins - Time.deltaTime);
+		}
         if (timeUntilCooldownBegins <= 0f && Temperature >= 0f) {
             Temperature -= CooldownRate * Time.deltaTime * (IsOverheating ? 1.5f : 1.0f);
             if (Temperature <= 0f) {
@@ -58,7 +60,9 @@ public class Gun : MonoBehaviour, IWeapon
             timeUntilNextShot = Mathf.Max(0f, timeUntilNextShot - Time.deltaTime);
             return;
         }
-        if (IsOverheating) return;
+		if (IsOverheating) {
+			return;
+		}
         if (Automatic) {
             if (Input.GetButton("Fire1")) {
                 Fire();
@@ -87,6 +91,7 @@ public class Gun : MonoBehaviour, IWeapon
             endpoint = hitInfo.point;
             IPlayer hitplayer = hitInfo.transform.GetComponent<AbstractPlayer>();
             if (hitplayer == null) hitplayer = hitInfo.transform.GetComponentInParent<AbstractPlayer>();
+			//Add in check for friendly fire here.
             if (hitplayer != null)
             {
                 hitplayer.TakeDamage(DamagePerShot, hitplayer.Username, -SourceTransform.forward);
