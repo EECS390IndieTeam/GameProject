@@ -55,7 +55,9 @@ public class GameManager : MonoBehaviour
 	private LobbyState Lobby;
 	private GAME_STATE currentGameState;
 
-    public string CurrentUserName;
+    //the username of the current player
+    [System.NonSerialized]
+    public string CurrentUserName = "";
 
 	private IDictionary<GAME_STATE,int> stateToSceneMap;
 

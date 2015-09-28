@@ -4,15 +4,15 @@ using System.Collections;
 [BoltGlobalBehaviour(BoltNetworkModes.Host)]
 public class ServerConnectionEventListener : Bolt.GlobalEventListener {
 
-    public static string ServerPassword = "dickbutt"; //this will be moved to a different class later
+    public static string ServerPassword = "dickbutt"; //this will be moved to a different class later?
     //the password for literally everything is "dickbutt"!
-    private string ServerUsername = "Im the server look at me!"; //this will also be moved later
 
     private LobbyState lobby;
 
     public override void BoltStartDone() {
-        PlayerRegistry.CreatePlayer(null, ServerUsername);
-        GameManager.instance.CurrentUserName = ServerUsername;
+        if (GameManager.instance.CurrentUserName == "") GameManager.instance.CurrentUserName = "Server Player";
+        PlayerRegistry.CreatePlayer(null, GameManager.instance.CurrentUserName);
+        //GameManager.instance.CurrentUserName = ServerUsername;
         lobby = BoltNetwork.Instantiate(BoltPrefabs.LobbyList).GetComponent<LobbyState>();
         lobby.InitializeLobby();
     }
@@ -22,7 +22,7 @@ public class ServerConnectionEventListener : Bolt.GlobalEventListener {
 
         //if this is a development build or in the editor, user authorization is not required
         //this should allow for much faster debugging and testing
-        if (Debug.isDebugBuild || Application.isEditor && token == null) {
+        if ((Debug.isDebugBuild || Application.isEditor) && token == null) {
             var newToken = new ConnectionRequestData();
             newToken.Password = ServerPassword;
             string baseusername = "debug player ";
