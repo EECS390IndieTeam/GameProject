@@ -34,9 +34,9 @@ public class FPSController : MonoBehaviour {
     {
         Cursor.lockState = CursorLockMode.Locked;
 		character = GetComponent<Rigidbody>();
-        mouseLook = new CustomMouseLook(cameraTransform, mouseSensitivityX, mouseSensitivityY);
-        rotator = new CharacterRotator(cameraTransform);
-        sMovement = new SurfaceMovement(character, maxSurfaceSpeed, maxXSpeedSurface, maxXSpeedSurface, grabDistance);
+        mouseLook = GetComponent<CustomMouseLook>();
+        rotator = GetComponent<CharacterRotator>();
+        sMovement = GetComponent<SurfaceMovement>();
         grappleGun = GetComponent<GrappleGun>();
 		if (grappleGun) grappleGun.controller = this;
 	}
@@ -66,12 +66,17 @@ public class FPSController : MonoBehaviour {
 			debounce = 0;
 		}
 		
-		if (Input.GetButtonDown("Fire1") && !grappled && debounce == 0) {
+		if (Input.GetButtonDown("Fire2") && !grappled && debounce == 0) {
 			grappleGun.fire();
+            if (isAttachedToSurface) {
+                Debug.Log("Detached from surface");
+                isAttachedToSurface = false;
+            }
+            
 			debounce = debounceTime;
 		}
 		
-		if (Input.GetButtonDown("Fire1") && grappled && debounce == 0) {
+		if (Input.GetButtonDown("Fire2") && grappled && debounce == 0) {
 			grappleGun.detach();
 			debounce = debounceTime;
 		}
@@ -83,12 +88,15 @@ public class FPSController : MonoBehaviour {
 
     void FixedUpdate ()
     {
+        //Debug.Log(isAttachedToSurface);
         RaycastHit hit;
-        if (Physics.SphereCast(character.position, .5f, character.transform.forward, out hit, grabDistance))
+        if (Physics.Raycast(character.position, cameraTransform.forward, out hit, grabDistance) && !isAttachedToSurface)
         {
+            grappleGun.detach();
+            Debug.Log("Attached to surface");
             sMovement.attachToSurface(hit);
             isAttachedToSurface = true;
-            grappleGun.detach();
+            
             
         }
 
@@ -99,6 +107,7 @@ public class FPSController : MonoBehaviour {
             sMovement.moveCharacter(input);
             if(Input.GetKey(KeyCode.Space))
             {
+                Debug.Log("Detached from surface");
                 isAttachedToSurface = false;
             }
         }

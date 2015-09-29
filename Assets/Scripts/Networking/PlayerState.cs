@@ -12,11 +12,17 @@ public class PlayerState : Bolt.EntityBehaviour<IPlayerState> {
         get {
             return state.Health;
         }
+        set {
+            state.Health = value;
+        }
     }
 
     public string Name {
         get {
             return state.Name;
+        }
+        set {
+            state.Name = value;
         }
     }
 
@@ -47,5 +53,6 @@ public class PlayerState : Bolt.EntityBehaviour<IPlayerState> {
         prefabTransform.parent = this.transform;
         prefabTransform.localPosition = Vector3.zero;
         prefabTransform.localRotation = Quaternion.identity;
+        prefabTransform.GetComponent<AbstractPlayer>().SetState(this);
     }
 }

@@ -53,13 +53,13 @@ MonoBehaviour:
   clientCanInstantiateAll: 1
   debugEditorMode: 1
   consoleToggleKey: 9
-  consoleVisibleByDefault: 1
+  consoleVisibleByDefault: 0
   compilationWarnLevel: 4
   editorSkin: 4
   scopeModeHideWarningInGui: 0
   showHelpButtons: 1
   masterServerGameId: 09A20926-601A-4EF4-BFEE-374761B0D2A5
   masterServerEndPoint: 79.99.6.136:24000
-  masterServerAutoConnect: 1
-  masterServerAutoDisconnect: 1
+  masterServerAutoConnect: 0
+  masterServerAutoDisconnect: 0
   showBoltEntityHints: 1

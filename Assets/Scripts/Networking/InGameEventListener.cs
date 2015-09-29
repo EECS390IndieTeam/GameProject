@@ -10,7 +10,7 @@ public class InGameEventListener : Bolt.GlobalEventListener {
 
     private bool running = false;
     public override void SceneLoadLocalBegin(string map) {
-        DebugHUD.setValue("load state", "Soading scene");
+        DebugHUD.setValue("load state", "Loading scene");
         FindObjectOfType<LobbyState>().HideDebugDraw = true;
         //display loading screen
     }
@@ -18,6 +18,7 @@ public class InGameEventListener : Bolt.GlobalEventListener {
 
     public override void SceneLoadLocalDone(string map) {
         BoltEntity entity = BoltNetwork.Instantiate(BoltPrefabs.PlayerPrefab);
+        entity.GetComponent<PlayerState>().Name = GameManager.instance.CurrentUserName;
         if (!BoltNetwork.isServer) {
             entity.AssignControl(BoltNetwork.server);
         }

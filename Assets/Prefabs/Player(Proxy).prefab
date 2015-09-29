@@ -26,6 +26,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 403450}
   - 136: {fileID: 13690252}
+  - 114: {fileID: 11467552}
   m_Layer: 0
   m_Name: Player(Proxy)
   m_TagString: Untagged
@@ -89,6 +90,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 125206}
   m_Mesh: {fileID: 4300000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
+--- !u!114 &11467552
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f645decfef67846ab3cfe9672bd797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &13690252
 CapsuleCollider:
   m_ObjectHideFlags: 1

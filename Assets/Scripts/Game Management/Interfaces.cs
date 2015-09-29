@@ -7,21 +7,23 @@ public interface IPlayer {
     void RespawnAt(Transform location);
     void MoveTo(Transform location);
 
-    void TakeDamage(float Damage, string OtherUser);
+    void TakeDamage(float Damage, string OtherUser, Vector3 direction);
 
     string Username {
         get;
-        set;
     }
-    int TeamID {
+    int Team {
         get;
-        set;
     }
 
     List<IWeapon> AvailableWeapons {
         get;
     }
     IWeapon CurrentWeapon {
+        get;
+    }
+
+    int CurrentWeaponID {
         get;
     }
 
@@ -43,7 +45,7 @@ public interface IWeapon {
     float EnergyPerShot {
         get;
     }
-    float DamagePerShort {
+    float DamagePerShot {
         get;
     }
     bool IsOverheating {
@@ -53,6 +55,10 @@ public interface IWeapon {
         get;
     }
     int WeaponID {
+        get;
+    }
+
+    float MaxTemperature {
         get;
     }
 }
@@ -67,6 +73,10 @@ public interface IGrenade {
     }
 
     float FuseTime {
+        get;
+    }
+
+    float FuseTimeRemaining {
         get;
     }
 

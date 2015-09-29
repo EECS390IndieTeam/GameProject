@@ -6,16 +6,16 @@ public class Cooldown : MonoBehaviour {
 	
 	public GameObject player;
 	public int maxDegrees;											//the max temp the weapon can be before overheat
-	public int degreesPerFire;										//the degrees added to weapon per weapon fire
+	public float degreesPerFire;										//the degrees added to weapon per weapon fire
 	public float cooldownSpeed;										//the speed the weapon cools off, in degrees/second
 	public float cooldownDelay;										//the delay before the weapon begins to cool down after firing
 	public float overheatDelay;										//the delay before the weapon begins to cool down after firing
 	public int overheatPenalty;										//the amount of health the player loses for trying to fire during an overheat
 
 	public bool hurtOnOverheat;
-	public Slider cooldownSlider;
+    public bool overheat;
+    public Slider cooldownSlider;
 
-	bool overheat;
 	float currentDegrees;
 	float currentDelay;
 	float currentOverheatDelay;
