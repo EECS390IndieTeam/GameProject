@@ -28,6 +28,10 @@ public class PlayerRegistry {
         return (string)connection.UserData; //we also store the username as the connection's userdata for even faster lookup
     }
 
+    public static BoltConnection GetConnectionFromUserName(string username) {
+        return players[username];
+    }
+
     public static void Remove(BoltConnection connection) {
         string username = GetUserNameFromConnection(connection);
         if(players.ContainsKey(username)) players.Remove(username);

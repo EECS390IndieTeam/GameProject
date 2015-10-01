@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CustomMouseLook
+public class CustomMouseLook : MonoBehaviour
 {
 
     public float sensitivityX = 15F;
@@ -12,7 +12,7 @@ public class CustomMouseLook
 
 
 
-    private Transform character;
+    public Transform character;
 
 
     public CustomMouseLook(Transform character, float sensitivityX, float sensitivityY)
