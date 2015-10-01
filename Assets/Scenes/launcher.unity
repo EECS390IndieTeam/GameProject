@@ -211,6 +211,84 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WindowWidth: 300
+--- !u!1001 &1513504597
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 480562, guid: aa38bb1acca7d4405b73ab96e5ed8828, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 480562, guid: aa38bb1acca7d4405b73ab96e5ed8828, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 480562, guid: aa38bb1acca7d4405b73ab96e5ed8828, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 480562, guid: aa38bb1acca7d4405b73ab96e5ed8828, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 480562, guid: aa38bb1acca7d4405b73ab96e5ed8828, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 480562, guid: aa38bb1acca7d4405b73ab96e5ed8828, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 480562, guid: aa38bb1acca7d4405b73ab96e5ed8828, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 480562, guid: aa38bb1acca7d4405b73ab96e5ed8828, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 22483830, guid: aa38bb1acca7d4405b73ab96e5ed8828, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22483830, guid: aa38bb1acca7d4405b73ab96e5ed8828, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22434754, guid: aa38bb1acca7d4405b73ab96e5ed8828, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22434754, guid: aa38bb1acca7d4405b73ab96e5ed8828, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11401002, guid: aa38bb1acca7d4405b73ab96e5ed8828, type: 2}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 1513504599}
+    - target: {fileID: 11401002, guid: aa38bb1acca7d4405b73ab96e5ed8828, type: 2}
+      propertyPath: damageImage
+      value: 
+      objectReference: {fileID: 1513504598}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: aa38bb1acca7d4405b73ab96e5ed8828, type: 2}
+  m_IsPrefabParent: 0
+--- !u!114 &1513504598 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11471350, guid: aa38bb1acca7d4405b73ab96e5ed8828,
+    type: 2}
+  m_PrefabInternal: {fileID: 1513504597}
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!114 &1513504599 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11450312, guid: aa38bb1acca7d4405b73ab96e5ed8828,
+    type: 2}
+  m_PrefabInternal: {fileID: 1513504597}
+  m_Script: {fileID: -113659843, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &1882344854
 Prefab:
   m_ObjectHideFlags: 0

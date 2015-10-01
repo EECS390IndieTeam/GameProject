@@ -14,7 +14,7 @@ public class HUDHandler : MonoBehaviour {
 	}
 
 	public static void UpdateWeapon(float weaponTemp, bool isOverheating){
-		Cooldown.weaponTemp = weaponTemp;
-		Cooldown.isOverheating = isOverheating;
+		// Cooldown.weaponTemp = weaponTemp;
+		// Cooldown.isOverheating = isOverheating;
 	}
 }
