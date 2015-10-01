@@ -1,0 +1,100 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+
+/// <summary>
+/// Setup (Host) game menu actions code behind.
+/// </summary>
+public class SetupGameMenuActions : MonoBehaviour
+{
+    /// <summary>
+    /// Port input field control.
+    /// </summary>
+    public InputField portInputField;
+
+    /// <summary>
+    /// Lobby password input field control.
+    /// </summary>
+    public InputField lobbyPasswordInputField;
+
+    /// <summary>
+    /// Screen name input field control.
+    /// </summary>
+    public InputField screenNameInputField;
+
+    /// <summary>
+    /// Launch button input control.
+    /// </summary>
+    public Button launchButton;
+
+    /// <summary>
+    /// Unrecoverable failure?
+    /// </summary>
+    private bool dead;
+
+    /// <summary>
+    /// Initial setup.
+    /// </summary>
+    void Start()
+    {
+        if (this.portInputField == null)
+        {
+            Debug.LogError("SetupGameMenuActions.portInputField cannot be null.");
+            this.dead = true;
+        }
+
+        if (this.lobbyPasswordInputField == null)
+        {
+            Debug.LogError("SetupGameMenuActions.lobbyPasswordInputField cannot be null.");
+            this.dead = true;
+        }
+
+        if (this.screenNameInputField == null)
+        {
+            Debug.LogError("SetupGameMenuActions.screenNameInputField cannot be null.");
+            this.dead = true;
+        }
+
+        if (this.launchButton == null)
+        {
+            Debug.LogError("SetupGameMenuActions.launchButton cannot be null.");
+            this.dead = true;
+        }
+
+        // Setup input validation. Deactivate launch button if the input values are bad.
+        var validateAction = new UnityEngine.Events.UnityAction<string>((newValue) =>
+        {
+            this.ValidateInputs();
+        });
+        this.portInputField.onValueChange.AddListener(validateAction);
+        this.lobbyPasswordInputField.onValueChange.AddListener(validateAction);
+        this.screenNameInputField.onValueChange.AddListener(validateAction);
+
+        // Add click listener for the launch button.
+        // We could do this in the editor but we scripted everything else.
+        // Might as well do it here too.
+        this.launchButton.onClick.AddListener(new UnityEngine.Events.UnityAction(() =>
+        {
+            // We validate this on edit, we shouldn't need to again.
+            BoltLauncher.StartServer(int.Parse(this.portInputField.text));
+        }));
+    }
+
+    /// <summary>
+    /// Validates user inputs. If inputs are bad, disables the launch button.
+    /// </summary>
+    private void ValidateInputs()
+    {
+        int port;
+
+        if (int.TryParse(this.portInputField.text, out port) &&
+            this.lobbyPasswordInputField.text.Length >= 6 &&
+            this.screenNameInputField.text.Length != 0)
+        {
+            this.launchButton.interactable = true;
+        }
+        else
+        {
+            this.launchButton.interactable = false;
+        }
+    }
+}
