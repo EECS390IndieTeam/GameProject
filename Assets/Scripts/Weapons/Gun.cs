@@ -40,6 +40,7 @@ public class Gun : MonoBehaviour, IWeapon
     void Start() {
         IsOverheating = false;
         Temperature = 0f;
+        SourceTransform = GetComponentsInChildren<Transform>()[1];
     }
 
     void Update()
@@ -99,16 +100,16 @@ public class Gun : MonoBehaviour, IWeapon
         }
         else
         {
-            endpoint = transform.position + SourceTransform.forward * 1000000.0f;
+            endpoint = SourceTransform.position + SourceTransform.forward * 1000000.0f;
         }
 
         WeaponFireEvent evnt = WeaponFireEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.Unreliable);
         evnt.EndPoint = endpoint;
-        evnt.StartPoint = transform.position;
+        evnt.StartPoint = SourceTransform.position;
         evnt.Color = Color.red;
         evnt.Send();
 
-        Debug.DrawLine(transform.position, endpoint, Color.cyan, 0.5f);
+        Debug.DrawLine(SourceTransform.position, endpoint, Color.cyan, 0.5f);
     }
 
     //doing it this way allows these properties to be set in the editor
