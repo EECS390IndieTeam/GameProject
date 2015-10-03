@@ -32,6 +32,19 @@ public class Grenade : Bolt.EntityBehaviour<IGrenadeState>, IGrenade
 		}
 	}
 
+	void OnCollisionEnter(Collision struck){
+		GameObject struckObject = struck.gameObject;
+		IPlayer hitplayer = struckObject.GetComponent<AbstractPlayer>();
+		if(hitplayer != null){
+			//Attach the grenade to the hit player.
+			this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+			this.GetComponent<Rigidbody>().isKinematic = true;
+			this.GetComponent<Rigidbody>().detectCollisions = false;
+			this.GetComponent<Collider>().enabled = false;
+			this.transform.parent = struckObject.transform;
+		}
+	}
+
 	public void Detonate(){
 		Collider[] targets = Physics.OverlapSphere(this.transform.position, explosionRadius);
 		int i = 0;
