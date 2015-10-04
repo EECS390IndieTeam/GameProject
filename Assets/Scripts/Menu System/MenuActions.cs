@@ -40,7 +40,7 @@ public class MenuActions : MonoBehaviour
             Debug.LogWarning("Pushed null canvas to navigation stack.");
             return;
         }
-
+        
         var transition = this.currentCanvas.GetComponent<IMenuTransistion>() ?? defaultTransistion;
         transition.Transistion(this.currentCanvas, canvas);
 
@@ -64,6 +64,18 @@ public class MenuActions : MonoBehaviour
 
         transition.Transistion(this.currentCanvas, previousCanvas);
         this.currentCanvas = previousCanvas;
+    }
+
+    /// <summary>
+    /// Clears all current items from the navigation stack.
+    /// NOTE: be careful, this can break the state of the menu system if not immediately
+    /// followed by a Navigate and push because we are clearing ALL menus and leaving them
+    /// in between states.
+    /// </summary>
+    /// <param name="canvas">The canvas to reset the stack to.</param>
+    public void Reset()
+    {
+        this.navigationStack.Clear();
     }
 
     /// <summary>
@@ -91,10 +103,5 @@ public class MenuActions : MonoBehaviour
         }
 
         this.currentCanvas = this.initialCanvas;
-    }
-
-    public void startMultiplayer()
-    {
-        GameManager.instance.transitionGameState(GameManager.GAME_STATE.GAME_MENU);
     }
 }

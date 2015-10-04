@@ -27,11 +27,6 @@ public class SetupGameMenuActions : MonoBehaviour
     public Button launchButton;
 
     /// <summary>
-    /// Unrecoverable failure?
-    /// </summary>
-    private bool dead;
-
-    /// <summary>
     /// Initial setup.
     /// </summary>
     void Start()
@@ -39,25 +34,21 @@ public class SetupGameMenuActions : MonoBehaviour
         if (this.portInputField == null)
         {
             Debug.LogError("SetupGameMenuActions.portInputField cannot be null.");
-            this.dead = true;
         }
 
         if (this.lobbyPasswordInputField == null)
         {
             Debug.LogError("SetupGameMenuActions.lobbyPasswordInputField cannot be null.");
-            this.dead = true;
         }
 
         if (this.screenNameInputField == null)
         {
             Debug.LogError("SetupGameMenuActions.screenNameInputField cannot be null.");
-            this.dead = true;
         }
 
         if (this.launchButton == null)
         {
             Debug.LogError("SetupGameMenuActions.launchButton cannot be null.");
-            this.dead = true;
         }
 
         // Setup input validation. Deactivate launch button if the input values are bad.
@@ -70,6 +61,7 @@ public class SetupGameMenuActions : MonoBehaviour
         this.screenNameInputField.onValueChange.AddListener(validateAction);
 
         // Add click listener for the launch button.
+        // Animations to waiting scene are done in the editor so we don't have to do lookups.
         // We could do this in the editor but we scripted everything else.
         // Might as well do it here too.
         this.launchButton.onClick.AddListener(new UnityEngine.Events.UnityAction(() =>
