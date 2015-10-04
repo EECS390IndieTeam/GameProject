@@ -74,7 +74,7 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
 
         if (BoltNetwork.isClient)
         {
-            DebugHUD.setValue("ping", BoltNetwork.server.PingNetwork);
+            //DebugHUD.setValue("ping", BoltNetwork.server.PingNetwork);
         }
 
         DebugHUD.setValue("username", GameManager.instance.CurrentUserName);

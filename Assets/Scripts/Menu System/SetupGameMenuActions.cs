@@ -69,6 +69,11 @@ public class SetupGameMenuActions : MonoBehaviour
             GameManager.instance.CurrentUserName = this.screenNameInputField.text;
             ServerConnectionEventListener.ServerPassword = this.lobbyPasswordInputField.text;
 
+            if (BoltNetwork.isRunning && BoltNetwork.isClient)
+            {
+                BoltLauncher.Shutdown();
+            }
+
             // We validate this on edit, we shouldn't need to again.
             BoltLauncher.StartServer(int.Parse(this.portInputField.text));
         }));
