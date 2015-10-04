@@ -66,6 +66,9 @@ public class SetupGameMenuActions : MonoBehaviour
         // Might as well do it here too.
         this.launchButton.onClick.AddListener(new UnityEngine.Events.UnityAction(() =>
         {
+            GameManager.instance.CurrentUserName = this.screenNameInputField.text;
+            ServerConnectionEventListener.ServerPassword = this.lobbyPasswordInputField.text;
+
             // We validate this on edit, we shouldn't need to again.
             BoltLauncher.StartServer(int.Parse(this.portInputField.text));
         }));
