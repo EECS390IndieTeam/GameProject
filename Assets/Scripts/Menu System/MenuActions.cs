@@ -67,18 +67,6 @@ public class MenuActions : MonoBehaviour
     }
 
     /// <summary>
-    /// Clears all current items from the navigation stack.
-    /// NOTE: be careful, this can break the state of the menu system if not immediately
-    /// followed by a Navigate and push because we are clearing ALL menus and leaving them
-    /// in between states.
-    /// </summary>
-    /// <param name="canvas">The canvas to reset the stack to.</param>
-    public void Reset()
-    {
-        this.navigationStack.Clear();
-    }
-
-    /// <summary>
     /// Terminates Unity and returns control to the operating system.
     /// </summary>
     public void ExitApplication()
