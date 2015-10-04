@@ -38,7 +38,7 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     /// </summary>
     void Start()
     {
-        if (this.teamButtonsList != null || this.teamButtonsList.Count == 0)
+        if (this.teamButtonsList == null || this.teamButtonsList.Count == 0)
         {
             Debug.LogError("Lobby Game Menu Actions Team buttons list cannot be empty.");
             this.dead = true;
@@ -69,14 +69,8 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             return;
         }
 
-        if (!BoltNetwork.isRunning)
-        {
-            Application.LoadLevel(1);
-            return;
-        }
-
         // TODO: fix this spelling mistake in the code whereever it originated.
-        DebugHUD.setValue("IsSever", BoltNetwork.isServer);
+        DebugHUD.setValue("IsServer", BoltNetwork.isServer);
 
         if (BoltNetwork.isClient)
         {
