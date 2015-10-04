@@ -39,7 +39,7 @@ public class Grenade : Bolt.EntityBehaviour<IGrenadeState>, IGrenade
 			//If something in the radius is a player, deal damage to them.
 			GameObject target = targets[i].gameObject;
 			IPlayer hitplayer = target.GetComponent<AbstractPlayer>();
-			if(hitplayer != null) hitplayer.TakeDamage(damage, Thrower, (target.transform.position - this.transform.position));
+			if(hitplayer != null) hitplayer.TakeDamage(damage, Thrower, (target.transform.position - this.transform.position), 0);
 			i++;
 		}
 		//--------Put in something here to create an explosion particle effect------------

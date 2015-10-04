@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
 	private IPlayer Player;
 	private LobbyState Lobby;
 	private GAME_STATE currentGameState;
+    public IGameMode gameMode;
 
     //the username of the current player
     [System.NonSerialized]
