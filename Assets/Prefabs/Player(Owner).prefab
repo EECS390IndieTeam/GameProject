@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 468334}
   - 20: {fileID: 2051188}
   - 92: {fileID: 9276192}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UICamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 22484374}
   - 222: {fileID: 22242716}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - 92: {fileID: 9289468}
   - 81: {fileID: 8117600}
   - 114: {fileID: 11453908}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22426102}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - 224: {fileID: 22453246}
   - 222: {fileID: 22269078}
   - 114: {fileID: 11409996}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - 224: {fileID: 22485534}
   - 222: {fileID: 22283078}
   - 114: {fileID: 11405542}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Reserve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - 222: {fileID: 22254566}
   - 114: {fileID: 11457356}
   - 114: {fileID: 11458174}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   - 224: {fileID: 22499204}
   - 222: {fileID: 22232348}
   - 114: {fileID: 11435552}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Loaded
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 22448246}
   - 114: {fileID: 11412596}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CooldownSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 22404472}
   - 114: {fileID: 11427060}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: HealthSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - 224: {fileID: 22497226}
   - 222: {fileID: 22292048}
   - 114: {fileID: 11448048}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   - 4: {fileID: 458646}
   - 33: {fileID: 3359506}
   - 23: {fileID: 2368184}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   - 114: {fileID: 11408152}
   - 114: {fileID: 11419332}
   - 225: {fileID: 22562518}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   - 114: {fileID: 11464100}
   - 114: {fileID: 11414432}
   - 135: {fileID: 13539874}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player(Owner)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 22494504}
   - 222: {fileID: 22275744}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   - 224: {fileID: 22472532}
   - 222: {fileID: 22278460}
   - 114: {fileID: 11426200}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Ally Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22440330}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   - 224: {fileID: 22441940}
   - 222: {fileID: 22212454}
   - 20: {fileID: 2065306}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: MiniMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +323,7 @@ GameObject:
   - 224: {fileID: 22427954}
   - 222: {fileID: 22220840}
   - 114: {fileID: 11479864}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: DamageImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   - 33: {fileID: 3355594}
   - 23: {fileID: 2316844}
   - 114: {fileID: 11427652}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   - 224: {fileID: 22492512}
   - 222: {fileID: 22294682}
   - 114: {fileID: 11465306}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: HealthIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +376,7 @@ GameObject:
   - 33: {fileID: 3383106}
   - 65: {fileID: 6572488}
   - 23: {fileID: 2341012}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: Character Dot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,7 +392,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 22466044}
   - 222: {fileID: 22297738}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Cooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,7 +409,7 @@ GameObject:
   - 224: {fileID: 22452942}
   - 222: {fileID: 22290104}
   - 114: {fileID: 11482618}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Controls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +426,7 @@ GameObject:
   - 224: {fileID: 22485576}
   - 222: {fileID: 22219700}
   - 114: {fileID: 11452140}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: AmmoIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +443,7 @@ GameObject:
   - 224: {fileID: 22477276}
   - 222: {fileID: 22213196}
   - 114: {fileID: 11459896}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   - 224: {fileID: 22401962}
   - 222: {fileID: 22287992}
   - 114: {fileID: 11419634}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -477,7 +477,7 @@ GameObject:
   - 224: {fileID: 22480128}
   - 222: {fileID: 22207100}
   - 114: {fileID: 11466522}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CooldownIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -494,7 +494,7 @@ GameObject:
   - 224: {fileID: 22410800}
   - 222: {fileID: 22209648}
   - 114: {fileID: 11451326}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Enemy Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -779,7 +779,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137688}
   serializedVersion: 2
-  m_Mass: 10
+  m_Mass: 60
   m_Drag: .0500000007
   m_AngularDrag: 1.5
   m_UseGravity: 0
@@ -831,7 +831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5e3c0d139aa724bbcc92e9d4ffcb67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 400382}
+  character: {fileID: 449230}
 --- !u!114 &11404112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1060,10 +1060,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d5b1bf8fa04436c8ccf3489f7b0729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  beamSpeed: 1000
   maxDistance: 199999996000
   reelSpeed: 15
   stabilizer: 1.10000002
   maxReelMultiplier: 3
+  grappleTo:
+    serializedVersion: 2
+    m_Bits: 1
+  grappleFireSound: {fileID: 0}
 --- !u!114 &11426200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1160,6 +1165,7 @@ MonoBehaviour:
   MaxTemperature: 100
   HeatPerShot: 20
   DamagePerShot: 10
+  OverheatedCooldownMultiplier: 1.5
   Automatic: 0
   MinDelayBetweenShots: .100000001
   WeaponID: 0
@@ -1394,7 +1400,7 @@ MonoBehaviour:
   sensitivityX: 10
   sensitivityY: 10
   space: 0
-  character: {fileID: 400382}
+  character: {fileID: 449230}
 --- !u!114 &11465010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2163,7 +2169,23 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Mass
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 449230}
+    - target: {fileID: 0}
+      propertyPath: grappleTo.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 137688}
