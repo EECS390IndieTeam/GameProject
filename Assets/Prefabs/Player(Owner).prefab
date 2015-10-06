@@ -1160,6 +1160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f379a04d46b804bbcb264755ab3276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootableLayers:
+    serializedVersion: 2
+    m_Bits: 0
   CooldownRate: 40
   CooldownDelay: .0500000007
   MaxTemperature: 100
@@ -1169,7 +1172,7 @@ MonoBehaviour:
   Automatic: 0
   MinDelayBetweenShots: .100000001
   WeaponID: 0
-  SourceTransform: {fileID: 400382}
+  SourceTransform: {fileID: 449230}
 --- !u!114 &11435552
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class Gun : MonoBehaviour, IWeapon
 {
 
+	public LayerMask shootableLayers;
+
     //  Variables for getters
     public float CooldownRate = 20.0f;
     public float CooldownDelay = 0.1f;
@@ -41,7 +43,6 @@ public class Gun : MonoBehaviour, IWeapon
     void Start() {
         IsOverheating = false;
         Temperature = 0f;
-        SourceTransform = GetComponentsInChildren<Transform>()[1];
     }
 
     void Update()
@@ -87,7 +88,7 @@ public class Gun : MonoBehaviour, IWeapon
             Temperature = MaxTemperature;
         }
         Vector3 endpoint;
-        if (Physics.Raycast(SourceTransform.position, SourceTransform.forward, out hitInfo))
+        if (Physics.Raycast(SourceTransform.position, SourceTransform.forward, out hitInfo, float.PositiveInfinity, shootableLayers))
         {
             Debug.Log("Hit " + hitInfo.transform.name);
             endpoint = hitInfo.point;

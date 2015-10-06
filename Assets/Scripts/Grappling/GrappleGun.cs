@@ -56,10 +56,8 @@ public class GrappleGun : MonoBehaviour {
 	}
 
 	public void fire() {
-		Debug.Log ("firing");
 		Physics.Raycast(controller.cameraTransform.position, controller.cameraTransform.forward, out grappleHitInfo, maxDistance, grappleTo);
 		if (grappleHitInfo.collider && !grappleHitInfo.collider.gameObject.GetComponent<Rigidbody>()) {
-			Debug.Log ("successful fire");
 			beamFiring = true;
 			lightning.enabled = true;
 			GrapplePhysics.anchor = grappleHitInfo.point;
