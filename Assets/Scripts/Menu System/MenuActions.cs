@@ -40,7 +40,7 @@ public class MenuActions : MonoBehaviour
             Debug.LogWarning("Pushed null canvas to navigation stack.");
             return;
         }
-
+        
         var transition = this.currentCanvas.GetComponent<IMenuTransistion>() ?? defaultTransistion;
         transition.Transistion(this.currentCanvas, canvas);
 
@@ -91,10 +91,5 @@ public class MenuActions : MonoBehaviour
         }
 
         this.currentCanvas = this.initialCanvas;
-    }
-
-    public void startMultiplayer()
-    {
-        GameManager.instance.transitionGameState(GameManager.GAME_STATE.GAME_MENU);
     }
 }
