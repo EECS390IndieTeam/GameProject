@@ -47,6 +47,8 @@ public class Gun : MonoBehaviour, IWeapon
 
     void Update()
     {
+        Debug.Log(SourceTransform.forward);
+        Debug.Log(transform.forward);
         DebugHUD.setValue("Gun temp", Temperature);
         DebugHUD.setValue("Gun overheated", IsOverheating);
 		if (timeUntilCooldownBegins > 0f){
