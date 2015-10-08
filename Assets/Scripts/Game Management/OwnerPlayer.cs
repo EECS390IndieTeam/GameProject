@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(GrappleGun), typeof(FPSController))]
 public class OwnerPlayer : AbstractPlayer {
 
     void Awake() {

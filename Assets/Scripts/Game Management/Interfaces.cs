@@ -91,6 +91,20 @@ public interface IPlayer {
 	float MaxHealth {
 		get;
 	}
+
+    /// <summary>
+    /// Where this player's grapple beam ends in world space
+    /// </summary>
+    Vector3 GrappleEndpoint {
+        get;
+    }
+
+    /// <summary>
+    /// true if this player's grapple beam is currently visible (fired)
+    /// </summary>
+    bool GrappleVisible {
+        get;
+    }
 		
 }
 	

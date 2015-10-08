@@ -23,6 +23,8 @@ public class GrappleGun : MonoBehaviour {
 
 	private Lightning lightning;
 
+    private AbstractPlayer player;
+
 	private bool beamFiring = false;
 
 	void Start() {
@@ -31,6 +33,7 @@ public class GrappleGun : MonoBehaviour {
 		beamSpeedTimer = 0;
 		GrapplePhysics.reelSpeed = reelSpeed;
 		GrapplePhysics.stabilizer = stabilizer;
+        player = (AbstractPlayer)GameManager.instance.CurrentPlayer;
 	}
 
 	void Update() {
@@ -65,6 +68,11 @@ public class GrappleGun : MonoBehaviour {
 			if (grappleFireSound) {
 				grappleFireSound.Play ();
 			}
+            ///NETWORKING///
+            // for networking, we make the beam visible a bit earler than it actually becomes active.
+            // this is so that, hopefully, by the time the other players can see it, the beam is now actually active.
+            player.GrappleEndpoint = grappleHitInfo.point;
+            player.GrappleVisible = true;
 		}
 
 	}
@@ -87,6 +95,7 @@ public class GrappleGun : MonoBehaviour {
 		GrapplePhysics.reelMultiplier = 0;
 
 		lightning.enabled = false;
+        player.GrappleVisible = false;
 	}
 
 }

@@ -40,6 +40,24 @@ public class PlayerState : Bolt.EntityBehaviour<IPlayerState> {
         }
     }
 
+    public Vector3 GrappleEndpoint {
+        get {
+            return state.GrappleEndpoint;
+        }
+        set {
+            state.GrappleEndpoint = value;
+        }
+    }
+
+    public bool GrappleVisible {
+        get {
+            return state.GrappleVisible;
+        }
+        set {
+            state.GrappleVisible = value;
+        }
+    }
+
     public override void Attached() {
         if (entity.isOwner) {
             GameObject prefab = Instantiate(OwnerPrefab);

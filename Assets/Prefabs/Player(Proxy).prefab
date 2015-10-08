@@ -27,6 +27,9 @@ GameObject:
   - 4: {fileID: 403450}
   - 136: {fileID: 13690252}
   - 114: {fileID: 11467552}
+  - 120: {fileID: 12085022}
+  - 114: {fileID: 11424862}
+  - 114: {fileID: 11485474}
   m_Layer: 0
   m_Name: Player(Proxy)
   m_TagString: Untagged
@@ -90,6 +93,35 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 125206}
   m_Mesh: {fileID: 4300000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
+--- !u!114 &11424862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130770}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6377af643aece34e908b945d4be2005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightningMaterial: {fileID: 2100000, guid: 34812b32841a255459f39511c1280354, type: 2}
+  framesPerUpdate: 1
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - time: .111831218
+      value: .00805031415
+      inSlope: 1.11684811
+      outSlope: 1.11684811
+      tangentMode: 10
+    - time: 1
+      value: 1
+      inSlope: 1.11684811
+      outSlope: 1.11684811
+      tangentMode: 10
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  multiplier: 1.20000005
 --- !u!114 &11467552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,6 +133,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f645decfef67846ab3cfe9672bd797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11485474
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3f629fd68ed844791e37a8c9d9231c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!120 &12085022
+LineRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130770}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: 1
+    endWidth: 1
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  m_UseWorldSpace: 1
 --- !u!136 &13690252
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -122,6 +202,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: curve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: da8d70830362ee6499443095ec231917,
@@ -129,6 +213,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Radius
       value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
