@@ -39,6 +39,7 @@ public class Gun : MonoBehaviour, IWeapon
     private RaycastHit hitInfo;
 
     public Transform SourceTransform;
+    public Transform GunShotStartTransform;
 
     void Start() {
         IsOverheating = false;
@@ -109,7 +110,7 @@ public class Gun : MonoBehaviour, IWeapon
 
         WeaponFireEvent evnt = WeaponFireEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.Unreliable);
         evnt.EndPoint = endpoint;
-        evnt.StartPoint = SourceTransform.position;
+        evnt.StartPoint = GunShotStartTransform.position;
         evnt.Color = Color.red;
         evnt.Send();
 
