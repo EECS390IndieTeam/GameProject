@@ -9,6 +9,7 @@ public class Cooldown : MonoBehaviour {
 
 	Gun gunScript;
 	Image sliderFill;
+	Color fillColor;
 
 	float CooldownRate;
 
@@ -32,23 +33,27 @@ public class Cooldown : MonoBehaviour {
 	void Start () {
 		gunScript = gun.GetComponent<Gun>();
 		cooldownSlider.maxValue = gunScript.MaxTemperature;
+		
 		cooldownSlider.value = 0;
 		weaponTemp = 0;
 		isOverheating = false;
 
 		CooldownRate = gunScript.CooldownRate;
 		sliderFill = cooldownSlider.fillRect.GetComponentInChildren<Image>();
+		fillColor = sliderFill.color;
+
 	}
 	
 	//Update is called once per frame
 	void Update () {
 		weaponTemp = gunScript.Temperature;
+		print(gunScript);
 		cooldownSlider.value = weaponTemp;
 		isOverheating = gunScript.IsOverheating;
 		if (isOverheating){
 			sliderFill.color = Color.red;
 		} else {
-			sliderFill.color = Color.blue;
+			sliderFill.color = fillColor;
 		}
 	}
 
