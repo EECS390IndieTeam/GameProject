@@ -244,6 +244,11 @@ public interface IGameMode {
     /// </summary>
     /// <param name="player"></param>
     void MovePlayerToSpawnPoint(IPlayer player);
+
+    void OnPreGame();
+    bool GameOver();
+    void OnGameStart();
+    void OnGameEnd();
 }
 	
 public interface IGameLevel {

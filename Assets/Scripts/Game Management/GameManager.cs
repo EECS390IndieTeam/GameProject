@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -37,30 +38,27 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	public enum GAME_STATE
+	public enum GameState
 	{
-		MAIN_MENU,
-		SETTINGS,
-		ABOUT,
-		GAME_MENU,
-		FIND_GAME,
-		HOST_GAME,
-		LOBBY_WAITING,
+		MENU,
+        LOBBY,
+        PRE_GAME,
 		IN_GAME,
-		GAME_RESULTS
+		POST_GAME
 	}
 
-    //TODO replace with interfaces from Bolt
 	private IPlayer Player;
-	private LobbyState Lobby;
-	private GAME_STATE currentGameState;
+	public LobbyState Lobby;
+    public GameState CurrentGameState {
+        get;
+        private set;
+    }
     public IGameMode gameMode;
 
     //the username of the current player
     [System.NonSerialized]
     public string CurrentUserName = "";
-
-	private IDictionary<GAME_STATE,int> stateToSceneMap;
+    public int CurrentPlayerStatIndex = 0;
 
 	public IPlayer CurrentPlayer {
 		get {
@@ -74,31 +72,51 @@ public class GameManager : MonoBehaviour
 
 	void Start ()
 	{
-		//Setup the mapping of game state to level number
-		stateToSceneMap = new Dictionary<GAME_STATE, int>();
-		stateToSceneMap.Add (GAME_STATE.MAIN_MENU, 0);
-        stateToSceneMap.Add(GAME_STATE.GAME_MENU, 1);
-        stateToSceneMap.Add(GAME_STATE.FIND_GAME, 1);
-
 		//Set default game state
-		currentGameState = GAME_STATE.MAIN_MENU;
-		Player = GameObject.FindObjectOfType<AbstractPlayer>();
+		CurrentGameState = GameState.MENU;
 	}
 
-	public void transitionGameState (GAME_STATE state)
+	public void ChangeGameState (GameState state)
 	{
-		checkForLevelConflicts (state);
-
-		//Here is where we can do other things such as doing the animation swaps for the menu system, etc.
+        CurrentGameState = state;
+        switch (state) {
+            case GameState.PRE_GAME:
+                GameStats.ClearAllStats();
+                
+                if (BoltNetwork.isServer) {
+                    CurrentPlayerStatIndex = ServerConnectionEventListener.IndexMap.GetIndexForPlayer(CurrentUserName);
+                    Debug.Log("CurrentPlayerStatIndex=" + CurrentPlayerStatIndex);
+                    GameStats.CreateNewStringStat("Player");
+                    var map = ServerConnectionEventListener.IndexMap;
+                    for (int i = 0; i < map.PlayerCount; i++) {
+                        GameStats.SetStringStat(i, "Player", map.GetPlayerNameForIndex(i));
+                    }
+                    if (gameMode.UsesTeams) {
+                        GameStats.CreateNewIntegerStat("Team");
+                        var lookup = Lobby.GetTeamLookup();
+                        foreach (var pair in lookup) {
+                            GameStats.SetIntegerStat(pair.Key, "Team", pair.Value);
+                        }
+                    }
+                    gameMode.OnPreGame();
+                } else {
+                    CurrentPlayerStatIndex = Lobby.GetStatIndexForPlayer(CurrentUserName);
+                }
+                break;
+            case GameState.IN_GAME:
+                if(BoltNetwork.isServer) gameMode.OnGameStart();
+                break;
+        }
 	}
 
-	private void checkForLevelConflicts(GAME_STATE newState)
-	{
-		int currentStateLevel = stateToSceneMap [currentGameState];
-		int newStateLevel = stateToSceneMap [newState];
-		if (newStateLevel != currentStateLevel) {
-			Application.LoadLevel(newStateLevel);
-		}
-	}
+    public void CheckForGameOver() {
+        if (!BoltNetwork.isServer) return;
+        if (gameMode.GameOver()) {
+            gameMode.OnGameEnd();
+            CurrentGameState = GameState.POST_GAME;
+            //more game over stuff here
+        }
+    }
+
 
 }

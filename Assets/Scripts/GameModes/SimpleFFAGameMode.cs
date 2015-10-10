@@ -65,4 +65,9 @@ public abstract class SimpleFFAGameMode : IGameMode {
     public abstract string GameModeName {
         get;
     }
+
+    public abstract void OnPreGame();
+    public abstract bool GameOver();
+    public abstract void OnGameStart();
+    public abstract void OnGameEnd();
 }

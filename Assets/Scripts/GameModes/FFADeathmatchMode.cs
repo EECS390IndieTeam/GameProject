@@ -7,6 +7,8 @@ using System.Linq;
 /// </summary>
 public class FFADeathmatchMode : SimpleFFAGameMode {
 
+    public int ScoreLimit = 25;
+
     public override GameModes Mode {
         get { return GameModes.FFA_DEATHMATCH; }
     }
@@ -31,4 +33,19 @@ public class FFADeathmatchMode : SimpleFFAGameMode {
     public override string GameModeName {
         get { return "Deathmatch"; }
     }
+
+    public override void OnPreGame() {
+        GameStats.CreateNewIntegerStat("Kills");
+    }
+
+    public override bool GameOver() {
+        for (int i = 0; i < ServerConnectionEventListener.IndexMap.PlayerCount; i++) {
+            if (GameStats.GetIntegerStat(i, "Kills") >= ScoreLimit) return true;
+        }
+        return false;
+    }
+
+    public override void OnGameStart() {}
+
+    public override void OnGameEnd() {}
 }
