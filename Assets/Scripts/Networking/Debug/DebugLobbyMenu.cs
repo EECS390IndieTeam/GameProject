@@ -7,11 +7,12 @@ public class DebugLobbyMenu : Bolt.GlobalEventListener {
 
     private float width = 300f;
 
-    private const int SERVER_MENU_LINE_COUNT = 5;
+    private const int SERVER_MENU_LINE_COUNT = 6;
     private const int CLIENT_MENU_LINE_COUNT = 3;
 
     private const float LINE_HEIGHT = 27.3f;
 
+    private int selectedGameMode = 0;
     void Update() {
         DebugHUD.setValue("IsSever", BoltNetwork.isServer);
         if (BoltNetwork.isClient) {
@@ -31,7 +32,7 @@ public class DebugLobbyMenu : Bolt.GlobalEventListener {
             StartBox(CLIENT_MENU_LINE_COUNT * LINE_HEIGHT);
             DrawClientMenu();
         } else {
-            StartBox(SERVER_MENU_LINE_COUNT * LINE_HEIGHT);
+            StartBox((SERVER_MENU_LINE_COUNT + GameModeManager.GameModes.Length) * LINE_HEIGHT);
             DrawServerMenu();
         }
         EndBox();
@@ -49,6 +50,19 @@ public class DebugLobbyMenu : Bolt.GlobalEventListener {
         }
         GUI.enabled = true;
         GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUILayout.Label("Game mode:");
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        selectedGameMode = GUILayout.SelectionGrid(selectedGameMode, GameModeManager.GameModeNames, 1);
+        GameManager.instance.gameMode = GameModeManager.GameModes[selectedGameMode];
+        GUILayout.EndHorizontal();
+
+
         DrawTeamChangeButtons();
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Start Game")) {

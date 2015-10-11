@@ -5,6 +5,11 @@ public class PlayerState : Bolt.EntityBehaviour<IPlayerState> {
 
     public GameObject OwnerPrefab, ProxyPrefab;
 
+    public IPlayer Player {
+        get;
+        private set;
+    }
+
     private Transform prefabTransform;
     
 
@@ -53,6 +58,13 @@ public class PlayerState : Bolt.EntityBehaviour<IPlayerState> {
         prefabTransform.parent = this.transform;
         prefabTransform.localPosition = Vector3.zero;
         prefabTransform.localRotation = Quaternion.identity;
-        prefabTransform.GetComponent<AbstractPlayer>().SetState(this);
+        Player = prefabTransform.GetComponent<IPlayer>();
+        ((AbstractPlayer)Player).SetState(this);
+        if (entity.isOwner) state.Name = GameManager.instance.CurrentUserName;
+
+        //if this is the server's player we have to do some special stuff
+        if (BoltNetwork.isServer && entity.isOwner) {
+            PlayerRegistry.SetPlayer(Player);
+        }
     }
 }

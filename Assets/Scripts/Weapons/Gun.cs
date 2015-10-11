@@ -13,6 +13,7 @@ public class Gun : MonoBehaviour, IWeapon
 
     public float HeatPerShot = 10.0f;
     public float DamagePerShot = 10.0f;
+    public float OverheatedCooldownMultiplier = 1.5f;
 
     public bool IsOverheating {
         get;
@@ -40,6 +41,7 @@ public class Gun : MonoBehaviour, IWeapon
     void Start() {
         IsOverheating = false;
         Temperature = 0f;
+        SourceTransform = GetComponentsInChildren<Transform>()[1];
     }
 
     void Update()
@@ -50,7 +52,7 @@ public class Gun : MonoBehaviour, IWeapon
 			timeUntilCooldownBegins = Mathf.Max (0f, timeUntilCooldownBegins - Time.deltaTime);
 		}
         if (timeUntilCooldownBegins <= 0f && Temperature >= 0f) {
-            Temperature -= CooldownRate * Time.deltaTime * (IsOverheating ? 1.5f : 1.0f);
+            Temperature -= CooldownRate * Time.deltaTime * (IsOverheating ? OverheatedCooldownMultiplier : 1.0f);
             if (Temperature <= 0f) {
                 Temperature = 0f;
                 IsOverheating = false;
@@ -94,21 +96,21 @@ public class Gun : MonoBehaviour, IWeapon
 			//Add in check for friendly fire here.
             if (hitplayer != null)
             {
-                hitplayer.TakeDamage(DamagePerShot, hitplayer.Username, -SourceTransform.forward);
+                hitplayer.TakeDamage(DamagePerShot, hitplayer.Username, -SourceTransform.forward, WeaponID);
             }
         }
         else
         {
-            endpoint = transform.position + SourceTransform.forward * 1000000.0f;
+            endpoint = SourceTransform.position + SourceTransform.forward * 1000000.0f;
         }
 
         WeaponFireEvent evnt = WeaponFireEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.Unreliable);
         evnt.EndPoint = endpoint;
-        evnt.StartPoint = transform.position;
+        evnt.StartPoint = SourceTransform.position;
         evnt.Color = Color.red;
         evnt.Send();
 
-        Debug.DrawLine(transform.position, endpoint, Color.cyan, 0.5f);
+        Debug.DrawLine(SourceTransform.position, endpoint, Color.cyan, 0.5f);
     }
 
     //doing it this way allows these properties to be set in the editor
@@ -134,5 +136,9 @@ public class Gun : MonoBehaviour, IWeapon
 
     float IWeapon.MaxTemperature {
         get { return MaxTemperature; }
+    }
+
+    float IWeapon.OverheatedCooldownMultiplier {
+        get { return OverheatedCooldownMultiplier; }
     }
 }

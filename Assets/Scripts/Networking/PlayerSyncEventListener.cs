@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[BoltGlobalBehaviour("ingame")]
-public class InGameEventListener : Bolt.GlobalEventListener {
+/// <summary>
+/// This script handles the player sync process from the player's perspective.
+/// See GameStartManager for the server's perspective
+/// </summary>
+[BoltGlobalBehaviour("ingame*")]
+public class PlayerSyncEventListener : Bolt.GlobalEventListener {
     public static float StartTime {
         get;
         private set;
@@ -17,12 +21,14 @@ public class InGameEventListener : Bolt.GlobalEventListener {
 
 
     public override void SceneLoadLocalDone(string map) {
+        //instantiate the player
         BoltEntity entity = BoltNetwork.Instantiate(BoltPrefabs.PlayerPrefab);
-        entity.GetComponent<PlayerState>().Name = GameManager.instance.CurrentUserName;
+        entity.GetComponent<PlayerState>().Name = GameManager.instance.CurrentUserName; //set their name
         if (!BoltNetwork.isServer) {
-            entity.AssignControl(BoltNetwork.server);
+            entity.AssignControl(BoltNetwork.server);  //this line is completely useless and should be removed
         }
         DebugHUD.setValue("load state", "Scene loaded, unsynced");
+        //the scene has now been loaded for this player, but we have not synchronized the players yet 
     }
 
     //Sync Event handler (client and server)
@@ -47,6 +53,7 @@ public class InGameEventListener : Bolt.GlobalEventListener {
             DebugHUD.setValue("load state", "Game started");
             //allow the player to move
             running = false;
+            Destroy(this);
         } else {
             DebugHUD.setValue("load state", "Sync message recieved, game starts in " + (StartTime - BoltNetwork.serverTime));
         }

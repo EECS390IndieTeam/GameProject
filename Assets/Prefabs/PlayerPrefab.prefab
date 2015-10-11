@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f8a4d0eac066243ab31ebaffa1c309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OwnerPrefab: {fileID: 187588, guid: 873b5aac7411e564cb019e2eeff1fda6, type: 2}
+  OwnerPrefab: {fileID: 137688, guid: 5c56759168e9e7040affc5d9ccfba86b, type: 2}
   ProxyPrefab: {fileID: 130770, guid: 2444047ad86b24fe293b5a3f078e5ac3, type: 2}
 --- !u!114 &11490634
 MonoBehaviour:
@@ -77,7 +77,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: OwnerPrefab
       value: 
-      objectReference: {fileID: 187588, guid: 873b5aac7411e564cb019e2eeff1fda6, type: 2}
+      objectReference: {fileID: 137688, guid: 5c56759168e9e7040affc5d9ccfba86b, type: 2}
     - target: {fileID: 0}
       propertyPath: ProxyPrefab
       value: 
