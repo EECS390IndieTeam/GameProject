@@ -8,6 +8,12 @@ public class OwnerPlayer : AbstractPlayer {
         GameManager.instance.SetCurrentPlayer(this);
     }
 
+    void Start()
+    {
+        this.Health = 100;
+        this.MaxHealth = 100;
+    }
+
     public override void Die(string killer, int weaponID) {
 		//TODO check comments on Death
 		//Do we need to reset the available weapon list here like this? Probably not...
