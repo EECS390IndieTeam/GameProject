@@ -398,7 +398,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &170316
 GameObject:
   m_ObjectHideFlags: 1
@@ -1110,8 +1110,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beamSpeed: 400
   maxDistance: 199999996000
-  reelSpeed: 15
-  stabilizer: 1.10000002
+  reelSpeed: 20
+  stabilizer: 1.05499995
   maxReelMultiplier: 3
   grappleTo:
     serializedVersion: 2
@@ -2400,8 +2400,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -4.28999996}
+  m_SizeDelta: {x: 0, y: -8.57999992}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22487460
 RectTransform:
