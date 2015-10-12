@@ -47,7 +47,7 @@ public class Cooldown : MonoBehaviour {
 	//Update is called once per frame
 	void Update () {
 		weaponTemp = gunScript.Temperature;
-		print(gunScript);
+//		print(gunScript);
 		cooldownSlider.value = weaponTemp;
 		isOverheating = gunScript.IsOverheating;
 		if (isOverheating){

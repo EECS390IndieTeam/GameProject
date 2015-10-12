@@ -50,11 +50,12 @@ public class GrappleGun : MonoBehaviour {
 
 	void LateUpdate() {
 		if (beamFiring) {
-			drawBeam (controller.character.position + (GrapplePhysics.anchor - controller.character.position) * beamSpeedTimer / GrapplePhysics.Length);
+			drawBeam (controller.character.position + (GrapplePhysics.anchor - controller.character.position) * beamSpeedTimer / GrapplePhysics.Length,
+			          controller.character.transform.position);
 		}
 
 		if (!beamFiring && controller.grappled) {
-			drawBeam(GrapplePhysics.anchor);
+			drawBeam(GrapplePhysics.anchor, controller.character.transform.position);
 		}
 	}
 
@@ -77,9 +78,10 @@ public class GrappleGun : MonoBehaviour {
 
 	}
 
-	public void drawBeam(Vector3 position) {
-		lightning.targetPoint = position;
-		lightning.length = Vector3.Magnitude(position - controller.character.position);
+	public void drawBeam(Vector3 to, Vector3 from) {
+		lightning.centerPoint = from;
+		lightning.targetPoint = to;
+		lightning.length = Vector3.Magnitude(to - from);
 		lightning.numPoints = (int)(lightning.length / 6);
 	}
 

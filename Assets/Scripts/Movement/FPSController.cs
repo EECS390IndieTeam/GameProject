@@ -10,6 +10,7 @@ public class FPSController : MonoBehaviour {
     public float maxXSpeedSurface = 8;
     public float maxYSpeedSurface = 8;
 	public float rotationSpeed = 1;
+	public Transform muzzlePoint;
 
     public Transform cameraTransform;
 

@@ -643,7 +643,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137688}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 178.19342, y: 73.4660797, z: -29.1476974}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400382}
@@ -848,7 +848,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 146624}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1108,7 +1108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d5b1bf8fa04436c8ccf3489f7b0729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beamSpeed: 1000
+  beamSpeed: 400
   maxDistance: 199999996000
   reelSpeed: 15
   stabilizer: 1.10000002
@@ -1449,7 +1449,8 @@ MonoBehaviour:
   maxSurfaceSpeed: 24
   maxXSpeedSurface: 8
   maxYSpeedSurface: 8
-  rotationSpeed: 1
+  rotationSpeed: 4
+  muzzlePoint: {fileID: 478866}
   cameraTransform: {fileID: 400382}
 --- !u!114 &11467254
 MonoBehaviour:
@@ -2457,7 +2458,7 @@ RectTransform:
   m_RootOrder: 6
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 118.199997, y: 47.9000015}
   m_SizeDelta: {x: 275, y: 53}
   m_Pivot: {x: 0, y: 0}
 --- !u!224 &22497104
@@ -2543,6 +2544,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: shootableLayers.m_Bits
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: rotationSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: beamSpeed
+      value: 400
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
