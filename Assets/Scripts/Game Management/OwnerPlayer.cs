@@ -27,6 +27,7 @@ public class OwnerPlayer : AbstractPlayer {
         evnt.Player = Username;
         evnt.WeaponID = weaponID;
         evnt.Send();
+        this.Health = MaxHealth;
     }
 
     public override void RespawnAt(Vector3 position, Quaternion rotation) {
