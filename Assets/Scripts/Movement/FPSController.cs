@@ -12,11 +12,13 @@ public class FPSController : MonoBehaviour {
 	public float rotationSpeed = 1;
 	public Transform muzzlePoint;
 
+    public LayerMask surfaceMovementMask;
+
     public Transform cameraTransform;
 
     private CustomMouseLook mouseLook;
     private CharacterRotator rotator;
-    //private SurfaceMovement sMovement;
+    private SurfaceMovement sMovement;
     private GrappleGun grappleGun;
     private bool isAttachedToSurface = false;
 	
@@ -38,7 +40,7 @@ public class FPSController : MonoBehaviour {
 		character = GetComponent<Rigidbody>();
         mouseLook = GetComponent<CustomMouseLook>();
         rotator = GetComponent<CharacterRotator>();
-        //sMovement = GetComponent<SurfaceMovement>();
+        sMovement = GetComponent<SurfaceMovement>();
         grappleGun = GetComponent<GrappleGun>();
 		if (grappleGun) grappleGun.controller = this;
 		grappled = false;
@@ -75,6 +77,7 @@ public class FPSController : MonoBehaviour {
             if (isAttachedToSurface) {
                 Debug.Log("Detached from surface");
                 isAttachedToSurface = false;
+                sMovement.detachFromSurface();
             }
             
 			debounce = debounceTime;
@@ -95,28 +98,32 @@ public class FPSController : MonoBehaviour {
     void FixedUpdate ()
     {
         //Debug.Log(isAttachedToSurface);
-//        RaycastHit hit;
-//        if (Physics.Raycast(character.position, cameraTransform.forward, out hit, grabDistance) && !isAttachedToSurface)
-//        {
-//            grappleGun.detach();
-//            Debug.Log("Attached to surface");
-//            //sMovement.attachToSurface(hit);
-//            isAttachedToSurface = true;
-//            
-//            
-//        }
-//
-//
-//        Vector2 input = GetInput();
-//        if(isAttachedToSurface)
-//        {
-//            //sMovement.moveCharacter(input);
-//            if(Input.GetKey(KeyCode.Space))
-//            {
-//                Debug.Log("Detached from surface");
-//                isAttachedToSurface = false;
-//            }
-//        }
+        RaycastHit hit;
+        if (Physics.Raycast(character.position, cameraTransform.forward, out hit, grabDistance + GetComponent<SphereCollider>().radius, surfaceMovementMask) && !isAttachedToSurface)
+        {
+            grappleGun.detach();
+            Debug.Log("Attached to surface");
+            sMovement.attachToSurface(hit);
+            isAttachedToSurface = true;
+            
+            
+        }
+
+
+        Vector2 input = GetInput();
+        if(isAttachedToSurface)
+        {
+            //sMovement.moveCharacter(input);
+            if(Input.GetKey(KeyCode.Space))
+            {
+                Debug.Log("Detached from surface");
+                isAttachedToSurface = false;
+                sMovement.detachFromSurface();
+            } else
+            {
+                sMovement.moveCharacter(input);
+            }
+        }
 
 		doPhysics();
     }
