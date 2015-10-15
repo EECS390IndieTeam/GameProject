@@ -2,11 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(GrappleGun), typeof(FPSController))]
 public class OwnerPlayer : AbstractPlayer {
 
     void Awake() {
         GameManager.instance.SetCurrentPlayer(this);
+    }
+
+    void Start()
+    {
+        this.Health = 100;
+        this.MaxHealth = 100;
     }
 
     public override void Die(string killer, int weaponID) {
@@ -22,6 +27,7 @@ public class OwnerPlayer : AbstractPlayer {
         evnt.Player = Username;
         evnt.WeaponID = weaponID;
         evnt.Send();
+        this.Health = MaxHealth;
     }
 
     public override void RespawnAt(Vector3 position, Quaternion rotation) {

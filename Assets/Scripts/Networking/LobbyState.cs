@@ -58,6 +58,10 @@ public class LobbyState : Bolt.EntityBehaviour<ILobbyObject> {
         Debug.LogWarning("Tried to change the team of a nonexistent player: " + username);
     }
 
+    public IDictionary<string, int> GetTeamLookup() {
+        return state.PlayerList.Where(x => x.Connected).ToDictionary(e => e.UserName, e => e.Team);
+    }
+
     private void CopyPlayer(int from, int to) {
         Debug.Log("moved player at " + from + " to " + to);
         PlayerEntry p = state.PlayerList[from];
@@ -75,19 +79,32 @@ public class LobbyState : Bolt.EntityBehaviour<ILobbyObject> {
         SetPlayer(i, "", DEFAULT_TEAM, false);
     }
 
+    public void SetPlayerStatIndex(string name, int index) {
+        for (int i = 0; i < PlayerCount; i++) {
+            if (state.PlayerList[i].UserName == name) {
+                state.PlayerList[i].StatIndex = index;
+                return;
+            }
+        }
+        Debug.LogError("Tried to change the stat index of a nonexistent player: "+name);
+    }
+
     public void InitializeLobby() {
         Debug.Log("initalizing lobby!");
         int i = 0;
         foreach (string p in PlayerRegistry.PlayerNames) {
             SetPlayer(i, p, DEFAULT_TEAM, true);
+            state.PlayerList[i].StatIndex = ServerConnectionEventListener.IndexMap.GetIndexForPlayer(p);
             i++;
         }
         state.PlayerCount = i;
         for (int n = i; n < state.PlayerList.Length; n++) {
             ClearPlayer(n);
         }
+    }
 
-        
+    public override void Attached() {
+        GameManager.instance.Lobby = this;
     }
 
     void OnGUI() {
@@ -125,4 +142,14 @@ public class LobbyState : Bolt.EntityBehaviour<ILobbyObject> {
                                      Color.Lerp(Color.red, Color.white, 0.5f),  //team 6
                                      Color.Lerp(Color.red, Color.blue, 0.5f)    //team 7
                                  };
+
+    internal int GetStatIndexForPlayer(string userName) {
+        for (int i = 0; i < PlayerCount; i++) {
+            var player = state.PlayerList[i];
+            if (player.Connected && player.UserName == userName) {
+                return player.StatIndex;
+            }
+        }
+        return -1;
+    }
 }

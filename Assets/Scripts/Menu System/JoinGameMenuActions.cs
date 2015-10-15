@@ -27,6 +27,11 @@ public class JoinGameMenuActions : MonoBehaviour
     public Button lobbyButton;
 
     /// <summary>
+    /// Set this to true to begin connecting to the server
+    /// </summary>
+    private bool connect = false;
+
+    /// <summary>
     /// Initial setup.
     /// </summary>
     void Start()
@@ -77,14 +82,20 @@ public class JoinGameMenuActions : MonoBehaviour
                 BoltLauncher.Shutdown();
             }
 
-            if (!BoltNetwork.isRunning)
-            {
-                BoltLauncher.StartClient();
-            }
-
-            BoltNetwork.Connect(UdpKit.UdpEndPoint.Parse(this.ipInputField.text),
-                new ConnectionRequestData(GameManager.instance.CurrentUserName, this.lobbyPasswordInputField.text));
+            connect = true;
         }));
+    }
+
+    void Update() {
+        if (connect) {
+            if (!BoltNetwork.isRunning) {
+                BoltLauncher.StartClient();
+            } else {
+                BoltNetwork.Connect(UdpKit.UdpEndPoint.Parse(this.ipInputField.text),
+                    new ConnectionRequestData(GameManager.instance.CurrentUserName, this.lobbyPasswordInputField.text));
+                connect = false;
+            }
+        }
     }
 
     /// <summary>

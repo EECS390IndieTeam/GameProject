@@ -14,6 +14,7 @@ public class PlayerSyncEventListener : Bolt.GlobalEventListener {
 
     private bool running = false;
     public override void SceneLoadLocalBegin(string map) {
+        GameManager.instance.ChangeGameState(GameManager.GameState.PRE_GAME);
         DebugHUD.setValue("load state", "Loading scene");
         FindObjectOfType<LobbyState>().HideDebugDraw = true;
         //display loading screen
@@ -54,6 +55,7 @@ public class PlayerSyncEventListener : Bolt.GlobalEventListener {
             //allow the player to move
             running = false;
             Destroy(this);
+            GameManager.instance.ChangeGameState(GameManager.GameState.IN_GAME);
         } else {
             DebugHUD.setValue("load state", "Sync message recieved, game starts in " + (StartTime - BoltNetwork.serverTime));
         }

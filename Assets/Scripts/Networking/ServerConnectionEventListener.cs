@@ -8,11 +8,13 @@ public class ServerConnectionEventListener : Bolt.GlobalEventListener {
     //the password for literally everything is "dickbutt"!
 
     private LobbyState lobby;
+    public static PlayerIndexMap IndexMap;
 
     public override void BoltStartDone() {
+        IndexMap = new PlayerIndexMap();
         if (GameManager.instance.CurrentUserName == "") GameManager.instance.CurrentUserName = "Server Player";
         PlayerRegistry.CreatePlayer(null, GameManager.instance.CurrentUserName);
-        //GameManager.instance.CurrentUserName = ServerUsername;
+        IndexMap.AddPlayer(GameManager.instance.CurrentUserName);
         lobby = BoltNetwork.Instantiate(BoltPrefabs.LobbyList).GetComponent<LobbyState>();
         lobby.InitializeLobby();
     }
@@ -40,19 +42,20 @@ public class ServerConnectionEventListener : Bolt.GlobalEventListener {
             ConnectionRequestData data = (ConnectionRequestData)token;
             Debug.Log("connection request with token of type " + token.GetType().Name);
             if (data.Password != ServerConnectionEventListener.ServerPassword) {
-                //BoltNetwork.Refuse(endpoint, reason);
                 connection.Disconnect(new DisconnectReason("Server Refused Connection", "Incorrect Password"));
             } else if (PlayerRegistry.UserConnected(data.PlayerName)) {
-                //BoltNetwork.Refuse(endpoint, reason);
                 connection.Disconnect(new DisconnectReason("Server Refused Connection", "A player with that name is already connected"));
-            } else {
+            } else if(GameManager.instance.CurrentGameState == GameManager.GameState.IN_GAME){
+                if (!IndexMap.ContainsPlayer(data.PlayerName)) {
+                    connection.Disconnect(new DisconnectReason("Server Refused Connection", "Game already in progress"));
+                }
+            } else{
                 PlayerRegistry.CreatePlayer(connection, data.PlayerName);
                 lobby.AddPlayer(data.PlayerName);
+                lobby.SetPlayerStatIndex(data.PlayerName, IndexMap.AddPlayer(data.PlayerName));
                 //player connected successfully!
-                //BoltNetwork.Accept(endpoint);
             }
         } else {
-            //BoltNetwork.Refuse(endpoint, reason);
             connection.Disconnect(new DisconnectReason("Server Refused Connection", "Invalid Connection Token"));
         }
     }

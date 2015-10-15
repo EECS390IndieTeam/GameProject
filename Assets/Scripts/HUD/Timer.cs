@@ -38,7 +38,12 @@ using System.Collections;
          var fraction = (time * 100) % 100;
  
          //update the label value
-         timer.text = string.Format ("{0:00} : {1:00} : {2:000}", (int) minutes, (int) seconds, (int) fraction);		//casting to int necessary to avoid float math issues
+         if (time > 60){
+            timer.text = string.Format ( "{0:00}:{1:00}", (int) minutes, (int) seconds);       //casting to int necessary to avoid float math issues
+         } else {
+            timer.text = string.Format("{0:00}", (int) seconds);
+         }
+         
      }
 
  }

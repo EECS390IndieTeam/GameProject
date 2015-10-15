@@ -19,22 +19,22 @@ public class UITests : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown(KeyCode.T)){
-			playerHealth.TakeDamage(damageToTake);
-		}
-		if (Input.GetKeyDown(KeyCode.F)){
-			ammoCounter.FireWeapon();
-		}
-		if (Input.GetKeyDown(KeyCode.R)){
-			ammoCounter.Reload();
-		}
-		if (Input.GetKeyDown(KeyCode.P)){
-			ammoCounter.PickupAmmo(ammoToPickup);
-		}
-		if (Input.GetKeyDown(KeyCode.C)){
-			cooldown.FireWeapon();
-		}
+	// void Update () {
+	// 	if (Input.GetKeyDown(KeyCode.T)){
+	// 		playerHealth.TakeDamage(damageToTake);
+	// 	}
+	// 	if (Input.GetKeyDown(KeyCode.F)){
+	// 		ammoCounter.FireWeapon();
+	// 	}
+	// 	if (Input.GetKeyDown(KeyCode.R)){
+	// 		ammoCounter.Reload();
+	// 	}
+	// 	if (Input.GetKeyDown(KeyCode.P)){
+	// 		ammoCounter.PickupAmmo(ammoToPickup);
+	// 	}
+	// 	if (Input.GetKeyDown(KeyCode.C)){
+	// 		cooldown.FireWeapon();
+	// 	}
 
-	}
+	// }
 }

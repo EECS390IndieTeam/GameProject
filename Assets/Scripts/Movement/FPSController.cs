@@ -10,6 +10,9 @@ public class FPSController : MonoBehaviour {
     public float maxXSpeedSurface = 8;
     public float maxYSpeedSurface = 8;
 	public float rotationSpeed = 1;
+	public Transform muzzlePoint;
+
+    public LayerMask surfaceMovementMask;
 
     public Transform cameraTransform;
 
@@ -27,6 +30,7 @@ public class FPSController : MonoBehaviour {
 
 	[System.NonSerialized]
 	public bool grappled = false;
+	private bool justFired = false;
 
 
 	// Use this for initialization
@@ -39,6 +43,8 @@ public class FPSController : MonoBehaviour {
         sMovement = GetComponent<SurfaceMovement>();
         grappleGun = GetComponent<GrappleGun>();
 		if (grappleGun) grappleGun.controller = this;
+		grappled = false;
+		justFired = false;
 	}
 	
 	// Update is called once per frame
@@ -66,19 +72,22 @@ public class FPSController : MonoBehaviour {
 			debounce = 0;
 		}
 		
-		if (Input.GetButtonDown("Fire2") && !grappled && debounce == 0) {
+		if (Input.GetButtonDown("Fire2") && !justFired && debounce == 0) {
 			grappleGun.fire();
             if (isAttachedToSurface) {
                 Debug.Log("Detached from surface");
                 isAttachedToSurface = false;
+                sMovement.detachFromSurface();
             }
             
 			debounce = debounceTime;
+			justFired = true;
 		}
 		
-		if (Input.GetButtonDown("Fire2") && grappled && debounce == 0) {
+		if (Input.GetButtonDown("Fire2") && justFired && debounce == 0) {
 			grappleGun.detach();
 			debounce = debounceTime;
+			justFired = false;
 		}
 
 		if (Input.GetButtonDown("Jump") && grappled) {
@@ -90,7 +99,7 @@ public class FPSController : MonoBehaviour {
     {
         //Debug.Log(isAttachedToSurface);
         RaycastHit hit;
-        if (Physics.Raycast(character.position, cameraTransform.forward, out hit, grabDistance) && !isAttachedToSurface)
+        if (Physics.Raycast(character.position, cameraTransform.forward, out hit, grabDistance + GetComponent<SphereCollider>().radius, surfaceMovementMask) && !isAttachedToSurface)
         {
             grappleGun.detach();
             Debug.Log("Attached to surface");
@@ -104,11 +113,15 @@ public class FPSController : MonoBehaviour {
         Vector2 input = GetInput();
         if(isAttachedToSurface)
         {
-            sMovement.moveCharacter(input);
+            //sMovement.moveCharacter(input);
             if(Input.GetKey(KeyCode.Space))
             {
                 Debug.Log("Detached from surface");
                 isAttachedToSurface = false;
+                sMovement.detachFromSurface();
+            } else
+            {
+                sMovement.moveCharacter(input);
             }
         }
 

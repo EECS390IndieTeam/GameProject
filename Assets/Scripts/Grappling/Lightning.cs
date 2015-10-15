@@ -21,6 +21,8 @@ public class Lightning : MonoBehaviour {
 
 	[System.NonSerialized]
 	public Vector3 targetPoint;
+	[System.NonSerialized]
+	public Vector3 centerPoint;
 
 	public AnimationCurve curve;
 	public float multiplier = 1.2f;
@@ -58,16 +60,15 @@ public class Lightning : MonoBehaviour {
 
 		Vector3 lineDirection = Vector3.Normalize(targetPoint - transform.position);
 
-		Vector3 position = transform.position;
-
 		float stepSize = length / numPoints;
 
-		lineRenderer.SetPosition(0, position);
+		lineRenderer.SetPosition(0, centerPoint);
 
-		for (int i = 1; i <= numPoints; i++) {
+		for (int i = 1; i <= numPoints - 1; i++) {
 			float curveMultiplier = curve.Evaluate((float)i * stepSize / (float)maxLength);
-			lineRenderer.SetPosition (i, position + lineDirection * i * stepSize + Random.onUnitSphere * multiplier * curveMultiplier);
+			lineRenderer.SetPosition (i, centerPoint + lineDirection * i * stepSize + Random.onUnitSphere * multiplier * curveMultiplier);
 		}
+		lineRenderer.SetPosition(numPoints, targetPoint);
 //		for (int j = 1; j <=numPoints; j++) {
 //			float curveMultiplier = curve.Evaluate((float)(numPoints - j) * stepSize / (float)maxLength);
 //			lineRenderer.SetPosition (j + numPoints, targetPoint - lineDirection * j * stepSize + Random.onUnitSphere * multiplier * curveMultiplier);
@@ -76,7 +77,7 @@ public class Lightning : MonoBehaviour {
 
     void redraw() {
         // may expand on this later to make it look better
-        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(0, centerPoint);
     }
 
 	void OnEnable() {

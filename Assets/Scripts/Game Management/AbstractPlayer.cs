@@ -71,6 +71,24 @@ public abstract class AbstractPlayer : MonoBehaviour, IPlayer {
 		protected set;
 	}
 
+    public Vector3 GrappleEndpoint {
+        get {
+            return state.GrappleEndpoint;
+        }
+        set {
+            state.GrappleEndpoint = value;
+        }
+    }
+
+    public bool GrappleVisible {
+        get {
+            return state.GrappleVisible;
+        }
+        set {
+            state.GrappleVisible = value;
+        }
+    }
+
     public abstract void Die(string killer, int weaponID);
 
     public void RespawnAt(Transform location) {
