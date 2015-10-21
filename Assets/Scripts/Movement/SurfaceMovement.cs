@@ -75,13 +75,13 @@ public class SurfaceMovement : MonoBehaviour {
         {
             RaycastHit hit;
             //Ok so we agree this works, this is the on a surface without extreme angles
-            if (Physics.SphereCast(character.position + (desiredSpeed * moveFromLast * Time.deltaTime), .1f, -lastNormal, out hit,
+            if (Physics.SphereCast(character.position + ((character.velocity * Time.fixedDeltaTime) + (desiredSpeed * moveFromLast * Time.deltaTime)), .1f, -lastNormal, out hit,
                 grabDistance + character.GetComponent<SphereCollider>().radius, moveableLayers))
             {
                 Vector3 moveVector = Vector3.ProjectOnPlane(worldSpaceVector, hit.normal);
                 if (Vector3.Dot(hit.normal, lastNormal) >= Mathf.Cos(5 * Mathf.Deg2Rad))
                 {
-                    character.AddForce(moveVector * desiredSpeed * Time.fixedDeltaTime * accelerationFactor, ForceMode.Impulse);
+                    character.AddForce(moveVector * desiredSpeed * Time.fixedDeltaTime * (accelerationFactor * (1- (character.velocity.magnitude / maxVelocity))), ForceMode.Impulse);
                 }
                 else
                 {
@@ -105,7 +105,7 @@ public class SurfaceMovement : MonoBehaviour {
 
                 //First handle not going off the edge, easy, just move in opposite of desired direction.
                 Vector3 moveVector = Vector3.ProjectOnPlane(lastPoint - character.position, lastNormal);
-                character.AddForce(-character.velocity + (.5f * moveVector), ForceMode.Impulse);
+                character.AddForce(character.velocity.magnitude * (moveVector), ForceMode.Impulse);
 
                 //Now deal with rounding corners. We're going to try a press button to move around corner approach.
                 //TODO: Use only the actual input system.

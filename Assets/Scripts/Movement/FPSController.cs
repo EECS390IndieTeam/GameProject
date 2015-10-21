@@ -105,7 +105,7 @@ public class FPSController : MonoBehaviour {
             Debug.Log("Attached to surface");
             sMovement.attachToSurface(hit);
             isAttachedToSurface = true;
-            
+            justFired = false;
             
         }
 
