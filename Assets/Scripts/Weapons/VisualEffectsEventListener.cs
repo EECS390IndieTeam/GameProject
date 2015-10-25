@@ -12,6 +12,7 @@ public class VisualEffectsEventListener : Bolt.GlobalEventListener {
         shot.StartPoint = evnt.StartPoint;
         shot.EndPoint = evnt.EndPoint;
         shot.BeamColor = evnt.Color;
+		shot.transform.parent = gameObject.transform;
     }
 
     public override void OnEvent(ExplosionEvent evnt) {

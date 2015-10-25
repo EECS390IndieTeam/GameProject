@@ -105,7 +105,24 @@ public interface IPlayer {
     bool GrappleVisible {
         get;
     }
-		
+
+	/// <summary>
+	/// Where the player's fired laser ends in world space
+	/// </summary>
+	Vector3 LaserEndpoint {
+		get;
+	}
+
+	/// <summary>
+	/// true if this player is firing their gun
+	/// </summary>
+	bool LaserVisible {
+		get;
+	}
+
+	Vector3 MuzzlePoint {
+		get;
+	}
 }
 	
 /// <summary>
@@ -116,7 +133,7 @@ public interface IWeapon {
     /// <summary>
     /// Fires the weapon
     /// </summary>
-    void Fire();
+    //void Fire();
     /// <summary>
     /// How fast the weapon will cool down in units/second
     /// </summary>

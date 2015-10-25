@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1534bf7839652c4b9b3e079e8a5c2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FadeTime: .5
+  FadeTime: 1
   BeamColor: {r: 1, g: 0, b: 0, a: 1}
   FadeCurve:
     serializedVersion: 2
@@ -85,15 +85,15 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions: []
   m_Parameters:
-    startWidth: .0199999996
-    endWidth: 1
+    startWidth: .0500000007
+    endWidth: .0500000007
     m_StartColor:
       serializedVersion: 2
       rgba: 4278190335
     m_EndColor:
       serializedVersion: 2
       rgba: 4278190335
-  m_UseWorldSpace: 1
+  m_UseWorldSpace: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -103,11 +103,23 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_Parameters.startWidth
-      value: .0199999996
+      value: .0500000007
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Parameters.endWidth
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: FadeTime
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: 1.73000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_UseWorldSpace
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

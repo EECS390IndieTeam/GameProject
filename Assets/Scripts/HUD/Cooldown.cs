@@ -5,9 +5,8 @@ using System.Collections;
 public class Cooldown : MonoBehaviour {
 	
 	public Slider cooldownSlider;
-	public GameObject gun;
 
-	Gun gunScript;
+	public Gun gunScript;
 	Image sliderFill;
 	Color fillColor;
 
@@ -31,7 +30,6 @@ public class Cooldown : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gunScript = gun.GetComponent<Gun>();
 		cooldownSlider.maxValue = gunScript.MaxTemperature;
 		
 		cooldownSlider.value = 0;

@@ -22,6 +22,7 @@ public class GrappleBeamDrawer : MonoBehaviour {
 
     public void drawBeam(Vector3 position) {
         lightning.targetPoint = position;
+		lightning.centerPoint = transform.position;
         lightning.length = Vector3.Magnitude(position - transform.position);
         lightning.numPoints = (int)(lightning.length / 6);
     }

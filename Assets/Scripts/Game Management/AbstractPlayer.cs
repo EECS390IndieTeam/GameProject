@@ -89,6 +89,33 @@ public abstract class AbstractPlayer : MonoBehaviour, IPlayer {
         }
     }
 
+	public Vector3 LaserEndpoint {
+		get {
+			return state.LaserEndpoint;
+		}
+		set {
+			state.LaserEndpoint = value;
+		}
+	}
+	
+	public bool LaserVisible {
+		get {
+			return state.LaserVisible;
+		}
+		set {
+			state.LaserVisible = value;
+		}
+	}
+
+	public Vector3 MuzzlePoint {
+		get {
+			return state.MuzzlePoint;
+		}
+		set {
+			state.MuzzlePoint = value;
+		}
+	}
+
     public abstract void Die(string killer, int weaponID);
 
     public void RespawnAt(Transform location) {

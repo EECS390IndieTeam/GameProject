@@ -58,6 +58,33 @@ public class PlayerState : Bolt.EntityBehaviour<IPlayerState> {
         }
     }
 
+	public Vector3 LaserEndpoint {
+		get {
+			return state.LaserEndpoint;
+		}
+		set {
+			state.LaserEndpoint = value;
+		}
+	}
+
+	public bool LaserVisible {
+		get {
+			return state.LaserVisible;
+		}
+		set {
+			state.LaserVisible = value;
+		}
+	}
+
+	public Vector3 MuzzlePoint {
+		get {
+			return state.MuzzlePoint;
+		}
+		set {
+			state.MuzzlePoint = value;
+		}
+	}
+
     public override void Attached() {
         if (entity.isOwner) {
             GameObject prefab = Instantiate(OwnerPrefab);
