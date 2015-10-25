@@ -68,7 +68,7 @@ public class SetupGameMenuActions : MonoBehaviour
         {
             GameManager.instance.CurrentUserName = this.screenNameInputField.text;
             GameManager.instance.gameMode = new TeamDeathmatchMode();
-            ServerConnectionEventListener.ServerPassword = this.lobbyPasswordInputField.text;
+            ServerSideData.Password = this.lobbyPasswordInputField.text;
             Cursor.visible = false;
             if (BoltNetwork.isRunning && BoltNetwork.isClient)
             {
@@ -88,7 +88,6 @@ public class SetupGameMenuActions : MonoBehaviour
         int port;
 
         if (int.TryParse(this.portInputField.text, out port) &&
-            this.lobbyPasswordInputField.text.Length >= 6 &&
             this.screenNameInputField.text.Length != 0)
         {
             this.launchButton.interactable = true;

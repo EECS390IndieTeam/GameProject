@@ -3,10 +3,6 @@ using System.Collections;
 
 [BoltGlobalBehaviour(BoltNetworkModes.Host)]
 public class ServerConnectionEventListener : Bolt.GlobalEventListener {
-
-    public static string ServerPassword = "dickbutt"; //this will be moved to a different class later?
-    //the password for literally everything is "dickbutt"!
-
     private LobbyState lobby;
     public static PlayerIndexMap IndexMap;
 
@@ -26,7 +22,7 @@ public class ServerConnectionEventListener : Bolt.GlobalEventListener {
         //this should allow for much faster debugging and testing
         if ((Debug.isDebugBuild || Application.isEditor) && token == null) {
             var newToken = new ConnectionRequestData();
-            newToken.Password = ServerPassword;
+            newToken.Password = ServerSideData.Password;
             string baseusername = "debug player ";
             int suffix = 0;
             while (PlayerRegistry.UserConnected(baseusername + suffix)) suffix++;
@@ -41,7 +37,7 @@ public class ServerConnectionEventListener : Bolt.GlobalEventListener {
         if (token != null && token is ConnectionRequestData) {
             ConnectionRequestData data = (ConnectionRequestData)token;
             Debug.Log("connection request with token of type " + token.GetType().Name);
-            if (data.Password != ServerConnectionEventListener.ServerPassword) {
+            if (data.Password != ServerSideData.Password) {
                 connection.Disconnect(new DisconnectReason("Server Refused Connection", "Incorrect Password"));
             } else if (PlayerRegistry.UserConnected(data.PlayerName)) {
                 connection.Disconnect(new DisconnectReason("Server Refused Connection", "A player with that name is already connected"));
