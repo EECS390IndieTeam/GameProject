@@ -24,7 +24,9 @@ public class PlayerSyncEventListener : Bolt.GlobalEventListener {
     public override void SceneLoadLocalDone(string map) {
         //instantiate the player
         BoltEntity entity = BoltNetwork.Instantiate(BoltPrefabs.PlayerPrefab);
-        entity.GetComponent<PlayerState>().Name = GameManager.instance.CurrentUserName; //set their name
+        PlayerState ps = entity.GetComponent<PlayerState>();
+        ps.Name = GameManager.instance.CurrentUserName; //set their name
+        ps.Team = GameManager.instance.Lobby.GetTeamLookup()[GameManager.instance.CurrentUserName];
         if (!BoltNetwork.isServer) {
             entity.AssignControl(BoltNetwork.server);  //this line is completely useless and should be removed
         }
