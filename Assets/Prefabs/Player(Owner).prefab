@@ -1736,6 +1736,7 @@ MonoBehaviour:
   shootableLayers:
     serializedVersion: 2
     m_Bits: 1
+  muzzleFlash: {fileID: 0}
   CooldownRate: 20
   CooldownDelay: .100000001
   MaxTemperature: 100
@@ -2552,6 +2553,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: rotationSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.rgba
+      value: 4279769322
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -8,6 +8,8 @@ public class Gun : MonoBehaviour, IWeapon
 
 	public LayerMask shootableLayers;
 
+    public ParticleSystem muzzleFlash;
+
     //  Variables for getters
     public float CooldownRate = 20.0f;
     public float CooldownDelay = 0.1f;
@@ -42,8 +44,12 @@ public class Gun : MonoBehaviour, IWeapon
     public Transform GunShotStartTransform;
 
     private bool assisting = false;
+    private Vector3 radius;
     private CustomMouseLook look;
-    private float assistedSpeedMultiplier = 0.75f;
+    private float assistedSpeedMultiplier = 0.5f;
+    private float marginOfError = 2.0f;
+
+    private WaitForSeconds w = new WaitForSeconds(2.0f);
 
     void Start() {
         IsOverheating = false;
@@ -106,6 +112,10 @@ public class Gun : MonoBehaviour, IWeapon
 
     public void Fire()
     {
+        if(muzzleFlash != null)
+        {
+            StartCoroutine(MuzzleFlash());
+        }
         timeUntilNextShot = MinDelayBetweenShots;
         timeUntilCooldownBegins = CooldownDelay;
         Temperature+=HeatPerShot;
@@ -157,6 +167,15 @@ public class Gun : MonoBehaviour, IWeapon
         assisting = false;
     }
 
+    private IEnumerator MuzzleFlash()
+    {
+        muzzleFlash.startSize = 0.25f;
+        muzzleFlash.enableEmission = true;
+        muzzleFlash.Play();
+        yield return w;
+        muzzleFlash.enableEmission = false;
+        muzzleFlash.Stop();
+    }
     //doing it this way allows these properties to be set in the editor
     float IWeapon.CooldownRate {
         get { return CooldownRate; }
