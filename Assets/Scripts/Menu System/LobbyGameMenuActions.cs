@@ -1,22 +1,10 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections.Generic;
 
 /// <summary>
 /// Contains menu actions for game lobby.
 /// </summary>
 public class LobbyGameMenuActions : Bolt.GlobalEventListener
 {
-    /// <summary>
-    /// An editor provided list of buttons, one for each team.
-    /// </summary>
-    public List<Button> teamButtonsList;
-
-    /// <summary>
-    /// Fatal error occurred.
-    /// </summary>
-    private bool dead;
-
     /// <summary>
     /// Stops the multiplayer client or server.
     /// </summary>
@@ -34,41 +22,10 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     }
 
     /// <summary>
-    /// Setup.
-    /// </summary>
-    void Start()
-    {
-        if (this.teamButtonsList == null || this.teamButtonsList.Count == 0)
-        {
-            Debug.LogError("Lobby Game Menu Actions Team buttons list cannot be empty.");
-            this.dead = true;
-            return;
-        }
-
-        // Create a click listener for each of the 7 buttons in ascending order
-        // assigning them to teams 0 through 7.
-        var i = 0;
-        foreach (var button in this.teamButtonsList)
-        {
-            button.onClick.AddListener(() =>
-            {
-                TeamChangeEvent evnt = TeamChangeEvent.Create(Bolt.GlobalTargets.OnlyServer, Bolt.ReliabilityModes.ReliableOrdered);
-                evnt.NewTeam = i++;
-                evnt.Send();
-            });
-        }
-    }
-
-    /// <summary>
     /// State updates.
     /// </summary>
     void Update()
     {
-        if (this.dead)
-        {
-            return;
-        }
-
         // TODO: fix this spelling mistake in the code whereever it originated.
         DebugHUD.setValue("IsServer", BoltNetwork.isServer);
 
