@@ -10,6 +10,7 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
     public int ScoreLimit = 3;
 
     //Hardcoded team limit here.
+	private Flag[] flags = new Flag[2];
     private bool[] isFlagAtBase = new bool[2];
 
     public override GameModes Mode {
@@ -44,6 +45,14 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
         {
             isFlagAtBase[i] = true;
         }
+		Flag[] fgs = Object.FindObjectsOfType(typeof(Flag)) as Flag[];
+		foreach (Flag f in fgs) {
+			if(flags[f.teamID] == null){
+				flags[f.teamID] = f;
+			} else {
+				Debug.LogError("Flag Collision for team number: "+f.teamID);
+			}
+		}
     }
 
     public override bool GameOver() {
@@ -72,4 +81,16 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
     {
         return isFlagAtBase[teamNum];
     }
+
+	public Vector3 GetFlagLocation(int teamNum){
+		Flag f = flags [teamNum];
+		if (f != null) {
+			return f.gameObject.transform.position;
+		} else {
+			Debug.LogError("Could not find flag for team "+teamNum);
+			return new Vector3();
+		}
+	}
+
+
 }
