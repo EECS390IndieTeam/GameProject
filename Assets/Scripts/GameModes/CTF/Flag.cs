@@ -5,20 +5,22 @@ public class Flag : MonoBehaviour {
 
     public int teamID; //The team that this flag belongs to
     public IPlayer player; //The player holding this flag. Null if the flag is dropped.
-    private Transform flagSpawnTransform;
+    private Vector3 flagSpawnPosition;
+	private Quaternion flagSpawnRotation;
     Collider c;
 
 	// Use this for initialization
 	void Start () {
-        flagSpawnTransform = transform;
+        flagSpawnPosition = transform.position;
+		flagSpawnRotation = transform.rotation;
         c = GetComponent<Collider>();
 	}
 	
     public void ReturnFlag()
     {
         DropFlag();
-        this.transform.position = flagSpawnTransform.position;
-        this.transform.rotation = flagSpawnTransform.rotation;
+        this.transform.position = flagSpawnPosition;
+        this.transform.rotation = flagSpawnRotation;
         c.isTrigger = true;
     }
 

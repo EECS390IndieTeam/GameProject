@@ -15,7 +15,7 @@ public class FlagCapturePoint : MonoBehaviour {
             Flag f = other.gameObject.GetComponent<Flag>();
             if (f != null)
             {
-                if(f.player.Team == teamID)
+                if(f.player != null && f.player.Team == teamID)
                 {
                     if(f.teamID == teamID)
                     {
