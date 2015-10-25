@@ -6,10 +6,12 @@ public class Cooldown : MonoBehaviour {
 	
 	public Slider cooldownSlider;
 	public GameObject gun;
+	public Color overheatColor;
 
 	Gun gunScript;
 	Image sliderFill;
 	Color fillColor;
+
 
 	float CooldownRate;
 
@@ -51,7 +53,7 @@ public class Cooldown : MonoBehaviour {
 		cooldownSlider.value = weaponTemp;
 		isOverheating = gunScript.IsOverheating;
 		if (isOverheating){
-			sliderFill.color = Color.red;
+			sliderFill.color = overheatColor;
 		} else {
 			sliderFill.color = fillColor;
 		}
