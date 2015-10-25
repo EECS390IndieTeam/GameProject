@@ -444,6 +444,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22452472}
+  - 114: {fileID: 11421350}
   m_Layer: 5
   m_Name: Grenades
   m_TagString: Untagged
@@ -1051,6 +1052,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11421350
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc79734fcbf06a4795b219706f60aa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCam: {fileID: 171062}
+  grenadeCount: 5
 --- !u!114 &11425260
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1548,7 +1562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a67e4c2742e517f46b4bbd17bb01dce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grenadeAmmo: 10
+  grenadeAmmo: 5
   ThrowForce: 1000
 --- !u!114 &11485398
 MonoBehaviour:
