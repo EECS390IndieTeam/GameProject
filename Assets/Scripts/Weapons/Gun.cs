@@ -25,7 +25,7 @@ public class Gun : MonoBehaviour, IWeapon
     public bool Automatic = false;
 
     public float MinDelayBetweenShots = 0.1f;
-    private float timeUntilNextShot = 0f;
+    //private float timeUntilNextShot = 0f;
     private float timeUntilCooldownBegins = 0f;
 
     public float Temperature {
@@ -41,9 +41,14 @@ public class Gun : MonoBehaviour, IWeapon
     public Transform SourceTransform;
     public Transform GunShotStartTransform;
 
+	private Vector3 endpoint;
+
+	private AbstractPlayer player;
+
     void Start() {
         IsOverheating = false;
         Temperature = 0f;
+		player = (AbstractPlayer)GameManager.instance.CurrentPlayer;
     }
 
     void Update()
@@ -60,59 +65,71 @@ public class Gun : MonoBehaviour, IWeapon
                 IsOverheating = false;
             }
         }
-        if (timeUntilNextShot > 0f) {
-            timeUntilNextShot = Mathf.Max(0f, timeUntilNextShot - Time.deltaTime);
-            return;
-        }
+//        if (timeUntilNextShot > 0f) {
+//            timeUntilNextShot = Mathf.Max(0f, timeUntilNextShot - Time.deltaTime);
+//            return;
+//        }
 		if (IsOverheating) {
 			return;
 		}
-        if (Automatic) {
-            if (Input.GetButton("Fire1")) {
-                Fire();
-            }
-        } else {
-            if (Input.GetButtonDown("Fire1")) {
-                Fire();
-            }
-        }
-
+		if (Input.GetButton ("Fire1")) {
+			player.LaserVisible = true;
+			Firing();
+		} else {
+			player.LaserVisible = false;
+		}
     }
 
-    public void Fire()
+	public void CreateShot() {
+		WeaponFireEvent evnt = WeaponFireEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.Unreliable);
+		evnt.EndPoint = endpoint;
+		evnt.StartPoint = GunShotStartTransform.position;
+		evnt.Color = Color.red;
+		evnt.Send();
+	}
+
+	public bool RefreshRaycast() {
+		if (Physics.Raycast(SourceTransform.position, SourceTransform.forward, out hitInfo, float.PositiveInfinity, shootableLayers))
+		{
+			Debug.Log("Hit " + hitInfo.transform.name);
+			endpoint = hitInfo.point;
+			return true;
+		}
+		else
+		{
+			endpoint = SourceTransform.position + SourceTransform.forward * 1000000.0f;
+			return false;
+		}
+	}
+
+	public IPlayer GetTarget() {
+			IPlayer hitplayer = hitInfo.transform.GetComponent<AbstractPlayer>();
+			if (hitplayer == null) hitplayer = hitInfo.transform.GetComponentInParent<AbstractPlayer>();
+			return hitplayer;
+	}
+
+    public void Firing()
     {
-        timeUntilNextShot = MinDelayBetweenShots;
+        //timeUntilNextShot = MinDelayBetweenShots;
         timeUntilCooldownBegins = CooldownDelay;
         Temperature+=HeatPerShot;
         if (Temperature >= MaxTemperature) {
             IsOverheating = true;
             Temperature = MaxTemperature;
         }
-        Vector3 endpoint;
-        if (Physics.Raycast(SourceTransform.position, SourceTransform.forward, out hitInfo, float.PositiveInfinity, shootableLayers))
-        {
-            Debug.Log("Hit " + hitInfo.transform.name);
-            endpoint = hitInfo.point;
-            IPlayer hitplayer = hitInfo.transform.GetComponent<AbstractPlayer>();
-            if (hitplayer == null) hitplayer = hitInfo.transform.GetComponentInParent<AbstractPlayer>();
+
+		if (RefreshRaycast()) {
+			IPlayer target = GetTarget();
+			
 			//Add in check for friendly fire here.
-            if (hitplayer != null)
-            {
-                hitplayer.TakeDamage(DamagePerShot, hitplayer.Username, -SourceTransform.forward, WeaponID);
-            }
-        }
-        else
-        {
-            endpoint = SourceTransform.position + SourceTransform.forward * 1000000.0f;
-        }
-
-        WeaponFireEvent evnt = WeaponFireEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.Unreliable);
-        evnt.EndPoint = endpoint;
-        evnt.StartPoint = GunShotStartTransform.position;
-        evnt.Color = Color.red;
-        evnt.Send();
-
-        Debug.DrawLine(SourceTransform.position, endpoint, Color.cyan, 0.5f);
+			if (target != null)
+			{
+				target.TakeDamage(DamagePerShot, target.Username, -SourceTransform.forward, WeaponID);
+			}
+		}
+		player.MuzzlePoint = GunShotStartTransform.position;
+		player.LaserEndpoint = endpoint;
+		player.LaserVisible = true;
     }
 
     //doing it this way allows these properties to be set in the editor
