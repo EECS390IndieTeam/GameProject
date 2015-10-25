@@ -16,7 +16,7 @@ public class WeaponShot : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
-		player = GameManager.instance.CurrentPlayer;
+		player = GetComponentInParent<IPlayer>();
 
         line = GetComponent<LineRenderer>();
         line.SetColors(BeamColor, BeamColor);
