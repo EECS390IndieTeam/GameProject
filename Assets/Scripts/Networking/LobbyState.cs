@@ -105,6 +105,7 @@ public class LobbyState : Bolt.EntityBehaviour<ILobbyObject> {
 
     public override void Attached() {
         GameManager.instance.Lobby = this;
+        if(BoltNetwork.isServer) ServerSideData.UpdateZeusData();
     }
 
     void OnGUI() {

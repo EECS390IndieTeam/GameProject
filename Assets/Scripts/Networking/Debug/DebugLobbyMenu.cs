@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DebugLobbyMenu : Bolt.GlobalEventListener {
 
-    private string tempPassword = ServerConnectionEventListener.ServerPassword;
+    private string tempPassword = ServerSideData.Password;
 
     private float width = 300f;
 
@@ -44,9 +44,10 @@ public class DebugLobbyMenu : Bolt.GlobalEventListener {
         tempPassword = GUILayout.TextField(tempPassword, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(false));
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
-        GUI.enabled = tempPassword != ServerConnectionEventListener.ServerPassword;
+        GUI.enabled = tempPassword != ServerSideData.Password;
         if (GUILayout.Button("Apply new Password")) {
-            ServerConnectionEventListener.ServerPassword = tempPassword;
+            ServerSideData.Password = tempPassword;
+            ServerSideData.UpdateZeusData();
         }
         GUI.enabled = true;
         GUILayout.EndHorizontal();

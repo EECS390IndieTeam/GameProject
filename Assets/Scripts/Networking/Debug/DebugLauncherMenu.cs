@@ -68,7 +68,7 @@ public class DebugLauncherMenu : MonoBehaviour {
     private void DrawServerSetupMenu() {
         FlexLabel("Server Setup");
         DrawFieldLine("Port", ref port);
-        DrawFieldLine("Lobby Password", ref ServerConnectionEventListener.ServerPassword);
+        DrawFieldLine("Lobby Password", ref ServerSideData.Password);
         DrawFieldLine("Username", ref GameManager.instance.CurrentUserName);
         GUILayout.BeginHorizontal();
         int parsedPort;

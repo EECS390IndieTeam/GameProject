@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
                 if(BoltNetwork.isServer) gameMode.OnGameStart();
                 break;
         }
+        if (BoltNetwork.isServer) ServerSideData.UpdateZeusData();
 	}
 
     public void CheckForGameOver() {

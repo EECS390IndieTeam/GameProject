@@ -59,7 +59,7 @@ MonoBehaviour:
   scopeModeHideWarningInGui: 0
   showHelpButtons: 1
   masterServerGameId: 09A20926-601A-4EF4-BFEE-374761B0D2A5
-  masterServerEndPoint: 79.99.6.136:24000
-  masterServerAutoConnect: 0
-  masterServerAutoDisconnect: 0
+  masterServerEndPoint: 54.152.15.157:24000
+  masterServerAutoConnect: 1
+  masterServerAutoDisconnect: 1
   showBoltEntityHints: 1

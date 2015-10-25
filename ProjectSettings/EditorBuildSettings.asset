@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/Scenes/lobby.unity
   - enabled: 1
     path: Assets/Scenes/ingame.unity
+  - enabled: 1
+    path: Assets/Scripts/Networking/Debug/DebugZeusScene.unity
