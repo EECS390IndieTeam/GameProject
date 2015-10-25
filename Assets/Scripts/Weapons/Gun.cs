@@ -41,10 +41,9 @@ public class Gun : MonoBehaviour, IWeapon
     public Transform SourceTransform;
     public Transform GunShotStartTransform;
 
-    private bool assist = false;
+    private bool assisting = false;
     private CustomMouseLook look;
     private float assistedSpeedMultiplier = 0.75f;
-    private float normalSpeedMultiplier = 1.0f;
 
     void Start() {
         IsOverheating = false;
@@ -55,16 +54,25 @@ public class Gun : MonoBehaviour, IWeapon
 
     void Update()
     {
-        // Aim assist
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Physics.Raycast(SourceTransform.position, SourceTransform.forward, out hitInfo, float.PositiveInfinity, shootableLayers))
         {
-            assist = !assist;
+            IPlayer hitplayer = hitInfo.transform.GetComponent<AbstractPlayer>();
+            if(hitplayer != null)
+            {
+                if (!assisting)
+                {
+                    AimAssist(hitplayer);
+                }
+            }
+            else
+            {
+                if (assisting)
+                {
+                    ResetAimAssist();
+                }
+            }
         }
-        if (assist && look != null)
-        {
-            AimAssist();
-            assist = !assist;
-        }
+
         DebugHUD.setValue("Gun temp", Temperature);
         DebugHUD.setValue("Gun overheated", IsOverheating);
 		if (timeUntilCooldownBegins > 0f){
@@ -132,16 +140,21 @@ public class Gun : MonoBehaviour, IWeapon
         Debug.DrawLine(SourceTransform.position, endpoint, Color.cyan, 0.5f);
     }
 
-    private void AimAssist()
+    private void AimAssist(IPlayer hitplayer)
     {
-        if(Physics.Raycast(SourceTransform.position, SourceTransform.forward, out hitInfo, float.PositiveInfinity, shootableLayers))
-        {
-            // IPlayer hitplayer = hitInfo.transform.GetComponent<AbstractPlayer>();
-            look.sensitivityX *= assistedSpeedMultiplier;
-            look.sensitivityY *= assistedSpeedMultiplier;
-            Debug.Log(look.sensitivityX);
-            Debug.Log(look.sensitivityY);
-        }
+       if(hitplayer != null)
+       {
+           look.sensitivityX *= assistedSpeedMultiplier;
+           look.sensitivityY *= assistedSpeedMultiplier;
+       }
+        assisting = true;
+    }
+
+    private void ResetAimAssist()
+    {
+        look.sensitivityX = look.sensitivityX / assistedSpeedMultiplier;
+        look.sensitivityY = look.sensitivityY / assistedSpeedMultiplier;
+        assisting = false;
     }
 
     //doing it this way allows these properties to be set in the editor
