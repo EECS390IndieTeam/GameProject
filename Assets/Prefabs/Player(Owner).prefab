@@ -1050,7 +1050,7 @@ MonoBehaviour:
   CooldownRate: 20
   CooldownDelay: .100000001
   MaxTemperature: 100
-  HeatPerShot: 0
+  HeatPerShot: 3
   DamagePerShot: 10
   OverheatedCooldownMultiplier: 1.5
   Automatic: 0
@@ -1328,7 +1328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownSlider: {fileID: 11445342}
-  gun: {fileID: 175590}
+  gunScript: {fileID: 11415526}
 --- !u!114 &11445342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1415,13 +1415,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 115780}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6900e899847024dfaa975edd861066bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownSlider: {fileID: 11445342}
-  gun: {fileID: 102286}
+  gunScript: {fileID: 11415526}
 --- !u!114 &11452740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1943,8 +1943,8 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions: []
   m_Parameters:
-    startWidth: .0500000007
-    endWidth: .0500000007
+    startWidth: .0199999996
+    endWidth: .100000001
     m_StartColor:
       serializedVersion: 2
       rgba: 4278190335
@@ -2675,6 +2675,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: MainCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: HeatPerShot
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Parameters.endWidth
+      value: .100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Parameters.startWidth
+      value: .0199999996
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -116,20 +116,21 @@ public class Gun : MonoBehaviour, IWeapon
         if (Temperature >= MaxTemperature) {
             IsOverheating = true;
             Temperature = MaxTemperature;
-        }
-
-		if (RefreshRaycast()) {
-			IPlayer target = GetTarget();
-			
-			//Add in check for friendly fire here.
-			if (target != null)
-			{
-				target.TakeDamage(DamagePerShot, target.Username, -SourceTransform.forward, WeaponID);
+			player.LaserVisible = false;
+        } else {
+			if (RefreshRaycast()) {
+				IPlayer target = GetTarget();
+				
+				//Add in check for friendly fire here.
+				if (target != null && target.Team != player.Team)
+				{
+					target.TakeDamage(DamagePerShot, target.Username, -SourceTransform.forward, WeaponID);
+				}
 			}
+			player.MuzzlePoint = GunShotStartTransform.position;
+			player.LaserEndpoint = endpoint;
+			player.LaserVisible = true;
 		}
-		player.MuzzlePoint = GunShotStartTransform.position;
-		player.LaserEndpoint = endpoint;
-		player.LaserVisible = true;
     }
 
     //doing it this way allows these properties to be set in the editor
