@@ -7,6 +7,7 @@ public class Cooldown : MonoBehaviour {
 	public Slider cooldownSlider;
 	public GameObject gun;
 	public Color overheatColor;
+	public Color normalColor;
 
 	Gun gunScript;
 	Image sliderFill;
