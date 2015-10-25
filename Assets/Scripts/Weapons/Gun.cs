@@ -48,8 +48,7 @@ public class Gun : MonoBehaviour, IWeapon
     private CustomMouseLook look;
     private float assistedSpeedMultiplier = 0.5f;
     private float marginOfError = 2.0f;
-
-    private WaitForSeconds w = new WaitForSeconds(2.0f);
+    
 	private Vector3 endpoint;
 
 	private AbstractPlayer player;
@@ -186,12 +185,13 @@ public class Gun : MonoBehaviour, IWeapon
 
     private IEnumerator MuzzleFlash()
     {
+        if (muzzleFlash.isPlaying)
+        {
+            muzzleFlash.Stop();
+        }
         muzzleFlash.startSize = 0.25f;
-        muzzleFlash.enableEmission = true;
         muzzleFlash.Play();
-        yield return w;
-        muzzleFlash.enableEmission = false;
-        muzzleFlash.Stop();
+        yield return new WaitForEndOfFrame();
     }
     //doing it this way allows these properties to be set in the editor
     float IWeapon.CooldownRate {
