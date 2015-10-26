@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
 
 public class FPSController : MonoBehaviour {
@@ -101,11 +102,16 @@ public class FPSController : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(character.position, cameraTransform.forward, out hit, grabDistance + GetComponent<SphereCollider>().radius, surfaceMovementMask) && !isAttachedToSurface)
         {
-            grappleGun.detach();
+
+            if (justFired)
+            {
+                grappleGun.detach();
+                justFired = false;
+            }
             Debug.Log("Attached to surface");
             sMovement.attachToSurface(hit);
             isAttachedToSurface = true;
-            
+
             
         }
 
