@@ -15,7 +15,7 @@ public class Gun : MonoBehaviour, IWeapon
     public float CooldownDelay = 0.1f;
     public float MaxTemperature = 100f;
 
-    public float HeatPerShot = 0f;
+    public float HeatPerShot = 3.0f;
     public float DamagePerShot = 10.0f;
     public float OverheatedCooldownMultiplier = 1.5f;
 
