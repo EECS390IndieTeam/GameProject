@@ -15,7 +15,7 @@ public class Gun : MonoBehaviour, IWeapon
     public float CooldownDelay = 0.1f;
     public float MaxTemperature = 100f;
 
-    public float HeatPerShot = 10.0f;
+    public float HeatPerShot = 0f;
     public float DamagePerShot = 10.0f;
     public float OverheatedCooldownMultiplier = 1.5f;
 
@@ -57,7 +57,6 @@ public class Gun : MonoBehaviour, IWeapon
         IsOverheating = false;
         Temperature = 0f;
         look = GetComponentInParent<CustomMouseLook>();
-        Debug.Log(look);
 		player = (AbstractPlayer)GameManager.instance.CurrentPlayer;
     }
 
@@ -99,6 +98,7 @@ public class Gun : MonoBehaviour, IWeapon
 //            return;
 //        }
 		if (IsOverheating) {
+			player.LaserVisible = false;
 			return;
 		}
 		if (Input.GetButton ("Fire1")) {
@@ -120,7 +120,6 @@ public class Gun : MonoBehaviour, IWeapon
 	public bool RefreshRaycast() {
 		if (Physics.Raycast(SourceTransform.position, SourceTransform.forward, out hitInfo, float.PositiveInfinity, shootableLayers))
 		{
-			Debug.Log("Hit " + hitInfo.transform.name);
 			endpoint = hitInfo.point;
 			return true;
 		}
@@ -141,8 +140,11 @@ public class Gun : MonoBehaviour, IWeapon
     {
         if(muzzleFlash != null)
         {
-            StartCoroutine(MuzzleFlash());
+            //StartCoroutine(MuzzleFlash());
+			muzzleFlash.Play();
+
         }
+		DebugHUD.setValue("muzzle flash", muzzleFlash.isPlaying);
 
         timeUntilCooldownBegins = CooldownDelay;
         Temperature+=HeatPerShot;

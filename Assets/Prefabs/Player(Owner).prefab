@@ -491,7 +491,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &175134
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -517,7 +517,6 @@ GameObject:
   - 33: {fileID: 3342402}
   - 23: {fileID: 2388138}
   - 95: {fileID: 9520508}
-  - 114: {fileID: 11488626}
   m_Layer: 8
   m_Name: Weapon
   m_TagString: Untagged
@@ -646,6 +645,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 438124}
+  - {fileID: 480238}
   - {fileID: 493600}
   - {fileID: 22450712}
   - {fileID: 22412418}
@@ -673,8 +673,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.00851000007, y: .00248000002, z: -.000769999984}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 480238}
+  m_Children: []
   m_Father: {fileID: 493600}
   m_RootOrder: 0
 --- !u!4 &448822
@@ -695,12 +694,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 175134}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: .0112986714, y: -.719251156, z: .0109109953, w: -.694572628}
+  m_LocalPosition: {x: .215246007, y: .41746074, z: .427496433}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
-  m_Father: {fileID: 444632}
-  m_RootOrder: 0
+  m_Father: {fileID: 417712}
+  m_RootOrder: 1
 --- !u!4 &493600
 Transform:
   m_ObjectHideFlags: 1
@@ -713,7 +712,7 @@ Transform:
   m_Children:
   - {fileID: 444632}
   m_Father: {fileID: 417712}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &499764
 Transform:
   m_ObjectHideFlags: 1
@@ -725,7 +724,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 417712}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!20 &2033310
 Camera:
   m_ObjectHideFlags: 1
@@ -1078,7 +1077,7 @@ MonoBehaviour:
   shootableLayers:
     serializedVersion: 2
     m_Bits: 513
-  muzzleFlash: {fileID: 0}
+  muzzleFlash: {fileID: 19819280}
   CooldownRate: 20
   CooldownDelay: .100000001
   MaxTemperature: 100
@@ -1088,7 +1087,7 @@ MonoBehaviour:
   Automatic: 0
   MinDelayBetweenShots: .100000001
   WeaponID: 0
-  SourceTransform: {fileID: 417712}
+  SourceTransform: {fileID: 438124}
   GunShotStartTransform: {fileID: 444632}
 --- !u!114 &11417270
 MonoBehaviour:
@@ -1863,32 +1862,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11488626
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 175590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0f379a04d46b804bbcb264755ab3276, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shootableLayers:
-    serializedVersion: 2
-    m_Bits: 1
-  muzzleFlash: {fileID: 19819280}
-  CooldownRate: 20
-  CooldownDelay: .100000001
-  MaxTemperature: 100
-  HeatPerShot: 10
-  DamagePerShot: 10
-  OverheatedCooldownMultiplier: 1.5
-  Automatic: 0
-  MinDelayBetweenShots: .100000001
-  WeaponID: 0
-  SourceTransform: {fileID: 417712}
-  GunShotStartTransform: {fileID: 444632}
 --- !u!114 &11492558
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2203,7 +2176,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294942720
+        rgba: 4278190335
       minMaxState: 0
     startSize:
       scalar: .25
@@ -3323,7 +3296,7 @@ RectTransform:
   m_LocalScale: {x: .00222287583, y: .00222287583, z: .0022228756}
   m_Children: []
   m_Father: {fileID: 417712}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 133.871094}
@@ -3524,7 +3497,7 @@ RectTransform:
   - {fileID: 22487154}
   - {fileID: 22481312}
   m_Father: {fileID: 417712}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
