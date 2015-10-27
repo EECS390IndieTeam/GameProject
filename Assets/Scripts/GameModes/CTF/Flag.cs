@@ -1,16 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Flag : MonoBehaviour {
+public class Flag : Bolt.EntityBehaviour<IFlagState> {
+    public bool isEnabled {
+        get {
+            return state.isEnabled;
+        }
+        set {
+            state.isEnabled = value;
+        }
+    }
 
     public int teamID; //The team that this flag belongs to
     public AbstractPlayer player; //The player holding this flag. Null if the flag is dropped.
     private Vector3 flagSpawnPosition;
 	private Quaternion flagSpawnRotation;
 	private float timeDelay = 3.0f;
-	private bool isEnabled = true;
     Collider c;
-	FlagState state;
+
+    public override void Attached() {
+        Debug.Log("Setting up a flag.");
+        Debug.Log(this.gameObject);
+        state.Transform.SetTransforms(this.transform);
+        isEnabled = true;
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -21,13 +34,22 @@ public class Flag : MonoBehaviour {
 	
     public void ReturnFlag()
     {
+        if (!BoltNetwork.isServer) return;
         DropFlag();
         this.transform.position = flagSpawnPosition;
         this.transform.rotation = flagSpawnRotation;
     }
 
+    
+
 	public void DropFlag(){
-		StartCoroutine ("DropFlagRoutine");
+        if (BoltNetwork.isServer) {
+            StartCoroutine("DropFlagRoutine");
+        } else {
+            FlagDroppedEvent evnt = FlagDroppedEvent.Create(Bolt.GlobalTargets.OnlyServer, Bolt.ReliabilityModes.ReliableOrdered);
+            evnt.Flag = entity;
+            evnt.Send();
+        }
 	}
 
     IEnumerator DropFlagRoutine()
@@ -35,6 +57,7 @@ public class Flag : MonoBehaviour {
 		transform.position += 2 * player.transform.forward;
 		player = null;
         this.transform.parent = null;
+        state.Holder = "";
 		yield return new WaitForSeconds(timeDelay);
 		Debug.Log ("Re-enabling flag");
         isEnabled = true;
@@ -42,7 +65,7 @@ public class Flag : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-		if (!isEnabled) {
+		if (!isEnabled || !BoltNetwork.isServer) {
 			return;
 		}
         AbstractPlayer p = other.gameObject.GetComponentInParent<AbstractPlayer>();
@@ -58,12 +81,13 @@ public class Flag : MonoBehaviour {
             //Update who is holding flag
             this.gameObject.transform.parent = other.gameObject.transform;
             player = p;
+            state.Holder = player.Username;
             isEnabled = false;
         }
     }
 
 	void Update(){
-		if (player != null) {
+		if (entity.isAttached && state.Holder == GameManager.instance.CurrentUserName) {
 			if(Input.GetButtonDown("Fire1")){
 				DropFlag();
 			}

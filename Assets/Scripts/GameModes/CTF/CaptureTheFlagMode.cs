@@ -67,7 +67,7 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
 			if(flags[f.teamID] == null){
 				flags[f.teamID] = f;
 				Debug.Log("Attaching flag for team: "+f.teamID);
-				BoltNetwork.Attach(f.gameObject);
+				//BoltNetwork.Attach(f.gameObject);
 			} else {
 				Debug.LogError("Flag Collision for team number: "+f.teamID);
 			}
