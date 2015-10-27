@@ -10,8 +10,8 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
     public int ScoreLimit = 3;
 
     //Hardcoded team limit here.
-	private Flag[] flags = new Flag[2];
-    private bool[] isFlagAtBase = new bool[2];
+	private Flag[] flags = new Flag[3];
+    private bool[] isFlagAtBase = new bool[3];
 
     public override GameModes Mode {
         get { return GameModes.CAPTURE_THE_FLAG; }
@@ -45,14 +45,7 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
         {
             isFlagAtBase[i] = true;
         }
-		Flag[] fgs = Object.FindObjectsOfType(typeof(Flag)) as Flag[];
-		foreach (Flag f in fgs) {
-			if(flags[f.teamID] == null){
-				flags[f.teamID] = f;
-			} else {
-				Debug.LogError("Flag Collision for team number: "+f.teamID);
-			}
-		}
+
     }
 
     public override bool GameOver() {
@@ -68,7 +61,18 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
         return false;
     }
 
-    public override void OnGameStart() {}
+    public override void OnGameStart() {
+		Flag[] fgs = Object.FindObjectsOfType(typeof(Flag)) as Flag[];
+		foreach (Flag f in fgs) {
+			if(flags[f.teamID] == null){
+				flags[f.teamID] = f;
+				Debug.Log("Attaching flag for team: "+f.teamID);
+				BoltNetwork.Attach(f.gameObject);
+			} else {
+				Debug.LogError("Flag Collision for team number: "+f.teamID);
+			}
+		}
+	}
 
     public override void OnGameEnd() {}
 

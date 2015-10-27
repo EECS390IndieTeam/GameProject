@@ -10,6 +10,7 @@ public class Flag : MonoBehaviour {
 	private float timeDelay = 3.0f;
 	private bool isEnabled = true;
     Collider c;
+	FlagState state;
 
 	// Use this for initialization
 	void Start () {
