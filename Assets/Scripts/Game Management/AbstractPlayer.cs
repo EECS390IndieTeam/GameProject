@@ -45,9 +45,13 @@ public abstract class AbstractPlayer : MonoBehaviour, IPlayer {
             state.SelectedWeapon = value;
         }
     }
-	public int Team {//TODO bolt stuff here
-		get;
-		protected set;
+	public int Team {
+        get {
+            return state.Team;
+        }
+        protected set {
+            state.Team = value;
+        }
 	}
 	public System.Collections.Generic.List<IWeapon> AvailableWeapons {
 		get;

@@ -10,6 +10,15 @@ public class PlayerState : Bolt.EntityBehaviour<IPlayerState> {
         private set;
     }
 
+    public int Team {
+        get {
+            return state.Team;
+        }
+        set { 
+            state.Team = value; 
+        }
+    }
+
     private Transform prefabTransform;
     
 
