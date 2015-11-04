@@ -99,8 +99,8 @@ public class Lobby : Bolt.GlobalEventListener {
 
     /// <summary>
     /// Gets the value of the given stat for the given player or pseudoplayer. If that player or pseudoplayer is not found
-    /// or the requested stat has not been created yet, an exception is thrown.  If the player or pseudoplayer does not 
-    /// have the requested stat, 0 is returned and a warning is logged.
+    /// or the requested stat has not been created yet, an exception is thrown.  If the stat has not been set for the given
+    /// player or pseudoplayer, the default value of zero is returned
     /// </summary>
     /// <param name="playerName"></param>
     /// <param name="stat"></param>
@@ -117,19 +117,13 @@ public class Lobby : Bolt.GlobalEventListener {
                 if (pseudoplayer.ContainsKey(statid)) {
                     return pseudoplayer[statid];
                 } else {
-                    Debug.LogWarning("Requested unknown stat \""+stat+"\" from pseudoplayer \""+playerName+"\"");
                     return 0;
                 }
             } else {
                 throw new Exception("Requested stat \"" + stat + "\" from unknown player \"" + playerName + "\"");
             }
         } else {
-            if (player.Stats.ContainsKey(statid)) {
-                return player.Stats[statid];
-            } else {
-                Debug.LogWarning("Requested unknown stat \"" + stat + "\" from player \"" + playerName + "\"");
-                return 0;
-            }
+            return player.GetStat(statid);
         }
     }
 
@@ -167,12 +161,75 @@ public class Lobby : Bolt.GlobalEventListener {
     }
 
     /// <summary>
+    /// Increments (or decrements) the given stat for the given player by the given amount.
+    /// Can only be called by the server.
+    /// An exception is thrown if the stat has not been created yet.
+    /// If the player could not be found, a new pseudoplayer is created.
+    /// </summary>
+    /// <param name="playername"></param>
+    /// <param name="statname"></param>
+    /// <param name="delta"></param>
+    public static void IncrementStatForPlayer(string playername, string statname, int delta) {
+        if (!BoltNetwork.isServer) throw new Exception("Only the server can set stats for players");
+        if (!StatCreated(statname)) {
+            throw new Exception("Tried to increment stat \"" + statname + "\" but it has not been created yet!");
+        }
+        byte stat = statNameMap[statname];
+        LobbyPlayer player = GetPlayer(playername);
+        int newval;
+        if (player == null) {
+            if (!pseudoplayers.ContainsKey(playername)) pseudoplayers.Add(playername, new Dictionary<byte, int>());
+            var pseudoplayer = pseudoplayers[playername];
+            if (!pseudoplayer.ContainsKey(stat)) {
+                newval = delta;
+            } else {
+                newval = pseudoplayer[stat] + delta;
+            }
+            pseudoplayer[stat] = newval;
+        } else {
+            newval = player.GetStat(stat) + delta;
+            player.SetStat(stat, newval);
+        }
+        //tell the clients!
+        StatUpdateEvent evnt = StatUpdateEvent.Create(Bolt.GlobalTargets.AllClients, Bolt.ReliabilityModes.ReliableOrdered);
+        StatUpdateToken token = new StatUpdateToken();
+        token.AddChange(playername, stat, newval);
+        evnt.Token = token;
+        evnt.Send();
+
+        Sort();
+        FireChangeEvent(LobbyChange.STAT_CHANGED);
+    }
+
+    /// <summary>
     /// returns true if the given stat has been created yet
     /// </summary>
     /// <param name="stat"></param>
     /// <returns></returns>
     public static bool StatCreated(string stat) {
         return statNameMap.ContainsKey(stat);
+    }
+
+    /// <summary>
+    /// Clears all stats from all players.
+    /// Removes all stats that have been created.
+    /// Removes all pseudoplayers.  
+    /// Only the server can do this.
+    /// </summary>
+    public static void ClearAllStats() {
+        if (!BoltNetwork.isServer) throw new Exception("Only the server can reset stats");
+        foreach (LobbyPlayer p in players) {
+            p.ClearStats();
+        }
+        statNameMap.Clear();
+        statNames.Clear();
+        pseudoplayers.Clear();
+        FullLobbyDataToken token = generateFullDataToken();
+        FullLobbyDataResponse evnt = FullLobbyDataResponse.Create(Bolt.GlobalTargets.AllClients, Bolt.ReliabilityModes.ReliableOrdered);
+        evnt.Token = token;
+        evnt.Send();
+        Sort();
+        FireChangeEvent(LobbyChange.ALL);
     }
 
     
@@ -280,13 +337,21 @@ public class Lobby : Bolt.GlobalEventListener {
     public static void SendFullDataToClient(BoltConnection connection) {
         if (!BoltNetwork.isServer) throw new Exception("Only the server can send out full lobby updates!");
         FullLobbyDataResponse evnt = FullLobbyDataResponse.Create(connection, Bolt.ReliabilityModes.ReliableOrdered);
+        evnt.Token = generateFullDataToken();
+        evnt.Send();
+    }
+
+    /// <summary>
+    /// Generates the token to be used for the FullLobbyDataResponse event
+    /// </summary>
+    /// <returns></returns>
+    private static FullLobbyDataToken generateFullDataToken() {
         FullLobbyDataToken token = new FullLobbyDataToken();
         token.players = players;
         token.pseudoplayers = pseudoplayers;
         token.StatList = new StatListToken();
         token.StatList.Names = statNames.ToArray();
-        evnt.Token = token;
-        evnt.Send();
+        return token;
     }
 
     /// <summary>
@@ -562,7 +627,16 @@ public class Lobby : Bolt.GlobalEventListener {
         }
 
         internal int GetStat(byte statid) {
+            if (!Stats.ContainsKey(statid)) return 0;
             return Stats[statid];
+        }
+
+        public int GetStat(string stat) {
+            return GetStat(statNameMap[stat]);
+        }
+
+        internal void ClearStats() {
+            Stats.Clear();
         }
     }
 

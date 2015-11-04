@@ -16,7 +16,6 @@ public class PlayerSyncEventListener : Bolt.GlobalEventListener {
     public override void SceneLoadLocalBegin(string map) {
         GameManager.instance.ChangeGameState(GameManager.GameState.PRE_GAME);
         DebugHUD.setValue("load state", "Loading scene");
-        FindObjectOfType<LobbyState>().HideDebugDraw = true;
         //display loading screen
     }
 
@@ -26,7 +25,7 @@ public class PlayerSyncEventListener : Bolt.GlobalEventListener {
         BoltEntity entity = BoltNetwork.Instantiate(BoltPrefabs.PlayerPrefab);
         PlayerState ps = entity.GetComponent<PlayerState>();
         ps.Name = GameManager.instance.CurrentUserName; //set their name
-        ps.Team = GameManager.instance.Lobby.GetTeamLookup()[GameManager.instance.CurrentUserName];
+        ps.Team = Lobby.GetPlayer(ps.Name).Team;
         if (!BoltNetwork.isServer) {
             entity.AssignControl(BoltNetwork.server);  //this line is completely useless and should be removed
         }

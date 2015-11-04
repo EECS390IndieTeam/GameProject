@@ -35,18 +35,12 @@ public class TeamDeathmatchMode : SimpleTeamGameMode {
     }
 
     public override void OnPreGame() {
-        GameStats.CreateNewIntegerStat("Kills");
+        Lobby.AddStat("Kills");
     }
 
     public override bool GameOver() {
-        IntegerStatTracker teamStat = GameStats.GetFullIntegerStat("Team");
-        IntegerStatTracker killStat = GameStats.GetFullIntegerStat("Kills");
-        int[] teamScores = new int[8];
-        for(int i = 0; i < ServerConnectionEventListener.IndexMap.PlayerCount; i++){
-            teamScores[teamStat[i]] += killStat[i];
-        }
-        for (int i = 0; i < teamScores.Length; i++) {
-            if (teamScores[i] >= ScoreLimit) return true;
+        for (int i = 0; i < 8; i++) {
+            if (Lobby.GetStatForPlayer(Lobby.PP_TEAMS[i], "Kills") >= ScoreLimit) return true;
         }
         return false;
     }
