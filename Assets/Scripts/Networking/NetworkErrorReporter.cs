@@ -1,16 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[BoltGlobalBehaviour(BoltNetworkModes.Client)]
-public class DebugErrorReporter : Bolt.GlobalEventListener {
+public class NetworkErrorReporter : Bolt.GlobalEventListener {
     const int windowHeight = 150;
     const int windowWidth = 300;
     string messageBody;
+    static NetworkErrorReporter instance = null;
 
     private bool messageDisplayed = false;
     private string title = "Error";
 
-
+    void Start() {
+        if (instance != null) DestroyImmediate(this.gameObject);
+        instance = this;
+        DontDestroyOnLoad(this);
+    }
 
 
     public override void BoltStartFailed() {
@@ -20,12 +24,18 @@ public class DebugErrorReporter : Bolt.GlobalEventListener {
     }
 
     public override void Disconnected(BoltConnection connection) {
+        if (BoltNetwork.isServer) return;
         if (connection.DisconnectToken != null && connection.DisconnectToken is DisconnectReason) {
             title = "Disconnected from server";
             DisconnectReason reason = (DisconnectReason)connection.DisconnectToken;
             messageBody = reason.Reason + (reason.Message == "" ? "" : ": " + reason.Message);
             messageDisplayed = true;
+        } else {
+            title = "Disconnected from server";
+            messageBody = "Connection closed";
+            messageDisplayed = true;
         }
+        Application.LoadLevel(0);
     }
 
     public override void ConnectRefused(UdpKit.UdpEndPoint endpoint, Bolt.IProtocolToken token) {

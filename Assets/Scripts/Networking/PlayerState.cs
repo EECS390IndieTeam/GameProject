@@ -10,6 +10,15 @@ public class PlayerState : Bolt.EntityBehaviour<IPlayerState> {
         private set;
     }
 
+    public int Team {
+        get {
+            return state.Team;
+        }
+        set { 
+            state.Team = value; 
+        }
+    }
+
     private Transform prefabTransform;
     
 
@@ -57,6 +66,33 @@ public class PlayerState : Bolt.EntityBehaviour<IPlayerState> {
             state.GrappleVisible = value;
         }
     }
+
+	public Vector3 LaserEndpoint {
+		get {
+			return state.LaserEndpoint;
+		}
+		set {
+			state.LaserEndpoint = value;
+		}
+	}
+
+	public bool LaserVisible {
+		get {
+			return state.LaserVisible;
+		}
+		set {
+			state.LaserVisible = value;
+		}
+	}
+
+	public Vector3 MuzzlePoint {
+		get {
+			return state.MuzzlePoint;
+		}
+		set {
+			state.MuzzlePoint = value;
+		}
+	}
 
     public override void Attached() {
         if (entity.isOwner) {

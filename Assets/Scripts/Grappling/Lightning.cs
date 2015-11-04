@@ -58,7 +58,7 @@ public class Lightning : MonoBehaviour {
 		lineRenderer.SetVertexCount(numPoints + 1);
 		//lineRenderer.SetVertexCount(2 * numPoints + 1);
 
-		Vector3 lineDirection = Vector3.Normalize(targetPoint - transform.position);
+		Vector3 lineDirection = Vector3.Normalize(targetPoint - centerPoint);
 
 		float stepSize = length / numPoints;
 
