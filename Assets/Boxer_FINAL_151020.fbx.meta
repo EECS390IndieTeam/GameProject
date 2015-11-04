@@ -1,17 +1,20 @@
 fileFormatVersion: 2
-guid: a15dfeeaf8fafa04298ea5e524be3681
-timeCreated: 1442469563
+guid: 5375079f85fcc1042b21eb69c7c90849
+timeCreated: 1446560014
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
-    100002: pCube1
+    100002: Modelrigged_0054RNfosterParent1
+    100004: RoadKillOut
     400000: //RootNode
-    400002: pCube1
-    2300000: pCube1
-    3300000: pCube1
-    4300000: pCube1
+    400002: Modelrigged_0054RNfosterParent1
+    400004: RoadKillOut
+    2300000: RoadKillOut
+    3300000: RoadKillOut
+    4300000: RoadKillOut
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -70,7 +73,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
