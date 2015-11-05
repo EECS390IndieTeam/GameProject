@@ -14,6 +14,7 @@ public class SurfaceMovement : MonoBehaviour {
     public float accelerationFactor;
     public float maxXSpeed;
     public float maxYSpeed;
+    public float pushMultiplier;
 
     public float grabDistance;
 
@@ -69,25 +70,29 @@ public class SurfaceMovement : MonoBehaviour {
 
         //Zero movement on axis if necessary
         //New velocity cancelling code.
-        zeroMovement(inputVector);
+        
         Vector3 moveFromLast = Vector3.ProjectOnPlane(worldSpaceVector, lastNormal);
-        if (movementSpeed < maxVelocity * maxVelocity)
+        //if (movementSpeed < maxVelocity * maxVelocity)
+        if (true)
         {
             RaycastHit hit;
             //Ok so we agree this works, this is the on a surface without extreme angles
-            if (Physics.SphereCast(character.position + (desiredSpeed * moveFromLast * Time.deltaTime), .1f, -lastNormal, out hit,
+            if (Physics.SphereCast(character.position + ((character.velocity * Time.fixedDeltaTime) + (desiredSpeed * moveFromLast * Time.deltaTime)),
+                .1f, -lastNormal, out hit,
                 grabDistance + character.GetComponent<SphereCollider>().radius, moveableLayers))
             {
+                zeroMovement(inputVector, hit.normal);
                 Vector3 moveVector = Vector3.ProjectOnPlane(worldSpaceVector, hit.normal);
                 if (Vector3.Dot(hit.normal, lastNormal) >= Mathf.Cos(5 * Mathf.Deg2Rad))
                 {
-                    character.AddForce(moveVector * desiredSpeed * Time.fixedDeltaTime * accelerationFactor, ForceMode.Impulse);
+                    character.AddForce(moveVector * desiredSpeed * Time.fixedDeltaTime * (accelerationFactor * (1 - (character.velocity.magnitude / maxVelocity))), ForceMode.Impulse);
                 }
                 else
                 {
-                   // Debug.Log("different normal from surface");
-                    character.AddForce(-character.velocity + Quaternion.AngleAxis(Vector3.Angle(lastNormal, hit.normal),
-                        Vector3.Cross(lastNormal, hit.normal)) * character.velocity, ForceMode.Impulse);
+                   Debug.Log("different normal from surface");
+                    //character.AddForce(-character.velocity + 
+                    //Quaternion.AngleAxis(Vector3.Angle(lastNormal, hit.normal),Vector3.Cross(lastNormal, hit.normal)) * character.velocity, ForceMode.Impulse);
+                    //character.AddForce(-character.velocity, ForceMode.Impulse);
                     character.AddForce(moveVector * desiredSpeed * Time.fixedDeltaTime * accelerationFactor, ForceMode.Impulse);
                 }
                 if (Vector3.Dot(hit.normal, lastNormal) < Mathf.Cos(90 * Mathf.Deg2Rad))
@@ -95,17 +100,19 @@ public class SurfaceMovement : MonoBehaviour {
                     lastNormal = hit.normal;
                     lastPoint = hit.point;
                 }
-
+                character.AddForce(-hit.normal.normalized * .1f, ForceMode.Impulse);
             }
 
             //This would handle transitions between surfaces and not allowing the player to go over the edge
             else
             {
-               // Debug.Log("Lost surface");
+                //zeroMovement(inputVector, lastNormal);
+                // Debug.Log("Lost surface");
 
                 //First handle not going off the edge, easy, just move in opposite of desired direction.
-                Vector3 moveVector = Vector3.ProjectOnPlane(lastPoint - character.position, lastNormal);
-                character.AddForce(-character.velocity + (.5f * moveVector), ForceMode.Impulse);
+                //Vector3 moveVector = Vector3.ProjectOnPlane(lastPoint - character.position, lastNormal);
+                Vector3 moveVector = lastPoint - character.position;
+                character.AddForce(character.velocity.magnitude * (moveVector.normalized) + .1f * moveVector.normalized, ForceMode.Impulse);
 
                 //Now deal with rounding corners. We're going to try a press button to move around corner approach.
                 //TODO: Use only the actual input system.
@@ -169,19 +176,19 @@ public class SurfaceMovement : MonoBehaviour {
     }
 
     //Stop character motion in each direction independently
-    private void zeroMovement(Vector2 inputVector)
+    private void zeroMovement(Vector2 inputVector, Vector3 normal)
     {
         if (Mathf.Abs(inputVector.x) < Mathf.Epsilon)
         {
             Vector3 xToWorld = pCamera.TransformDirection(1, 0, 0);
-            Vector3 xOnPlane = Vector3.ProjectOnPlane(xToWorld, lastNormal);
+            Vector3 xOnPlane = Vector3.ProjectOnPlane(xToWorld, normal).normalized;
             character.AddForce(Vector3.Project(-character.velocity, xOnPlane), ForceMode.Impulse);
         }
 
         if (Mathf.Abs(inputVector.y) < Mathf.Epsilon)
         {
             Vector3 yToWorld = pCamera.TransformDirection(0, 1, 0);
-            Vector3 yOnPlane = Vector3.ProjectOnPlane(yToWorld, lastNormal);
+            Vector3 yOnPlane = Vector3.ProjectOnPlane(yToWorld, normal).normalized;
             character.AddForce(Vector3.Project(-character.velocity, yOnPlane), ForceMode.Impulse);
         }
     }
@@ -250,14 +257,14 @@ public class SurfaceMovement : MonoBehaviour {
     }
 
     //Method that is called when first contact with a surface occurs
-    public void attachToSurface(RaycastHit hit)
+    public void attachToSurface(Collision hit)
     {
         attached = true;
         attachedSurface = hit.transform;
-        character.MovePosition(((hit.point - character.position) * .3f * Time.deltaTime) + character.position);
+        //character.AddForce((hit.contacts[0].point - character.position).normalized * .3f * Time.deltaTime);
         character.velocity = new Vector3(0, 0, 0);
-        lastNormal = hit.normal;
-        lastPoint = hit.point;
+        lastNormal = hit.contacts[0].normal;
+        lastPoint = hit.contacts[0].point;
     }
 
     //Method that is called when a surface is detached from
@@ -265,6 +272,12 @@ public class SurfaceMovement : MonoBehaviour {
     {
         attached = false;
         attachedSurface = null;
+    }
+
+    public void pushOff()
+    {
+        character.AddForce(lastNormal.normalized * pushMultiplier, ForceMode.Impulse);
+        detachFromSurface();
     }
 
     //Provides input from axes in one vector

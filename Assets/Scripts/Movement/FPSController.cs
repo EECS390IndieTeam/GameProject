@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
 
 public class FPSController : MonoBehaviour {
@@ -9,6 +10,7 @@ public class FPSController : MonoBehaviour {
     public float maxSurfaceSpeed = 24;
     public float maxXSpeedSurface = 8;
     public float maxYSpeedSurface = 8;
+    public float velocityQuantum;
 	public float rotationSpeed = 1;
 	public Transform muzzlePoint;
 
@@ -98,16 +100,21 @@ public class FPSController : MonoBehaviour {
     void FixedUpdate ()
     {
         //Debug.Log(isAttachedToSurface);
-        RaycastHit hit;
-        if (Physics.Raycast(character.position, cameraTransform.forward, out hit, grabDistance + GetComponent<SphereCollider>().radius, surfaceMovementMask) && !isAttachedToSurface)
-        {
-            grappleGun.detach();
-            Debug.Log("Attached to surface");
-            sMovement.attachToSurface(hit);
-            isAttachedToSurface = true;
+        //RaycastHit hit;
+        //if (Physics.Raycast(character.position, cameraTransform.forward, out hit, grabDistance + GetComponent<SphereCollider>().radius, surfaceMovementMask) && !isAttachedToSurface)
+        //{
+
+        //    if (justFired)
+        //    {
+        //        grappleGun.detach();
+        //        justFired = false;
+        //    }
+        //    Debug.Log("Attached to surface");
+        //    sMovement.attachToSurface(hit);
+        //    isAttachedToSurface = true;
+
             
-            
-        }
+        //}
 
 
         Vector2 input = GetInput();
@@ -118,14 +125,30 @@ public class FPSController : MonoBehaviour {
             {
                 Debug.Log("Detached from surface");
                 isAttachedToSurface = false;
-                sMovement.detachFromSurface();
+                sMovement.pushOff();
             } else
             {
-                sMovement.moveCharacter(input);
+                //sMovement.moveCharacter(input);
             }
         }
 
 		doPhysics();
+    }
+
+    void OnCollisionStay(Collision c)
+    {
+        if(c.collider.gameObject.layer == 0 && c.contacts.Length > 0 && (Input.GetKey(KeyCode.LeftShift) || character.velocity.magnitude < velocityQuantum) && !isAttachedToSurface)
+        {
+
+            if (justFired)
+            {
+                grappleGun.detach();
+                justFired = false;
+            }
+            Debug.Log("Attached to surface");
+            sMovement.attachToSurface(c);
+            isAttachedToSurface = true;
+        }
     }
 
 	private void doPhysics() {
