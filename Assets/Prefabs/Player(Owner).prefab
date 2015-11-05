@@ -1310,7 +1310,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beamSpeed: 400
   maxDistance: 199999996000
-  reelSpeed: 20
+  minDistance: 2
+  reelSpeed: 4.5
   stabilizer: 1.05499995
   maxReelMultiplier: 3
   grappleTo:
@@ -1555,6 +1556,7 @@ MonoBehaviour:
   accelerationFactor: 6
   maxXSpeed: 4
   maxYSpeed: 4
+  pushMultiplier: 500
   grabDistance: 1
   moveableLayers:
     serializedVersion: 2
@@ -1749,11 +1751,12 @@ MonoBehaviour:
   maxSurfaceSpeed: 24
   maxXSpeedSurface: 8
   maxYSpeedSurface: 8
+  velocityQuantum: .100000001
   rotationSpeed: 1
   muzzlePoint: {fileID: 444632}
   surfaceMovementMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 513
   cameraTransform: {fileID: 438124}
 --- !u!114 &11471288
 MonoBehaviour:
@@ -3859,7 +3862,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: surfaceMovementMask.m_Bits
-      value: 1
+      value: 513
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxVelocity
@@ -3892,6 +3895,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Parameters.startWidth
       value: .0199999996
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: velocityQuantum
+      value: .100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reelSpeed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: pushMultiplier
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

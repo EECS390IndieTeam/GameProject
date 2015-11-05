@@ -137,7 +137,7 @@ public class FPSController : MonoBehaviour {
 
     void OnCollisionStay(Collision c)
     {
-        if(c.collider.gameObject.layer == 0 && c.contacts.Length > 0 && (Input.GetKey(KeyCode.LeftShift) || character.velocity.magnitude < velocityQuantum) && !isAttachedToSurface)
+        if(c.collider.gameObject.layer == 9 && c.contacts.Length > 0 && (Input.GetKey(KeyCode.LeftShift) || character.velocity.magnitude < velocityQuantum) && !isAttachedToSurface)
         {
 
             if (justFired)
