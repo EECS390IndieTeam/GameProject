@@ -92,7 +92,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &117258
 GameObject:
   m_ObjectHideFlags: 1
@@ -388,7 +388,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 415994}
   - 33: {fileID: 3384094}
-  - 65: {fileID: 6533416}
   - 23: {fileID: 2319602}
   m_Layer: 4
   m_Name: Character Dot
@@ -901,7 +900,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967279
+    m_Bits: 4294967247
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -988,18 +987,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &6533416
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 160888}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!81 &8153196
 AudioListener:
   m_ObjectHideFlags: 1
@@ -1167,7 +1154,7 @@ MonoBehaviour:
   CooldownDelay: .100000001
   MaxTemperature: 100
   HeatPerShot: 3
-  DamagePerShot: 10
+  DamagePerShot: 100
   OverheatedCooldownMultiplier: 1.5
   Automatic: 0
   MinDelayBetweenShots: .100000001
@@ -1310,13 +1297,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beamSpeed: 400
   maxDistance: 199999996000
-  minDistance: 2
+  minDistance: 1
   reelSpeed: 4.5
   stabilizer: 1.05499995
   maxReelMultiplier: 3
   grappleTo:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 512
   grappleFireSound: {fileID: 0}
 --- !u!114 &11427660
 MonoBehaviour:
@@ -3314,7 +3301,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 2
   m_RenderMode: 1
-  m_Camera: {fileID: 2054388}
+  m_Camera: {fileID: 2033310}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
