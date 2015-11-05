@@ -18,7 +18,8 @@ public static class ServerSideData {
         token.GameMode = GameManager.instance.gameMode.GameModeName;
         token.MapName = "TEMP_NULL";
         token.MaxPlayerCount = (byte)GameManager.instance.gameMode.MaxPlayers;
-        token.PlayerCount = (byte)GameManager.instance.Lobby.PlayerCount;
+        //token.PlayerCount = (byte)GameManager.instance.Lobby.PlayerCount;
+        token.PlayerCount = (byte)Lobby.PlayerCount; //Lobby 2.0
         token.MOTD = MOTD;
         token.PasswordRequired = !string.IsNullOrEmpty(Password);
         token.ServerName = ServerName;

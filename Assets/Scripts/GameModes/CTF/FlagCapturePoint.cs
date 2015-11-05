@@ -32,16 +32,11 @@ public class FlagCapturePoint : MonoBehaviour {
                         if (mode.isFlagAtBaseForTeam(teamID))
                         {
                             //update scores
-                            if (ServerConnectionEventListener.IndexMap.ContainsPlayer(f.player.Username)) {
-                                int playerStatIndex = ServerConnectionEventListener.IndexMap[f.player.Username];
-                                GameStats.SetIntegerStat(playerStatIndex, "Flags", GameStats.GetIntegerStat(playerStatIndex, "Flags") + 1);
-                            }
-
-                            GameManager.instance.CheckForGameOver();
+                            Lobby.IncrementStatForPlayer(f.player.Username, "Flags", 1);
+                            Lobby.IncrementStatForPlayer(Lobby.PP_TEAMS[f.player.Team], "Flags", 1);
                             f.ReturnFlag();
                         }
                     }
-                    
                 }
             }
         }
