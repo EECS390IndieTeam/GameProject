@@ -19,6 +19,8 @@ public class GrappleGun : MonoBehaviour {
 
 	public LayerMask grappleTo;
 
+    public Transform firingPoint;
+
 	public AudioSource grappleFireSound;
 
 	private Lightning lightning;
@@ -50,17 +52,17 @@ public class GrappleGun : MonoBehaviour {
 
 	void LateUpdate() {
 		if (beamFiring) {
-			drawBeam (controller.character.position + (GrapplePhysics.anchor - controller.character.position) * beamSpeedTimer / GrapplePhysics.Length,
-			          controller.character.transform.position);
+			drawBeam (firingPoint.position + (GrapplePhysics.anchor - firingPoint.position) * beamSpeedTimer / GrapplePhysics.Length,
+			          firingPoint.position);
 		}
 
 		if (!beamFiring && controller.grappled) {
-			drawBeam(GrapplePhysics.anchor, controller.character.transform.position);
+			drawBeam(GrapplePhysics.anchor, firingPoint.position);
 		}
 	}
 
 	public void fire() {
-		Physics.Raycast(controller.cameraTransform.position, controller.cameraTransform.forward, out grappleHitInfo, maxDistance, grappleTo);
+		Physics.Raycast(firingPoint.position, controller.cameraTransform.forward, out grappleHitInfo, maxDistance, grappleTo);
 		if (grappleHitInfo.collider && !grappleHitInfo.collider.gameObject.GetComponent<Rigidbody>()) {
 			beamFiring = true;
 			lightning.enabled = true;
