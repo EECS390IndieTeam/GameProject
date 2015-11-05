@@ -243,10 +243,6 @@ public interface IGameMode {
     bool UsesTeams {
         get;
     }
-	IGameLevel level {
-		get;
-		set; //Not sure if we need to be able to set this or not.
-	}
     string GameModeName {
         get;
     }
@@ -266,11 +262,4 @@ public interface IGameMode {
     bool GameOver();
     void OnGameStart();
     void OnGameEnd();
-}
-	
-public interface IGameLevel {
-	string levelName {
-		get;
-	}
-	void loadGameLevel();
 }

@@ -21,15 +21,6 @@ public class FFADeathmatchMode : SimpleFFAGameMode {
         get { return 16; }
     }
 
-    public override IGameLevel level {
-        get {
-            throw new System.NotImplementedException();
-        }
-        set {
-            throw new System.NotImplementedException();
-        }
-    }
-
     public override string GameModeName {
         get { return "Deathmatch"; }
     }

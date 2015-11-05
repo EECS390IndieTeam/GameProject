@@ -25,15 +25,6 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
         get { return 16; }
     }
 
-    public override IGameLevel level {
-        get {
-            throw new System.NotImplementedException();
-        }
-        set {
-            throw new System.NotImplementedException();
-        }
-    }
-
     public override string GameModeName {
         get { return "Capture the Flag"; }
     }

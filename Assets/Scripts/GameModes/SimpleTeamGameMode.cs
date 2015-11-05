@@ -60,11 +60,6 @@ public abstract class SimpleTeamGameMode : IGameMode {
         get;
     }
 
-    public abstract IGameLevel level {
-        get;
-        set;
-    }
-
     public abstract string GameModeName {
         get;
     }

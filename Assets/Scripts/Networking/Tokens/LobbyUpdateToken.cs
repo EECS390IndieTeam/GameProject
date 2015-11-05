@@ -17,10 +17,10 @@ public class LobbyUpdateToken : Bolt.IProtocolToken {
                     Lobby.GetPlayer(c.Name).Name = (string)c.NewValue;
                     break;
                 case ChangeField.TEAM:
-                    Lobby.GetPlayer(c.Name).Team = (int)c.NewValue;
+                    Lobby.GetPlayer(c.Name).Team = Convert.ToInt32(c.NewValue);
                     break;
                 case ChangeField.STATUS:
-                    Lobby.GetPlayer(c.Name).flags = (byte)c.NewValue;
+                    Lobby.GetPlayer(c.Name).flags = Convert.ToByte(c.NewValue);
                     break;
                 default:
                     throw new Exception("Error: Invalid change requested in LobbyUpdateToken!");

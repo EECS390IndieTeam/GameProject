@@ -57,11 +57,6 @@ public abstract class SimpleFFAGameMode : IGameMode {
         get;
     }
 
-    public abstract IGameLevel level {
-        get;
-        set;
-    }
-
     public abstract string GameModeName {
         get;
     }

@@ -15,7 +15,6 @@ public class Lobby : Bolt.GlobalEventListener {
     //these "pseudoplayers" can be used to store global statistics
     private static Dictionary<string, Dictionary<byte, int>> pseudoplayers = new Dictionary<string, Dictionary<byte, int>>();
 
-
     /// <summary>
     /// returns the total number of players in the lobby
     /// </summary>
