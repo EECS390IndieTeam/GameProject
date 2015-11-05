@@ -5,10 +5,14 @@ using System.Collections;
 public class Cooldown : MonoBehaviour {
 	
 	public Slider cooldownSlider;
+	public GameObject gun;
+	public Color overheatColor;
+	public Color normalColor;
 
-	public Gun gunScript;
+	Gun gunScript;
 	Image sliderFill;
 	Color fillColor;
+
 
 	float CooldownRate;
 
@@ -30,6 +34,7 @@ public class Cooldown : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		gunScript = gun.GetComponent<Gun>();
 		cooldownSlider.maxValue = gunScript.MaxTemperature;
 		
 		cooldownSlider.value = 0;
@@ -49,7 +54,7 @@ public class Cooldown : MonoBehaviour {
 		cooldownSlider.value = weaponTemp;
 		isOverheating = gunScript.IsOverheating;
 		if (isOverheating){
-			sliderFill.color = Color.red;
+			sliderFill.color = overheatColor;
 		} else {
 			sliderFill.color = fillColor;
 		}
