@@ -14,6 +14,7 @@ public class SurfaceMovement : MonoBehaviour {
     public float accelerationFactor;
     public float maxXSpeed;
     public float maxYSpeed;
+    public float pushMultiplier;
 
     public float grabDistance;
 
@@ -256,14 +257,14 @@ public class SurfaceMovement : MonoBehaviour {
     }
 
     //Method that is called when first contact with a surface occurs
-    public void attachToSurface(RaycastHit hit)
+    public void attachToSurface(Collision hit)
     {
         attached = true;
         attachedSurface = hit.transform;
-        character.AddForce((hit.point - character.position).normalized * .3f * Time.deltaTime);
+        //character.AddForce((hit.contacts[0].point - character.position).normalized * .3f * Time.deltaTime);
         character.velocity = new Vector3(0, 0, 0);
-        lastNormal = hit.normal;
-        lastPoint = hit.point;
+        lastNormal = hit.contacts[0].normal;
+        lastPoint = hit.contacts[0].point;
     }
 
     //Method that is called when a surface is detached from
@@ -271,6 +272,12 @@ public class SurfaceMovement : MonoBehaviour {
     {
         attached = false;
         attachedSurface = null;
+    }
+
+    public void pushOff()
+    {
+        character.AddForce(lastNormal.normalized * pushMultiplier, ForceMode.Impulse);
+        detachFromSurface();
     }
 
     //Provides input from axes in one vector

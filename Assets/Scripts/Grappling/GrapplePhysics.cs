@@ -6,9 +6,10 @@ public static class GrapplePhysics {
 	public static Vector3 anchor;
 
 	// Length of the grapple line
-	public static float Length { set { length = value; sqrLength = length * length; } get { return length; } }
+	public static float Length { set { length = value; sqrLength = length * length; } get { return length ; } }
 	private static float length;
 	private static float sqrLength;             // for comparing with sqrMagnitude
+    public static float sqrDistance;
 
 	// The base speed with which the grapple pulls in the player in meters^2 per second
 	public static float reelSpeed = 15;
@@ -25,7 +26,7 @@ public static class GrapplePhysics {
 		Vector3 targetVelocity = velocity;
 
 		Vector3 grappleVector = anchor - position;
-		float sqrDistance = grappleVector.sqrMagnitude;
+		sqrDistance = grappleVector.sqrMagnitude;
 
 		// The player's velocity along the direction of the grapple line
 		Vector3 projectedVelocity = Math.project(velocity, grappleVector);
