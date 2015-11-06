@@ -42,6 +42,7 @@ public class Gun : MonoBehaviour, IWeapon
 
     public Transform SourceTransform;
     public Transform GunShotStartTransform;
+    public CrosshairScript crosshair;
 	
     private bool assisting = false;
     private Vector3 radius;
@@ -176,6 +177,7 @@ public class Gun : MonoBehaviour, IWeapon
            look.sensitivityY *= assistedSpeedMultiplier;
        }
         assisting = true;
+        crosshair.ToggleAimAssist(assisting);
     }
 
     private void ResetAimAssist()
@@ -183,6 +185,7 @@ public class Gun : MonoBehaviour, IWeapon
         look.sensitivityX = look.sensitivityX / assistedSpeedMultiplier;
         look.sensitivityY = look.sensitivityY / assistedSpeedMultiplier;
         assisting = false;
+        crosshair.ToggleAimAssist(assisting);
     }
 
     private IEnumerator MuzzleFlash()
