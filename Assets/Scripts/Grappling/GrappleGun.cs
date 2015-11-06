@@ -6,6 +6,9 @@ public class GrappleGun : MonoBehaviour {
 	[System.NonSerialized]
 	public FPSController controller;
 
+    public Transform hitEffect;
+    private Transform hitInstantiation;
+
 	public float beamSpeed = 1000;
 	private float beamSpeedTimer = 0;
 
@@ -71,6 +74,13 @@ public class GrappleGun : MonoBehaviour {
 			if (grappleFireSound) {
 				grappleFireSound.Play ();
 			}
+            if(hitInstantiation != null)
+            {
+                Destroy(hitInstantiation);
+            }
+
+            hitInstantiation = Instantiate(hitEffect) as Transform;
+            hitInstantiation.position = grappleHitInfo.point;
             ///NETWORKING///
             // for networking, we make the beam visible a bit earler than it actually becomes active.
             // this is so that, hopefully, by the time the other players can see it, the beam is now actually active.
