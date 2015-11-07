@@ -98,14 +98,8 @@ public class SetupGameMenuActions : MonoBehaviour
     {
         int port;
 
-        if (int.TryParse(this.portInputField.text, out port) &&
-            this.screenNameInputField.text.Length != 0)
-        {
-            this.launchButton.interactable = true;
-        }
-        else
-        {
-            this.launchButton.interactable = false;
-        }
+        this.launchButton.interactable
+            = (int.TryParse(this.portInputField.text, out port) &&
+            this.screenNameInputField.text.Length != 0);
     }
 }
