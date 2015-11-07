@@ -5233,6 +5233,7 @@ GameObject:
   - 114: {fileID: 854847385}
   - 114: {fileID: 854847384}
   - 114: {fileID: 854847388}
+  - 114: {fileID: 854847389}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -5308,6 +5309,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialCanvas: {fileID: 1846086754}
+--- !u!114 &854847389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 854847383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a1f5878dd8a1b4a829160d821d05d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 2800000, guid: cde36cf1a31c94ba6be54d93de7ea4e2, type: 3}
+  cursorMode: 0
+  hotSpot: {x: 74, y: 68}
 --- !u!1 &861740466
 GameObject:
   m_ObjectHideFlags: 0
