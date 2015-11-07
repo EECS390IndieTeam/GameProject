@@ -6,7 +6,6 @@ using System.Linq;
 /// An abstract IGameMode implemtation that handles the respawning for Team games
 /// </summary>
 public abstract class SimpleTeamGameMode : IGameMode {
-
     public bool UsesTeams {
         get { return true; }
     }
@@ -49,6 +48,10 @@ public abstract class SimpleTeamGameMode : IGameMode {
     }
 
     public abstract GameModes Mode {
+        get;
+    }
+
+    public abstract int MaxTeams {
         get;
     }
 

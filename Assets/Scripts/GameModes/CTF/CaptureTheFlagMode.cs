@@ -17,6 +17,9 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
         get { return GameModes.CAPTURE_THE_FLAG; }
     }
 
+    public override int MaxTeams {
+        get { return 2; }
+    }
     public override int MinPlayers {
         get { return 2; }
     }
@@ -40,19 +43,6 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
     }
 
     public override bool GameOver() {
-        //Lobby 1.0
-        //IntegerStatTracker teamStat = GameStats.GetFullIntegerStat("Team");
-        //IntegerStatTracker flagStat = GameStats.GetFullIntegerStat("Flags");
-        //int[] teamScores = new int[8];
-        //for(int i = 0; i < ServerConnectionEventListener.IndexMap.PlayerCount; i++){
-        //    teamScores[teamStat[i]] += flagStat[i];
-        //}
-        //for (int i = 0; i < teamScores.Length; i++) {
-        //    if (teamScores[i] >= ScoreLimit) return true;
-        //}
-        //return false;
-
-        //Lobby 2.0
         for (int i = 0; i < 8; i++) {//iterate through all teams
             //we store the team's total score in their team's default pseudoplayer
             if (Lobby.GetStatForPlayer(Lobby.PP_TEAMS[i], "Flags") >= ScoreLimit) return true;

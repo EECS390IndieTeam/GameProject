@@ -15,6 +15,30 @@ public class Lobby : Bolt.GlobalEventListener {
     //these "pseudoplayers" can be used to store global statistics
     private static Dictionary<string, Dictionary<byte, int>> pseudoplayers = new Dictionary<string, Dictionary<byte, int>>();
 
+    private static List<string> displayedStatNames = new List<string>();
+
+    /// <summary>
+    /// returns a list of stats that should be displayed on the in-game scoreboard;
+    /// </summary>
+    public IEnumerable<string> DisplayedStatNames {
+        get { return displayedStatNames.AsEnumerable(); }
+    }
+
+    /// <summary>
+    /// Adds the given stat to the in-game stat display screen.
+    /// SERVER ONLY
+    /// </summary>
+    /// <param name="statname"></param>
+    public static void DisplayStat(string statname) {
+        if (!BoltNetwork.isServer) throw new Exception("Only the server can add stats to display");
+        if (!StatCreated(statname)) throw new Exception("Tried to display a stat that does not exist!");
+        if (!displayedStatNames.Contains(statname)) {
+            displayedStatNames.Add(statname);
+
+        }
+    }
+
+
     /// <summary>
     /// returns the total number of players in the lobby
     /// </summary>
@@ -33,6 +57,9 @@ public class Lobby : Bolt.GlobalEventListener {
 
 
     private static string _GameModeName;
+    /// <summary>
+    /// Gets or sets the GameMode class name of the current game mode.  Only the server can set this value.  
+    /// </summary>
     public static string GameModeName {
         get {
             return _GameModeName;
@@ -59,6 +86,7 @@ public class Lobby : Bolt.GlobalEventListener {
             evnt.Name = value;
             evnt.Send();
             FireChangeEvent(LobbyChange.MAP_CHANGED);
+            
         }
     }
 
@@ -230,8 +258,6 @@ public class Lobby : Bolt.GlobalEventListener {
         Sort();
         FireChangeEvent(LobbyChange.ALL);
     }
-
-    
 
     public delegate void LobbyUpdated(LobbyChange change);
 

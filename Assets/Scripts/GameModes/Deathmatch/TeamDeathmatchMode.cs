@@ -7,6 +7,10 @@ using System.Linq;
 /// </summary>
 public class TeamDeathmatchMode : SimpleTeamGameMode {
 
+    public override int MaxTeams {
+        get { return 8; }
+    }
+
     public int ScoreLimit = 25;
 
     public override GameModes Mode {
