@@ -1,45 +1,78 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Pause menu script.
+/// </summary>
 public class PauseMenu : MonoBehaviour {
 
-	public Canvas pauseCanvas;
-	bool paused = false;
+    /// <summary>
+    /// The canvas of the pause menu.
+    /// </summary>
+    public Canvas pauseCanvas;
 
-	public GameObject crosshair;
+    /// <summary>
+    /// Is the game paused.
+    /// </summary>
+    private bool paused = false;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown ("escape")) {
-			if(paused == true){
-				pauseCanvas.enabled = false;
-				crosshair.SetActive(true);
-				Cursor.visible = false;
-				Screen.lockCursor = true;
-				paused = false;
-			} else {
-				pauseCanvas.enabled = true;
-				crosshair.SetActive(false);
-				Cursor.visible = true;
-				Screen.lockCursor = false;
-				paused = true;
-			}
-		}
-	}
+    /// <summary>
+    /// Fatal error encountered.
+    /// </summary>
+    private bool dead = false;
 
-	public void Resume () {
-		pauseCanvas.enabled = false;
-		Cursor.visible = false;
-		Screen.lockCursor = true;
-		paused = false;
-	}
+    /// <summary>
+    /// Gets or sets the pause menu state and cursor visibility for the game.
+    /// </summary>
+    public bool IsPaused
+    {
+        set
+        {
+            if (!this.dead)
+            {
+                pauseCanvas.enabled = value;
+                Cursor.visible = value;
+                Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
+                this.paused = value;
+            }
+        }
 
-	public void Quit () {
-		Application.LoadLevel ("MainMenu");
-	}
+        get
+        {
+            return this.paused;
+        }
+    }
+
+    /// <summary>
+    /// Quits 
+    /// </summary>
+	public void Quit ()
+    {
+        // Feel free to change this if it breaks like I think it will.
+        GameManager.instance.QuitToMainMenu();
+    }
+
+
+    /// <summary>
+    /// Run once per frame.
+    /// </summary>
+    void Update()
+    {
+        if (!this.dead && Input.GetKeyDown(KeyCode.Escape))
+        {
+            // Toggle paused.
+            this.IsPaused = !this.IsPaused;
+        }
+    }
+
+    /// <summary>
+    /// Check inputs before running.
+    /// </summary>
+    void Start()
+    {
+        if (this.pauseCanvas == null)
+        {
+            Debug.LogError("PauseMenu requires a PauseCanvas reference and it must be disabled initially.");
+            this.dead = true;
+        }
+    }
 }

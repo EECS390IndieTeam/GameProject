@@ -119,5 +119,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Jank-ASS disconnect network and go to MainMenu function.
+    /// </summary>
+    public void QuitToMainMenu()
+    {
+        // Disconnect network.
+        if (BoltNetwork.isRunning)
+        {
+            BoltLauncher.Shutdown();
+        }
 
+        Application.LoadLevel(BoltScenes.MainMenu);
+    }
 }
