@@ -18,6 +18,7 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     /// </summary>
     public void StartGame()
     {
+        Cursor.visible = false;
         BoltNetwork.LoadScene("ingame");
     }
 

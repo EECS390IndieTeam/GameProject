@@ -77,7 +77,10 @@ public class SetupGameMenuActions : MonoBehaviour
             GameManager.instance.CurrentUserName = this.screenNameInputField.text;
             GameManager.instance.gameMode = new TeamDeathmatchMode();
             ServerSideData.Password = this.lobbyPasswordInputField.text;
-            Cursor.visible = false;
+
+            // IMPORTANT: If you are planning on hiding the mouse cursor here, DON'T.
+            // There is another UI page after this one.
+
             if (BoltNetwork.isRunning && BoltNetwork.isClient)
             {
                 BoltLauncher.Shutdown();

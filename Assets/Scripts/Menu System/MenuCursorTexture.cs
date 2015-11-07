@@ -10,9 +10,20 @@ public class MenuCursorTexture : MonoBehaviour
     /// The texture to set to the cursor.
     /// </summary>
     public Texture2D cursorTexture;
+
+    /// <summary>
+    /// The cursor mode.
+    /// </summary>
     public CursorMode cursorMode = CursorMode.Auto;
+
+    /// <summary>
+    /// The cursor hotspot. The point in the cursor where the "point" is.
+    /// </summary>
     public Vector2 hotSpot = Vector2.zero;
 
+    /// <summary>
+    /// Run at Start of scene by Unity.
+    /// </summary>
     void Start()
     {
         // Check for a cursor texture.
