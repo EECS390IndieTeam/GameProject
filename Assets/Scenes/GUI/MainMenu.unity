@@ -97,6 +97,8 @@ GameObject:
   - 114: {fileID: 49688972}
   - 114: {fileID: 49688971}
   - 114: {fileID: 49688970}
+  - 222: {fileID: 49688975}
+  - 114: {fileID: 49688974}
   m_Layer: 5
   m_Name: ClientLobbyCanvas
   m_TagString: Untagged
@@ -133,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b011ead9533bc7b4bab1181c51ee4482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableWiggle: 1
+  enableWiggle: 0
   enableRotate: 1
   rotationVector: {x: 0, y: 0, z: 1}
   degreesPerSecond: 3
@@ -192,6 +194,39 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!114 &49688974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 49688968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &49688975
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 49688968}
 --- !u!1 &52157361
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,7 +386,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -476,7 +511,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -858,7 +893,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -1450,7 +1485,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -1844,7 +1879,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -2141,6 +2176,7 @@ GameObject:
   - 114: {fileID: 397869290}
   - 114: {fileID: 397869289}
   - 114: {fileID: 397869288}
+  - 222: {fileID: 397869292}
   m_Layer: 5
   m_Name: LauncherCanvas
   m_TagString: Untagged
@@ -2181,7 +2217,7 @@ MonoBehaviour:
   enableRotate: 1
   rotationVector: {x: 0, y: 0, z: 1}
   degreesPerSecond: 3
-  maxWiggleDegrees: 25
+  maxWiggleDegrees: 15
 --- !u!114 &397869289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2236,6 +2272,12 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!222 &397869292
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 397869286}
 --- !u!1 &404319217
 GameObject:
   m_ObjectHideFlags: 0
@@ -2448,6 +2490,8 @@ GameObject:
   - 114: {fileID: 437241163}
   - 114: {fileID: 437241162}
   - 114: {fileID: 437241161}
+  - 222: {fileID: 437241166}
+  - 114: {fileID: 437241165}
   m_Layer: 5
   m_Name: ServerLobbyCanvas
   m_TagString: Untagged
@@ -2484,7 +2528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b011ead9533bc7b4bab1181c51ee4482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableWiggle: 1
+  enableWiggle: 0
   enableRotate: 1
   rotationVector: {x: 0, y: 0, z: 1}
   degreesPerSecond: 3
@@ -2543,6 +2587,39 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!114 &437241165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 437241159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &437241166
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 437241159}
 --- !u!1 &472738744
 GameObject:
   m_ObjectHideFlags: 0
@@ -2600,7 +2677,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -3423,7 +3500,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -3871,7 +3948,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -3951,6 +4028,8 @@ GameObject:
   - 114: {fileID: 627002618}
   - 114: {fileID: 627002617}
   - 114: {fileID: 627002616}
+  - 222: {fileID: 627002622}
+  - 114: {fileID: 627002621}
   m_Layer: 5
   m_Name: HostGameCanvas
   m_TagString: Untagged
@@ -3969,7 +4048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b011ead9533bc7b4bab1181c51ee4482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableWiggle: 1
+  enableWiggle: 0
   enableRotate: 1
   rotationVector: {x: 0, y: 0, z: 1}
   degreesPerSecond: 3
@@ -4046,6 +4125,39 @@ RectTransform:
   m_AnchoredPosition: {x: 1370, y: -344}
   m_SizeDelta: {x: 800, y: 450}
   m_Pivot: {x: .5, y: .5}
+--- !u!114 &627002621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 627002615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &627002622
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 627002615}
 --- !u!1 &629614261
 GameObject:
   m_ObjectHideFlags: 0
@@ -4433,6 +4545,8 @@ GameObject:
   - 114: {fileID: 737460060}
   - 114: {fileID: 737460059}
   - 114: {fileID: 737460058}
+  - 222: {fileID: 737460063}
+  - 114: {fileID: 737460062}
   m_Layer: 5
   m_Name: MarketCanvas
   m_TagString: Untagged
@@ -4528,6 +4642,39 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!114 &737460062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 737460056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &737460063
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 737460056}
 --- !u!1 &747716175
 GameObject:
   m_ObjectHideFlags: 0
@@ -4977,7 +5124,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -5423,6 +5570,8 @@ GameObject:
   - 114: {fileID: 874565449}
   - 114: {fileID: 874565448}
   - 114: {fileID: 874565447}
+  - 222: {fileID: 874565453}
+  - 114: {fileID: 874565452}
   m_Layer: 5
   m_Name: JoinGameCanvas
   m_TagString: Untagged
@@ -5441,11 +5590,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b011ead9533bc7b4bab1181c51ee4482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableWiggle: 1
+  enableWiggle: 0
   enableRotate: 1
   rotationVector: {x: 0, y: 0, z: 1}
   degreesPerSecond: 3
-  maxWiggleDegrees: 25
+  maxWiggleDegrees: 15
 --- !u!114 &874565448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5518,6 +5667,39 @@ RectTransform:
   m_AnchoredPosition: {x: 2325, y: 649}
   m_SizeDelta: {x: 800, y: 450}
   m_Pivot: {x: .5, y: .5}
+--- !u!114 &874565452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 874565446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &874565453
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 874565446}
 --- !u!1001 &876458880
 Prefab:
   m_ObjectHideFlags: 0
@@ -5770,7 +5952,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -5878,7 +6060,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -6582,7 +6764,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -7221,7 +7403,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -7301,6 +7483,8 @@ GameObject:
   - 114: {fileID: 1230809107}
   - 114: {fileID: 1230809106}
   - 114: {fileID: 1230809105}
+  - 222: {fileID: 1230809111}
+  - 114: {fileID: 1230809110}
   m_Layer: 5
   m_Name: ConfirmBuyCanvas
   m_TagString: Untagged
@@ -7396,6 +7580,39 @@ RectTransform:
   m_AnchoredPosition: {x: 1410, y: -1397}
   m_SizeDelta: {x: 800, y: 450}
   m_Pivot: {x: .5, y: .5}
+--- !u!114 &1230809110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1230809104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1230809111
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1230809104}
 --- !u!1 &1232619964
 GameObject:
   m_ObjectHideFlags: 0
@@ -8496,7 +8713,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1347369269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 316, y: 148, z: -389}
+  m_LocalPosition: {x: 311, y: 148, z: -434}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8537,6 +8754,8 @@ GameObject:
   - 114: {fileID: 1350434163}
   - 114: {fileID: 1350434162}
   - 114: {fileID: 1350434165}
+  - 222: {fileID: 1350434167}
+  - 114: {fileID: 1350434166}
   m_Layer: 5
   m_Name: CreditsCanvas
   m_TagString: Untagged
@@ -8632,6 +8851,39 @@ MonoBehaviour:
   rotationVector: {x: 0, y: 0, z: 1}
   degreesPerSecond: 3
   maxWiggleDegrees: 25
+--- !u!114 &1350434166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1350434160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1350434167
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1350434160}
 --- !u!1 &1380029835
 GameObject:
   m_ObjectHideFlags: 0
@@ -8761,7 +9013,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -9210,7 +9462,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -9483,7 +9735,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -9606,6 +9858,8 @@ GameObject:
   - 114: {fileID: 1582639510}
   - 114: {fileID: 1582639509}
   - 114: {fileID: 1582639513}
+  - 222: {fileID: 1582639515}
+  - 114: {fileID: 1582639514}
   m_Layer: 5
   m_Name: SettingsCanvas
   m_TagString: Untagged
@@ -9696,11 +9950,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b011ead9533bc7b4bab1181c51ee4482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableWiggle: 1
+  enableWiggle: 0
   enableRotate: 1
   rotationVector: {x: 0, y: 0, z: 1}
   degreesPerSecond: 3
   maxWiggleDegrees: 25
+--- !u!114 &1582639514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1582639508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1582639515
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1582639508}
 --- !u!1 &1584215793
 GameObject:
   m_ObjectHideFlags: 0
@@ -9875,7 +10162,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -10146,7 +10433,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -10271,7 +10558,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -10515,7 +10802,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -11260,7 +11547,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -11385,7 +11672,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -11971,6 +12258,8 @@ GameObject:
   - 114: {fileID: 2040723120}
   - 114: {fileID: 2040723119}
   - 114: {fileID: 2040723118}
+  - 222: {fileID: 2040723123}
+  - 114: {fileID: 2040723122}
   m_Layer: 5
   m_Name: StoryCanvas
   m_TagString: Untagged
@@ -12066,6 +12355,39 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!114 &2040723122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2040723116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &2040723123
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2040723116}
 --- !u!1 &2041992176
 GameObject:
   m_ObjectHideFlags: 0
@@ -12123,7 +12445,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -12360,7 +12682,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
@@ -12666,7 +12988,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: .71034503, b: 1, a: 1}
     m_PressedColor: {r: .117241383, g: 0, b: 1, a: 1}
-    m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
+    m_DisabledColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: .501960814}
     m_ColorMultiplier: 5
     m_FadeDuration: .100000001
   m_SpriteState:
