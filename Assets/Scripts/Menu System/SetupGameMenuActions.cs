@@ -27,6 +27,11 @@ public class SetupGameMenuActions : MonoBehaviour
     public Button launchButton;
 
     /// <summary>
+    /// Default host port number.
+    /// </summary>
+    public int defaultPort = 54321;
+
+    /// <summary>
     /// Initial setup.
     /// </summary>
     void Start()
@@ -50,6 +55,9 @@ public class SetupGameMenuActions : MonoBehaviour
         {
             Debug.LogError("SetupGameMenuActions.launchButton cannot be null.");
         }
+
+        // Set default port number in input box.
+        this.portInputField.text = this.defaultPort.ToString();
 
         // Setup input validation. Deactivate launch button if the input values are bad.
         var validateAction = new UnityEngine.Events.UnityAction<string>((newValue) =>
