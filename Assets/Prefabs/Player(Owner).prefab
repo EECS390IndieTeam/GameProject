@@ -476,6 +476,7 @@ GameObject:
   - 225: {fileID: 22506448}
   - 114: {fileID: 11443784}
   - 114: {fileID: 11492868}
+  - 114: {fileID: 11466654}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -1650,6 +1651,28 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &11466654
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f72838734e6f545a019dc6b9a63a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerScore: {fileID: 11492558}
+  OpponentScore: {fileID: 11438850}
+  teamColors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: .921568632, b: .0156862754, a: 1}
+  - {r: 1, g: .460784316, b: .00784313772, a: 1}
+  - {r: 1, g: .5, b: .5, a: 1}
+  - {r: .5, g: 0, b: .5, a: 1}
 --- !u!114 &11469972
 MonoBehaviour:
   m_ObjectHideFlags: 1

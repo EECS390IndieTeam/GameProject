@@ -9,11 +9,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 443392}
   - 95: {fileID: 9506724}
-  - 136: {fileID: 13605896}
   - 114: {fileID: 11414640}
   - 135: {fileID: 13510716}
   - 114: {fileID: 11465666}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Flag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +27,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 457964}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: transform1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +42,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 468914}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +57,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 495986}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: group1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +72,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 420380}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: pasted__pPlane1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +87,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 485122}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: pCylinder3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,8 +102,24 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 449764}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: pasted__pCylinder1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &169526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 491954}
+  - 136: {fileID: 13633474}
+  m_Layer: 11
+  m_Name: FlagCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,7 +133,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 463020}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: transform2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +148,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 429992}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +163,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 456940}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: pCylinder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +178,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 495956}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: transform3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +193,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 467594}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: transform5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +210,7 @@ GameObject:
   - 4: {fileID: 446540}
   - 33: {fileID: 3306104}
   - 23: {fileID: 2357692}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: pCylinder4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +225,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 457522}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: transform4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,6 +274,7 @@ Transform:
   - {fileID: 456940}
   - {fileID: 485122}
   - {fileID: 446540}
+  - {fileID: 491954}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &446540
@@ -373,6 +389,18 @@ Transform:
   - {fileID: 467594}
   m_Father: {fileID: 443392}
   m_RootOrder: 4
+--- !u!4 &491954
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169526}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 443392}
+  m_RootOrder: 6
 --- !u!4 &495956
 Transform:
   m_ObjectHideFlags: 1
@@ -474,7 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: -36112512, guid: 5b00bf8b25851d440940a40ec23344f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneGuid: 
+  _sceneGuid: 3566cb0c-941c-4447-b890-553058fa080b
   _serializerGuid: b56740fb-ac32-4e1e-b416-6a8e6877f725
   _prefabId: 2
   _updateRate: 1
@@ -500,12 +528,12 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.52999997
   m_Center: {x: 0, y: 1.30999994, z: -.349999994}
---- !u!136 &13605896
+--- !u!136 &13633474
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 104248}
+  m_GameObject: {fileID: 169526}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

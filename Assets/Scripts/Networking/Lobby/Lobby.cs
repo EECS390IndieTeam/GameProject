@@ -147,7 +147,8 @@ public class Lobby : Bolt.GlobalEventListener {
                     return 0;
                 }
             } else {
-                throw new Exception("Requested stat \"" + stat + "\" from unknown player \"" + playerName + "\"");
+                //throw new Exception("Requested stat \"" + stat + "\" from unknown player \"" + playerName + "\"");
+                return 0;
             }
         } else {
             return player.GetStat(statid);
@@ -372,6 +373,8 @@ public class Lobby : Bolt.GlobalEventListener {
     /// <returns></returns>
     private static FullLobbyDataToken generateFullDataToken() {
         FullLobbyDataToken token = new FullLobbyDataToken();
+        token.GameModeName = GameModeName;
+        token.MapName = MapName;
         token.players = players;
         token.pseudoplayers = pseudoplayers;
         token.StatList = new StatListToken();
@@ -469,6 +472,9 @@ public class Lobby : Bolt.GlobalEventListener {
     public override void OnEvent(FullLobbyDataResponse evnt) {
         if (!BoltNetwork.isClient) return;
         FullLobbyDataToken token = evnt.Token as FullLobbyDataToken;
+        _MapName = token.MapName;
+        GameManager.instance.GameMode = GameModeManager.GetGameModeFromClassName(token.GameModeName);
+        _GameModeName = token.GameModeName;
         players = token.players;
         pseudoplayers = token.pseudoplayers;
         parseStatListToken(token.StatList);
