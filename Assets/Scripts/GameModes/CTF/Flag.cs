@@ -28,10 +28,10 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
 
 	// Use this for initialization
 	void Start () {
-		BoltNetwork.Attach (this.gameObject);
+		c = GetComponent<Collider>();
         flagSpawnPosition = transform.position;
 		flagSpawnRotation = transform.rotation;
-        c = GetComponent<Collider>();
+        
 	}
 	
     public void ReturnFlag()

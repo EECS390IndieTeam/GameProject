@@ -4,7 +4,13 @@ using System.Collections;
 [RequireComponent(typeof(Collider))]
 public class FlagCapturePoint : MonoBehaviour {
     void Awake() {
-        if (!BoltNetwork.isServer) enabled = false;
+        if (!BoltNetwork.isServer) {
+			enabled = false;
+		} else {
+			if(teamID == 1) BoltNetwork.Instantiate(BoltPrefabs.Flag1,transform.position, Quaternion.identity);
+			if(teamID == 2) BoltNetwork.Instantiate(BoltPrefabs.Flag2,transform.position, Quaternion.identity);
+
+		}
     }
     
     public int teamID; //Team who owns this capture point and can score points here
