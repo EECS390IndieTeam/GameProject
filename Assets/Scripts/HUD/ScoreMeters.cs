@@ -78,6 +78,10 @@ public class ScoreMeters : MonoBehaviour {
         }
     }
 
+    void OnDestroy() {
+        Lobby.LobbyUpdatedEvent -= Lobby_LobbyUpdatedEvent;
+    }
+
 
 
 

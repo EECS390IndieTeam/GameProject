@@ -6,6 +6,8 @@ public class FullLobbyDataToken : Bolt.IProtocolToken {
     public StatListToken StatList;
     public List<Lobby.LobbyPlayer> players = new List<Lobby.LobbyPlayer>();
     public Dictionary<string, Dictionary<byte, int>> pseudoplayers = new Dictionary<string, Dictionary<byte, int>>();
+    public string MapName;
+    public string GameModeName;
     
 
     public void Read(UdpPacket packet) {
@@ -15,6 +17,9 @@ public class FullLobbyDataToken : Bolt.IProtocolToken {
         for (int i = 0; i < count; i++) {
             players.Add(new Lobby.LobbyPlayer(packet));
         }
+
+        MapName = packet.ReadString();
+        GameModeName = packet.ReadString();
 
         //read the stat list
         StatList = new StatListToken();
@@ -38,6 +43,10 @@ public class FullLobbyDataToken : Bolt.IProtocolToken {
         foreach (Lobby.LobbyPlayer p in players) {
             p.Write(packet);
         }
+
+        packet.WriteString(MapName);
+        packet.WriteString(GameModeName);
+
         //write the statList
         if (StatList != null) StatList.Write(packet);
 
