@@ -24,14 +24,25 @@ public class Lobby : Bolt.GlobalEventListener {
         get { return displayedStatNames.AsEnumerable(); }
     }
 
-    /// <summary>
-    /// Adds the given stat to the in-game stat display screen.
-    /// SERVER ONLY
-    /// </summary>
-    /// <param name="statname"></param>
-    public static void DisplayStat(string statname) {
-        if (!BoltNetwork.isServer) throw new Exception("Only the server can add stats to display");
-        if (!StatCreated(statname)) throw new Exception("Tried to display a stat that does not exist!");
+	public static Color[] teamColors = {
+		Color.white,                               //team 0
+		Color.red,                                 //team 1
+		Color.blue,                                //team 2
+		Color.green,                               //team 3
+		Color.yellow,                              //team 4
+		Color.Lerp(Color.red,Color.yellow, 0.5f),  //team 5
+		Color.Lerp(Color.red, Color.white, 0.5f),  //team 6
+		Color.Lerp(Color.red, Color.blue, 0.5f)    //team 7
+	};
+	
+	/// <summary>
+	/// Adds the given stat to the in-game stat display screen.
+	/// SERVER ONLY
+	/// </summary>
+	/// <param name="statname"></param>
+	public static void DisplayStat(string statname) {
+		if (!BoltNetwork.isServer) throw new Exception("Only the server can add stats to display");
+		if (!StatCreated(statname)) throw new Exception("Tried to display a stat that does not exist!");
         if (!displayedStatNames.Contains(statname)) {
             displayedStatNames.Add(statname);
 

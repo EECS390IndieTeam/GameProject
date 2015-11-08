@@ -13,7 +13,7 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
 
     public int teamID; //The team that this flag belongs to
     public AbstractPlayer player; //The player holding this flag. Null if the flag is dropped.
-	public Material flagMaterial;
+	public MeshRenderer flagMaterial;
     private Vector3 flagSpawnPosition;
 	private Quaternion flagSpawnRotation;
 	private float timeDelay = 3.0f;
@@ -31,7 +31,7 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
 		c = GetComponent<Collider>();
         flagSpawnPosition = transform.position;
 		flagSpawnRotation = transform.rotation;
-        
+		SetFlagColor (Lobby.teamColors [teamID]);
 	}
 	
     public void ReturnFlag()
@@ -55,7 +55,7 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
 	}
 
 	public void SetFlagColor(Color c){
-		flagMaterial.SetColor ("_EmissionColor", c);
+		flagMaterial.materials [1].SetColor ("_EmissionColor", c);
 	}
 
     IEnumerator DropFlagRoutine()
