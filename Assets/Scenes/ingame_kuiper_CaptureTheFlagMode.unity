@@ -670,7 +670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0db6d48e93d9ab49932e0efd8b07283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 0
+  Team: 2
   UsableInTeamModes: 1
   UsableInFreeForAll: 0
   IsSpawnPoint: 1
@@ -716,7 +716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0db6d48e93d9ab49932e0efd8b07283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 0
+  Team: 2
   UsableInTeamModes: 1
   UsableInFreeForAll: 0
   IsSpawnPoint: 1
@@ -962,7 +962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0db6d48e93d9ab49932e0efd8b07283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 0
+  Team: 2
   UsableInTeamModes: 1
   UsableInFreeForAll: 0
   IsSpawnPoint: 1
@@ -1071,7 +1071,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c3cb100a93245fd9b8d5c33c0da6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Lobby: {fileID: 0}
   CurrentPlayerStatIndex: 0
 --- !u!4 &596852510
 Transform:
@@ -1182,7 +1181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0db6d48e93d9ab49932e0efd8b07283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 0
+  Team: 2
   UsableInTeamModes: 1
   UsableInFreeForAll: 0
   IsSpawnPoint: 1
@@ -1228,7 +1227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0db6d48e93d9ab49932e0efd8b07283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 0
+  Team: 2
   UsableInTeamModes: 1
   UsableInFreeForAll: 0
   IsSpawnPoint: 1
@@ -1320,7 +1319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0db6d48e93d9ab49932e0efd8b07283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 0
+  Team: 2
   UsableInTeamModes: 1
   UsableInFreeForAll: 0
   IsSpawnPoint: 1
@@ -1424,7 +1423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0db6d48e93d9ab49932e0efd8b07283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 0
+  Team: 2
   UsableInTeamModes: 1
   UsableInFreeForAll: 0
   IsSpawnPoint: 1
@@ -1585,7 +1584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0db6d48e93d9ab49932e0efd8b07283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 0
+  Team: 2
   UsableInTeamModes: 1
   UsableInFreeForAll: 0
   IsSpawnPoint: 1
@@ -1659,7 +1658,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1944730931}
   m_Layer: 0
-  m_Name: Team 0 start points
+  m_Name: Team 2 start points
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
