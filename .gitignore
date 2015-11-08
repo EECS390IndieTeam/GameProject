@@ -19,6 +19,7 @@ sysinfo.txt
 /*.user
 /*.unityproj
 /*.booproj
+/*.vs
  
 # ============ #
 # OS generated #
@@ -30,3 +31,7 @@ sysinfo.txt
 Icon?
 ehthumbs.db
 [Tt]humbs.db
+
+#BOLT
+Bolt_DebugStart_Build/
+DebugBuilds/
