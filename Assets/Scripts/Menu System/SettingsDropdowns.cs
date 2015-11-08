@@ -45,6 +45,6 @@ public class SettingsDropdowns : MonoBehaviour {
 	}
 
 	public void toggleFullscreen() {
-		Screen.SetResolution (Screen.height, Screen.width, !(Screen.fullScreen));
+		Screen.fullScreen = !(Screen.fullScreen);
 	}
 }
