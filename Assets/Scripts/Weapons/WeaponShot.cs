@@ -8,6 +8,7 @@ public class WeaponShot : MonoBehaviour {
     public AnimationCurve FadeCurve;
     public Vector3 EndPoint;
     public Vector3 StartPoint;
+	public AudioSource laserSound;
 
     private LineRenderer line;
     private float curFadeTime;
@@ -30,8 +31,13 @@ public class WeaponShot : MonoBehaviour {
 	void Update () {
 		DebugHUD.setValue("laser endpoint", player.LaserEndpoint);
 		line.enabled = player.LaserVisible;
-		line.SetPosition (0, player.MuzzlePoint);
-		line.SetPosition (1, player.LaserEndpoint);
+		if (line.enabled) {
+			if (!laserSound.isPlaying) laserSound.Play (); // audio source loops
+			line.SetPosition (0, player.MuzzlePoint);
+			line.SetPosition (1, player.LaserEndpoint);
+		} else {
+			if (laserSound.isPlaying) laserSound.Stop ();
+		}
 //        curFadeTime += Time.deltaTime;
 //        if(curFadeTime >= FadeTime){
 //            Destroy(this.gameObject);
