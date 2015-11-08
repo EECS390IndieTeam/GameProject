@@ -9,7 +9,7 @@ public class DebugLobbyMenu : Bolt.GlobalEventListener {
     private float width = 300f;
 
     private const int SERVER_MENU_LINE_COUNT = 7;
-    private const int CLIENT_MENU_LINE_COUNT = 3;
+    private const int CLIENT_MENU_LINE_COUNT = 5;
 
     private const float LINE_HEIGHT = 27.3f;
 
@@ -106,6 +106,17 @@ public class DebugLobbyMenu : Bolt.GlobalEventListener {
     }
 
     private void DrawClientMenu() {
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        IGameMode mode = GameManager.instance.GameMode;
+        GUILayout.Label("Mode: " + (mode != null ? mode.GameModeName : "-"));
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUILayout.Label("Map: " + Lobby.MapName);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
         DrawTeamChangeButtons();
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Disconnect")) {
