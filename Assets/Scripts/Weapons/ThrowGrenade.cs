@@ -8,6 +8,14 @@ public class ThrowGrenade : MonoBehaviour {
     public float ThrowForce = 10.0f;
 
     private Grenade heldGrenade;
+    private PlayerGrenades playerGrenades;
+
+    public GameObject grenades;
+
+    void Start() {
+        playerGrenades = grenades.GetComponent<PlayerGrenades>();
+        playerGrenades.updateUI(grenadeAmmo);
+    }
 
     void Update() {
         if (Input.GetButtonDown("Grenade") && heldGrenade == null && grenadeAmmo > 0) {
@@ -19,6 +27,9 @@ public class ThrowGrenade : MonoBehaviour {
             heldGrenade.transform.localScale = Vector3.one;
             heldGrenade.GetComponent<Rigidbody>().isKinematic = true;
             grenadeAmmo--;
+            playerGrenades.updateUI(grenadeAmmo);
+        } else if (Input.GetButtonDown("Grenade") && heldGrenade == null){
+            playerGrenades.noGrenades();
         }
         if (Input.GetButtonUp("Grenade") && heldGrenade != null) {
             Rigidbody rgb = heldGrenade.GetComponent<Rigidbody>();

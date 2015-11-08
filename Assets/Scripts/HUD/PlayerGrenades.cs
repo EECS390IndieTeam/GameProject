@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerGrenades : MonoBehaviour {
-	public GameObject playerCam;		//Grenade Throw is attached to the Camera
 	public int grenadeCount;
 
 	ThrowGrenade nadeScript;
@@ -11,61 +13,92 @@ public class PlayerGrenades : MonoBehaviour {
 	GameObject nade3;
 	GameObject nade4;
 	GameObject nade5;
+
+	GameObject border1;
+	GameObject border2;
+	GameObject border3;
+	GameObject border4;
+	GameObject border5;
+
+	public List<GameObject> grenades;
+	public List<GameObject> borders;
+
+	private List<Image> borderImages;
+
+	Color iconColor;
+	Color blueColor;
+
+	bool noGrenadesFlash;
+	public int noGrenadeFlashTime;
+
+	private float t;
+
 	// Use this for initialization
 	void Start () {
-		nadeScript = playerCam.GetComponent<ThrowGrenade> ();
 
-		nade1 = this.transform.Find("Grenade 1").gameObject;
-		nade2 = this.transform.Find("Grenade 2").gameObject;
-		nade3 = this.transform.Find("Grenade 3").gameObject;
-		nade4 = this.transform.Find("Grenade 4").gameObject;
-		nade5 = this.transform.Find("Grenade 5").gameObject;
+		t = 1;
+
+		noGrenadesFlash = false;
+
+		// nade1 = this.transform.Find("Grenade Center 1").gameObject;
+		// nade2 = this.transform.Find("Grenade Center 2").gameObject;
+		// nade3 = this.transform.Find("Grenade Center 3").gameObject;
+		// nade4 = this.transform.Find("Grenade Center 4").gameObject;
+		// nade5 = this.transform.Find("Grenade Center 5").gameObject;
+
+		iconColor = grenades.First().GetComponent<Image>().color;
+		blueColor = new Color(37f/255f, 153f/255f, 219f/255f, 1f);
+		Debug.Log(grenades.First().GetComponent<Image>().color);
+		borderImages = new List<Image>();
+		foreach (GameObject border in borders){
+			Image borderImage = border.GetComponent<Image>();
+			borderImage.color = blueColor;
+			borderImages.Add(borderImage);
+
+		}
+
+
+
+		// grenades = {nade1, nade2, nade3, nade4, nade5};
+		// this.borders = {border1, border2, border3, border4, border5};	
+
+		// iconColor = "#";
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		grenadeCount = nadeScript.grenadeAmmo;
-		if (grenadeCount < 1) {
-			nade1.SetActive(false);
-			nade2.SetActive(false);
-			nade3.SetActive(false);
-			nade4.SetActive(false);
-			nade5.SetActive(false);
+
+		Debug.Log("flash: " + noGrenadesFlash);
+		if (noGrenadesFlash){
+			foreach (Image borderImage in borderImages){
+				borderImage.color = Color.red;
+				
+			}
+			noGrenadesFlash = false;
+
+		} else {
+			foreach (Image borderImage in borderImages){
+				borderImage.color = Color.Lerp(blueColor, borderImage.color, .95f);
+
 		}
-		else if (grenadeCount < 2) {
-			nade1.SetActive(true);
-			nade2.SetActive(false);
-			nade3.SetActive(false);
-			nade4.SetActive(false);
-			nade5.SetActive(false);
 		}
-		else if (grenadeCount < 3) {
-			nade1.SetActive(true);
-			nade2.SetActive(true);
-			nade3.SetActive(false);
-			nade4.SetActive(false);
-			nade5.SetActive(false);
+	}
+
+	public void updateUI(int grenadeCount){
+		int i;
+		for (i = 0; i < grenadeCount; i++){
+			grenades.ElementAt(i).SetActive(true);
 		}
-		else if (grenadeCount < 4) {
-			nade1.SetActive(true);
-			nade2.SetActive(true);
-			nade3.SetActive(true);
-			nade4.SetActive(false);
-			nade5.SetActive(false);
+		for (i = i; i < 5; i++){
+			grenades.ElementAt(i).SetActive(false);
 		}
-		else if (grenadeCount < 5) {
-			nade1.SetActive(true);
-			nade2.SetActive(true);
-			nade3.SetActive(true);
-			nade4.SetActive(true);
-			nade5.SetActive(false);
-		}
-		else {
-			nade1.SetActive(true);
-			nade2.SetActive(true);
-			nade3.SetActive(true);
-			nade4.SetActive(true);
-			nade5.SetActive(true);
-		}
+
+		Debug.Log("updateUI called");
+		
+		
+	}
+	public void noGrenades(){
+		noGrenadesFlash = true;
+
 	}
 }

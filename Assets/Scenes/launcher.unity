@@ -124,14 +124,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 22405876, guid: b4ce5049c794c9f4997b34e899a6c735, type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22405876, guid: b4ce5049c794c9f4997b34e899a6c735, type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 22471870, guid: b4ce5049c794c9f4997b34e899a6c735, type: 2}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -140,34 +132,17 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11456950, guid: b4ce5049c794c9f4997b34e899a6c735, type: 2}
-      propertyPath: m_Color.r
-      value: 1
+    - target: {fileID: 22405876, guid: b4ce5049c794c9f4997b34e899a6c735, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11456950, guid: b4ce5049c794c9f4997b34e899a6c735, type: 2}
-      propertyPath: m_Color.g
-      value: 1
+    - target: {fileID: 22405876, guid: b4ce5049c794c9f4997b34e899a6c735, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11456950, guid: b4ce5049c794c9f4997b34e899a6c735, type: 2}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11456950, guid: b4ce5049c794c9f4997b34e899a6c735, type: 2}
-      propertyPath: m_Color.a
-      value: .521568656
-      objectReference: {fileID: 0}
-    - target: {fileID: 11456950, guid: b4ce5049c794c9f4997b34e899a6c735, type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f1ec0ba5e92dc44338ca85502bd9eff5,
-        type: 3}
-    - target: {fileID: 11456950, guid: b4ce5049c794c9f4997b34e899a6c735, type: 2}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11412604, guid: b4ce5049c794c9f4997b34e899a6c735, type: 2}
-      propertyPath: m_Value
-      value: 1
+    - target: {fileID: 11412906, guid: b4ce5049c794c9f4997b34e899a6c735, type: 2}
+      propertyPath: m_PreserveAspect
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4ce5049c794c9f4997b34e899a6c735, type: 2}
