@@ -127,7 +127,7 @@ public class Gun : MonoBehaviour, IWeapon
 		if (Physics.Raycast(SourceTransform.position, SourceTransform.forward, out hitInfo, float.PositiveInfinity, shootableLayers))
 		{
             firingPoints.Enqueue(hitInfo.point);
-            if(firingPoints.Count >= 3)
+            if(firingPoints.Count >= 2)
             {
                 endpoint = firingPoints.Dequeue();
             }
