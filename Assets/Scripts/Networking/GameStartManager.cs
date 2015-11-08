@@ -74,7 +74,7 @@ public class GameStartManager : Bolt.GlobalEventListener {
     }
 
     private void MoveAllPlayersToStartPoints() {
-        GameManager.instance.gameMode.MovePlayersToStartPoints(controlledPlayers);
+        GameManager.instance.GameMode.MovePlayersToStartPoints(controlledPlayers);
         Debug.Log("All Players moved to spawn points!");
     }
 

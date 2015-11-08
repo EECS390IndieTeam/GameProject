@@ -75,7 +75,7 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
 			return;
 		}
         AbstractPlayer p = other.gameObject.GetComponentInParent<AbstractPlayer>();
-        CaptureTheFlagMode mode = (CaptureTheFlagMode)GameManager.instance.gameMode;
+        CaptureTheFlagMode mode = (CaptureTheFlagMode)GameManager.instance.GameMode;
         //You can only pick up this flag if
         // - you are a player
         // - there is not already someone picking up this flag

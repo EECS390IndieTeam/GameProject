@@ -55,7 +55,7 @@ public class DebugLauncherMenu : MonoBehaviour {
                 break;
             case State.LAUNCH_SERVER:
                 if (BoltNetwork.isRunning) {
-                    GameManager.instance.gameMode = GameModeManager.GameModes[0];
+                    GameManager.instance.GameMode = GameModeManager.GameModes[0];
                     GameManager.instance.ChangeGameState(GameManager.GameState.LOBBY);
                     BoltNetwork.LoadScene(BoltScenes.lobby);
                 } else {

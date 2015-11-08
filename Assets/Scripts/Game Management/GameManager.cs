@@ -53,7 +53,17 @@ public class GameManager : MonoBehaviour
         get;
         private set;
     }
-    public IGameMode gameMode;
+
+    private IGameMode _GameMode;
+    public IGameMode GameMode {
+        get { return _GameMode; }
+        set {
+            _GameMode = value;
+            if (BoltNetwork.isServer) {
+                Lobby.GameModeName = value.GetType().Name;
+            }
+        }
+    }
 
     //the username of the current player
     [System.NonSerialized]
@@ -93,11 +103,11 @@ public class GameManager : MonoBehaviour
                 if (BoltNetwork.isServer) {
                     Lobby.RemoveAllDisconnectedPlayers();
                     Lobby.ClearAllStats();
-                    gameMode.OnPreGame();
+                    GameMode.OnPreGame();
                 }
                 break;
             case GameState.IN_GAME:
-                if(BoltNetwork.isServer) gameMode.OnGameStart();
+                if(BoltNetwork.isServer) GameMode.OnGameStart();
                 break;
         }
         if (BoltNetwork.isServer) ServerSideData.UpdateZeusData();
@@ -106,8 +116,8 @@ public class GameManager : MonoBehaviour
     public void CheckForGameOver() {
         if (!BoltNetwork.isServer) return;
         if (CurrentGameState != GameState.IN_GAME) return;
-        if (gameMode.GameOver()) {
-            gameMode.OnGameEnd();
+        if (GameMode.GameOver()) {
+            GameMode.OnGameEnd();
             CurrentGameState = GameState.POST_GAME;
             //more game over stuff here
         }

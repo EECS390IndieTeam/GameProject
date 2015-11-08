@@ -67,6 +67,10 @@ public abstract class SimpleTeamGameMode : IGameMode {
         get;
     }
 
+    public abstract string StatToDisplay {
+        get;
+    }
+
     public abstract void OnPreGame();
     public abstract bool GameOver();
     public abstract void OnGameStart();
