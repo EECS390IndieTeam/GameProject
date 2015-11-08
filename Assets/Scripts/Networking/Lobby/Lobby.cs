@@ -348,12 +348,19 @@ public class Lobby : Bolt.GlobalEventListener {
 
     /// <summary>
     /// Creates a new stat that can then be used for a player or pseudoplayer
+    /// Only the server can call this
     /// </summary>
     /// <param name="statName"></param>
     public static void AddStat(string statName) {
+        if (!BoltNetwork.isServer) return;
         int index = statNames.Count;
         statNames.Add(statName);
         statNameMap.Add(statName, (byte)index);
+        StatListUpdateEvent evnt = StatListUpdateEvent.Create(Bolt.GlobalTargets.AllClients, Bolt.ReliabilityModes.ReliableOrdered);
+        StatListToken token = new StatListToken();
+        token.Names = statNames.ToArray();
+        evnt.Token = token;
+        evnt.Send();
     }
 
     /// <summary>
