@@ -228,49 +228,5 @@ public interface IGrenade {
 
 }
 
-public interface IGameMode {
-
-    GameModes Mode {
-        get;
-    }
-
-    int MinPlayers {
-        get;
-    }
-    int MaxPlayers {
-        get;
-    }
-    bool UsesTeams {
-        get;
-    }
-	IGameLevel level {
-		get;
-		set; //Not sure if we need to be able to set this or not.
-	}
-    string GameModeName {
-        get;
-    }
-
-    /// <summary>
-    /// Moves the given list of players to start points
-    /// </summary>
-    /// <param name="players"></param>
-    void MovePlayersToStartPoints(List<IPlayer> players);
-    /// <summary>
-    /// Moves the given player to a spawn point
-    /// </summary>
-    /// <param name="player"></param>
-    void MovePlayerToSpawnPoint(IPlayer player);
-
-    void OnPreGame();
-    bool GameOver();
-    void OnGameStart();
-    void OnGameEnd();
-}
-	
-public interface IGameLevel {
-	string levelName {
-		get;
-	}
-	void loadGameLevel();
-}
+//IGameMode moved to Assets/Scripts/Game Modes/IGameMode.cs
+// -SM

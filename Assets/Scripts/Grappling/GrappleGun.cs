@@ -10,6 +10,7 @@ public class GrappleGun : MonoBehaviour {
 	private float beamSpeedTimer = 0;
 
 	public float maxDistance = 200f;
+    public float minDistance = 2.0f;
 
 	public float reelSpeed = 15f;
 	public float stabilizer = 1.1f;
@@ -37,6 +38,8 @@ public class GrappleGun : MonoBehaviour {
 	}
 
 	void Update() {
+        DebugHUD.setValue("Grappled", controller.grappled);
+
 		if (beamFiring) {
 			beamSpeedTimer += beamSpeed * Time.deltaTime;
 
@@ -46,6 +49,11 @@ public class GrappleGun : MonoBehaviour {
 				controller.grappled = true;
 			}
 		}
+        DebugHUD.setValue("Grapple Length", GrapplePhysics.sqrDistance);
+        if (controller.grappled && GrapplePhysics.sqrDistance != 0 && GrapplePhysics.sqrDistance <= minDistance * minDistance)
+        {
+            detach();
+        }
 	}
 
 	void LateUpdate() {
@@ -95,7 +103,7 @@ public class GrappleGun : MonoBehaviour {
 		beamFiring = false;
 		controller.grappled = false;
 		GrapplePhysics.reelMultiplier = 0;
-
+        GrapplePhysics.sqrDistance = 0;
 		lightning.enabled = false;
         player.GrappleVisible = false;
 	}

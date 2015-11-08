@@ -20,15 +20,8 @@ public class GameStartManager : Bolt.GlobalEventListener {
     //a list of all players who have given control of their PlayerEntity to the server
     private List<IPlayer> controlledPlayers = new List<IPlayer>();
 
-    //a reference to the LobbyState
-    private LobbyState lobby;
-
     //true if this script should run.  We can't just use enabled because then it won't recieve the Bolt events it needs to start
     private bool running = false;
-
-    void Start() {
-        lobby = FindObjectOfType<LobbyState>();
-    }
 
     public override void SceneLoadLocalDone(string map) {
         Begin();
@@ -57,7 +50,7 @@ public class GameStartManager : Bolt.GlobalEventListener {
         }
 
         //if all players have passed control back to the server
-        if(controlledPlayers.Count == lobby.PlayerCount){
+        if(controlledPlayers.Count == Lobby.PlayerCount){
             Finished();
             return;
         }
@@ -81,7 +74,7 @@ public class GameStartManager : Bolt.GlobalEventListener {
     }
 
     private void MoveAllPlayersToStartPoints() {
-        GameManager.instance.gameMode.MovePlayersToStartPoints(controlledPlayers);
+        GameManager.instance.GameMode.MovePlayersToStartPoints(controlledPlayers);
         Debug.Log("All Players moved to spawn points!");
     }
 

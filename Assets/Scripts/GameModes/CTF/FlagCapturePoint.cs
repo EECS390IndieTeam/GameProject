@@ -12,8 +12,8 @@ public class FlagCapturePoint : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         if (!BoltNetwork.isServer) return;
-        IGameMode currentGameMode = GameManager.instance.gameMode;
-        if(GameManager.instance.gameMode.Mode == GameModes.CAPTURE_THE_FLAG)
+        IGameMode currentGameMode = GameManager.instance.GameMode;
+        if(GameManager.instance.GameMode.Mode == GameModes.CAPTURE_THE_FLAG)
         {
             CaptureTheFlagMode mode = (CaptureTheFlagMode)currentGameMode;
             Flag f = other.gameObject.GetComponent<Flag>();
@@ -32,16 +32,11 @@ public class FlagCapturePoint : MonoBehaviour {
                         if (mode.isFlagAtBaseForTeam(teamID))
                         {
                             //update scores
-                            if (ServerConnectionEventListener.IndexMap.ContainsPlayer(f.player.Username)) {
-                                int playerStatIndex = ServerConnectionEventListener.IndexMap[f.player.Username];
-                                GameStats.SetIntegerStat(playerStatIndex, "Flags", GameStats.GetIntegerStat(playerStatIndex, "Flags") + 1);
-                            }
-
-                            GameManager.instance.CheckForGameOver();
+                            Lobby.IncrementStatForPlayer(f.player.Username, "Flags", 1);
+                            Lobby.IncrementStatForPlayer(Lobby.PP_TEAMS[f.player.Team], "Flags", 1);
                             f.ReturnFlag();
                         }
                     }
-                    
                 }
             }
         }

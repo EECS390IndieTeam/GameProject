@@ -48,12 +48,22 @@ public class GameManager : MonoBehaviour
 	}
 
 	private IPlayer Player;
-	public LobbyState Lobby;
+
     public GameState CurrentGameState {
         get;
         private set;
     }
-    public IGameMode gameMode;
+
+    private IGameMode _GameMode;
+    public IGameMode GameMode {
+        get { return _GameMode; }
+        set {
+            _GameMode = value;
+            if (BoltNetwork.isServer) {
+                Lobby.GameModeName = value.GetType().Name;
+            }
+        }
+    }
 
     //the username of the current player
     [System.NonSerialized]
@@ -74,37 +84,30 @@ public class GameManager : MonoBehaviour
 	{
 		//Set default game state
 		CurrentGameState = GameState.MENU;
+        Lobby.LobbyUpdatedEvent += LobbyUpdated;
 	}
+
+    /// <summary>
+    /// callback for lobby change events
+    /// </summary>
+    /// <param name="change"></param>
+    public void LobbyUpdated(Lobby.LobbyChange change) {
+        if(BoltNetwork.isServer) CheckForGameOver();
+    }
 
 	public void ChangeGameState (GameState state)
 	{
         CurrentGameState = state;
         switch (state) {
             case GameState.PRE_GAME:
-                GameStats.ClearAllStats();
-                
                 if (BoltNetwork.isServer) {
-                    CurrentPlayerStatIndex = ServerConnectionEventListener.IndexMap.GetIndexForPlayer(CurrentUserName);
-                    Debug.Log("CurrentPlayerStatIndex=" + CurrentPlayerStatIndex);
-                    GameStats.CreateNewStringStat("Player");
-                    var map = ServerConnectionEventListener.IndexMap;
-                    for (int i = 0; i < map.PlayerCount; i++) {
-                        GameStats.SetStringStat(i, "Player", map.GetPlayerNameForIndex(i));
-                    }
-                    if (gameMode.UsesTeams) {
-                        GameStats.CreateNewIntegerStat("Team");
-                        var lookup = Lobby.GetTeamLookup();
-                        foreach (var pair in lookup) {
-                            GameStats.SetIntegerStat(pair.Key, "Team", pair.Value);
-                        }
-                    }
-                    gameMode.OnPreGame();
-                } else {
-                    CurrentPlayerStatIndex = Lobby.GetStatIndexForPlayer(CurrentUserName);
+                    Lobby.RemoveAllDisconnectedPlayers();
+                    Lobby.ClearAllStats();
+                    GameMode.OnPreGame();
                 }
                 break;
             case GameState.IN_GAME:
-                if(BoltNetwork.isServer) gameMode.OnGameStart();
+                if(BoltNetwork.isServer) GameMode.OnGameStart();
                 break;
         }
         if (BoltNetwork.isServer) ServerSideData.UpdateZeusData();
@@ -112,8 +115,9 @@ public class GameManager : MonoBehaviour
 
     public void CheckForGameOver() {
         if (!BoltNetwork.isServer) return;
-        if (gameMode.GameOver()) {
-            gameMode.OnGameEnd();
+        if (CurrentGameState != GameState.IN_GAME) return;
+        if (GameMode.GameOver()) {
+            GameMode.OnGameEnd();
             CurrentGameState = GameState.POST_GAME;
             //more game over stuff here
         }

@@ -147,7 +147,7 @@ public class Gun : MonoBehaviour, IWeapon
 		DebugHUD.setValue("muzzle flash", muzzleFlash.isPlaying);
 
         timeUntilCooldownBegins = CooldownDelay;
-        Temperature+=HeatPerShot;
+        Temperature += HeatPerShot * Time.deltaTime;
         if (Temperature >= MaxTemperature) {
             IsOverheating = true;
             Temperature = MaxTemperature;
