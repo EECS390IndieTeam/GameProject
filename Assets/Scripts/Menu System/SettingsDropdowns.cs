@@ -19,7 +19,7 @@ public class SettingsDropdowns : MonoBehaviour {
 				setDropdownLabelText(resolutionDropdown, "Resolution");
 			});
 		}
-		string[] names = QualitySettings.names;;
+		string[] names = QualitySettings.names;
 		qualityDropdown.options.Clear ();
 		setDropdownLabelText(qualityDropdown, "Quality");
 		for (int i = 0; i < names.Length; i++) {
