@@ -31,7 +31,6 @@ public class FPSController : MonoBehaviour {
 
 	[System.NonSerialized]
 	public bool grappled = false;
-	private bool justFired = false;
 
 
 	// Use this for initialization
@@ -45,7 +44,6 @@ public class FPSController : MonoBehaviour {
         grappleGun = GetComponent<GrappleGun>();
 		if (grappleGun) grappleGun.controller = this;
 		grappled = false;
-		justFired = false;
 	}
 	
 	// Update is called once per frame
@@ -73,7 +71,7 @@ public class FPSController : MonoBehaviour {
 			debounce = 0;
 		}
 		
-		if (Input.GetButtonDown("Fire2") && !justFired && debounce == 0) {
+		if (Input.GetButtonDown("Fire2") && !(grappled || grappleGun.beamFiring) && debounce == 0) {
 			grappleGun.fire();
             if (isAttachedToSurface) {
                 Debug.Log("Detached from surface");
@@ -82,13 +80,11 @@ public class FPSController : MonoBehaviour {
             }
             
 			debounce = debounceTime;
-			justFired = true;
 		}
 		
-		if (Input.GetButtonDown("Fire2") && justFired && debounce == 0) {
+		if (Input.GetButtonDown("Fire2") && (grappled || grappleGun.beamFiring) && debounce == 0) {
 			grappleGun.detach();
 			debounce = debounceTime;
-			justFired = false;
 		}
 
 		if (Input.GetButtonDown("Jump") && grappled) {
@@ -139,10 +135,9 @@ public class FPSController : MonoBehaviour {
         if(c.collider.gameObject.layer == 9 && c.contacts.Length > 0 && (Input.GetKey(KeyCode.LeftShift) || character.velocity.magnitude < velocityQuantum) && !isAttachedToSurface)
         {
 
-            if (justFired)
+            if (grappled)
             {
                 grappleGun.detach();
-                justFired = false;
             }
             Debug.Log("Attached to surface");
             sMovement.attachToSurface(c);

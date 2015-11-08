@@ -21,12 +21,15 @@ public class GrappleGun : MonoBehaviour {
 	public LayerMask grappleTo;
 
 	public AudioSource grappleFireSound;
+	public AudioSource grappleOnSound;
+	public AudioSource grappleDetachSound;
 
 	private Lightning lightning;
 
     private AbstractPlayer player;
 
-	private bool beamFiring = false;
+	[System.NonSerialized]
+	public bool beamFiring = false;
 
 	void Start() {
 		lightning = GetComponent<Lightning>();
@@ -77,6 +80,9 @@ public class GrappleGun : MonoBehaviour {
 			if (grappleFireSound) {
 				grappleFireSound.Play ();
 			}
+			if (grappleOnSound) {
+				grappleOnSound.Play (); // audio source loops
+			}
             ///NETWORKING///
             // for networking, we make the beam visible a bit earler than it actually becomes active.
             // this is so that, hopefully, by the time the other players can see it, the beam is now actually active.
@@ -102,6 +108,12 @@ public class GrappleGun : MonoBehaviour {
 	public void detach() {
 		beamFiring = false;
 		controller.grappled = false;
+		if (grappleOnSound) {
+			grappleOnSound.Stop (); // audio source loops
+		}
+		if (grappleDetachSound) {
+			grappleDetachSound.Play ();
+		}
 		GrapplePhysics.reelMultiplier = 0;
         GrapplePhysics.sqrDistance = 0;
 		lightning.enabled = false;
