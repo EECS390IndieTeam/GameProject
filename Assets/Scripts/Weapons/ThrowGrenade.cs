@@ -7,6 +7,8 @@ public class ThrowGrenade : MonoBehaviour {
 
     public float ThrowForce = 10.0f;
 
+	public AudioSource grenadeThrow;
+
     private Grenade heldGrenade;
 
     void Update() {
@@ -23,6 +25,7 @@ public class ThrowGrenade : MonoBehaviour {
         if (Input.GetButtonUp("Grenade") && heldGrenade != null) {
             Rigidbody rgb = heldGrenade.GetComponent<Rigidbody>();
             rgb.isKinematic = false;
+			if (grenadeThrow) grenadeThrow.Play ();
             rgb.AddForce(transform.forward * ThrowForce);
             heldGrenade.transform.parent = null;
             heldGrenade.GetComponent<Collider>().enabled = true;

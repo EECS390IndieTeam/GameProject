@@ -56,7 +56,8 @@ public class Grenade : Bolt.EntityBehaviour<IGrenadeState>, IGrenade
 			i++;
 		}
 		//--------Put in something here to create an explosion particle effect------------
-        //OK, I will, here goes:
+		//OK, I will, here goes:
+
         ExplosionEvent evnt = ExplosionEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.Unreliable);
         evnt.Position = transform.position;
         evnt.Send();
