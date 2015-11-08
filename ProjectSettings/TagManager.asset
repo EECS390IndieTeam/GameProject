@@ -16,8 +16,8 @@ TagManager:
   - Player
   - Level
   - Base
-  - Flag
-  - 
+  - Flag_Collider
+  - Flag_Trigger
   - 
   - 
   - 

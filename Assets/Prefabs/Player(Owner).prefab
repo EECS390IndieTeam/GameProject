@@ -958,6 +958,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c205ba3935581e489b21a8439c469a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Color: {r: 0, g: 0, b: 0, a: 0}
+  Fog: 0
+  QualityLevel: 1
 --- !u!114 &11404950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1024,7 +1027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e0a424e4e79ee4ba8ee32ffe8e20bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HandPoint: {fileID: 0}
+  HandPoint: {fileID: 405900}
 --- !u!114 &11412604
 MonoBehaviour:
   m_ObjectHideFlags: 1
