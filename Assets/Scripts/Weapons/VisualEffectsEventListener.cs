@@ -4,6 +4,7 @@ using System.Collections;
 public class VisualEffectsEventListener : Bolt.GlobalEventListener {
     public GameObject WeaponFirePrefab;
     public GameObject ExplosionPrefab;
+	public AudioSource explosionSound;
 
 
     public override void OnEvent(WeaponFireEvent evnt) {
@@ -18,6 +19,7 @@ public class VisualEffectsEventListener : Bolt.GlobalEventListener {
     public override void OnEvent(ExplosionEvent evnt) {
         GameObject prefab = Instantiate(ExplosionPrefab);
         prefab.transform.position = evnt.Position;
+		explosionSound.Play();
         Destroy(prefab, 10f);
     }
 }
