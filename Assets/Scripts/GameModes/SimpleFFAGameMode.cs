@@ -11,6 +11,10 @@ public abstract class SimpleFFAGameMode : IGameMode {
         get { return false; }
     }
 
+    public int MaxTeams {
+        get { return 1; }
+    }
+
     public void MovePlayersToStartPoints(List<IPlayer> players) {
         Debug.Log("Moving " + players.Count + " players to their spawn points");
         SpawnPointManager mgr = SpawnPointManager.instance;
@@ -57,12 +61,11 @@ public abstract class SimpleFFAGameMode : IGameMode {
         get;
     }
 
-    public abstract IGameLevel level {
+    public abstract string GameModeName {
         get;
-        set;
     }
 
-    public abstract string GameModeName {
+    public abstract string StatToDisplay {
         get;
     }
 

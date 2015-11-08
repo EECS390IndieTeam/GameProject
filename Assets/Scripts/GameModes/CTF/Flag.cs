@@ -13,6 +13,7 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
 
     public int teamID; //The team that this flag belongs to
     public AbstractPlayer player; //The player holding this flag. Null if the flag is dropped.
+	public Material flagMaterial;
     private Vector3 flagSpawnPosition;
 	private Quaternion flagSpawnRotation;
 	private float timeDelay = 3.0f;
@@ -52,6 +53,10 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
         }
 	}
 
+	public void SetFlagColor(Color c){
+		flagMaterial.SetColor ("_EmissionColor", c);
+	}
+
     IEnumerator DropFlagRoutine()
     {
 		transform.position += 2 * player.transform.forward;
@@ -69,7 +74,7 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
 			return;
 		}
         AbstractPlayer p = other.gameObject.GetComponentInParent<AbstractPlayer>();
-        CaptureTheFlagMode mode = (CaptureTheFlagMode)GameManager.instance.gameMode;
+        CaptureTheFlagMode mode = (CaptureTheFlagMode)GameManager.instance.GameMode;
         //You can only pick up this flag if
         // - you are a player
         // - there is not already someone picking up this flag
@@ -79,7 +84,14 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
         if(p != null && player == null && (p.Team != teamID || (p.Team == teamID && !mode.isFlagAtBaseForTeam(teamID))))
         {
             //Update who is holding flag
-            this.gameObject.transform.parent = other.gameObject.transform;
+			OwnerPlayer p1 = other.gameObject.GetComponentInParent<OwnerPlayer>();
+			if(p1 == null){
+				Debug.Log ("Player doensn't exist.");
+			}
+			Vector3 pos = p1.HandPoint.position;
+			this.transform.position = pos - Vector3.Scale(other.transform.up,new Vector3(1.0f,0.5f,1.0f));
+			this.transform.rotation = p1.HandPoint.rotation;
+			this.gameObject.transform.parent = other.gameObject.transform;
             player = p;
             state.Holder = player.Username;
             isEnabled = false;

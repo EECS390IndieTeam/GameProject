@@ -80,7 +80,7 @@ public class DebugLobbyMenu : Bolt.GlobalEventListener {
         if (newGameModeIndex != selectedGameMode) {
             selectedGameMode = newGameModeIndex;
             IGameMode newGameMode = GameModeManager.GameModes[selectedGameMode];
-            GameManager.instance.gameMode = newGameMode;
+            GameManager.instance.GameMode = newGameMode;
             updateMapList(GameModeManager.GameModeNames[selectedGameMode]);
         }
         GUILayout.EndHorizontal();
@@ -98,7 +98,7 @@ public class DebugLobbyMenu : Bolt.GlobalEventListener {
         DrawTeamChangeButtons();
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Start Game")) {
-            string sceneName = "ingame_" + mapList[selectedMap] + "_" + GameManager.instance.gameMode.GetType().Name;
+            string sceneName = "ingame_" + mapList[selectedMap] + "_" + GameManager.instance.GameMode.GetType().Name;
             Debug.Log("loading scene \"" + sceneName + "\"");
             BoltNetwork.LoadScene(sceneName);
         }

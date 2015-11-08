@@ -1,0 +1,958 @@
+fileFormatVersion: 2
+guid: e09e8480c3485446a945b4815ef734ab
+timeCreated: 1445972611
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: ambientLight1
+    100002: ambientLight2
+    100004: ARENA
+    100006: ARENA1
+    100008: asteroid1_0001:pCube1
+    100010: asteroid1_0002:pCube1
+    100012: asteroid1_0003:pCube1
+    100014: asteroid1_0004:pCube1
+    100016: asteroid1_0005:pCube1
+    100018: asteroid1_0006:pCube1
+    100020: asteroid2_0001:pCube1
+    100022: asteroid2_0002:pCube1
+    100024: asteroid2_0003:pCube1
+    100026: asteroid2_0004:pCube1
+    100028: asteroid2_0006:pCube1
+    100030: asteroid2_0007:pCube1
+    100032: asteroid3_00010:pCube1
+    100034: asteroid3_0001:pCube1
+    100036: asteroid3_0002:pCube1
+    100038: asteroid3_0003:pCube1
+    100040: asteroid3_0004:pCube1
+    100042: asteroid3_0005:pCube1
+    100044: asteroid3_0006:pCube1
+    100046: asteroid3_0007:pCube1
+    100048: asteroid3_0008:pCube1
+    100050: asteroid3_0009:pCube1
+    100052: //RootNode
+    100054: cube_and_decals:ambientLight1
+    100056: cube_and_decals:ARENA
+    100058: cube_and_decals:ARENA1
+    100060: cube_and_decals:asteroid1_0001:pCube1
+    100062: cube_and_decals:asteroid1_0003:pCube1
+    100064: cube_and_decals:asteroid1_0006:pCube1
+    100066: cube_and_decals:asteroid2_0001:pCube1
+    100068: cube_and_decals:asteroid2_0004:pCube1
+    100070: cube_and_decals:asteroid2_0006:pCube1
+    100072: cube_and_decals:asteroid2_0007:pCube1
+    100074: cube_and_decals:asteroid3_0001:pCube1
+    100076: cube_and_decals:asteroid3_0003:pCube1
+    100078: cube_and_decals:asteroid3_0004:pCube1
+    100080: cube_and_decals:asteroid3_0006:pCube1
+    100082: cube_and_decals:asteroid3_0007:pCube1
+    100084: cube_and_decals:asteroid3_0008:pCube1
+    100086: cube_and_decals:Cube:group
+    100088: cube_and_decals:Cube:polySurface1
+    100090: cube_and_decals:Decals:pointLight1
+    100092: cube_and_decals:Decals:pPlane1
+    100094: cube_and_decals:Decals:pPlane2
+    100096: cube_and_decals:Decals:pPlane4
+    100098: cube_and_decals:Decals:pPlane5
+    100100: cube_and_decals:Decals:pPlane6
+    100102: cube_and_decals:Decals:pPlane7
+    100104: cube_and_decals:Decals:pPlane8
+    100106: cube_and_decals:Decals:pPlane9
+    100108: cube_and_decals:Direction_Decals
+    100110: cube_and_decals:group
+    100112: cube_and_decals:group1
+    100114: cube_and_decals:group10
+    100116: cube_and_decals:group11
+    100118: cube_and_decals:group12
+    100120: cube_and_decals:group13
+    100122: cube_and_decals:group14
+    100124: cube_and_decals:group15
+    100126: cube_and_decals:group16
+    100128: cube_and_decals:group17
+    100130: cube_and_decals:group18
+    100132: cube_and_decals:group19
+    100134: cube_and_decals:group2
+    100136: cube_and_decals:group20
+    100138: cube_and_decals:group21
+    100140: cube_and_decals:group22
+    100142: cube_and_decals:group23
+    100144: cube_and_decals:group24
+    100146: cube_and_decals:group25
+    100148: cube_and_decals:group26
+    100150: cube_and_decals:group27
+    100152: cube_and_decals:group28
+    100154: cube_and_decals:group29
+    100156: cube_and_decals:group3
+    100158: cube_and_decals:group30
+    100160: cube_and_decals:group31
+    100162: cube_and_decals:group32
+    100164: cube_and_decals:group4
+    100166: cube_and_decals:group5
+    100168: cube_and_decals:group6
+    100170: cube_and_decals:group7
+    100172: cube_and_decals:group8
+    100174: cube_and_decals:group9
+    100176: cube_and_decals:Modelrigged_0054RNfosterParent1
+    100178: cube_and_decals:pasted__group
+    100180: cube_and_decals:pasted__group 1
+    100182: cube_and_decals:pasted__group1
+    100184: cube_and_decals:pasted__group1 1
+    100186: cube_and_decals:pasted__group1 2
+    100188: cube_and_decals:pasted__group10
+    100190: cube_and_decals:pasted__group11
+    100192: cube_and_decals:pasted__group11 1
+    100194: cube_and_decals:pasted__group12
+    100196: cube_and_decals:pasted__group13
+    100198: cube_and_decals:pasted__group14
+    100200: cube_and_decals:pasted__group15
+    100202: cube_and_decals:pasted__group17
+    100204: cube_and_decals:pasted__group18
+    100206: cube_and_decals:pasted__group19
+    100208: cube_and_decals:pasted__group19 1
+    100210: cube_and_decals:pasted__group19 2
+    100212: cube_and_decals:pasted__group2
+    100214: cube_and_decals:pasted__group2 1
+    100216: cube_and_decals:pasted__group20
+    100218: cube_and_decals:pasted__group22
+    100220: cube_and_decals:pasted__group22 1
+    100222: cube_and_decals:pasted__group24
+    100224: cube_and_decals:pasted__group27
+    100226: cube_and_decals:pasted__group27 1
+    100228: cube_and_decals:pasted__group27 2
+    100230: cube_and_decals:pasted__group28
+    100232: cube_and_decals:pasted__group3
+    100234: cube_and_decals:pasted__group3 1
+    100236: cube_and_decals:pasted__group31
+    100238: cube_and_decals:pasted__group4
+    100240: cube_and_decals:pasted__group4 1
+    100242: cube_and_decals:pasted__group5
+    100244: cube_and_decals:pasted__group6
+    100246: cube_and_decals:pasted__group6 1
+    100248: cube_and_decals:pasted__group6 2
+    100250: cube_and_decals:pasted__group7
+    100252: cube_and_decals:pasted__group7 1
+    100254: cube_and_decals:pasted__group8
+    100256: cube_and_decals:pasted__group8 1
+    100258: cube_and_decals:pasted__group9
+    100260: cube_and_decals:pasted__pasted__group
+    100262: cube_and_decals:pasted__pasted__group 1
+    100264: cube_and_decals:pasted__pasted__group 2
+    100266: cube_and_decals:pasted__pasted__group1
+    100268: cube_and_decals:pasted__pasted__group1 1
+    100270: cube_and_decals:pasted__pasted__group1 2
+    100272: cube_and_decals:pasted__pasted__group11
+    100274: cube_and_decals:pasted__pasted__group17
+    100276: cube_and_decals:pasted__pasted__group18
+    100278: cube_and_decals:pasted__pasted__group18 1
+    100280: cube_and_decals:pasted__pasted__group18 2
+    100282: cube_and_decals:pasted__pasted__group19
+    100284: cube_and_decals:pasted__pasted__group19 1
+    100286: cube_and_decals:pasted__pasted__group19 2
+    100288: cube_and_decals:pasted__pasted__group2
+    100290: cube_and_decals:pasted__pasted__group22
+    100292: cube_and_decals:pasted__pasted__group27
+    100294: cube_and_decals:pasted__pasted__group27 1
+    100296: cube_and_decals:pasted__pasted__group3
+    100298: cube_and_decals:pasted__pasted__group3 1
+    100300: cube_and_decals:pasted__pasted__group4
+    100302: cube_and_decals:pasted__pasted__group6
+    100304: cube_and_decals:pasted__pasted__group6 1
+    100306: cube_and_decals:pasted__pasted__group6 2
+    100308: cube_and_decals:pasted__pasted__group7
+    100310: cube_and_decals:pasted__pasted__group7 1
+    100312: cube_and_decals:pasted__pasted__group8
+    100314: cube_and_decals:pasted__pasted__pasted__group
+    100316: cube_and_decals:pasted__pasted__pasted__group 1
+    100318: cube_and_decals:pasted__pasted__pasted__group 2
+    100320: cube_and_decals:pasted__pasted__pasted__group1
+    100322: cube_and_decals:pasted__pasted__pasted__group17
+    100324: cube_and_decals:pasted__pasted__pasted__group17 1
+    100326: cube_and_decals:pasted__pasted__pasted__group17 2
+    100328: cube_and_decals:pasted__pasted__pasted__group18
+    100330: cube_and_decals:pasted__pasted__pasted__group18 1
+    100332: cube_and_decals:pasted__pasted__pasted__group18 2
+    100334: cube_and_decals:pasted__pasted__pasted__group19
+    100336: cube_and_decals:pasted__pasted__pasted__group3
+    100338: cube_and_decals:pasted__pasted__pasted__group6
+    100340: cube_and_decals:pasted__pasted__pasted__group6 1
+    100342: cube_and_decals:pasted__pasted__pasted__group7
+    100344: cube_and_decals:pasted__pasted__pasted__pasted__group
+    100346: cube_and_decals:pasted__pasted__pasted__pasted__group17
+    100348: cube_and_decals:pasted__pasted__pasted__pasted__group17 1
+    100350: cube_and_decals:pasted__pasted__pasted__pasted__group17 2
+    100352: cube_and_decals:pasted__pasted__pasted__pasted__group18
+    100354: cube_and_decals:pasted__pasted__pasted__pasted__group6
+    100356: cube_and_decals:pasted__pasted__pasted__pasted__pasted__group17
+    100358: cube_and_decals:pasted__pasted__pasted__pointLight3
+    100360: cube_and_decals:pCube1
+    100362: cube_and_decals:pointLight1
+    100364: cube_and_decals:pointLight2
+    100366: cube_and_decals:pointLight3
+    100368: cube_and_decals:polySurface10
+    100370: cube_and_decals:polySurface7
+    100372: cube_and_decals:polySurface8
+    100374: cube_and_decals:polySurface9
+    100376: cube_and_decals:transform1
+    100378: cube_and_decals:transform10
+    100380: cube_and_decals:transform11
+    100382: cube_and_decals:transform12
+    100384: cube_and_decals:transform13
+    100386: cube_and_decals:transform14
+    100388: cube_and_decals:transform15
+    100390: cube_and_decals:transform16
+    100392: cube_and_decals:transform17
+    100394: cube_and_decals:transform18
+    100396: cube_and_decals:transform19
+    100398: cube_and_decals:transform2
+    100400: cube_and_decals:transform3
+    100402: cube_and_decals:transform4
+    100404: cube_and_decals:transform5
+    100406: cube_and_decals:transform6
+    100408: cube_and_decals:transform7
+    100410: cube_and_decals:transform8
+    100412: cube_and_decals:transform9
+    100414: cube_and_decals:Unneeded_Decals
+    100416: CubeRNfosterParent1
+    100418: DecalsRNfosterParent1
+    100420: Direction_Decals
+    100422: group
+    100424: group1
+    100426: group10
+    100428: group11
+    100430: group12
+    100432: group13
+    100434: group14
+    100436: group15
+    100438: group16
+    100440: group17
+    100442: group18
+    100444: group19
+    100446: group2
+    100448: group20
+    100450: group21
+    100452: group22
+    100454: group23
+    100456: group24
+    100458: group25
+    100460: group26
+    100462: group27
+    100464: group28
+    100466: group29
+    100468: group3
+    100470: group30
+    100472: group31
+    100474: group32
+    100476: group4
+    100478: group5
+    100480: group6
+    100482: group7
+    100484: group8
+    100486: group9
+    100488: Modelrigged_0054RNfosterParent1
+    100490: pasted__group
+    100492: pasted__group 1
+    100494: pasted__group1
+    100496: pasted__group1 1
+    100498: pasted__group1 2
+    100500: pasted__group10
+    100502: pasted__group11
+    100504: pasted__group11 1
+    100506: pasted__group12
+    100508: pasted__group13
+    100510: pasted__group14
+    100512: pasted__group15
+    100514: pasted__group17
+    100516: pasted__group18
+    100518: pasted__group19
+    100520: pasted__group19 1
+    100522: pasted__group19 2
+    100524: pasted__group2
+    100526: pasted__group2 1
+    100528: pasted__group20
+    100530: pasted__group22
+    100532: pasted__group22 1
+    100534: pasted__group24
+    100536: pasted__group27
+    100538: pasted__group27 1
+    100540: pasted__group27 2
+    100542: pasted__group28
+    100544: pasted__group3
+    100546: pasted__group3 1
+    100548: pasted__group31
+    100550: pasted__group4
+    100552: pasted__group4 1
+    100554: pasted__group5
+    100556: pasted__group6
+    100558: pasted__group6 1
+    100560: pasted__group6 2
+    100562: pasted__group7
+    100564: pasted__group7 1
+    100566: pasted__group8
+    100568: pasted__group8 1
+    100570: pasted__group9
+    100572: pasted__pasted__group
+    100574: pasted__pasted__group 1
+    100576: pasted__pasted__group 2
+    100578: pasted__pasted__group1
+    100580: pasted__pasted__group1 1
+    100582: pasted__pasted__group1 2
+    100584: pasted__pasted__group11
+    100586: pasted__pasted__group17
+    100588: pasted__pasted__group18
+    100590: pasted__pasted__group18 1
+    100592: pasted__pasted__group18 2
+    100594: pasted__pasted__group19
+    100596: pasted__pasted__group19 1
+    100598: pasted__pasted__group19 2
+    100600: pasted__pasted__group2
+    100602: pasted__pasted__group22
+    100604: pasted__pasted__group27
+    100606: pasted__pasted__group27 1
+    100608: pasted__pasted__group3
+    100610: pasted__pasted__group3 1
+    100612: pasted__pasted__group4
+    100614: pasted__pasted__group6
+    100616: pasted__pasted__group6 1
+    100618: pasted__pasted__group6 2
+    100620: pasted__pasted__group7
+    100622: pasted__pasted__group7 1
+    100624: pasted__pasted__group8
+    100626: pasted__pasted__pasted__group
+    100628: pasted__pasted__pasted__group 1
+    100630: pasted__pasted__pasted__group 2
+    100632: pasted__pasted__pasted__group1
+    100634: pasted__pasted__pasted__group17
+    100636: pasted__pasted__pasted__group17 1
+    100638: pasted__pasted__pasted__group17 2
+    100640: pasted__pasted__pasted__group18
+    100642: pasted__pasted__pasted__group18 1
+    100644: pasted__pasted__pasted__group18 2
+    100646: pasted__pasted__pasted__group19
+    100648: pasted__pasted__pasted__group3
+    100650: pasted__pasted__pasted__group6
+    100652: pasted__pasted__pasted__group6 1
+    100654: pasted__pasted__pasted__group7
+    100656: pasted__pasted__pasted__pasted__group
+    100658: pasted__pasted__pasted__pasted__group17
+    100660: pasted__pasted__pasted__pasted__group17 1
+    100662: pasted__pasted__pasted__pasted__group17 2
+    100664: pasted__pasted__pasted__pasted__group18
+    100666: pasted__pasted__pasted__pasted__group6
+    100668: pasted__pasted__pasted__pasted__pasted__group17
+    100670: pasted__pasted__pasted__pointLight3
+    100672: pasted__pasted__pasted__pointLight3 1
+    100674: pasted__pasted__pointLight3
+    100676: pasted__pasted__pointLight3 1
+    100678: pasted__pasted__pointLight3 2
+    100680: pasted__pointLight3
+    100682: pCube1
+    100684: pointLight1
+    100686: pointLight2
+    100688: pointLight3
+    100690: pointLight4
+    100692: polySurface1
+    100694: polySurface10
+    100696: polySurface11
+    100698: polySurface12
+    100700: polySurface13
+    100702: polySurface14
+    100704: polySurface15
+    100706: polySurface16
+    100708: polySurface17
+    100710: polySurface18
+    100712: polySurface19
+    100714: polySurface2
+    100716: polySurface3
+    100718: polySurface4
+    100720: polySurface5
+    100722: polySurface6
+    100724: polySurface7
+    100726: polySurface8
+    100728: polySurface9
+    100730: transform1
+    100732: transform10
+    100734: transform11
+    100736: transform12
+    100738: transform13
+    100740: transform14
+    100742: transform15
+    100744: transform16
+    100746: transform17
+    100748: transform18
+    100750: transform19
+    100752: transform2
+    100754: transform3
+    100756: transform4
+    100758: transform5
+    100760: transform6
+    100762: transform7
+    100764: transform8
+    100766: transform9
+    100768: Unneeded_Decals
+    400000: ambientLight1
+    400002: ambientLight2
+    400004: ARENA
+    400006: ARENA1
+    400008: asteroid1_0001:pCube1
+    400010: asteroid1_0002:pCube1
+    400012: asteroid1_0003:pCube1
+    400014: asteroid1_0004:pCube1
+    400016: asteroid1_0005:pCube1
+    400018: asteroid1_0006:pCube1
+    400020: asteroid2_0001:pCube1
+    400022: asteroid2_0002:pCube1
+    400024: asteroid2_0003:pCube1
+    400026: asteroid2_0004:pCube1
+    400028: asteroid2_0006:pCube1
+    400030: asteroid2_0007:pCube1
+    400032: asteroid3_00010:pCube1
+    400034: asteroid3_0001:pCube1
+    400036: asteroid3_0002:pCube1
+    400038: asteroid3_0003:pCube1
+    400040: asteroid3_0004:pCube1
+    400042: asteroid3_0005:pCube1
+    400044: asteroid3_0006:pCube1
+    400046: asteroid3_0007:pCube1
+    400048: asteroid3_0008:pCube1
+    400050: asteroid3_0009:pCube1
+    400052: //RootNode
+    400054: cube_and_decals:ambientLight1
+    400056: cube_and_decals:ARENA
+    400058: cube_and_decals:ARENA1
+    400060: cube_and_decals:asteroid1_0001:pCube1
+    400062: cube_and_decals:asteroid1_0003:pCube1
+    400064: cube_and_decals:asteroid1_0006:pCube1
+    400066: cube_and_decals:asteroid2_0001:pCube1
+    400068: cube_and_decals:asteroid2_0004:pCube1
+    400070: cube_and_decals:asteroid2_0006:pCube1
+    400072: cube_and_decals:asteroid2_0007:pCube1
+    400074: cube_and_decals:asteroid3_0001:pCube1
+    400076: cube_and_decals:asteroid3_0003:pCube1
+    400078: cube_and_decals:asteroid3_0004:pCube1
+    400080: cube_and_decals:asteroid3_0006:pCube1
+    400082: cube_and_decals:asteroid3_0007:pCube1
+    400084: cube_and_decals:asteroid3_0008:pCube1
+    400086: cube_and_decals:Cube:group
+    400088: cube_and_decals:Cube:polySurface1
+    400090: cube_and_decals:Decals:pointLight1
+    400092: cube_and_decals:Decals:pPlane1
+    400094: cube_and_decals:Decals:pPlane2
+    400096: cube_and_decals:Decals:pPlane4
+    400098: cube_and_decals:Decals:pPlane5
+    400100: cube_and_decals:Decals:pPlane6
+    400102: cube_and_decals:Decals:pPlane7
+    400104: cube_and_decals:Decals:pPlane8
+    400106: cube_and_decals:Decals:pPlane9
+    400108: cube_and_decals:Direction_Decals
+    400110: cube_and_decals:group
+    400112: cube_and_decals:group1
+    400114: cube_and_decals:group10
+    400116: cube_and_decals:group11
+    400118: cube_and_decals:group12
+    400120: cube_and_decals:group13
+    400122: cube_and_decals:group14
+    400124: cube_and_decals:group15
+    400126: cube_and_decals:group16
+    400128: cube_and_decals:group17
+    400130: cube_and_decals:group18
+    400132: cube_and_decals:group19
+    400134: cube_and_decals:group2
+    400136: cube_and_decals:group20
+    400138: cube_and_decals:group21
+    400140: cube_and_decals:group22
+    400142: cube_and_decals:group23
+    400144: cube_and_decals:group24
+    400146: cube_and_decals:group25
+    400148: cube_and_decals:group26
+    400150: cube_and_decals:group27
+    400152: cube_and_decals:group28
+    400154: cube_and_decals:group29
+    400156: cube_and_decals:group3
+    400158: cube_and_decals:group30
+    400160: cube_and_decals:group31
+    400162: cube_and_decals:group32
+    400164: cube_and_decals:group4
+    400166: cube_and_decals:group5
+    400168: cube_and_decals:group6
+    400170: cube_and_decals:group7
+    400172: cube_and_decals:group8
+    400174: cube_and_decals:group9
+    400176: cube_and_decals:Modelrigged_0054RNfosterParent1
+    400178: cube_and_decals:pasted__group
+    400180: cube_and_decals:pasted__group 1
+    400182: cube_and_decals:pasted__group1
+    400184: cube_and_decals:pasted__group1 1
+    400186: cube_and_decals:pasted__group1 2
+    400188: cube_and_decals:pasted__group10
+    400190: cube_and_decals:pasted__group11
+    400192: cube_and_decals:pasted__group11 1
+    400194: cube_and_decals:pasted__group12
+    400196: cube_and_decals:pasted__group13
+    400198: cube_and_decals:pasted__group14
+    400200: cube_and_decals:pasted__group15
+    400202: cube_and_decals:pasted__group17
+    400204: cube_and_decals:pasted__group18
+    400206: cube_and_decals:pasted__group19
+    400208: cube_and_decals:pasted__group19 1
+    400210: cube_and_decals:pasted__group19 2
+    400212: cube_and_decals:pasted__group2
+    400214: cube_and_decals:pasted__group2 1
+    400216: cube_and_decals:pasted__group20
+    400218: cube_and_decals:pasted__group22
+    400220: cube_and_decals:pasted__group22 1
+    400222: cube_and_decals:pasted__group24
+    400224: cube_and_decals:pasted__group27
+    400226: cube_and_decals:pasted__group27 1
+    400228: cube_and_decals:pasted__group27 2
+    400230: cube_and_decals:pasted__group28
+    400232: cube_and_decals:pasted__group3
+    400234: cube_and_decals:pasted__group3 1
+    400236: cube_and_decals:pasted__group31
+    400238: cube_and_decals:pasted__group4
+    400240: cube_and_decals:pasted__group4 1
+    400242: cube_and_decals:pasted__group5
+    400244: cube_and_decals:pasted__group6
+    400246: cube_and_decals:pasted__group6 1
+    400248: cube_and_decals:pasted__group6 2
+    400250: cube_and_decals:pasted__group7
+    400252: cube_and_decals:pasted__group7 1
+    400254: cube_and_decals:pasted__group8
+    400256: cube_and_decals:pasted__group8 1
+    400258: cube_and_decals:pasted__group9
+    400260: cube_and_decals:pasted__pasted__group
+    400262: cube_and_decals:pasted__pasted__group 1
+    400264: cube_and_decals:pasted__pasted__group 2
+    400266: cube_and_decals:pasted__pasted__group1
+    400268: cube_and_decals:pasted__pasted__group1 1
+    400270: cube_and_decals:pasted__pasted__group1 2
+    400272: cube_and_decals:pasted__pasted__group11
+    400274: cube_and_decals:pasted__pasted__group17
+    400276: cube_and_decals:pasted__pasted__group18
+    400278: cube_and_decals:pasted__pasted__group18 1
+    400280: cube_and_decals:pasted__pasted__group18 2
+    400282: cube_and_decals:pasted__pasted__group19
+    400284: cube_and_decals:pasted__pasted__group19 1
+    400286: cube_and_decals:pasted__pasted__group19 2
+    400288: cube_and_decals:pasted__pasted__group2
+    400290: cube_and_decals:pasted__pasted__group22
+    400292: cube_and_decals:pasted__pasted__group27
+    400294: cube_and_decals:pasted__pasted__group27 1
+    400296: cube_and_decals:pasted__pasted__group3
+    400298: cube_and_decals:pasted__pasted__group3 1
+    400300: cube_and_decals:pasted__pasted__group4
+    400302: cube_and_decals:pasted__pasted__group6
+    400304: cube_and_decals:pasted__pasted__group6 1
+    400306: cube_and_decals:pasted__pasted__group6 2
+    400308: cube_and_decals:pasted__pasted__group7
+    400310: cube_and_decals:pasted__pasted__group7 1
+    400312: cube_and_decals:pasted__pasted__group8
+    400314: cube_and_decals:pasted__pasted__pasted__group
+    400316: cube_and_decals:pasted__pasted__pasted__group 1
+    400318: cube_and_decals:pasted__pasted__pasted__group 2
+    400320: cube_and_decals:pasted__pasted__pasted__group1
+    400322: cube_and_decals:pasted__pasted__pasted__group17
+    400324: cube_and_decals:pasted__pasted__pasted__group17 1
+    400326: cube_and_decals:pasted__pasted__pasted__group17 2
+    400328: cube_and_decals:pasted__pasted__pasted__group18
+    400330: cube_and_decals:pasted__pasted__pasted__group18 1
+    400332: cube_and_decals:pasted__pasted__pasted__group18 2
+    400334: cube_and_decals:pasted__pasted__pasted__group19
+    400336: cube_and_decals:pasted__pasted__pasted__group3
+    400338: cube_and_decals:pasted__pasted__pasted__group6
+    400340: cube_and_decals:pasted__pasted__pasted__group6 1
+    400342: cube_and_decals:pasted__pasted__pasted__group7
+    400344: cube_and_decals:pasted__pasted__pasted__pasted__group
+    400346: cube_and_decals:pasted__pasted__pasted__pasted__group17
+    400348: cube_and_decals:pasted__pasted__pasted__pasted__group17 1
+    400350: cube_and_decals:pasted__pasted__pasted__pasted__group17 2
+    400352: cube_and_decals:pasted__pasted__pasted__pasted__group18
+    400354: cube_and_decals:pasted__pasted__pasted__pasted__group6
+    400356: cube_and_decals:pasted__pasted__pasted__pasted__pasted__group17
+    400358: cube_and_decals:pasted__pasted__pasted__pointLight3
+    400360: cube_and_decals:pCube1
+    400362: cube_and_decals:pointLight1
+    400364: cube_and_decals:pointLight2
+    400366: cube_and_decals:pointLight3
+    400368: cube_and_decals:polySurface10
+    400370: cube_and_decals:polySurface7
+    400372: cube_and_decals:polySurface8
+    400374: cube_and_decals:polySurface9
+    400376: cube_and_decals:transform1
+    400378: cube_and_decals:transform10
+    400380: cube_and_decals:transform11
+    400382: cube_and_decals:transform12
+    400384: cube_and_decals:transform13
+    400386: cube_and_decals:transform14
+    400388: cube_and_decals:transform15
+    400390: cube_and_decals:transform16
+    400392: cube_and_decals:transform17
+    400394: cube_and_decals:transform18
+    400396: cube_and_decals:transform19
+    400398: cube_and_decals:transform2
+    400400: cube_and_decals:transform3
+    400402: cube_and_decals:transform4
+    400404: cube_and_decals:transform5
+    400406: cube_and_decals:transform6
+    400408: cube_and_decals:transform7
+    400410: cube_and_decals:transform8
+    400412: cube_and_decals:transform9
+    400414: cube_and_decals:Unneeded_Decals
+    400416: CubeRNfosterParent1
+    400418: DecalsRNfosterParent1
+    400420: Direction_Decals
+    400422: group
+    400424: group1
+    400426: group10
+    400428: group11
+    400430: group12
+    400432: group13
+    400434: group14
+    400436: group15
+    400438: group16
+    400440: group17
+    400442: group18
+    400444: group19
+    400446: group2
+    400448: group20
+    400450: group21
+    400452: group22
+    400454: group23
+    400456: group24
+    400458: group25
+    400460: group26
+    400462: group27
+    400464: group28
+    400466: group29
+    400468: group3
+    400470: group30
+    400472: group31
+    400474: group32
+    400476: group4
+    400478: group5
+    400480: group6
+    400482: group7
+    400484: group8
+    400486: group9
+    400488: Modelrigged_0054RNfosterParent1
+    400490: pasted__group
+    400492: pasted__group 1
+    400494: pasted__group1
+    400496: pasted__group1 1
+    400498: pasted__group1 2
+    400500: pasted__group10
+    400502: pasted__group11
+    400504: pasted__group11 1
+    400506: pasted__group12
+    400508: pasted__group13
+    400510: pasted__group14
+    400512: pasted__group15
+    400514: pasted__group17
+    400516: pasted__group18
+    400518: pasted__group19
+    400520: pasted__group19 1
+    400522: pasted__group19 2
+    400524: pasted__group2
+    400526: pasted__group2 1
+    400528: pasted__group20
+    400530: pasted__group22
+    400532: pasted__group22 1
+    400534: pasted__group24
+    400536: pasted__group27
+    400538: pasted__group27 1
+    400540: pasted__group27 2
+    400542: pasted__group28
+    400544: pasted__group3
+    400546: pasted__group3 1
+    400548: pasted__group31
+    400550: pasted__group4
+    400552: pasted__group4 1
+    400554: pasted__group5
+    400556: pasted__group6
+    400558: pasted__group6 1
+    400560: pasted__group6 2
+    400562: pasted__group7
+    400564: pasted__group7 1
+    400566: pasted__group8
+    400568: pasted__group8 1
+    400570: pasted__group9
+    400572: pasted__pasted__group
+    400574: pasted__pasted__group 1
+    400576: pasted__pasted__group 2
+    400578: pasted__pasted__group1
+    400580: pasted__pasted__group1 1
+    400582: pasted__pasted__group1 2
+    400584: pasted__pasted__group11
+    400586: pasted__pasted__group17
+    400588: pasted__pasted__group18
+    400590: pasted__pasted__group18 1
+    400592: pasted__pasted__group18 2
+    400594: pasted__pasted__group19
+    400596: pasted__pasted__group19 1
+    400598: pasted__pasted__group19 2
+    400600: pasted__pasted__group2
+    400602: pasted__pasted__group22
+    400604: pasted__pasted__group27
+    400606: pasted__pasted__group27 1
+    400608: pasted__pasted__group3
+    400610: pasted__pasted__group3 1
+    400612: pasted__pasted__group4
+    400614: pasted__pasted__group6
+    400616: pasted__pasted__group6 1
+    400618: pasted__pasted__group6 2
+    400620: pasted__pasted__group7
+    400622: pasted__pasted__group7 1
+    400624: pasted__pasted__group8
+    400626: pasted__pasted__pasted__group
+    400628: pasted__pasted__pasted__group 1
+    400630: pasted__pasted__pasted__group 2
+    400632: pasted__pasted__pasted__group1
+    400634: pasted__pasted__pasted__group17
+    400636: pasted__pasted__pasted__group17 1
+    400638: pasted__pasted__pasted__group17 2
+    400640: pasted__pasted__pasted__group18
+    400642: pasted__pasted__pasted__group18 1
+    400644: pasted__pasted__pasted__group18 2
+    400646: pasted__pasted__pasted__group19
+    400648: pasted__pasted__pasted__group3
+    400650: pasted__pasted__pasted__group6
+    400652: pasted__pasted__pasted__group6 1
+    400654: pasted__pasted__pasted__group7
+    400656: pasted__pasted__pasted__pasted__group
+    400658: pasted__pasted__pasted__pasted__group17
+    400660: pasted__pasted__pasted__pasted__group17 1
+    400662: pasted__pasted__pasted__pasted__group17 2
+    400664: pasted__pasted__pasted__pasted__group18
+    400666: pasted__pasted__pasted__pasted__group6
+    400668: pasted__pasted__pasted__pasted__pasted__group17
+    400670: pasted__pasted__pasted__pointLight3
+    400672: pasted__pasted__pasted__pointLight3 1
+    400674: pasted__pasted__pointLight3
+    400676: pasted__pasted__pointLight3 1
+    400678: pasted__pasted__pointLight3 2
+    400680: pasted__pointLight3
+    400682: pCube1
+    400684: pointLight1
+    400686: pointLight2
+    400688: pointLight3
+    400690: pointLight4
+    400692: polySurface1
+    400694: polySurface10
+    400696: polySurface11
+    400698: polySurface12
+    400700: polySurface13
+    400702: polySurface14
+    400704: polySurface15
+    400706: polySurface16
+    400708: polySurface17
+    400710: polySurface18
+    400712: polySurface19
+    400714: polySurface2
+    400716: polySurface3
+    400718: polySurface4
+    400720: polySurface5
+    400722: polySurface6
+    400724: polySurface7
+    400726: polySurface8
+    400728: polySurface9
+    400730: transform1
+    400732: transform10
+    400734: transform11
+    400736: transform12
+    400738: transform13
+    400740: transform14
+    400742: transform15
+    400744: transform16
+    400746: transform17
+    400748: transform18
+    400750: transform19
+    400752: transform2
+    400754: transform3
+    400756: transform4
+    400758: transform5
+    400760: transform6
+    400762: transform7
+    400764: transform8
+    400766: transform9
+    400768: Unneeded_Decals
+    2300000: asteroid1_0002:pCube1
+    2300002: asteroid1_0004:pCube1
+    2300004: asteroid1_0005:pCube1
+    2300006: asteroid2_0002:pCube1
+    2300008: asteroid2_0003:pCube1
+    2300010: asteroid3_00010:pCube1
+    2300012: asteroid3_0002:pCube1
+    2300014: asteroid3_0005:pCube1
+    2300016: asteroid3_0009:pCube1
+    2300018: cube_and_decals:Decals:pPlane1
+    2300020: cube_and_decals:Decals:pPlane2
+    2300022: cube_and_decals:Decals:pPlane7
+    2300024: cube_and_decals:Decals:pPlane8
+    2300026: cube_and_decals:Decals:pPlane9
+    2300028: cube_and_decals:pCube1
+    2300030: cube_and_decals:polySurface10
+    2300032: cube_and_decals:polySurface7
+    2300034: cube_and_decals:polySurface8
+    2300036: cube_and_decals:polySurface9
+    2300038: pCube1
+    2300040: polySurface1
+    2300042: polySurface10
+    2300044: polySurface11
+    2300046: polySurface12
+    2300048: polySurface13
+    2300050: polySurface14
+    2300052: polySurface15
+    2300054: polySurface16
+    2300056: polySurface17
+    2300058: polySurface18
+    2300060: polySurface19
+    2300062: polySurface2
+    2300064: polySurface3
+    2300066: polySurface4
+    2300068: polySurface5
+    2300070: polySurface6
+    2300072: polySurface7
+    2300074: polySurface8
+    2300076: polySurface9
+    3300000: asteroid1_0002:pCube1
+    3300002: asteroid1_0004:pCube1
+    3300004: asteroid1_0005:pCube1
+    3300006: asteroid2_0002:pCube1
+    3300008: asteroid2_0003:pCube1
+    3300010: asteroid3_00010:pCube1
+    3300012: asteroid3_0002:pCube1
+    3300014: asteroid3_0005:pCube1
+    3300016: asteroid3_0009:pCube1
+    3300018: cube_and_decals:Decals:pPlane1
+    3300020: cube_and_decals:Decals:pPlane2
+    3300022: cube_and_decals:Decals:pPlane7
+    3300024: cube_and_decals:Decals:pPlane8
+    3300026: cube_and_decals:Decals:pPlane9
+    3300028: cube_and_decals:pCube1
+    3300030: cube_and_decals:polySurface10
+    3300032: cube_and_decals:polySurface7
+    3300034: cube_and_decals:polySurface8
+    3300036: cube_and_decals:polySurface9
+    3300038: pCube1
+    3300040: polySurface1
+    3300042: polySurface10
+    3300044: polySurface11
+    3300046: polySurface12
+    3300048: polySurface13
+    3300050: polySurface14
+    3300052: polySurface15
+    3300054: polySurface16
+    3300056: polySurface17
+    3300058: polySurface18
+    3300060: polySurface19
+    3300062: polySurface2
+    3300064: polySurface3
+    3300066: polySurface4
+    3300068: polySurface5
+    3300070: polySurface6
+    3300072: polySurface7
+    3300074: polySurface8
+    3300076: polySurface9
+    4300000: pCube1
+    4300002: asteroid1_0002:pCube1
+    4300004: asteroid2_0002:pCube1
+    4300006: asteroid3_0002:pCube1
+    4300008: asteroid2_0003:pCube1
+    4300010: asteroid1_0004:pCube1
+    4300012: asteroid1_0005:pCube1
+    4300014: asteroid3_0005:pCube1
+    4300016: asteroid3_0009:pCube1
+    4300018: asteroid3_00010:pCube1
+    4300020: polySurface1
+    4300022: polySurface2
+    4300024: polySurface3
+    4300026: polySurface4
+    4300028: polySurface5
+    4300030: polySurface6
+    4300032: polySurface7
+    4300034: polySurface8
+    4300036: polySurface9
+    4300038: polySurface10
+    4300040: polySurface11
+    4300042: polySurface12
+    4300044: polySurface13
+    4300046: polySurface14
+    4300048: polySurface15
+    4300050: polySurface16
+    4300052: polySurface17
+    4300054: polySurface18
+    4300056: polySurface19
+    4300058: cube_and_decals:pCube1
+    4300060: cube_and_decals:Decals:pPlane7
+    4300062: cube_and_decals:Decals:pPlane1
+    4300064: cube_and_decals:Decals:pPlane2
+    4300066: cube_and_decals:Decals:pPlane8
+    4300068: cube_and_decals:Decals:pPlane9
+    4300070: cube_and_decals:polySurface7
+    4300072: cube_and_decals:polySurface8
+    4300074: cube_and_decals:polySurface9
+    4300076: cube_and_decals:polySurface10
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

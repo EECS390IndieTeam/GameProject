@@ -10,12 +10,9 @@ public class FlagCaptureEventListener: Bolt.GlobalEventListener
     public override void OnEvent(FlagCapturedEvent evnt)
     {
         //update scores
-        if (ServerConnectionEventListener.IndexMap.ContainsPlayer(evnt.Player))
-        {
-            GameStats.SetIntegerStat(evnt.Player, "Flags", GameStats.GetIntegerStat(evnt.Player, "Flags") + 1);
-        }
-        
-        GameManager.instance.CheckForGameOver();
+        Lobby.IncrementStatForPlayer(evnt.Player, "Flags", 1);
+        int team = Lobby.GetPlayer(evnt.Player).Team;
+        Lobby.IncrementStatForPlayer(Lobby.PP_TEAMS[team], "Flags", 1);
 
     }
 }
