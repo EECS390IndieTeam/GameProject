@@ -535,6 +535,7 @@ public class Lobby : Bolt.GlobalEventListener {
     public override void OnEvent(GameModeUpdateEvent evnt) {
         if (!BoltNetwork.isClient) return;
         _GameModeName = evnt.Name;
+        GameManager.instance.GameMode = GameModeManager.GetGameModeFromClassName(_GameModeName);
         FireChangeEvent(LobbyChange.MODE_CHANGED);
     }
 

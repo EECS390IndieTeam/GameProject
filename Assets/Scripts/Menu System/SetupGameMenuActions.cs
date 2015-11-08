@@ -67,7 +67,7 @@ public class SetupGameMenuActions : MonoBehaviour
         this.launchButton.onClick.AddListener(new UnityEngine.Events.UnityAction(() =>
         {
             GameManager.instance.CurrentUserName = this.screenNameInputField.text;
-            GameManager.instance.gameMode = new TeamDeathmatchMode();
+            GameManager.instance.GameMode = new TeamDeathmatchMode();
             ServerSideData.Password = this.lobbyPasswordInputField.text;
             Cursor.visible = false;
             if (BoltNetwork.isRunning && BoltNetwork.isClient)

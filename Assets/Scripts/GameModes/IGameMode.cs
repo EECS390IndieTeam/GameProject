@@ -46,6 +46,14 @@ public interface IGameMode {
     }
 
     /// <summary>
+    /// The name of the stat that should be displayed at the top of the screen
+    /// If this is a team mode, it will show team pseudoplayers instead
+    /// </summary>
+    string StatToDisplay {
+        get;
+    }
+
+    /// <summary>
     /// Moves the given list of players to start points
     /// </summary>
     /// <param name="players"></param>

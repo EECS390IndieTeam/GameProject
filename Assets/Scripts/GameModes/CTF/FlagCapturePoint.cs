@@ -12,8 +12,8 @@ public class FlagCapturePoint : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         if (!BoltNetwork.isServer) return;
-        IGameMode currentGameMode = GameManager.instance.gameMode;
-        if(GameManager.instance.gameMode.Mode == GameModes.CAPTURE_THE_FLAG)
+        IGameMode currentGameMode = GameManager.instance.GameMode;
+        if(GameManager.instance.GameMode.Mode == GameModes.CAPTURE_THE_FLAG)
         {
             CaptureTheFlagMode mode = (CaptureTheFlagMode)currentGameMode;
             Flag f = other.gameObject.GetComponent<Flag>();

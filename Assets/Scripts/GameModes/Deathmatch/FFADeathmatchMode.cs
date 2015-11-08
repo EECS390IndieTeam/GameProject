@@ -29,6 +29,10 @@ public class FFADeathmatchMode : SimpleFFAGameMode {
         Lobby.AddStat("Kills");
     }
 
+    public override string StatToDisplay {
+        get { return "Kills"; }
+    }
+
     public override bool GameOver() {
         foreach (var p in Lobby.AllPlayers) {
             if (p.GetStat("Kills") >= ScoreLimit) return true;

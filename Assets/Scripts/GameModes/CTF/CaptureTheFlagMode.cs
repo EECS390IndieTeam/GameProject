@@ -31,6 +31,9 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
     public override string GameModeName {
         get { return "Capture the Flag"; }
     }
+    public override string StatToDisplay {
+        get { return "Flags"; }
+    }
 
     public override void OnPreGame() {
         Lobby.AddStat("Kills");
@@ -84,6 +87,4 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
 			return new Vector3();
 		}
 	}
-
-
 }

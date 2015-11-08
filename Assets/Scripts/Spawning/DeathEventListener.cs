@@ -27,7 +27,7 @@ public class DeathEventListener : Bolt.GlobalEventListener {
 
         //because of the Owner/ProxyPlayer abstraction, this line will either just move the server's player, or
         //send an MovePlayerEvent to the propper player!
-        GameManager.instance.gameMode.MovePlayerToSpawnPoint(PlayerRegistry.GetIPlayerForUserName(evnt.Player));
+        GameManager.instance.GameMode.MovePlayerToSpawnPoint(PlayerRegistry.GetIPlayerForUserName(evnt.Player));
 
         //GameManager.instance.CheckForGameOver();
        

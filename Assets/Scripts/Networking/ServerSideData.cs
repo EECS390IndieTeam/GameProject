@@ -15,9 +15,9 @@ public static class ServerSideData {
         if (!BoltNetwork.isServer) throw new System.Exception("Attempted to update zeus data on a client!");
         ServerInfoToken token = new ServerInfoToken();
         token.IsDedicatedServer = IsDedicated;
-        token.GameMode = GameManager.instance.gameMode.GameModeName;
+        token.GameMode = GameManager.instance.GameMode.GameModeName;
         token.MapName = "TEMP_NULL";
-        token.MaxPlayerCount = (byte)GameManager.instance.gameMode.MaxPlayers;
+        token.MaxPlayerCount = (byte)GameManager.instance.GameMode.MaxPlayers;
         //token.PlayerCount = (byte)GameManager.instance.Lobby.PlayerCount;
         token.PlayerCount = (byte)Lobby.PlayerCount; //Lobby 2.0
         token.MOTD = MOTD;

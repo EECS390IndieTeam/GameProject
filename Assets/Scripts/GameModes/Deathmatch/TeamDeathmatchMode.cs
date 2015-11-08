@@ -33,6 +33,10 @@ public class TeamDeathmatchMode : SimpleTeamGameMode {
         Lobby.AddStat("Kills");
     }
 
+    public override string StatToDisplay {
+        get { return "Kills"; }
+    }
+
     public override bool GameOver() {
         for (int i = 0; i < 8; i++) {
             if (Lobby.GetStatForPlayer(Lobby.PP_TEAMS[i], "Kills") >= ScoreLimit) return true;
