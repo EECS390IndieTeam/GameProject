@@ -19,6 +19,8 @@ public class Gun : MonoBehaviour, IWeapon
     public float DamagePerShot = 10.0f;
     public float OverheatedCooldownMultiplier = 1.5f;
 
+    private Queue<Vector3> firingPoints;
+
     public bool IsOverheating {
         get;
         private set;
@@ -55,6 +57,7 @@ public class Gun : MonoBehaviour, IWeapon
 	private AbstractPlayer player;
 
     void Start() {
+        firingPoints = new Queue<Vector3>();
         IsOverheating = false;
         Temperature = 0f;
         look = GetComponentInParent<CustomMouseLook>();
@@ -65,6 +68,7 @@ public class Gun : MonoBehaviour, IWeapon
     {
         if (Physics.Raycast(SourceTransform.position, SourceTransform.forward, out hitInfo, float.PositiveInfinity, shootableLayers))
         {
+            firingPoints.Enqueue(hitInfo.point);
             IPlayer hitplayer = hitInfo.transform.GetComponent<AbstractPlayer>();
             if(hitplayer != null)
             {
@@ -107,12 +111,13 @@ public class Gun : MonoBehaviour, IWeapon
 			Firing();
 		} else {
 			player.LaserVisible = false;
-		}
+            firingPoints.Clear();
+        }
     }
 
 	public void CreateShot() {
 		WeaponFireEvent evnt = WeaponFireEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.Unreliable);
-		evnt.EndPoint = endpoint;
+        evnt.EndPoint = endpoint;
 		evnt.StartPoint = GunShotStartTransform.position;
 		evnt.Color = Color.red;
 		evnt.Send();
@@ -121,8 +126,16 @@ public class Gun : MonoBehaviour, IWeapon
 	public bool RefreshRaycast() {
 		if (Physics.Raycast(SourceTransform.position, SourceTransform.forward, out hitInfo, float.PositiveInfinity, shootableLayers))
 		{
-			endpoint = hitInfo.point;
-			return true;
+            firingPoints.Enqueue(hitInfo.point);
+            if(firingPoints.Count >= 3)
+            {
+                endpoint = firingPoints.Dequeue();
+            }
+            else
+            {
+                endpoint = hitInfo.point;
+            }
+            return true;
 		}
 		else
 		{
