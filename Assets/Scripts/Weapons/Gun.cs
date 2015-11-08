@@ -10,6 +10,9 @@ public class Gun : MonoBehaviour, IWeapon
 
     public ParticleSystem muzzleFlash;
 
+    public ParticleSystem shotEffect;
+    private GameObject shotInstantiation;
+
     //  Variables for getters
     public float CooldownRate = 20.0f;
     public float CooldownDelay = 0.1f;
@@ -108,7 +111,18 @@ public class Gun : MonoBehaviour, IWeapon
 		}
 		if (Input.GetButton ("Fire1")) {
 			player.LaserVisible = true;
-			Firing();
+
+            shotInstantiation = Instantiate(shotEffect.gameObject) as GameObject;
+            shotInstantiation.transform.position = hitInfo.point;
+            if (shotInstantiation.GetComponent<ParticleSystem>() != null)
+            {
+                ParticleSystem p = shotInstantiation.GetComponent<ParticleSystem>();
+                shotInstantiation.transform.up = hitInfo.normal;
+                p.Play();
+            }
+            Destroy(shotInstantiation, 4);
+
+            Firing();
 		} else {
 			player.LaserVisible = false;
             firingPoints.Clear();
@@ -121,13 +135,16 @@ public class Gun : MonoBehaviour, IWeapon
 		evnt.StartPoint = GunShotStartTransform.position;
 		evnt.Color = Color.red;
 		evnt.Send();
-	}
+    }
 
 	public bool RefreshRaycast() {
 		if (Physics.Raycast(SourceTransform.position, SourceTransform.forward, out hitInfo, float.PositiveInfinity, shootableLayers))
-		{
-            firingPoints.Enqueue(hitInfo.point);
-            if(firingPoints.Count >= 2)
+        {
+            if (hitInfo.point != firingPoints.Peek())
+            {
+                firingPoints.Enqueue(hitInfo.point);
+            }
+            if (firingPoints.Count >= 3)
             {
                 endpoint = firingPoints.Dequeue();
             }
