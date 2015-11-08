@@ -40,6 +40,9 @@ public class InGamePause : MonoBehaviour {
 	}
 	
 	public void Quit () {
+		if (BoltNetwork.isRunning) {
+			BoltLauncher.Shutdown();
+		}
 		Application.LoadLevel ("MainMenu");
 	}
 }
