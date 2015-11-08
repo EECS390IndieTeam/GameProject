@@ -6,6 +6,9 @@ public class GrappleGun : MonoBehaviour {
 	[System.NonSerialized]
 	public FPSController controller;
 
+    public ParticleSystem hitEffect;
+    private GameObject hitInstantiation;
+
 	public float beamSpeed = 1000;
 	private float beamSpeedTimer = 0;
 
@@ -18,6 +21,8 @@ public class GrappleGun : MonoBehaviour {
 	public RaycastHit grappleHitInfo;
 
 	public LayerMask grappleTo;
+
+    public Transform firingPoint;
 
 	public AudioSource grappleFireSound;
 
@@ -50,17 +55,17 @@ public class GrappleGun : MonoBehaviour {
 
 	void LateUpdate() {
 		if (beamFiring) {
-			drawBeam (controller.character.position + (GrapplePhysics.anchor - controller.character.position) * beamSpeedTimer / GrapplePhysics.Length,
-			          controller.character.transform.position);
+			drawBeam (firingPoint.position + (GrapplePhysics.anchor - firingPoint.position) * beamSpeedTimer / GrapplePhysics.Length,
+			          firingPoint.position);
 		}
 
 		if (!beamFiring && controller.grappled) {
-			drawBeam(GrapplePhysics.anchor, controller.character.transform.position);
+			drawBeam(GrapplePhysics.anchor, firingPoint.position);
 		}
 	}
 
 	public void fire() {
-		Physics.Raycast(controller.cameraTransform.position, controller.cameraTransform.forward, out grappleHitInfo, maxDistance, grappleTo);
+		Physics.Raycast(firingPoint.position, controller.cameraTransform.forward, out grappleHitInfo, maxDistance, grappleTo);
 		if (grappleHitInfo.collider && !grappleHitInfo.collider.gameObject.GetComponent<Rigidbody>()) {
 			beamFiring = true;
 			lightning.enabled = true;
@@ -69,6 +74,16 @@ public class GrappleGun : MonoBehaviour {
 			if (grappleFireSound) {
 				grappleFireSound.Play ();
 			}
+            hitInstantiation = Instantiate(hitEffect.gameObject) as GameObject;
+            hitInstantiation.transform.position = grappleHitInfo.point;
+            if(hitInstantiation.GetComponent<ParticleSystem>() != null)
+            {
+                ParticleSystem p = hitInstantiation.GetComponent<ParticleSystem>();
+                hitInstantiation.transform.up = grappleHitInfo.normal;
+                p.Play();
+            }
+            Destroy(hitInstantiation, 5);
+            
             ///NETWORKING///
             // for networking, we make the beam visible a bit earler than it actually becomes active.
             // this is so that, hopefully, by the time the other players can see it, the beam is now actually active.
