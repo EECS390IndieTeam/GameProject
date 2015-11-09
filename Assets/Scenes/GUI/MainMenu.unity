@@ -780,6 +780,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollPanel: {fileID: 601525528}
   listItemPrefab: {fileID: 126912, guid: da16df9283e6cc241b3b5a3225fa00dc, type: 2}
+  launchButton: {fileID: 0}
+  isClient: 1
 --- !u!224 &232224493
 RectTransform:
   m_ObjectHideFlags: 0
