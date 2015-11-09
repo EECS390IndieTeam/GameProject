@@ -116,7 +116,7 @@ public class FPSController : MonoBehaviour {
         if(isAttachedToSurface)
         {
             //sMovement.moveCharacter(input);
-            if(Input.GetKey(KeyCode.Space))
+            if(Input.GetKey(KeyCode.Space) && !grappled)
             {
                 Debug.Log("Detached from surface");
                 isAttachedToSurface = false;
