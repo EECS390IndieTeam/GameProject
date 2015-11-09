@@ -39,9 +39,9 @@ public class FPSController : MonoBehaviour {
 	private AbstractPlayer player;
 
 	// Use this for initialization
-	void Start ()
+	void Awake ()
     {
-		player = (AbstractPlayer)GameManager.instance.CurrentPlayer;
+		
         Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
 		character = GetComponent<Rigidbody>();
@@ -54,6 +54,10 @@ public class FPSController : MonoBehaviour {
 		grappled = false;
 		previousHolding = false;
 	}
+
+    void Start() {
+        player = (AbstractPlayer)GameManager.instance.CurrentPlayer;
+    }
 	
 	// Update is called once per frame
 	void Update () {

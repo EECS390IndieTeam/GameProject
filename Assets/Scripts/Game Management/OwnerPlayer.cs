@@ -2,9 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(FPSController))]
 public class OwnerPlayer : AbstractPlayer {
+    private FPSController fpsController;
+
+    public bool ControlEnabled {
+        get {
+            return fpsController.enabled;
+        }
+        set {
+            fpsController.enabled = value;
+        }
+    }
 
     void Awake() {
+        this.fpsController = GetComponent<FPSController>();
         GameManager.instance.SetCurrentPlayer(this);
     }
 
