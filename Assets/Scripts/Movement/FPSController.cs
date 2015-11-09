@@ -12,6 +12,7 @@ public class FPSController : MonoBehaviour {
     public float velocityQuantum;
 	public float rotationSpeed = 1;
 	public Transform muzzlePoint;
+	public MeshRenderer gunModel;
 
     public LayerMask surfaceMovementMask;
 
@@ -21,6 +22,7 @@ public class FPSController : MonoBehaviour {
     private CharacterRotator rotator;
     private SurfaceMovement sMovement;
     private GrappleGun grappleGun;
+	private Gun gun;
     private bool isAttachedToSurface = false;
 	
 	private float debounceTime = 0.1f;
@@ -32,22 +34,30 @@ public class FPSController : MonoBehaviour {
 	[System.NonSerialized]
 	public bool grappled = false;
 
+	private bool previousHolding;
+
+	private AbstractPlayer player;
 
 	// Use this for initialization
 	void Start ()
     {
+		player = (AbstractPlayer)GameManager.instance.CurrentPlayer;
         Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 		character = GetComponent<Rigidbody>();
         mouseLook = GetComponent<CustomMouseLook>();
         rotator = GetComponent<CharacterRotator>();
         sMovement = GetComponent<SurfaceMovement>();
         grappleGun = GetComponent<GrappleGun>();
+		gun = GetComponent<Gun>();
 		if (grappleGun) grappleGun.controller = this;
 		grappled = false;
+		previousHolding = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
@@ -74,7 +84,6 @@ public class FPSController : MonoBehaviour {
 		if (Input.GetButtonDown("Fire2") && !(grappled || grappleGun.beamFiring) && debounce == 0) {
 			grappleGun.fire();
             if (isAttachedToSurface) {
-                Debug.Log("Detached from surface");
                 isAttachedToSurface = false;
                 sMovement.detachFromSurface();
             }
@@ -90,6 +99,11 @@ public class FPSController : MonoBehaviour {
 		if (Input.GetButtonDown("Jump") && grappled) {
 			grappleGun.reelIn();
 		}
+
+		if (player.HoldingFlag) previousHolding = true;
+		gun.canShoot = !previousHolding;
+		gunModel.enabled = !previousHolding;
+		if (previousHolding && !player.HoldingFlag) previousHolding = false;
     }
 
     void FixedUpdate ()
@@ -118,7 +132,6 @@ public class FPSController : MonoBehaviour {
             //sMovement.moveCharacter(input);
             if(Input.GetKey(KeyCode.Space) && !grappled)
             {
-                Debug.Log("Detached from surface");
                 isAttachedToSurface = false;
                 sMovement.pushOff();
             } else
@@ -139,7 +152,6 @@ public class FPSController : MonoBehaviour {
             {
                 grappleGun.detach();
             }
-            Debug.Log("Attached to surface");
             sMovement.attachToSurface(c);
             isAttachedToSurface = true;
         }

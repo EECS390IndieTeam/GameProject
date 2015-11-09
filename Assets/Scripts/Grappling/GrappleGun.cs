@@ -52,7 +52,7 @@ public class GrappleGun : MonoBehaviour {
 				controller.grappled = true;
 			}
 		}
-        DebugHUD.setValue("Grapple Length", GrapplePhysics.sqrDistance);
+        
         if (controller.grappled && GrapplePhysics.sqrDistance != 0 && GrapplePhysics.sqrDistance <= minDistance * minDistance)
         {
             detach();
@@ -71,13 +71,16 @@ public class GrappleGun : MonoBehaviour {
 	}
 
 	public void fire() {
+
 		Physics.Raycast(controller.cameraTransform.position, controller.cameraTransform.forward, out grappleHitInfo, maxDistance, grappleTo);
+		if (grappleHitInfo.distance < minDistance) return; // Don't grapple if we're too close
 		if (grappleHitInfo.collider && !grappleHitInfo.collider.gameObject.GetComponent<Rigidbody>()) {
 			beamFiring = true;
 			lightning.enabled = true;
 			GrapplePhysics.anchor = grappleHitInfo.point;
 			GrapplePhysics.Length = grappleHitInfo.distance;
 			if (grappleFireSound) {
+				grappleFireSound.pitch = Random.Range(1.2f, 1.8f);
 				grappleFireSound.Play ();
 			}
 			if (grappleOnSound) {
@@ -112,6 +115,7 @@ public class GrappleGun : MonoBehaviour {
 			grappleOnSound.Stop (); // audio source loops
 		}
 		if (grappleDetachSound) {
+			grappleDetachSound.pitch = Random.Range(1.2f, 1.8f);
 			grappleDetachSound.Play ();
 		}
 		GrapplePhysics.reelMultiplier = 0;

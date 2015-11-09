@@ -94,6 +94,15 @@ public class PlayerState : Bolt.EntityBehaviour<IPlayerState> {
 		}
 	}
 
+	public bool HoldingFlag {
+		get {
+			return state.HoldingFlag;
+		}
+		set {
+			state.HoldingFlag = value;
+		}
+	}
+
     public override void Attached() {
         if (entity.isOwner) {
             GameObject prefab = Instantiate(OwnerPrefab);

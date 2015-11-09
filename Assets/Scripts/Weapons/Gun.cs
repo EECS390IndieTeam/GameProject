@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-/*Controls gunfire and grenade launch. To be hit by gun, target must have a Rigidbody component attached.*/
+/*Controls gunfire and grenade launch.*/
 public class Gun : MonoBehaviour, IWeapon
 {
 
@@ -18,6 +18,9 @@ public class Gun : MonoBehaviour, IWeapon
     public float HeatPerShot = 3.0f;
     public float DamagePerShot = 10.0f;
     public float OverheatedCooldownMultiplier = 1.5f;
+
+	[System.NonSerialized]
+	public bool canShoot;
 
     public bool IsOverheating {
         get;
@@ -51,6 +54,8 @@ public class Gun : MonoBehaviour, IWeapon
     
 	private Vector3 endpoint;
 
+	private bool currentlyFiring;
+
 	private AbstractPlayer player;
 
     void Start() {
@@ -62,6 +67,7 @@ public class Gun : MonoBehaviour, IWeapon
 
     void Update()
     {
+
         if (Physics.Raycast(SourceTransform.position, SourceTransform.forward, out hitInfo, float.PositiveInfinity, shootableLayers))
         {
             IPlayer hitplayer = hitInfo.transform.GetComponent<AbstractPlayer>();
@@ -81,8 +87,6 @@ public class Gun : MonoBehaviour, IWeapon
             }
         }
 
-        DebugHUD.setValue("Gun temp", Temperature);
-        DebugHUD.setValue("Gun overheated", IsOverheating);
 		if (timeUntilCooldownBegins > 0f){
 			timeUntilCooldownBegins = Mathf.Max (0f, timeUntilCooldownBegins - Time.deltaTime);
 		}
@@ -101,7 +105,12 @@ public class Gun : MonoBehaviour, IWeapon
 			player.LaserVisible = false;
 			return;
 		}
-		if (Input.GetButton ("Fire1")) {
+		if (canShoot && Input.GetButtonDown ("Fire1")) {
+			currentlyFiring = true;
+		} else if (Input.GetButtonUp ("Fire1")) {
+			currentlyFiring = false;
+		}
+		if (currentlyFiring) {
 			player.LaserVisible = true;
 			Firing();
 		} else {
@@ -144,7 +153,6 @@ public class Gun : MonoBehaviour, IWeapon
 			muzzleFlash.Play();
 
         }
-		DebugHUD.setValue("muzzle flash", muzzleFlash.isPlaying);
 
         timeUntilCooldownBegins = CooldownDelay;
         Temperature += HeatPerShot * Time.deltaTime;
@@ -152,6 +160,7 @@ public class Gun : MonoBehaviour, IWeapon
             IsOverheating = true;
             Temperature = MaxTemperature;
 			player.LaserVisible = false;
+			currentlyFiring = false;
         } else {
 			if (RefreshRaycast()) {
 				IPlayer target = GetTarget();

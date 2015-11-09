@@ -22,8 +22,6 @@ public class Grenade : Bolt.EntityBehaviour<IGrenadeState>, IGrenade
     //SimulateOwner is called from FixedUpdate, but only for the owner of the object
 	public override void SimulateOwner() {
         float timeSinceThrown = StartingFuseTime - FuseTimeRemaining;
-        DebugHUD.setValue("DetonateTime", DetonateTime);
-        DebugHUD.setValue("ServerTime", BoltNetwork.serverTime);
         DebugHUD.setValue("FuseTimeRemaining", FuseTimeRemaining);
 
 		//Self-destroy object after its fuse is done.

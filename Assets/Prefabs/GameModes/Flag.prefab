@@ -491,6 +491,8 @@ MonoBehaviour:
   teamID: 1
   player: {fileID: 0}
   flagMaterial: {fileID: 2100000, guid: e1159005a607647d7a93316b70a0dbdb, type: 2}
+  center: {x: 0, y: 1, z: 0}
+  timeDelay: 1
 --- !u!114 &11465666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -502,7 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: -36112512, guid: 5b00bf8b25851d440940a40ec23344f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneGuid: 3566cb0c-941c-4447-b890-553058fa080b
+  _sceneGuid: 
   _serializerGuid: b56740fb-ac32-4e1e-b416-6a8e6877f725
   _prefabId: 2
   _updateRate: 1
@@ -551,6 +553,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: center.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: timeDelay
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

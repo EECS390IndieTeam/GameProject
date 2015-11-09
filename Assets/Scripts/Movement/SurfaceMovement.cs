@@ -129,7 +129,6 @@ public class SurfaceMovement : MonoBehaviour {
     private void roundCorner(Vector2 inputVector, float desiredSpeed)
     {
         RaycastHit hit;
-        Debug.Log("Hit shift");
         //Now look at what direction the user is trying to go in, have left and right win over up and down
         //Determines direction to look for surface if moving left or right
         if (Mathf.Abs(inputVector.x) >= Mathf.Abs(inputVector.y))

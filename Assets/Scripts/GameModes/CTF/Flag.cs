@@ -16,7 +16,12 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
 	public MeshRenderer flagMaterial;
     private Vector3 flagSpawnPosition;
 	private Quaternion flagSpawnRotation;
-	private float timeDelay = 3.0f;
+	public float timeDelay = 1.0f;
+
+	private Light light;
+
+	public bouncySpinnyCubeScript bSCS;
+
     Collider c;
 
     public override void Attached() {
@@ -29,9 +34,11 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
 	// Use this for initialization
 	void Start () {
 		c = GetComponent<Collider>();
+		light = GetComponentInChildren<Light>();
         flagSpawnPosition = transform.position;
 		flagSpawnRotation = transform.rotation;
 		SetFlagColor (Lobby.teamColors [teamID]);
+		bSCS.enabled = true;
 	}
 	
     public void ReturnFlag()
@@ -45,6 +52,7 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
     
 
 	public void DropFlag(){
+
         if (BoltNetwork.isServer) {
             StartCoroutine("DropFlagRoutine");
         } else {
@@ -55,17 +63,20 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
 	}
 
 	public void SetFlagColor(Color c){
-		flagMaterial.materials [1].SetColor ("_EmissionColor", c);
+		flagMaterial.materials [1].SetColor ("_EmissionColor", c * 2);
+		light.color = c;
 	}
 
     IEnumerator DropFlagRoutine()
     {
 		transform.position += 2 * player.transform.forward;
+		player.HoldingFlag = false;
 		player = null;
         this.transform.parent = null;
         state.Holder = "";
 		yield return new WaitForSeconds(timeDelay);
 		Debug.Log ("Re-enabling flag");
+		bSCS.enabled = true;
         isEnabled = true;
     }
 
@@ -87,15 +98,22 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
             //Update who is holding flag
 			OwnerPlayer p1 = other.gameObject.GetComponentInParent<OwnerPlayer>();
 			if(p1 == null){
-				Debug.Log ("Player doensn't exist.");
+				Debug.Log ("Player doesn't exist.");
+			} else {
+				Debug.Log ("Picked up flag");
+				Vector3 pos = p1.HandPoint.position;
+				//this.transform.position = pos - Vector3.Scale(other.transform.up,new Vector3(1.0f,0.5f,1.0f));
+				//this.transform.rotation = p1.HandPoint.rotation;
+
+				this.gameObject.transform.parent = p1.HandPoint;
+				transform.localPosition = 0.31f * Vector3.up;
+				transform.localRotation = Quaternion.identity;
+				player = p;
+				p.HoldingFlag = true;
+				state.Holder = player.Username;
+				bSCS.enabled = false;
+				isEnabled = false;
 			}
-			Vector3 pos = p1.HandPoint.position;
-			this.transform.position = pos - Vector3.Scale(other.transform.up,new Vector3(1.0f,0.5f,1.0f));
-			this.transform.rotation = p1.HandPoint.rotation;
-			this.gameObject.transform.parent = other.gameObject.transform;
-            player = p;
-            state.Holder = player.Username;
-            isEnabled = false;
         }
     }
 

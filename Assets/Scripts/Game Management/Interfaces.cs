@@ -123,6 +123,10 @@ public interface IPlayer {
 	Vector3 MuzzlePoint {
 		get;
 	}
+
+	bool HoldingFlag {
+		get;
+	}
 }
 	
 /// <summary>

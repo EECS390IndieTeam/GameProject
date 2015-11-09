@@ -11,7 +11,6 @@ public class WeaponShot : MonoBehaviour {
 	public AudioSource laserSound;
 
     private LineRenderer line;
-    private float curFadeTime;
 	private IPlayer player;
 
 	// Use this for initialization
@@ -24,12 +23,10 @@ public class WeaponShot : MonoBehaviour {
         line.SetVertexCount(2);
 		line.SetPosition(0, player.MuzzlePoint);
 		line.SetPosition(1, player.LaserEndpoint);
-        curFadeTime = 0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		DebugHUD.setValue("laser endpoint", player.LaserEndpoint);
 		line.enabled = player.LaserVisible;
 		if (line.enabled) {
 			if (!laserSound.isPlaying) laserSound.Play (); // audio source loops

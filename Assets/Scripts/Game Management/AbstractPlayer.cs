@@ -120,6 +120,15 @@ public abstract class AbstractPlayer : MonoBehaviour, IPlayer {
 		}
 	}
 
+	public bool HoldingFlag {
+		get {
+			return state.HoldingFlag;
+		}
+		set {
+			state.HoldingFlag = value;
+		}
+	}
+
     public abstract void Die(string killer, int weaponID);
 
     public void RespawnAt(Transform location) {

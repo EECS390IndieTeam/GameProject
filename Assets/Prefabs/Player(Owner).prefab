@@ -1717,7 +1717,7 @@ GameObject:
   - 33: {fileID: 3339738}
   - 23: {fileID: 2376010}
   m_Layer: 0
-  m_Name: Model
+  m_Name: GunModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1939,7 +1939,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &165150
 GameObject:
   m_ObjectHideFlags: 1
@@ -3143,7 +3143,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155240}
-  m_LocalRotation: {x: .0112986704, y: -.719251156, z: .0109109962, w: -.694572628}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: .219999999, y: .389999986, z: .342999995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3363,7 +3363,7 @@ Transform:
   m_GameObject: {fileID: 160888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4220.96875, y: 4220.96875, z: 4220.96875}
+  m_LocalScale: {x: 200, y: 200, z: 200}
   m_Children: []
   m_Father: {fileID: 22450712}
   m_RootOrder: 4
@@ -5001,7 +5001,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 175590}
-  m_LocalRotation: {x: -1.86264493e-09, y: -2.9103827e-11, z: 9.31322464e-10, w: 1}
+  m_LocalRotation: {x: .0112986704, y: -.719251156, z: .0109109962, w: -.694572628}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5502,8 +5502,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0bf505aa8ca2d46498ac094e6b3d5c15, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: .377999991
+  m_Pitch: 1.77999997
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -5642,8 +5642,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4bb05b38b5f2a854185bea9ab9f4d274, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: .377999991
+  m_Pitch: 1.77999997
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -5712,8 +5712,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ab71e22e8a44e1e48b5866b7465afe55, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: .377999991
+  m_Pitch: 1.25
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -5782,7 +5782,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 219ca8f20e1038940a717f400d2196b9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: .377999991
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6151,7 +6151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beamSpeed: 400
   maxDistance: 199999996000
-  minDistance: 1
+  minDistance: .5
   reelSpeed: 4.5
   stabilizer: 1.05499995
   maxReelMultiplier: 3
@@ -6413,7 +6413,7 @@ MonoBehaviour:
   Automatic: 0
   MinDelayBetweenShots: .100000001
   WeaponID: 0
-  SourceTransform: {fileID: 417712}
+  SourceTransform: {fileID: 438124}
   GunShotStartTransform: {fileID: 444632}
 --- !u!114 &11454848
 MonoBehaviour:
@@ -6634,6 +6634,7 @@ MonoBehaviour:
   velocityQuantum: .100000001
   rotationSpeed: 1
   muzzlePoint: {fileID: 444632}
+  gunModel: {fileID: 2376010}
   surfaceMovementMask:
     serializedVersion: 2
     m_Bits: 513
@@ -8659,6 +8660,18 @@ Prefab:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: ab71e22e8a44e1e48b5866b7465afe55, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Volume
+      value: .377999991
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Pitch
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: SourceTransform
+      value: 
+      objectReference: {fileID: 438124}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 102286}
