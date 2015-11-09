@@ -5,6 +5,8 @@
 /// </summary>
 public class PauseMenu : MonoBehaviour {
 
+	public GameObject pausePanel;
+
     /// <summary>
     /// The canvas of the pause menu.
     /// </summary>
@@ -75,4 +77,8 @@ public class PauseMenu : MonoBehaviour {
             this.dead = true;
         }
     }
+
+	public void resume() {
+		this.IsPaused = !this.IsPaused;
+	}
 }
