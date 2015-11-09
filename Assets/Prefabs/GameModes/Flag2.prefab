@@ -515,7 +515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamID: 2
   player: {fileID: 0}
-  flagMaterial: {fileID: 2100000, guid: e1159005a607647d7a93316b70a0dbdb, type: 2}
+  flagMaterial: {fileID: 2384132}
 --- !u!135 &13597244
 SphereCollider:
   m_ObjectHideFlags: 1
