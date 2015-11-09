@@ -104,7 +104,6 @@ public class JoinGameMenuActions : MonoBehaviour
     private void ValidateInputs()
     {
         if (this.IsIPAndPortValid() &&
-            this.lobbyPasswordInputField.text.Length >= 6 &&
             this.screenNameInputField.text.Length != 0)
         {
             this.lobbyButton.interactable = true;
