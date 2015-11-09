@@ -79,7 +79,7 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
 
     private void ReloadPlayersList()
     {
-        // Clear the list.
+        // Clear the list.I gott
         foreach (var childTransform in this.scrollPanel.transform)
         {
             Destroy(((Transform)childTransform).gameObject);
