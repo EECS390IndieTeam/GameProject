@@ -70,6 +70,7 @@ public class SpawningBlind : MonoBehaviour {
     public void Show() {
         Alpha = 1.0f;
         this.enabled = false;
+        canvas.enabled = true;
     }
 
     public void Hide() {
