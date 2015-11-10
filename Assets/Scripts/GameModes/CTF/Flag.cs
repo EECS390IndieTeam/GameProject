@@ -97,7 +97,7 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
         if(p != null && player == null && (p.Team != teamID || (p.Team == teamID && !mode.isFlagAtBaseForTeam(teamID))))
         {
             //Update who is holding flag
-			OwnerPlayer p1 = other.gameObject.GetComponentInParent<OwnerPlayer>();
+			AbstractPlayer p1 = other.gameObject.GetComponentInParent<AbstractPlayer>();
 			if(p1 == null){
 				Debug.Log ("Player doesn't exist.");
 			} else {

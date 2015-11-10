@@ -2194,7 +2194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootableLayers:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 8705
   muzzleFlash: {fileID: 19853930}
   CooldownRate: 40
   CooldownDelay: .100000001

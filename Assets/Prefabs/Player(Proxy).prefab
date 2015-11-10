@@ -525,6 +525,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &124816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 442218}
+  m_Layer: 13
+  m_Name: Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &124876
 GameObject:
   m_ObjectHideFlags: 1
@@ -710,7 +725,7 @@ GameObject:
   - 114: {fileID: 11424862}
   - 114: {fileID: 11485474}
   - 54: {fileID: 5493164}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Player(Proxy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2424,6 +2439,7 @@ Transform:
   m_Children:
   - {fileID: 496154}
   - {fileID: 480020}
+  - {fileID: 442218}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &404446
@@ -3173,6 +3189,18 @@ Transform:
   m_Children:
   - {fileID: 412116}
   m_Father: {fileID: 451488}
+  m_RootOrder: 2
+--- !u!4 &442218
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124816}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .145999998, y: .536000013, z: .335000008}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 403450}
   m_RootOrder: 2
 --- !u!4 &442482
 Transform:
@@ -4659,6 +4687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightningMaterial: {fileID: 2100000, guid: 34812b32841a255459f39511c1280354, type: 2}
+  maxLength: 0
   framesPerUpdate: 1
   curve:
     serializedVersion: 2
@@ -4718,6 +4747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f645decfef67846ab3cfe9672bd797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HandPoint: {fileID: 442218}
 --- !u!114 &11485474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4865,6 +4895,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Pitch
       value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
