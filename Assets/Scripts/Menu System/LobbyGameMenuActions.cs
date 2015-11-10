@@ -92,17 +92,18 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             var newItem = Instantiate(this.listItemPrefab);
             var textComponent = newItem.GetComponentInChildren<Text>();
 
+			
+			// Add new item to the list box.
+			newItem.transform.SetParent(this.scrollPanel.transform);
+
             textComponent.text = player.Name;
 
             // For some reason Unity auto rotates the item. Set it to be straight up.
-            newItem.transform.eulerAngles = Vector3.zero;
+			newItem.transform.localRotation = Quaternion.identity;
 
             // Set item's position in the box.
-            newItem.transform.position = new Vector3(0, nextY, 0);
+            newItem.transform.localPosition = new Vector3(91.5f, nextY, 0);
             nextY -= 30;
-
-            // Add new item to the list box.
-            newItem.transform.SetParent(this.scrollPanel.transform);
         }
     }
 }
