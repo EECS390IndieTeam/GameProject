@@ -36,6 +36,11 @@ public class DebugLobbyMenu : Bolt.GlobalEventListener {
         mapList = GameModeManager.GetSupportedMapsForGameMode(gameModeName).ToArray();
         humanReadableMapList = mapList.Select(s => GameModeManager.GetHumanReadableNameForMap(s)).ToArray();
         selectedMap = 0;
+        if (humanReadableMapList.Length > 0) {
+            Lobby.MapName = humanReadableMapList[selectedMap];
+        } else {
+            Lobby.MapName = "Not Selected";
+        }
     }
 
     void OnGUI() {
@@ -92,7 +97,11 @@ public class DebugLobbyMenu : Bolt.GlobalEventListener {
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
-        selectedMap = GUILayout.SelectionGrid(selectedMap, humanReadableMapList, 1);
+        int newSelectedMap = GUILayout.SelectionGrid(selectedMap, humanReadableMapList, 1);
+        if (newSelectedMap != selectedMap) {
+            selectedMap = newSelectedMap;
+            Lobby.MapName = humanReadableMapList[selectedMap];
+        }
         GUILayout.EndHorizontal();
 
         DrawTeamChangeButtons();

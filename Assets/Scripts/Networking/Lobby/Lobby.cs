@@ -17,6 +17,13 @@ public class Lobby : Bolt.GlobalEventListener {
 
     private static List<string> displayedStatNames = new List<string>();
 
+
+    /// <summary>
+    /// If this is false, any calls to SetStatForPlayer or IncrementStatForPlayer will be ignored
+    /// This field will not do anything on clients
+    /// </summary>
+    public static bool StatChangesAllowed = true;
+
     /// <summary>
     /// returns a list of stats that should be displayed on the in-game scoreboard;
     /// </summary>
@@ -176,6 +183,7 @@ public class Lobby : Bolt.GlobalEventListener {
     /// <param name="statname"></param>
     /// <param name="value"></param>
     public static void SetStatForPlayer(string playername, string statname, int value) {
+        if (!StatChangesAllowed) return;
         if (!BoltNetwork.isServer) throw new Exception("Only the server can set stats for players");
         if (!StatCreated(statname)) {
             throw new Exception("Tried to set stat \"" + statname + "\" but it has not been created yet!");
@@ -209,6 +217,7 @@ public class Lobby : Bolt.GlobalEventListener {
     /// <param name="statname"></param>
     /// <param name="delta"></param>
     public static void IncrementStatForPlayer(string playername, string statname, int delta) {
+        if (!StatChangesAllowed) return;
         if (!BoltNetwork.isServer) throw new Exception("Only the server can set stats for players");
         if (!StatCreated(statname)) {
             throw new Exception("Tried to increment stat \"" + statname + "\" but it has not been created yet!");

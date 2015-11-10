@@ -7,7 +7,26 @@ using System.Linq;
 /// </summary>
 public class CaptureTheFlagMode : SimpleTeamGameMode {
 
-    public int ScoreLimit = 3;
+    public CaptureTheFlagMode() {
+        ScoreLimit = 3; //3 points to win
+        TimeLimit = 5f * 60f; //5 minutes
+        RespawnDelay = 3f; //3 second respawn delay
+    }
+
+    public override int ScoreLimit {
+        get;
+        set;
+    }
+
+    public override float TimeLimit {
+        get;
+        set;
+    }
+
+    public override float RespawnDelay {
+        get;
+        set;
+    }
 
     //Hardcoded team limit here.
 	private Flag[] flags = new Flag[3];

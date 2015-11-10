@@ -6007,6 +6007,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e0a424e4e79ee4ba8ee32ffe8e20bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ObjectsToDisableWhileDead:
+  - {fileID: 120052}
+  - {fileID: 165130}
+  - {fileID: 155274}
+  - {fileID: 189980}
+  - {fileID: 155240}
   HandPoint: {fileID: 405900}
 --- !u!114 &11412604
 MonoBehaviour:

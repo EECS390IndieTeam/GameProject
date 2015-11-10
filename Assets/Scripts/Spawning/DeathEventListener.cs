@@ -1,21 +1,17 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// This script listens for DeathEvents
 /// </summary>
 [BoltGlobalBehaviour(BoltNetworkModes.Host, "ingame*")]
 public class DeathEventListener : Bolt.GlobalEventListener {
+    private Queue<Player> playersToRespawn = new Queue<Player>();
+    private float nextRespawnTime = 0f;
+    private bool respawning = false;
+
+
     public override void OnEvent(DeathEvent evnt) {
-        //update scores
-        //if (ServerConnectionEventListener.IndexMap.ContainsPlayer(evnt.Killer)) {
-        //    GameStats.SetIntegerStat(evnt.Killer, "Kills", GameStats.GetIntegerStat(evnt.Killer, "Kills") + 1);
-        //}
-
-        //if (ServerConnectionEventListener.IndexMap.ContainsPlayer(evnt.Player)) {
-        //    GameStats.SetIntegerStat(evnt.Player, "Deaths", GameStats.GetIntegerStat(evnt.Player, "Deaths") + 1);
-        //}
-
         if (Lobby.StatCreated("Kills")) {
             Lobby.IncrementStatForPlayer(evnt.Killer, "Kills", 1);
             Lobby.IncrementStatForPlayer(Lobby.PP_TEAMS[Lobby.GetPlayer(evnt.Killer).Team], "Kills", 1);
@@ -25,11 +21,37 @@ public class DeathEventListener : Bolt.GlobalEventListener {
             Lobby.IncrementStatForPlayer(Lobby.PP_TEAMS[Lobby.GetPlayer(evnt.Player).Team], "Deaths", 1);
         }
 
-        //because of the Owner/ProxyPlayer abstraction, this line will either just move the server's player, or
-        //send an MovePlayerEvent to the propper player!
-        GameManager.instance.GameMode.MovePlayerToSpawnPoint(PlayerRegistry.GetIPlayerForUserName(evnt.Player));
+        //the server player has died
+        GameManager.instance.GameMode.MovePlayerToSpawnPoint(PlayerRegistry.GetIPlayerForUserName(evnt.Player), true);
+        float nextTime = BoltNetwork.serverTime + GameManager.instance.GameMode.RespawnDelay;
+        if (playersToRespawn.Count == 0) {
+            nextRespawnTime = nextTime;
+            respawning = true;
+        }
 
-        //GameManager.instance.CheckForGameOver();
-       
+        playersToRespawn.Enqueue(new Player(PlayerRegistry.GetIPlayerForUserName(evnt.Player), nextTime));
+    }
+
+    void Update() {
+        if (!respawning) return;
+        if (BoltNetwork.serverTime >= nextRespawnTime) {
+            Player p = playersToRespawn.Dequeue();
+            GameManager.instance.GameMode.MovePlayerToSpawnPoint(p.player, true);
+            if (playersToRespawn.Count == 0) {
+                respawning = false;
+            } else {
+                nextRespawnTime = playersToRespawn.Peek().respawnTime;
+            }
+        }
+    }
+
+    private struct Player {
+        public Player(IPlayer p, float t) {
+            this.player = p;
+            this.respawnTime = t;
+        }
+
+        public float respawnTime;
+        public IPlayer player;
     }
 }

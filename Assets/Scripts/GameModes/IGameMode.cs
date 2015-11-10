@@ -53,6 +53,21 @@ public interface IGameMode {
         get;
     }
 
+    int ScoreLimit {
+        get;
+        set;
+    }
+
+    float TimeLimit {
+        get;
+        set;
+    }
+
+    float RespawnDelay {
+        get;
+        set;
+    }
+
     /// <summary>
     /// Moves the given list of players to start points
     /// </summary>
@@ -60,10 +75,12 @@ public interface IGameMode {
     void MovePlayersToStartPoints(List<IPlayer> players);
 
     /// <summary>
-    /// Moves the given player to a spawn point
+    /// Moves the given player to a spawn point.
+    /// If the respawn parameter is true, IPlayer.RespawnAt() will be called instead of MoveTo()
     /// </summary>
     /// <param name="player"></param>
-    void MovePlayerToSpawnPoint(IPlayer player);
+    /// <param name="respawn"></param>
+    void MovePlayerToSpawnPoint(IPlayer player, bool respawn);
 
     /// <summary>
     /// Called after the host has begun to start the game, but before the game has started

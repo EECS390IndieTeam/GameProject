@@ -36,7 +36,7 @@ public abstract class SimpleTeamGameMode : IGameMode {
         points.Dispose();
     }
 
-    public void MovePlayerToSpawnPoint(IPlayer player) {
+    public void MovePlayerToSpawnPoint(IPlayer player, bool respawn) {
         SpawnPointManager mgr = SpawnPointManager.instance;
         if (mgr == null) {
             Debug.LogError("SpawnPointManager.instance was null!");
@@ -44,7 +44,12 @@ public abstract class SimpleTeamGameMode : IGameMode {
         }
         List<SpawnPoint> points = mgr.GetSpawnPointsForTeam(player.Team, this.Mode).ToList();
         int rand = Random.Range(0, points.Count);
-        player.MoveTo(points[rand].transform);
+        if (respawn) {
+            player.RespawnAt(points[rand].transform);
+        } else {
+            player.MoveTo(points[rand].transform);
+        }
+        
     }
 
     public abstract GameModes Mode {
@@ -69,6 +74,21 @@ public abstract class SimpleTeamGameMode : IGameMode {
 
     public abstract string StatToDisplay {
         get;
+    }
+
+    public abstract int ScoreLimit {
+        get;
+        set;
+    }
+
+    public abstract float TimeLimit {
+        get;
+        set;
+    }
+
+    public abstract float RespawnDelay {
+        get;
+        set;
     }
 
     public abstract void OnPreGame();

@@ -6,8 +6,11 @@ using System.Linq;
 /// A game mode for a simple free-for-all deathmatch mode
 /// </summary>
 public class FFADeathmatchMode : SimpleFFAGameMode {
-
-    public int ScoreLimit = 25;
+    public FFADeathmatchMode() {
+        this.ScoreLimit = 25;
+        this.TimeLimit = 5f * 60f;
+        this.RespawnDelay = 3f;
+    }
 
     public override GameModes Mode {
         get { return GameModes.FFA_DEATHMATCH; }
@@ -38,6 +41,21 @@ public class FFADeathmatchMode : SimpleFFAGameMode {
             if (p.GetStat("Kills") >= ScoreLimit) return true;
         }
         return false;
+    }
+
+    public override int ScoreLimit {
+        get;
+        set;
+    }
+
+    public override float TimeLimit {
+        get;
+        set;
+    }
+
+    public override float RespawnDelay {
+        get;
+        set;
     }
 
     public override void OnGameStart() {}

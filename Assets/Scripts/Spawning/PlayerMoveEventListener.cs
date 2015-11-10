@@ -9,6 +9,11 @@ using System.Collections;
 [BoltGlobalBehaviour(BoltNetworkModes.Client, "ingame*")]
 public class PlayerMoveEventListener : Bolt.GlobalEventListener {
     public override void OnEvent(PlayerMoveEvent evnt) {
-        GameManager.instance.CurrentPlayer.MoveTo(evnt.NewPosition, evnt.NewRotation);
+        IPlayer player = GameManager.instance.CurrentPlayer;
+        if (evnt.Respawn) {
+            player.RespawnAt(evnt.NewPosition, evnt.NewRotation);
+        } else {
+            player.MoveTo(evnt.NewPosition, evnt.NewRotation);
+        }
     }
 }

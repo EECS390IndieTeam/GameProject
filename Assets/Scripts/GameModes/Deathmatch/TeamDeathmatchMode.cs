@@ -7,11 +7,31 @@ using System.Linq;
 /// </summary>
 public class TeamDeathmatchMode : SimpleTeamGameMode {
 
+    public TeamDeathmatchMode() {
+        this.ScoreLimit = 25;
+        this.TimeLimit = 5f * 60f;
+        this.RespawnDelay = 3f;
+    }
+
     public override int MaxTeams {
         get { return 8; }
     }
 
-    public int ScoreLimit = 25;
+
+    public override int ScoreLimit {
+        get;
+        set;
+    }
+
+    public override float TimeLimit {
+        get;
+        set;
+    }
+
+    public override float RespawnDelay {
+        get;
+        set;
+    }
 
     public override GameModes Mode {
         get { return GameModes.TEAM_DEATHMATCH; }

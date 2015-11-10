@@ -49,6 +49,14 @@ public class GameManager : MonoBehaviour
 
 	private IPlayer Player;
 
+    /// <summary>
+    /// The value of BoltNetwork.ServerTime when the game started
+    /// </summary>
+    public float GameStartTime {
+        get;
+        private set;
+    }
+
     public GameState CurrentGameState {
         get;
         private set;
@@ -101,13 +109,20 @@ public class GameManager : MonoBehaviour
         switch (state) {
             case GameState.PRE_GAME:
                 if (BoltNetwork.isServer) {
+                    Lobby.StatChangesAllowed = true;
                     Lobby.RemoveAllDisconnectedPlayers();
                     Lobby.ClearAllStats();
                     GameMode.OnPreGame();
                 }
                 break;
             case GameState.IN_GAME:
+                GameStartTime = BoltNetwork.serverTime;
                 if(BoltNetwork.isServer) GameMode.OnGameStart();
+                break;
+            case GameState.POST_GAME:
+                if (BoltNetwork.isServer) {
+                    Lobby.StatChangesAllowed = false;
+                }
                 break;
         }
         if (BoltNetwork.isServer) ServerSideData.UpdateZeusData();
@@ -117,11 +132,24 @@ public class GameManager : MonoBehaviour
         if (!BoltNetwork.isServer) return;
         if (CurrentGameState != GameState.IN_GAME) return;
         if (GameMode.GameOver()) {
-            GameMode.OnGameEnd();
-            CurrentGameState = GameState.POST_GAME;
-            //more game over stuff here
+            GameOver();
         }
     }
 
+    private void GameOver() {
+            GameMode.OnGameEnd();
+            ChangeGameState(GameState.POST_GAME);
+            //more game over stuff here
+    }
+
+    void Update() {
+        if(!BoltNetwork.isServer) return;
+        if(CurrentGameState != GameState.IN_GAME) return;
+        float gameTime = BoltNetwork.serverTime - GameStartTime;
+        if (gameTime <= GameMode.TimeLimit) {
+            Debug.Log("Timer expired!");
+            GameOver();
+        }
+    }
 
 }
