@@ -11,25 +11,36 @@ public class ThrowGrenade : MonoBehaviour {
 
     private Grenade heldGrenade;
 
-    void Update() {
-        if (Input.GetButtonDown("Grenade") && heldGrenade == null && grenadeAmmo > 0) {
-            heldGrenade = BoltNetwork.Instantiate(BoltPrefabs.Grenade).GetComponent<Grenade>();
-            heldGrenade.SetThrower(GameManager.instance.CurrentUserName);
-            heldGrenade.transform.parent = this.transform;//the grenade needs to follow us if we move while cooking it
-            heldGrenade.transform.localPosition = new Vector3(0f,0f,3f);//put it in front of the player for now
-            heldGrenade.transform.localRotation = Quaternion.identity;
-            heldGrenade.transform.localScale = Vector3.one;
-            heldGrenade.GetComponent<Rigidbody>().isKinematic = true;
-            grenadeAmmo--;
-        }
-        if (Input.GetButtonUp("Grenade") && heldGrenade != null) {
-            Rigidbody rgb = heldGrenade.GetComponent<Rigidbody>();
-            rgb.isKinematic = false;
-			if (grenadeThrow) grenadeThrow.Play ();
-            rgb.AddForce(transform.forward * ThrowForce);
-            heldGrenade.transform.parent = null;
-            heldGrenade.GetComponent<Collider>().enabled = true;
-            heldGrenade = null;
-        }
-    }
+	private AbstractPlayer player;
+
+	void Start() {
+		player = (AbstractPlayer)GameManager.instance.CurrentPlayer;
+	}
+
+	// Returns bool for success
+	public bool PrepGrenade() {
+		if (heldGrenade || grenadeAmmo <= 0) return false;
+		heldGrenade = BoltNetwork.Instantiate(BoltPrefabs.Grenade).GetComponent<Grenade>();
+		heldGrenade.SetThrower(GameManager.instance.CurrentUserName);
+		heldGrenade.transform.parent = this.transform;//the grenade needs to follow us if we move while cooking it
+		heldGrenade.transform.localPosition = Vector3.zero;
+		heldGrenade.transform.localRotation = Quaternion.identity;
+		heldGrenade.GetComponent<Rigidbody>().isKinematic = true;
+		grenadeAmmo--;
+		return true;
+	}
+
+	// Returns bool for success
+	public bool GrenadeThrow() {
+		if (!heldGrenade) return false;
+		Rigidbody rgb = heldGrenade.GetComponent<Rigidbody>();
+		rgb.isKinematic = false;
+		if (grenadeThrow) grenadeThrow.Play ();
+		heldGrenade.transform.parent = null;
+		rgb.velocity = player.GetComponent<Rigidbody>().velocity;
+		rgb.AddForce(player.transform.forward * ThrowForce);
+		heldGrenade.GetComponent<Collider>().enabled = true;
+		heldGrenade = null;
+		return true;
+	}
 }

@@ -11,19 +11,20 @@ public class FPSController : MonoBehaviour {
     public float maxYSpeedSurface = 8;
     public float velocityQuantum;
 	public float rotationSpeed = 1;
-	public Transform muzzlePoint;
-	public MeshRenderer gunModel;
-
-    public LayerMask surfaceMovementMask;
+	public LayerMask surfaceMovementMask;
 
     public Transform cameraTransform;
 
     private CustomMouseLook mouseLook;
     private CharacterRotator rotator;
     private SurfaceMovement sMovement;
-    private GrappleGun grappleGun;
-	private Gun gun;
+    public GrappleGun grappleGun;
+	public Gun gun;
+	public ThrowGrenade grenade;
+	public MeshRenderer gunModel;
+
     private bool isAttachedToSurface = false;
+	private bool prepGrenade;
 	
 	private float debounceTime = 0.1f;
 	private float debounce = 0;
@@ -48,8 +49,9 @@ public class FPSController : MonoBehaviour {
         mouseLook = GetComponent<CustomMouseLook>();
         rotator = GetComponent<CharacterRotator>();
         sMovement = GetComponent<SurfaceMovement>();
-        grappleGun = GetComponent<GrappleGun>();
-		gun = GetComponent<Gun>();
+        
+
+
 		if (grappleGun) grappleGun.controller = this;
 		grappled = false;
 		previousHolding = false;
@@ -58,89 +60,102 @@ public class FPSController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
+        CheckForInput ();
 
-        if (Mathf.Abs(mouseX) > float.Epsilon || Mathf.Abs(mouseY) > float.Epsilon)
-        {
-            mouseLook.rotateView(mouseX, mouseY);
-        }
-        if(Input.GetKey(KeyCode.Q))
-        {
-            rotator.rotateCharacter(rotationSpeed);
-        }
-        if (Input.GetKey(KeyCode.E))
-        {
-            rotator.rotateCharacter(-rotationSpeed);
-        }
+		if (previousHolding != player.HoldingFlag) {
+			previousHolding = player.HoldingFlag;
+			gun.canShoot = !previousHolding;
+			gunModel.enabled = !previousHolding;
+		}
+		//if (previousHolding && !player.HoldingFlag) previousHolding = false;
+    }
 
-		if (!grappleGun) return;
+	private void CheckForInput() {
+		
+		DebugHUD.setValue("gunModel.enabled", gunModel.enabled);
 
+		// Mouse look and character rotation
+		float mouseX = Input.GetAxis("Mouse X");
+		float mouseY = Input.GetAxis("Mouse Y");
+		if (Mathf.Abs(mouseX) > float.Epsilon || Mathf.Abs(mouseY) > float.Epsilon)
+		{
+			mouseLook.rotateView(mouseX, mouseY);
+		}
+		if(Input.GetKey(KeyCode.Q))
+		{
+			rotator.rotateCharacter(rotationSpeed);
+		}
+		if (Input.GetKey(KeyCode.E))
+		{
+			rotator.rotateCharacter(-rotationSpeed);
+		}
+		
+		// -------------------------------------------------------------------------- //
+
+		// Firing weapon
+		if (Input.GetButtonDown("Fire1")) {
+			gun.StartShot();
+		}
+		if (Input.GetButtonUp("Fire1")) {
+			gun.EndShot();
+		}
+
+		// -------------------------------------------------------------------------- //
+
+		// Grapple/Degrapple
 		debounce -= Time.deltaTime;
 		if (debounce < 0) {
 			debounce = 0;
 		}
-		
 		if (Input.GetButtonDown("Fire2") && !(grappled || grappleGun.beamFiring) && debounce == 0) {
 			grappleGun.fire();
-            if (isAttachedToSurface) {
-                isAttachedToSurface = false;
-                sMovement.detachFromSurface();
-            }
-            
+			if (isAttachedToSurface) {
+				isAttachedToSurface = false;
+			}
+			
 			debounce = debounceTime;
 		}
-		
 		if (Input.GetButtonDown("Fire2") && (grappled || grappleGun.beamFiring) && debounce == 0) {
 			grappleGun.detach();
 			debounce = debounceTime;
 		}
 
-		if (Input.GetButtonDown("Jump") && grappled) {
-			grappleGun.reelIn();
+		// -------------------------------------------------------------------------- //
+
+		// Reel in or push off
+		if (Input.GetButtonDown("Jump")){
+			if (grappled) {
+				grappleGun.reelIn();
+			} else if (isAttachedToSurface) {
+				isAttachedToSurface = false;
+				sMovement.pushOff();
+			}
 		}
 
-		if (player.HoldingFlag) previousHolding = true;
-		gun.canShoot = !previousHolding;
-		gunModel.enabled = !previousHolding;
-		if (previousHolding && !player.HoldingFlag) previousHolding = false;
-    }
+		// -------------------------------------------------------------------------- //
+
+		// Grenades
+		if (Input.GetButtonDown("Grenade") && !previousHolding) {
+			bool success = grenade.PrepGrenade();
+			gun.canShoot = !success;
+			gunModel.enabled = !success;
+			prepGrenade = true;
+		}
+		if (Input.GetButtonUp("Grenade") && !previousHolding) {
+			grenade.GrenadeThrow();
+			if (!gunModel.enabled && prepGrenade) {
+				gun.canShoot = true;
+				gunModel.enabled = true;
+				prepGrenade = false;
+			}
+		}
+	}
 
     void FixedUpdate ()
     {
-        //Debug.Log(isAttachedToSurface);
-        //RaycastHit hit;
-        //if (Physics.Raycast(character.position, cameraTransform.forward, out hit, grabDistance + GetComponent<SphereCollider>().radius, surfaceMovementMask) && !isAttachedToSurface)
-        //{
-
-        //    if (justFired)
-        //    {
-        //        grappleGun.detach();
-        //        justFired = false;
-        //    }
-        //    Debug.Log("Attached to surface");
-        //    sMovement.attachToSurface(hit);
-        //    isAttachedToSurface = true;
-
-            
-        //}
-
-
-        Vector2 input = GetInput();
-        if(isAttachedToSurface)
-        {
-            //sMovement.moveCharacter(input);
-            if(Input.GetKey(KeyCode.Space) && !grappled)
-            {
-                isAttachedToSurface = false;
-                sMovement.pushOff();
-            } else
-            {
-                //sMovement.moveCharacter(input);
-            }
-        }
-
-		doPhysics();
+		if (grappled) {
+			character.velocity = GrapplePhysics.calculateVelocity(character.position, character.velocity);
+		}
     }
 
     void OnCollisionStay(Collision c)
@@ -155,23 +170,5 @@ public class FPSController : MonoBehaviour {
             sMovement.attachToSurface(c);
             isAttachedToSurface = true;
         }
-    }
-
-	private void doPhysics() {
-		if (grappled) {
-			character.velocity = GrapplePhysics.calculateVelocity(character.position, character.velocity);
-		}
-	}
-
-    private Vector2 GetInput()
-    {
-
-        Vector2 input = new Vector2
-        {
-            x = Input.GetAxis("Horizontal"),
-            y = Input.GetAxis("Vertical")
-        };
-        
-        return input;
     }
 }

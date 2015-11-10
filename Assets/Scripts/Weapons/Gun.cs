@@ -63,10 +63,13 @@ public class Gun : MonoBehaviour, IWeapon
         Temperature = 0f;
         look = GetComponentInParent<CustomMouseLook>();
 		player = (AbstractPlayer)GameManager.instance.CurrentPlayer;
+		canShoot = true;
     }
 
     void Update()
     {
+		DebugHUD.setValue("Currently Firing", currentlyFiring);
+		DebugHUD.setValue ("Can shoot", canShoot);
 
         if (Physics.Raycast(SourceTransform.position, SourceTransform.forward, out hitInfo, float.PositiveInfinity, shootableLayers))
         {
@@ -105,11 +108,7 @@ public class Gun : MonoBehaviour, IWeapon
 			player.LaserVisible = false;
 			return;
 		}
-		if (canShoot && Input.GetButtonDown ("Fire1")) {
-			currentlyFiring = true;
-		} else if (Input.GetButtonUp ("Fire1")) {
-			currentlyFiring = false;
-		}
+
 		if (currentlyFiring) {
 			player.LaserVisible = true;
 			Firing();
@@ -117,6 +116,14 @@ public class Gun : MonoBehaviour, IWeapon
 			player.LaserVisible = false;
 		}
     }
+
+	public void StartShot() {
+		currentlyFiring = canShoot;
+	}
+
+	public void EndShot() {
+		currentlyFiring = false;
+	}
 
 	public void CreateShot() {
 		WeaponFireEvent evnt = WeaponFireEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.Unreliable);
@@ -146,7 +153,8 @@ public class Gun : MonoBehaviour, IWeapon
 	}
 
     public void Firing()
-    {
+	{
+		Debug.Log ("Hey I should start shooting now");
         if(muzzleFlash != null)
         {
             //StartCoroutine(MuzzleFlash());
