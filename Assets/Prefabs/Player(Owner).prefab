@@ -121,6 +121,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 22479014}
   - 114: {fileID: 11436972}
+  - 114: {fileID: 11481564}
   m_Layer: 5
   m_Name: Health_Slider
   m_TagString: Untagged
@@ -219,6 +220,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22444826}
+  - 114: {fileID: 11430754}
   m_Layer: 5
   m_Name: Timer, Scores
   m_TagString: Untagged
@@ -235,6 +237,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 22454310}
   - 114: {fileID: 11412604}
+  - 114: {fileID: 11478962}
   m_Layer: 5
   m_Name: Weapon_Slider
   m_TagString: Untagged
@@ -510,9 +513,6 @@ GameObject:
   - 114: {fileID: 11453406}
   - 114: {fileID: 11464946}
   - 225: {fileID: 22506448}
-  - 114: {fileID: 11443784}
-  - 114: {fileID: 11492868}
-  - 114: {fileID: 11466654}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -1734,6 +1734,28 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11430754
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f72838734e6f545a019dc6b9a63a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerScore: {fileID: 11492558}
+  OpponentScore: {fileID: 11438850}
+  teamColors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: .921568632, b: .0156862754, a: 1}
+  - {r: 1, g: .460784316, b: .00784313772, a: 1}
+  - {r: 1, g: .5, b: .5, a: 1}
+  - {r: .5, g: 0, b: .5, a: 1}
 --- !u!114 &11436972
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1826,6 +1848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightningMaterial: {fileID: 2100000, guid: 34812b32841a255459f39511c1280354, type: 2}
+  maxLength: 100
   framesPerUpdate: 1
   curve:
     serializedVersion: 2
@@ -1870,21 +1893,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11443784
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6900e899847024dfaa975edd861066bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownSlider: {fileID: 11412604}
-  gun: {fileID: 11481790}
-  overheatColor: {r: 1, g: 0, b: 0, a: 1}
-  normalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11448800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2114,28 +2122,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &11466654
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43f72838734e6f545a019dc6b9a63a08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerScore: {fileID: 11492558}
-  OpponentScore: {fileID: 11438850}
-  teamColors:
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 1, a: 1}
-  - {r: 0, g: 1, b: 0, a: 1}
-  - {r: 1, g: .921568632, b: .0156862754, a: 1}
-  - {r: 1, g: .460784316, b: .00784313772, a: 1}
-  - {r: 1, g: .5, b: .5, a: 1}
-  - {r: .5, g: 0, b: .5, a: 1}
 --- !u!114 &11469972
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2163,6 +2149,38 @@ MonoBehaviour:
   gun: {fileID: 11481790}
   grenade: {fileID: 11421868}
   gunModel: {fileID: 2376010}
+--- !u!114 &11478962
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 146384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6900e899847024dfaa975edd861066bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownSlider: {fileID: 11412604}
+  gun: {fileID: 11481790}
+  overheatColor: {r: 1, g: 0, b: 0, a: 1}
+  normalColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &11481564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d547e4f511313456c956df3612e02248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 102286}
+  currentHealth: 0
+  healthSlider: {fileID: 11436972}
+  damageImage: {fileID: 11417270}
+  flashSpeed: 5
+  flashColour: {r: 1, g: 0, b: 0, a: .100000001}
 --- !u!114 &11481790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2275,23 +2293,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 88
---- !u!114 &11492868
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d547e4f511313456c956df3612e02248, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 102286}
-  currentHealth: 0
-  healthSlider: {fileID: 11436972}
-  damageImage: {fileID: 11417270}
-  flashSpeed: 5
-  flashColour: {r: 1, g: 0, b: 0, a: .100000001}
 --- !u!114 &11496008
 MonoBehaviour:
   m_ObjectHideFlags: 1

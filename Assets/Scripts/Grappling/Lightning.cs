@@ -13,7 +13,7 @@ public class Lightning : MonoBehaviour {
 	public int numPoints;
 	[System.NonSerialized]
 	public float length;
-	[System.NonSerialized]
+
 	public float maxLength;
 
 	public int framesPerUpdate = 1;

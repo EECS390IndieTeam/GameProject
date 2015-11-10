@@ -33,7 +33,6 @@ public class GrappleGun : MonoBehaviour {
 
 	void Start() {
 		lightning = GetComponent<Lightning>();
-		lightning.maxLength = maxDistance;
 		beamSpeedTimer = 0;
 		GrapplePhysics.reelSpeed = reelSpeed;
 		GrapplePhysics.stabilizer = stabilizer;
