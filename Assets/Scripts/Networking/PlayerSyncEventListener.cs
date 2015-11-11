@@ -66,8 +66,8 @@ public class PlayerSyncEventListener : Bolt.GlobalEventListener {
             //allow the player to move
             player.ControlEnabled = true;
             running = false;
-            Destroy(this);
             GameManager.instance.ChangeGameState(GameManager.GameState.IN_GAME);
+            Destroy(this);
         } else {
             DebugHUD.setValue("load state", "Sync message recieved, game starts in " + (StartTime - BoltNetwork.serverTime));
             blind.Text = "Synchronized!\nGame will begin in " + (StartTime - BoltNetwork.serverTime).ToString("F2") + " seconds";

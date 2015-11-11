@@ -143,10 +143,11 @@ public class GameManager : MonoBehaviour
     }
 
     void Update() {
+        DebugHUD.setValue("GameState", System.Enum.GetName(typeof(GameState), CurrentGameState));
         if(!BoltNetwork.isServer) return;
         if(CurrentGameState != GameState.IN_GAME) return;
         float gameTime = BoltNetwork.serverTime - GameStartTime;
-        if (gameTime <= GameMode.TimeLimit) {
+        if (gameTime >= GameMode.TimeLimit) {
             Debug.Log("Timer expired!");
             GameOver();
         }
