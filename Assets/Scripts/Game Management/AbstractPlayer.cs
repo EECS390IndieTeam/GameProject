@@ -15,6 +15,8 @@ public abstract class AbstractPlayer : MonoBehaviour, IPlayer {
     /// </summary>
     private PlayerState state;
 
+    public Transform HandPoint;
+
     /// <summary>
     /// Sets the PlayerState to use.  We can't simply use GetComponent because when the prefab
     /// containing the implementation of this script, it initially has no parent transform, so we don't

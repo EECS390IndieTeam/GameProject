@@ -42,9 +42,6 @@ public class OwnerPlayer : AbstractPlayer {
         GameManager.instance.SetCurrentPlayer(this);
     }
 
-	
-	public Transform HandPoint;
-
     void Start()
     {
         this.Health = 100;

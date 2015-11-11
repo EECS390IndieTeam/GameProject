@@ -5,7 +5,7 @@ public class PlayerGrenades : MonoBehaviour {
 	public GameObject playerCam;		//Grenade Throw is attached to the Camera
 	public int grenadeCount;
 
-	ThrowGrenade nadeScript;
+	public ThrowGrenade nadeScript;
 	GameObject nade1;
 	GameObject nade2;
 	GameObject nade3;
@@ -13,7 +13,6 @@ public class PlayerGrenades : MonoBehaviour {
 	GameObject nade5;
 	// Use this for initialization
 	void Start () {
-		nadeScript = playerCam.GetComponent<ThrowGrenade> ();
 
 		nade1 = this.transform.Find("Grenade 1").gameObject;
 		nade2 = this.transform.Find("Grenade 2").gameObject;

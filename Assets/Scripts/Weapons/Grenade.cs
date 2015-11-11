@@ -33,7 +33,7 @@ public class Grenade : Bolt.EntityBehaviour<IGrenadeState>, IGrenade
 	void OnCollisionEnter(Collision struck){
 		GameObject struckObject = struck.gameObject;
 		IPlayer hitplayer = struckObject.GetComponent<AbstractPlayer>();
-		if(hitplayer != null){
+		if(hitplayer != null && hitplayer != (AbstractPlayer)GameManager.instance.CurrentPlayer){
 			//Attach the grenade to the hit player.
 			this.GetComponent<Rigidbody>().velocity = Vector3.zero;
 			this.GetComponent<Rigidbody>().isKinematic = true;
@@ -50,7 +50,10 @@ public class Grenade : Bolt.EntityBehaviour<IGrenadeState>, IGrenade
 			//If something in the radius is a player, deal damage to them.
 			GameObject target = targets[i].gameObject;
 			IPlayer hitplayer = target.GetComponent<AbstractPlayer>();
-			if(hitplayer != null) hitplayer.TakeDamage(damage, Thrower, (target.transform.position - this.transform.position), 0);
+			Vector3 directionVector = target.transform.position - this.transform.position;
+			float distanceMultiplier = (explosionRadius - directionVector.magnitude) / explosionRadius;
+			if (distanceMultiplier < 0) distanceMultiplier = 0;
+			if(hitplayer != null) hitplayer.TakeDamage(damage * distanceMultiplier, Thrower, directionVector, 0);
 			i++;
 		}
 		//--------Put in something here to create an explosion particle effect------------

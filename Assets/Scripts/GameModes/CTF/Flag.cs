@@ -12,6 +12,7 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
     }
 
     public int teamID; //The team that this flag belongs to
+	[System.NonSerialized]
     public AbstractPlayer player; //The player holding this flag. Null if the flag is dropped.
 	public MeshRenderer flagMaterial;
     private Vector3 flagSpawnPosition;
@@ -69,14 +70,14 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
 
     IEnumerator DropFlagRoutine()
     {
+		this.transform.parent = null;
 		transform.position += 2 * player.transform.forward;
+		bSCS.enabled = true;
 		player.HoldingFlag = false;
 		player = null;
-        this.transform.parent = null;
         state.Holder = "";
 		yield return new WaitForSeconds(timeDelay);
 		Debug.Log ("Re-enabling flag");
-		bSCS.enabled = true;
         isEnabled = true;
     }
 
@@ -96,7 +97,7 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
         if(p != null && player == null && (p.Team != teamID || (p.Team == teamID && !mode.isFlagAtBaseForTeam(teamID))))
         {
             //Update who is holding flag
-			OwnerPlayer p1 = other.gameObject.GetComponentInParent<OwnerPlayer>();
+			AbstractPlayer p1 = other.gameObject.GetComponentInParent<AbstractPlayer>();
 			if(p1 == null){
 				Debug.Log ("Player doesn't exist.");
 			} else {
