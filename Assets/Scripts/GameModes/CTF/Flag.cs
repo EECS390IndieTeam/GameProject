@@ -38,7 +38,7 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
 		light = GetComponentInChildren<Light>();
         flagSpawnPosition = transform.position;
 		flagSpawnRotation = transform.rotation;
-		SetFlagColor (Lobby.teamColors [teamID]);
+		SetFlagColor (Teams.Colors[teamID]);
 		bSCS.enabled = true;
 	}
 	

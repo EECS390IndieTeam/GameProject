@@ -57,13 +57,6 @@ public class TeamDeathmatchMode : SimpleTeamGameMode {
         get { return "Kills"; }
     }
 
-    public override bool GameOver() {
-        for (int i = 0; i < 8; i++) {
-            if (Lobby.GetStatForPlayer(Lobby.PP_TEAMS[i], "Kills") >= ScoreLimit) return true;
-        }
-        return false;
-    }
-
     public override void OnGameStart() {}
 
     public override void OnGameEnd() {}

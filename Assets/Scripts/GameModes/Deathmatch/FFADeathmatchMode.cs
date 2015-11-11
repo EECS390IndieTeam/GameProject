@@ -36,13 +36,6 @@ public class FFADeathmatchMode : SimpleFFAGameMode {
         get { return "Kills"; }
     }
 
-    public override bool GameOver() {
-        foreach (var p in Lobby.AllPlayers) {
-            if (p.GetStat("Kills") >= ScoreLimit) return true;
-        }
-        return false;
-    }
-
     public override int ScoreLimit {
         get;
         set;

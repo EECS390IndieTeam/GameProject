@@ -30,17 +30,6 @@ public class Lobby : Bolt.GlobalEventListener {
     public IEnumerable<string> DisplayedStatNames {
         get { return displayedStatNames.AsEnumerable(); }
     }
-
-	public static Color[] teamColors = {
-		Color.white,                               //team 0
-		Color.red,                                 //team 1
-		Color.blue,                                //team 2
-		Color.green,                               //team 3
-		Color.yellow,                              //team 4
-		Color.Lerp(Color.red,Color.yellow, 0.5f),  //team 5
-		Color.Lerp(Color.red, Color.white, 0.5f),  //team 6
-		Color.Lerp(Color.red, Color.blue, 0.5f)    //team 7
-	};
 	
 	/// <summary>
 	/// Adds the given stat to the in-game stat display screen.
@@ -266,18 +255,22 @@ public class Lobby : Bolt.GlobalEventListener {
     /// </summary>
     public static void ClearAllStats() {
         if (!BoltNetwork.isServer) throw new Exception("Only the server can reset stats");
-        foreach (LobbyPlayer p in players) {
-            p.ClearStats();
-        }
-        statNameMap.Clear();
-        statNames.Clear();
-        pseudoplayers.Clear();
+        _ClearAllStats();
         FullLobbyDataToken token = generateFullDataToken();
         FullLobbyDataResponse evnt = FullLobbyDataResponse.Create(Bolt.GlobalTargets.AllClients, Bolt.ReliabilityModes.ReliableOrdered);
         evnt.Token = token;
         evnt.Send();
         Sort();
         FireChangeEvent(LobbyChange.ALL);
+    }
+
+    private static void _ClearAllStats() {
+        foreach (LobbyPlayer p in players) {
+            p.ClearStats();
+        }
+        statNameMap.Clear();
+        statNames.Clear();
+        pseudoplayers.Clear();
     }
 
     public delegate void LobbyUpdated(LobbyChange change);
@@ -563,6 +556,11 @@ public class Lobby : Bolt.GlobalEventListener {
         }
         Sort();
         FireChangeEvent(LobbyChange.STAT_CHANGED);
+    }
+
+    public override void Disconnected(BoltConnection connection) {
+        if (BoltNetwork.isServer) return;
+        _ClearAllStats();
     }
 
     public override void OnEvent(GameModeUpdateEvent evnt) {

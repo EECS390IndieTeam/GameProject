@@ -24,7 +24,7 @@ public static class ServerSideData {
         token.PasswordRequired = !string.IsNullOrEmpty(Password);
         token.ServerName = ServerName;
         GameManager.GameState state = GameManager.instance.CurrentGameState;
-        token.HideInServerList = state == GameManager.GameState.LOBBY || state == GameManager.GameState.POST_GAME;
+        token.HideInServerList = state != GameManager.GameState.LOBBY;
         BoltNetwork.SetHostInfo(ServerName, token);
     }
 }

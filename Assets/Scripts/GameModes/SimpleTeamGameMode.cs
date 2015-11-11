@@ -92,7 +92,32 @@ public abstract class SimpleTeamGameMode : IGameMode {
     }
 
     public abstract void OnPreGame();
-    public abstract bool GameOver();
+    public virtual bool GameOver() {
+        for (int i = 0; i < 8; i++) {//iterate through all teams
+            //we store the team's total score in their team's default pseudoplayer
+            if (Lobby.GetStatForPlayer(Lobby.PP_TEAMS[i], StatToDisplay) >= ScoreLimit) {
+                Debug.Log("Team " + i + " won with their score of " + Lobby.GetStatForPlayer(Lobby.PP_TEAMS[i], StatToDisplay) + " which is more than the limit of " + ScoreLimit);
+                return true;
+            }
+        }
+        return false;
+    }
+    public virtual string GetWinner() {
+        List<string> winners = new List<string>();
+        int max = 0;
+        for (int i = 0; i < 8; i++) {
+            int stat = Lobby.GetStatForPlayer(Lobby.PP_TEAMS[i], StatToDisplay);
+            if (stat > max) {
+                max = stat;
+                winners.Clear();
+                winners.Add(Teams.Names[i]);
+            } else if (stat == max) {
+                winners.Add(Teams.Names[i]);
+            }
+        }
+        return string.Join(", ", winners.ToArray());
+    }
     public abstract void OnGameStart();
     public abstract void OnGameEnd();
+    
 }

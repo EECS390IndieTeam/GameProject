@@ -7,17 +7,21 @@ public class SpawningBlind : MonoBehaviour {
     public Text text;
     public Image image;
 
-    //private bool fading = false;
     private float fadeTime = 0f;
     private float targetFadeTime = 0f;
     private float startingAlpha = 0f;
+    private float endingAlpha = 0f;
 
     void Awake() {
+        //this allows us to leave this attached to the player, and not just floating in the level
         transform.SetParent(null, false);
         transform.position = Vector3.zero;
         enabled = false;
     }
 
+    /// <summary>
+    /// get or set the text color
+    /// </summary>
     public Color TextColor {
         get {
             return text.color;
@@ -27,6 +31,9 @@ public class SpawningBlind : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// get or set the background color
+    /// </summary>
     public Color BackgroundColor {
         get {
             return image.color;
@@ -36,6 +43,9 @@ public class SpawningBlind : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Get or set the transparency of the blind (0-1)
+    /// </summary>
     public float Alpha {
         get {
             return BackgroundColor.a;
@@ -50,6 +60,9 @@ public class SpawningBlind : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Get or set the text on the blind
+    /// </summary>
     public string Text {
         get {
             return text.text;
@@ -59,33 +72,62 @@ public class SpawningBlind : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Shorthand for FadeTo(time, 0.0f)
+    /// </summary>
+    /// <param name="time"></param>
     public void FadeOut(float time) {
+        FadeTo(time, 0.0f);
+    }
+
+    /// <summary>
+    /// Shorthand for FadeTo(time, 1.0f)
+    /// </summary>
+    /// <param name="time"></param>
+    public void FadeIn(float time) {
+        FadeTo(time, 1.0f);
+    }
+
+    /// <summary>
+    /// Fades to the give alpha value over the given amount of time
+    /// </summary>
+    /// <param name="time"></param>
+    /// <param name="alpha"></param>
+    public void FadeTo(float time, float endAlpha) {
+        canvas.enabled = true;
         targetFadeTime = time;
         this.enabled = true;
-        //fading = true;
         startingAlpha = Alpha;
+        endingAlpha = endAlpha;
         fadeTime = 0f;
     }
 
+    /// <summary>
+    /// Cancels the current fade and makes the blind fully opaque
+    /// </summary>
     public void Show() {
         Alpha = 1.0f;
         this.enabled = false;
         canvas.enabled = true;
     }
 
+    /// <summary>
+    /// Cancels the current fade and hides the blind.  Use this instead of setting Alpha to zero
+    /// </summary>
     public void Hide() {
         canvas.enabled = false;
         this.enabled = false;
     }
 
     void Update() {
-        //if (!fading) return;
         fadeTime += Time.deltaTime;
         if (fadeTime >= targetFadeTime) {
             Hide();
         } else {
             float percent = fadeTime / targetFadeTime;
-            Alpha = Mathf.Lerp(startingAlpha, 0.0f, percent);
+            Alpha = Mathf.Lerp(startingAlpha, endingAlpha, percent);
         }
     }
+
+
 }

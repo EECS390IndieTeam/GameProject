@@ -44,7 +44,8 @@ public class GameManager : MonoBehaviour
         LOBBY,
         PRE_GAME,
 		IN_GAME,
-		POST_GAME
+		POST_GAME_FADE,
+        POST_GAME
 	}
 
 	private IPlayer Player;
@@ -119,9 +120,14 @@ public class GameManager : MonoBehaviour
                 GameStartTime = BoltNetwork.serverTime;
                 if(BoltNetwork.isServer) GameMode.OnGameStart();
                 break;
-            case GameState.POST_GAME:
+            case GameState.POST_GAME_FADE:
                 if (BoltNetwork.isServer) {
                     Lobby.StatChangesAllowed = false;
+                }
+                break;
+            case GameState.POST_GAME:
+                if (BoltNetwork.isServer) {
+                    BoltNetwork.LoadScene(BoltScenes.postgame);
                 }
                 break;
         }
@@ -137,19 +143,35 @@ public class GameManager : MonoBehaviour
     }
 
     private void GameOver() {
-            GameMode.OnGameEnd();
-            ChangeGameState(GameState.POST_GAME);
-            //more game over stuff here
+        GameMode.OnGameEnd();
+        ChangeGameState(GameState.POST_GAME_FADE);
+        SpawningBlind blind = FindObjectOfType<SpawningBlind>();
+        if (blind != null) {
+            blind.Text = "Game Over";
+            blind.FadeIn(3f);
+        }
+        fadeTime = 0f;
+        
+        //more game over stuff here
     }
+    private float fadeTime = 0f;
 
     void Update() {
         DebugHUD.setValue("GameState", System.Enum.GetName(typeof(GameState), CurrentGameState));
-        if(!BoltNetwork.isServer) return;
-        if(CurrentGameState != GameState.IN_GAME) return;
-        float gameTime = BoltNetwork.serverTime - GameStartTime;
-        if (gameTime >= GameMode.TimeLimit) {
-            Debug.Log("Timer expired!");
-            GameOver();
+        //if(!BoltNetwork.isServer) return;
+        if (BoltNetwork.isServer && CurrentGameState == GameState.POST_GAME_FADE) {
+            if (fadeTime < 3f) {
+                fadeTime += Time.deltaTime;
+            } else {
+                ChangeGameState(GameState.POST_GAME);
+            }
+        }
+        if (CurrentGameState == GameState.IN_GAME) {
+            float gameTime = BoltNetwork.serverTime - GameStartTime;
+            if (gameTime >= GameMode.TimeLimit) {
+                Debug.Log("Timer expired!");
+                GameOver();
+            }
         }
     }
 

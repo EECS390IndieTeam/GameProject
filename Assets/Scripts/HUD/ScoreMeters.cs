@@ -13,20 +13,6 @@ public class ScoreMeters : MonoBehaviour {
     /// </summary>
     public Text OpponentScore;
 
-    /// <summary>
-    /// A mapping of team numbers and colors
-    /// </summary>
-    public Color[] teamColors = {
-                                     Color.white,                               //team 0
-                                     Color.red,                                 //team 1
-                                     Color.blue,                                //team 2
-                                     Color.green,                               //team 3
-                                     Color.yellow,                              //team 4
-                                     Color.Lerp(Color.red,Color.yellow, 0.5f),  //team 5
-                                     Color.Lerp(Color.red, Color.white, 0.5f),  //team 6
-                                     Color.Lerp(Color.red, Color.blue, 0.5f)    //team 7
-                                 };
-
     void Awake() {
         Lobby.LobbyUpdatedEvent += Lobby_LobbyUpdatedEvent;
     }
@@ -44,7 +30,7 @@ public class ScoreMeters : MonoBehaviour {
         if (currentGameMode.UsesTeams) {
             //current player
             int curPlayerTeam = Lobby.GetPlayer(GameManager.instance.CurrentUserName).Team;
-            PlayerScore.color = teamColors[curPlayerTeam];
+            PlayerScore.color = Teams.Colors[curPlayerTeam];
             PlayerScore.text = "" + Lobby.GetStatForPlayer(Lobby.PP_TEAMS[curPlayerTeam], currentGameMode.StatToDisplay);
             //opponent
             int maxOtherScore = -1;
@@ -59,7 +45,7 @@ public class ScoreMeters : MonoBehaviour {
                 }
             }
             if (otherTeam != -1) {
-                OpponentScore.color = teamColors[otherTeam];
+                OpponentScore.color = Teams.Colors[otherTeam];
                 OpponentScore.text = "" + maxOtherScore;
             }
         } else {

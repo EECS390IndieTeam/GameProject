@@ -89,7 +89,28 @@ public abstract class SimpleFFAGameMode : IGameMode {
     }
 
     public abstract void OnPreGame();
-    public abstract bool GameOver();
+    public virtual bool GameOver() {
+        foreach (var p in Lobby.AllPlayers) {
+            if (p.GetStat(StatToDisplay) >= ScoreLimit) return true;
+        }
+        return false;
+    }
+    public virtual string GetWinner() {
+        List<string> winners = new List<string>();
+        int max = 0;
+        foreach (var p in Lobby.AllPlayers) {
+            int stat = p.GetStat(StatToDisplay);
+            if (stat > max) {
+                max = stat;
+                winners.Clear();
+                winners.Add(p.Name);
+            } else if (stat == max) {
+                winners.Add(p.Name);
+            }
+        }
+        return string.Join(", ", winners.ToArray());
+    }
     public abstract void OnGameStart();
     public abstract void OnGameEnd();
+    
 }

@@ -21,7 +21,7 @@ public class DebugLobbyDrawer : MonoBehaviour {
         foreach (Lobby.LobbyPlayer p in Lobby.AllPlayers) {
             GUILayout.BeginHorizontal(boxSkin);
             Color retColor = GUI.contentColor;
-            GUI.contentColor = p.Connected ? teamColors[p.Team] : Color.grey;
+            GUI.contentColor = p.Connected ? Teams.Colors[p.Team] : Color.grey;
             GUILayout.Label(p.Team + " - " + p.Name + (p.Host ? " [H]" : ""));
             GUI.contentColor = retColor;
             GUILayout.EndHorizontal();
@@ -30,15 +30,4 @@ public class DebugLobbyDrawer : MonoBehaviour {
         GUILayout.EndVertical();
         GUILayout.EndArea();
     }
-
-    private Color[] teamColors = {
-                                     Color.white,                               //team 0
-                                     Color.red,                                 //team 1
-                                     Color.blue,                                //team 2
-                                     Color.green,                               //team 3
-                                     Color.yellow,                              //team 4
-                                     Color.Lerp(Color.red,Color.yellow, 0.5f),  //team 5
-                                     Color.Lerp(Color.red, Color.white, 0.5f),  //team 6
-                                     Color.Lerp(Color.red, Color.blue, 0.5f)    //team 7
-                                 };
 }

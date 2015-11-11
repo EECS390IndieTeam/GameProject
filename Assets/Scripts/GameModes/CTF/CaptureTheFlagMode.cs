@@ -64,17 +64,6 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
 
     }
 
-    public override bool GameOver() {
-        for (int i = 0; i < 8; i++) {//iterate through all teams
-            //we store the team's total score in their team's default pseudoplayer
-            if (Lobby.GetStatForPlayer(Lobby.PP_TEAMS[i], "Flags") >= ScoreLimit) {
-                Debug.Log("Team " + i + " won with their score of " + Lobby.GetStatForPlayer(Lobby.PP_TEAMS[i], "Flags") + " which is more than the limit of " + ScoreLimit);
-                return true;
-            }
-        }
-        return false;
-    }
-
     public override void OnGameStart() {
 		Flag[] fgs = Object.FindObjectsOfType(typeof(Flag)) as Flag[];
 		foreach (Flag f in fgs) {

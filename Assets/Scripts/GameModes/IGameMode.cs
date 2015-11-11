@@ -98,6 +98,15 @@ public interface IGameMode {
     bool GameOver();
 
     /// <summary>
+    /// Returns the name of the winner of the game.  In a non-team mode, it will return the username of the winner.
+    /// In team modes, it will return the string corresponding to the winning team's id from Teams.Names.  
+    /// If there is no winner, the top player/team is returned.
+    /// If there is a tie, the result is either null or a comma-seperated list of winners
+    /// </summary>
+    /// <returns></returns>
+    string GetWinner();
+
+    /// <summary>
     /// Called when the game starts. Called by both clients and the server
     /// </summary>
     void OnGameStart();

@@ -17,3 +17,5 @@ EditorBuildSettings:
     path: Assets/Scenes/ingame_kuiper_CaptureTheFlagMode.unity
   - enabled: 1
     path: Assets/Scenes/GUI/MainMenu.unity
+  - enabled: 1
+    path: Assets/Scenes/postgame.unity

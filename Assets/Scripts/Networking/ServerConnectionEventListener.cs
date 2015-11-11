@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 [BoltGlobalBehaviour(BoltNetworkModes.Host)]
 public class ServerConnectionEventListener : Bolt.GlobalEventListener {
@@ -36,11 +37,13 @@ public class ServerConnectionEventListener : Bolt.GlobalEventListener {
                 connection.Disconnect(new DisconnectReason("Server Refused Connection", "Incorrect Password"));
             } else if (PlayerRegistry.UserConnected(data.PlayerName)) {
                 connection.Disconnect(new DisconnectReason("Server Refused Connection", "A player with that name is already connected"));
-            } else if(GameManager.instance.CurrentGameState == GameManager.GameState.IN_GAME || GameManager.instance.CurrentGameState == GameManager.GameState.POST_GAME){
+            } else if(GameManager.instance.CurrentGameState != GameManager.GameState.LOBBY){
                 connection.Disconnect(new DisconnectReason("Server Refused Connection", "Game already in progress"));
             }else if(data.PlayerName.StartsWith(Lobby.PP_PREFIX)){
                 connection.Disconnect(new DisconnectReason("Server Refused Connection", "Invalid Username; Usernames may not begin with "+Lobby.PP_PREFIX));
-            } else{
+            } else if (data.PlayerName.Any(c => RESTRICTED_CHARACTERS.Contains(c))) {
+                connection.Disconnect(new DisconnectReason("Server Refused Connection", "The following character(s) are not allowed in usernames: " + string.Join(", ", RESTRICTED_CHARACTERS.Cast<string>().ToArray())));
+            } else {
                 PlayerRegistry.CreatePlayer(connection, data.PlayerName);
                 Lobby.AddPlayer(data.PlayerName, 0);
                 Lobby.SendFullDataToClient(connection);
@@ -52,7 +55,8 @@ public class ServerConnectionEventListener : Bolt.GlobalEventListener {
     }
 
     public override void Disconnected(BoltConnection connection) {
-        if (GameManager.instance.CurrentGameState == GameManager.GameState.IN_GAME || GameManager.instance.CurrentGameState == GameManager.GameState.POST_GAME) {
+        GameManager.GameState cur = GameManager.instance.CurrentGameState;
+        if (cur == GameManager.GameState.IN_GAME || cur == GameManager.GameState.POST_GAME_FADE || cur == GameManager.GameState.POST_GAME) {
             Lobby.SetPlayerConnected(PlayerRegistry.GetUserNameFromConnection(connection), false);
         } else {
             Lobby.RemovePlayer(PlayerRegistry.GetUserNameFromConnection(connection));
@@ -64,5 +68,10 @@ public class ServerConnectionEventListener : Bolt.GlobalEventListener {
     public override void OnEvent(TeamChangeEvent evnt) {
         Lobby.SetPlayerTeam(PlayerRegistry.GetUserNameFromConnection(evnt.RaisedBy), evnt.NewTeam);
     }
+
+    /// <summary>
+    /// These characters are not allowed in usernames
+    /// </summary>
+    public static char[] RESTRICTED_CHARACTERS = { ',', '.', '@', '`', '/', '\\' };
 
 }
