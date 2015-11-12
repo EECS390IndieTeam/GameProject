@@ -21,6 +21,13 @@ public class PlayerSyncEventListener : Bolt.GlobalEventListener {
         GameManager.instance.ChangeGameState(GameManager.GameState.PRE_GAME);
         DebugHUD.setValue("load state", "Loading scene");
         //display loading screen
+        blind = SpawningBlind.instance;
+        if (blind == null) {
+            Debug.LogWarning("Warning: could not find spawning blind!");
+        } else {
+            blind.Text = "Loading...";
+            blind.Show();
+        }
     }
 
 
@@ -29,7 +36,6 @@ public class PlayerSyncEventListener : Bolt.GlobalEventListener {
         BoltEntity entity = BoltNetwork.Instantiate(BoltPrefabs.PlayerPrefab);
         PlayerState ps = entity.GetComponent<PlayerState>();
         player = (OwnerPlayer)ps.Player;
-        blind = FindObjectOfType<SpawningBlind>();
         ps.Name = GameManager.instance.CurrentUserName; //set their name
         ps.Team = Lobby.GetPlayer(ps.Name).Team;
         if (!BoltNetwork.isServer) {

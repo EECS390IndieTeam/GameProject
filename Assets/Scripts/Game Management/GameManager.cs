@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Bolt.GlobalEventListener
 {
 
 	private static GameManager _instance;
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 			//If a Singleton already exists and you find
 			//another reference in scene, destroy it!
 			if (this != _instance) {
-				Destroy (this.gameObject);
+				Destroy (this);
 			}
 		}
 	}
@@ -115,6 +115,8 @@ public class GameManager : MonoBehaviour
                     Lobby.ClearAllStats();
                     GameMode.OnPreGame();
                 }
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 break;
             case GameState.IN_GAME:
                 GameStartTime = BoltNetwork.serverTime;
@@ -123,12 +125,16 @@ public class GameManager : MonoBehaviour
             case GameState.POST_GAME_FADE:
                 if (BoltNetwork.isServer) {
                     Lobby.StatChangesAllowed = false;
+                } else {
+                    Lobby.RequestFullDataFromServer();
                 }
                 break;
             case GameState.POST_GAME:
                 if (BoltNetwork.isServer) {
                     BoltNetwork.LoadScene(BoltScenes.postgame);
                 }
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 break;
         }
         if (BoltNetwork.isServer) ServerSideData.UpdateZeusData();
@@ -139,13 +145,20 @@ public class GameManager : MonoBehaviour
         if (CurrentGameState != GameState.IN_GAME) return;
         if (GameMode.GameOver()) {
             GameOver();
+            //tell the clients to end the game
+            //we do this here instead of in GameOver() because if the game ends due to the timer, the clients will already know that
+            //and don't need the server to tell them to call GameOver()
+            GameOverEvent.Create(Bolt.GlobalTargets.AllClients, Bolt.ReliabilityModes.ReliableOrdered).Send();
         }
     }
 
     private void GameOver() {
-        GameMode.OnGameEnd();
+        if (BoltNetwork.isServer) {
+            GameMode.OnGameEnd();
+
+        }
         ChangeGameState(GameState.POST_GAME_FADE);
-        SpawningBlind blind = FindObjectOfType<SpawningBlind>();
+        SpawningBlind blind = SpawningBlind.instance;
         if (blind != null) {
             blind.Text = "Game Over";
             blind.FadeIn(3f);
@@ -158,7 +171,7 @@ public class GameManager : MonoBehaviour
 
     void Update() {
         DebugHUD.setValue("GameState", System.Enum.GetName(typeof(GameState), CurrentGameState));
-        //if(!BoltNetwork.isServer) return;
+        //only the server needs to do this because it will change the scene and bring the clients along for the ride
         if (BoltNetwork.isServer && CurrentGameState == GameState.POST_GAME_FADE) {
             if (fadeTime < 3f) {
                 fadeTime += Time.deltaTime;
@@ -166,6 +179,8 @@ public class GameManager : MonoBehaviour
                 ChangeGameState(GameState.POST_GAME);
             }
         }
+        //both the client and server need to be able to detect that the timer has expired
+        //this ensures that the game ends at the same time for all players
         if (CurrentGameState == GameState.IN_GAME) {
             float gameTime = BoltNetwork.serverTime - GameStartTime;
             if (gameTime >= GameMode.TimeLimit) {
@@ -175,4 +190,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Tells clients to end the game
+    public override void OnEvent(GameOverEvent evnt) {
+        if (!BoltNetwork.isClient) return;
+        GameOver();
+    }
 }

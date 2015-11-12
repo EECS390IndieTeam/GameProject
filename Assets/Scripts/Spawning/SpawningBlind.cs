@@ -12,11 +12,17 @@ public class SpawningBlind : MonoBehaviour {
     private float startingAlpha = 0f;
     private float endingAlpha = 0f;
 
+    public static SpawningBlind instance = null;
+
     void Awake() {
-        //this allows us to leave this attached to the player, and not just floating in the level
-        transform.SetParent(null, false);
-        transform.position = Vector3.zero;
+        if (instance != null) {
+            DestroyImmediate(this.gameObject);
+        } else {
+            instance = this;
+            DontDestroyOnLoad(this);
+        }
         enabled = false;
+        Hide();
     }
 
     /// <summary>
