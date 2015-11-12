@@ -974,6 +974,10 @@ MonoBehaviour:
   scrollPanel: {fileID: 601525528}
   listItemPrefab: {fileID: 126912, guid: da16df9283e6cc241b3b5a3225fa00dc, type: 2}
   launchButton: {fileID: 1913270250}
+  nextMapButton: {fileID: 1618058453}
+  prevMapButton: {fileID: 1418791470}
+  nextModeButton: {fileID: 77877656}
+  prevModeButton: {fileID: 551221993}
   gameModelLabel: {fileID: 1580091184}
   mapLabel: {fileID: 433887802}
   listItemHeight: 30
@@ -3492,7 +3496,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 300}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &623581016
@@ -6860,7 +6864,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 968263193}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
