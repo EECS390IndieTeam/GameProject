@@ -20,6 +20,8 @@ public class OwnerPlayer : AbstractPlayer {
         }
     }
 
+	public MeshRenderer[] materials;
+
     /// <summary>
     /// These objects will be disabled when the player dies and re-enabled when the player respawns
     /// </summary>
@@ -46,6 +48,7 @@ public class OwnerPlayer : AbstractPlayer {
     {
         this.Health = 100;
         this.MaxHealth = 100;
+		SetColor(Teams.Colors[this.Team]);
     }
 
     public override void Die(string killer, int weaponID) {
@@ -82,4 +85,10 @@ public class OwnerPlayer : AbstractPlayer {
             Die(OtherUser, weaponID);
         }
     }
+
+	public override void SetColor(Color color) {
+		foreach (MeshRenderer renderer in materials) {
+			renderer.material.SetColor ("_EmissionColor", color);
+		}
+	}
 }

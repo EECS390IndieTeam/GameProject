@@ -146,4 +146,6 @@ public abstract class AbstractPlayer : MonoBehaviour, IPlayer {
     }
 
     public abstract void TakeDamage(float Damage, string DamageSource, Vector3 direction, int weaponID);
+
+	public abstract void SetColor(Color color);
 }
