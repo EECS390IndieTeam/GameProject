@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
@@ -6,13 +7,21 @@ using UnityEngine.UI;
 /// </summary>
 public class LobbyGameMenuActions : Bolt.GlobalEventListener
 {
+    /// <summary>
+    /// The content panel of the connected players ScrollView.
+    /// </summary>
     public GameObject scrollPanel;
 
+    /// <summary>
+    /// Prefab used to populate the list.
+    /// </summary>
     public GameObject listItemPrefab;
 
-    public Button launchButton;
-
-    public bool isClient = true;
+    /// <summary>
+    /// The height of the list item prefab. There is probably a way to get it in code
+    /// but Unity sucks and I can't find it. AGH!
+    /// </summary>
+    public int listItemHeight = 30;
 
     /// <summary>
     /// Stops the multiplayer client or server.
@@ -36,7 +45,6 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     /// </summary>
     void Update()
     {
-        // TODO: fix this spelling mistake in the code whereever it originated.
         DebugHUD.setValue("IsServer", BoltNetwork.isServer);
 
         if (BoltNetwork.isClient)
@@ -62,21 +70,45 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
         }
     }
 
+    /// <summary>
+    /// Runs once at scene load.
+    /// </summary>
     void Start()
     {
+        if (this.scrollPanel == null)
+        {
+            Debug.LogError("LobbyGameMenuActions expects a non-null scrollPanel.");
+            return;
+        }
+
+        if (this.listItemPrefab == null)
+        {
+            Debug.LogError("LobbyGameMenuActions expects a non-null listItemPrefab.");
+            return;
+        }
+
+        if (this.listItemHeight < 1)
+        {
+            Debug.LogError("LobbyGameMenuActions expects a positive listItemHeight.");
+            return;
+        }
+
         Lobby.LobbyUpdatedEvent += (change) =>
         {
             switch (change)
             {
                 case Lobby.LobbyChange.PLAYER_ADDED:
-              //  case Lobby.LobbyChange.PLAYER_CHANGED:
-               // case Lobby.LobbyChange.PLAYER_REMOVED:
+                case Lobby.LobbyChange.PLAYER_CHANGED:
+                case Lobby.LobbyChange.PLAYER_REMOVED:
                     ReloadPlayersList();
                     break;
             }
         };
     }
 
+    /// <summary>
+    /// Repopulates the list of connected players.
+    /// </summary>
     private void ReloadPlayersList()
     {
         // Clear the list.I gott
@@ -85,13 +117,22 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             Destroy(((Transform)childTransform).gameObject);
         }
 
-        // Populate list with items.
-        int nextY = -15;
-        foreach (var player in Lobby.AllPlayers)
+        // Populate list with connected players,
+        // group players by teams sorted alphabetically by name.
+        int nextY = -(this.listItemHeight / 2);
+        foreach (var player in Lobby.AllPlayers
+            .Where(x => x.Connected)
+            .OrderBy(y => y.Team)
+            .ThenBy(z => z.Name))
         {
             var newItem = Instantiate(this.listItemPrefab);
             var textComponent = newItem.GetComponentInChildren<Text>();
+            var imageComponent = newItem.GetComponentInChildren<Image>();
 
+            // Team colors.
+            var teamColor = ColorFromTeam(player.Team);
+            teamColor.a = 0.5f;
+            imageComponent.color = teamColor;
 			
 			// Add new item to the list box.
 			newItem.transform.SetParent(this.scrollPanel.transform);
@@ -103,7 +144,38 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
 
             // Set item's position in the box.
             newItem.transform.localPosition = new Vector3(91.5f, nextY, 0);
-            nextY -= 30;
+            nextY -= this.listItemHeight;
+        }
+    }
+
+    /// <summary>
+    /// Maps team number to a color.
+    /// </summary>
+    /// <param name="team">The number of the team.</param>
+    /// <returns>A color for the team.</returns>
+    private static Color ColorFromTeam(int team)
+    {
+        switch (team)
+        {
+            case 0:
+                return Color.red;
+            case 1:
+                return Color.blue;
+            case 2:
+                return Color.green;
+            case 3:
+                return Color.yellow;
+            case 4:
+                return Color.cyan;
+            case 5:
+                return Color.magenta;
+            case 6:
+                return Color.white;
+            default:
+                Debug.LogWarning(string.Format(
+                    "LobbyGameMenuActions does not have a definition for colors for team {0}",
+                    team));
+                return Color.grey;
         }
     }
 }
