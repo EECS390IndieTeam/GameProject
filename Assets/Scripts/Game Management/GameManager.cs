@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         private set;
     }
 
-    private IGameMode _GameMode;
+    private IGameMode _GameMode = GameModeManager.GameModes.First();
     public IGameMode GameMode {
         get { return _GameMode; }
         set {

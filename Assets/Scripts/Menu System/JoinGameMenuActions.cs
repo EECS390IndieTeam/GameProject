@@ -93,6 +93,7 @@ public class JoinGameMenuActions : MonoBehaviour
             } else {
                 BoltNetwork.Connect(UdpKit.UdpEndPoint.Parse(this.ipInputField.text),
                     new ConnectionRequestData(GameManager.instance.CurrentUserName, this.lobbyPasswordInputField.text));
+                GameObject.Find("LobbyPanel").GetComponent<LobbyGameMenuActions>().PrepareMenu();
                 connect = false;
             }
         }

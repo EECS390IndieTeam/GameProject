@@ -88,6 +88,7 @@ public class SetupGameMenuActions : MonoBehaviour
 
             // We validate this on edit, we shouldn't need to again.
             BoltLauncher.StartServer(int.Parse(this.portInputField.text));
+            GameObject.Find("LobbyPanel").GetComponent<LobbyGameMenuActions>().PrepareMenu();
         }));
     }
 
