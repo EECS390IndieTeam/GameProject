@@ -7,6 +7,12 @@ using System.Collections;
 /// </summary>
 public class ProxyPlayer : AbstractPlayer {
 
+	public MeshRenderer[] materials;
+
+	void Start() {
+		SetColor(Teams.Colors[this.Team]);
+	}
+
     public override void Die(string killer, int weaponID) {
         if (!BoltNetwork.isServer) {
             Debug.LogError("Only the server is allowed to kill other players!");
@@ -51,4 +57,10 @@ public class ProxyPlayer : AbstractPlayer {
         evnt.WeaponID = weaponID;
         evnt.Send();
     }
+	
+	public override void SetColor(Color color) {
+		foreach (MeshRenderer renderer in materials) {
+			renderer.material.SetColor ("_EmissionColor", color);
+		}
+	}
 }

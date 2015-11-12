@@ -4748,6 +4748,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HandPoint: {fileID: 442218}
+  materials:
+  - {fileID: 2307558}
+  - {fileID: 2344014}
+  - {fileID: 2395274}
+  - {fileID: 2392376}
 --- !u!114 &11485474
 MonoBehaviour:
   m_ObjectHideFlags: 1
