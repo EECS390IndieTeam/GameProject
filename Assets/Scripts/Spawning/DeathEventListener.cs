@@ -22,13 +22,18 @@ public class DeathEventListener : Bolt.GlobalEventListener {
         }
 
         //the server player has died
+        //Removed this because it was causing a "snapback" after player respawn, due to the player moving twice per respawn
         //GameManager.instance.GameMode.MovePlayerToSpawnPoint(PlayerRegistry.GetIPlayerForUserName(evnt.Player), true);
         float nextTime = BoltNetwork.serverTime + GameManager.instance.GameMode.RespawnDelay;
         if (playersToRespawn.Count == 0) {
             nextRespawnTime = nextTime;
             respawning = true;
         }
-
+        //Attemped change to deal with player bouncing after death
+        //Disable the player so it effective disappears on death
+        AbstractPlayer p = (AbstractPlayer)PlayerRegistry.GetIPlayerForUserName(evnt.Player);
+        p.gameObject.SetActive(false);
+        //end change
         playersToRespawn.Enqueue(new Player(PlayerRegistry.GetIPlayerForUserName(evnt.Player), nextTime));
     }
 
@@ -36,6 +41,10 @@ public class DeathEventListener : Bolt.GlobalEventListener {
         if (!respawning) return;
         if (BoltNetwork.serverTime >= nextRespawnTime) {
             Player p = playersToRespawn.Dequeue();
+            //Second part of change to deal with player bouncing after death
+            //Re-enable the player after respawning
+            ((AbstractPlayer)p.player).gameObject.SetActive(true);
+            //End of change
             GameManager.instance.GameMode.MovePlayerToSpawnPoint(p.player, true);
             if (playersToRespawn.Count == 0) {
                 respawning = false;

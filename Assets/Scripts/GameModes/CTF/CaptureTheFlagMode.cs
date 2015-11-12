@@ -11,7 +11,7 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
         ScoreLimit = 3; //3 points to win
         TimeLimit = 5f * 60f; //5 minutes
         //TimeLimit = 3f; //3 seconds DEBUG
-        RespawnDelay = 1.5f; //3 second respawn delay
+        RespawnDelay = 3f; //3 second respawn delay
     }
 
     public override int ScoreLimit {
