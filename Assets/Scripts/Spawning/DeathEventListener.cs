@@ -22,7 +22,7 @@ public class DeathEventListener : Bolt.GlobalEventListener {
         }
 
         //the server player has died
-        GameManager.instance.GameMode.MovePlayerToSpawnPoint(PlayerRegistry.GetIPlayerForUserName(evnt.Player), true);
+        //GameManager.instance.GameMode.MovePlayerToSpawnPoint(PlayerRegistry.GetIPlayerForUserName(evnt.Player), true);
         float nextTime = BoltNetwork.serverTime + GameManager.instance.GameMode.RespawnDelay;
         if (playersToRespawn.Count == 0) {
             nextRespawnTime = nextTime;
