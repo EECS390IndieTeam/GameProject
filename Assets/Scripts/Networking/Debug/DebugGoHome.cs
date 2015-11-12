@@ -11,7 +11,7 @@ public class DebugGoHome : MonoBehaviour {
         GUILayout.FlexibleSpace();
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
-        GUILayout.Label("You shouldn't be here;\n We haven't made this scene yet;\nGo back to the main menu.");
+        GUILayout.Label("We haven't made this scene yet;\nGo back to the main menu.");
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
@@ -32,7 +32,7 @@ public class DebugGoHome : MonoBehaviour {
     void Update() {
         if (!pressed) return;
         if (BoltNetwork.isRunning) return;
-        Application.LoadLevel(0);
+        Application.LoadLevel("launcher");
         GameManager.instance.ChangeGameState(GameManager.GameState.MENU);
     }
 }

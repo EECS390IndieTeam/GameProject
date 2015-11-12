@@ -15,6 +15,11 @@ public class FlagCapturePoint : MonoBehaviour {
     
     public int teamID; //Team who owns this capture point and can score points here
 
+    void Start()
+    {
+        SetColor(Teams.Colors[teamID]);
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (!BoltNetwork.isServer) return;
@@ -52,5 +57,10 @@ public class FlagCapturePoint : MonoBehaviour {
                 }
             }
         }
+    }
+
+    private void SetColor(Color color)
+    {
+        GetComponent<Renderer>().material.SetColor("_EmissionColor", color);
     }
 }
