@@ -37,7 +37,7 @@ public class FPSController : MonoBehaviour {
 
 	private bool previousHolding;
 
-	private AbstractPlayer player;
+	private OwnerPlayer player;
 
 	// Use this for initialization
 	void Awake ()
@@ -58,7 +58,7 @@ public class FPSController : MonoBehaviour {
 	}
 
     void Start() {
-        player = (AbstractPlayer)GameManager.instance.CurrentPlayer;
+        player = (OwnerPlayer)GameManager.instance.CurrentPlayer;
     }
 	
 	// Update is called once per frame
@@ -96,13 +96,24 @@ public class FPSController : MonoBehaviour {
 		
 		// -------------------------------------------------------------------------- //
 
-		// Firing weapon
-		if (Input.GetButtonDown("Fire1")) {
-			gun.StartShot();
-		}
-		if (Input.GetButtonUp("Fire1")) {
-			gun.EndShot();
-		}
+        // Firing weapon / dropping flag
+        if (player.HoldingFlag) {
+            if (Input.GetButton("Fire1")) {
+                //I might change this later so that the OwnerPlayer can drop the flag immediately without having to go through Bolt first
+                FlagDroppedEvent evnt = FlagDroppedEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.ReliableOrdered);
+                evnt.FlagTeam = player.HeldFlagTeam;
+                evnt.Carrier = player.Username;
+                evnt.Send();
+            }
+        } else {
+            
+            if (Input.GetButtonDown("Fire1")) {
+                gun.StartShot();
+            }
+            if (Input.GetButtonUp("Fire1")) {
+                gun.EndShot();
+            }
+        }
 
 		// -------------------------------------------------------------------------- //
 
@@ -139,7 +150,7 @@ public class FPSController : MonoBehaviour {
 		// -------------------------------------------------------------------------- //
 
 		// Grenades
-		if (Input.GetButtonDown("Grenade") && !previousHolding) {
+        if (!player.HoldingFlag && Input.GetButtonDown("Grenade") && !previousHolding) {
 			bool success = grenade.PrepGrenade();
 			gun.canShoot = !success;
 			gunModel.enabled = !success;

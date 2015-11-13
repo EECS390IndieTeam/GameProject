@@ -127,6 +127,18 @@ public interface IPlayer {
 	bool HoldingFlag {
 		get;
 	}
+
+    int HeldFlagTeam {
+        get;
+    }
+
+    Color HeldFlagColor {
+        get;
+    }
+
+    bool IsDead {
+        get;
+    }
 }
 	
 /// <summary>

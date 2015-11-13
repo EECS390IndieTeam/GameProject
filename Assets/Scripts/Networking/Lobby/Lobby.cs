@@ -545,12 +545,14 @@ public class Lobby : Bolt.GlobalEventListener {
             if (player != null) {
                 foreach (var change in changepair.Value) {
                     player.SetStat(change.Stat, change.NewValue);
+                    Debug.Log(player.Name + "\'s " + statNames[change.Stat] + " score was changed to " + change.NewValue);
                 }
             } else {
                 if (!pseudoplayers.ContainsKey(name)) pseudoplayers.Add(name, new Dictionary<byte, int>());
                 var dict = pseudoplayers[name];
                 foreach (var change in changepair.Value) {
                     dict[change.Stat] = change.NewValue;
+                    Debug.Log(name + "\'s " + statNames[change.Stat] + " score was changed to " + change.NewValue);
                 }
             }
         }

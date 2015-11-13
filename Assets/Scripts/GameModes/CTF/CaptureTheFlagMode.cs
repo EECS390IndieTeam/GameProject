@@ -30,8 +30,7 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
     }
 
     //Hardcoded team limit here.
-	private Flag[] flags = new Flag[3];
-    private bool[] isFlagAtBase = new bool[3];
+    private FlagCapturePoint[] capPoints = new FlagCapturePoint[2];
 
     public override GameModes Mode {
         get { return GameModes.CAPTURE_THE_FLAG; }
@@ -58,45 +57,32 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
     public override void OnPreGame() {
         Lobby.AddStat("Kills");
         Lobby.AddStat("Flags");
-        for(int i=0; i<isFlagAtBase.Length; i++)
-        {
-            isFlagAtBase[i] = true;
-        }
-
     }
 
     public override void OnGameStart() {
-		Flag[] fgs = Object.FindObjectsOfType(typeof(Flag)) as Flag[];
-		foreach (Flag f in fgs) {
-			if(flags[f.teamID] == null){
-				flags[f.teamID] = f;
-				Debug.Log("Attaching flag for team: "+f.teamID);
-				//BoltNetwork.Attach(f.gameObject);
-			} else {
-				Debug.LogError("Flag Collision for team number: "+f.teamID);
-			}
-		}
+        FlagCapturePoint[] points = Object.FindObjectsOfType<FlagCapturePoint>();
+        foreach (FlagCapturePoint pt in points) {
+            if (GetCapPointForTeam(pt.teamID) == null) {
+                SetCapPointForTeam(pt.teamID, pt);
+                Debug.Log("Cap Point registered for team " + pt.teamID);
+            } else {
+                Debug.LogError("Duplicate Cap Point found for team " + pt.teamID);
+            }
+        }
 	}
 
     public override void OnGameEnd() {}
 
-    public void setFlagAtBase(int flagNum, bool isAtBase)
-    {
-        isFlagAtBase[flagNum] = isAtBase;
-    }
-
     public bool isFlagAtBaseForTeam(int teamNum)
     {
-        return isFlagAtBase[teamNum];
+        return GetCapPointForTeam(teamNum).FlagAtBase;
     }
 
-	public Vector3 GetFlagLocation(int teamNum){
-		Flag f = flags [teamNum];
-		if (f != null) {
-			return f.gameObject.transform.position;
-		} else {
-			Debug.LogError("Could not find flag for team "+teamNum);
-			return new Vector3();
-		}
-	}
+    public FlagCapturePoint GetCapPointForTeam(int team) {
+        return capPoints[team-1];
+    }
+
+    private void SetCapPointForTeam(int team, FlagCapturePoint point) {
+        capPoints[team - 1] = point;
+    }
 }

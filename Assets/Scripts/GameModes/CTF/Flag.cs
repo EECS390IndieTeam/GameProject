@@ -2,91 +2,69 @@
 using System.Collections;
 
 public class Flag : Bolt.EntityBehaviour<IFlagState> {
-    public bool isEnabled {
+    public int Team {
         get {
-            return state.isEnabled;
+            return state.Team;
         }
-        set {
-            state.isEnabled = value;
+        private set {
+            state.Team = value;
+            SetFlagColor(Teams.Colors[value]);
         }
     }
-
-    public int teamID; //The team that this flag belongs to
-	[System.NonSerialized]
-    public AbstractPlayer player; //The player holding this flag. Null if the flag is dropped.
-	public MeshRenderer flagMaterial;
-    private Vector3 flagSpawnPosition;
-	private Quaternion flagSpawnRotation;
+	public Renderer flagRenderer;
+    public Light flagLight;
 	public float timeDelay = 1.0f;
+    private float timer = 0f;
+    private bool delayFinished = false;
 
-	private Light light;
+    private Collider c;
 
-	public bouncySpinnyCubeScript bSCS;
-
-    Collider c;
+    void Awake() {
+        c = GetComponent<Collider>();
+        if (!BoltNetwork.isServer) c.enabled = false;
+    }
 
     public override void Attached() {
-        Debug.Log("Setting up a flag.");
-        Debug.Log(this.gameObject);
         state.Transform.SetTransforms(this.transform);
-        isEnabled = true;
+        if (!BoltNetwork.isServer) c.enabled = false;
     }
 
 	// Use this for initialization
 	void Start () {
-		c = GetComponent<Collider>();
-		light = GetComponentInChildren<Light>();
-        flagSpawnPosition = transform.position;
-		flagSpawnRotation = transform.rotation;
-		SetFlagColor (Teams.Colors[teamID]);
-		bSCS.enabled = true;
+		SetFlagColor (Teams.Colors[Team]);
 	}
+
+    void Update() {
+        if (!BoltNetwork.isServer) return;
+        if (delayFinished) return;
+        if (timer >= timeDelay) {
+            c.enabled = true;
+            delayFinished = true;
+        } else {
+            timer += Time.deltaTime;
+        }
+    }
 	
     public void ReturnFlag()
     {
         if (!BoltNetwork.isServer) return;
-        DropFlag();
-        this.transform.position = flagSpawnPosition;
-        this.transform.rotation = flagSpawnRotation;
+        CaptureTheFlagMode mode = (CaptureTheFlagMode)GameManager.instance.GameMode;
+        mode.GetCapPointForTeam(Team).ReturnFlag();
+        Destroy(this);
     }
-
-    
-
-	public void DropFlag(){
-
-        if (BoltNetwork.isServer) {
-            StartCoroutine("DropFlagRoutine");
-        } else {
-            FlagDroppedEvent evnt = FlagDroppedEvent.Create(Bolt.GlobalTargets.OnlyServer, Bolt.ReliabilityModes.ReliableOrdered);
-            evnt.Flag = entity;
-            evnt.Send();
-        }
-	}
 
 	public void SetFlagColor(Color c){
-		flagMaterial.materials [1].SetColor ("_EmissionColor", c * 2);
-		light.color = c;
+		flagRenderer.materials [1].SetColor ("_EmissionColor", c * 2);
+		flagLight.color = c;
 	}
-
-    IEnumerator DropFlagRoutine()
-    {
-		this.transform.parent = null;
-		transform.position += 2 * player.transform.forward;
-		bSCS.enabled = true;
-		player.HoldingFlag = false;
-		player = null;
-        state.Holder = "";
-		yield return new WaitForSeconds(timeDelay);
-		Debug.Log ("Re-enabling flag");
-        isEnabled = true;
-    }
 
     void OnTriggerEnter(Collider other)
     {
-		if (!isEnabled || !BoltNetwork.isServer) {
+		if (!BoltNetwork.isServer) {
 			return;
 		}
-        AbstractPlayer p = other.gameObject.GetComponentInParent<AbstractPlayer>();
+        Debug.Log("Flag triggered");
+        AbstractPlayer player = other.gameObject.GetComponentInParent<AbstractPlayer>();
         CaptureTheFlagMode mode = (CaptureTheFlagMode)GameManager.instance.GameMode;
         //You can only pick up this flag if
         // - you are a player
@@ -94,35 +72,18 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
         // - either you are
         //    - on the enemy team, so you can pick it up wherever
         //    - or your a friendly player but the flag is not at spawn
-        if(p != null && player == null && (p.Team != teamID || (p.Team == teamID && !mode.isFlagAtBaseForTeam(teamID))))
+        if(player != null && (player.Team != Team || (player.Team == Team && !mode.isFlagAtBaseForTeam(Team))))
         {
-            //Update who is holding flag
-			AbstractPlayer p1 = other.gameObject.GetComponentInParent<AbstractPlayer>();
-			if(p1 == null){
-				Debug.Log ("Player doesn't exist.");
-			} else {
-				Debug.Log ("Picked up flag");
-				Vector3 pos = p1.HandPoint.position;
-				//this.transform.position = pos - Vector3.Scale(other.transform.up,new Vector3(1.0f,0.5f,1.0f));
-				//this.transform.rotation = p1.HandPoint.rotation;
-
-				this.gameObject.transform.parent = p1.HandPoint;
-				transform.localPosition = 0.31f * Vector3.up;
-				transform.localRotation = Quaternion.identity;
-				player = p;
-				p.HoldingFlag = true;
-				state.Holder = player.Username;
-				bSCS.enabled = false;
-				isEnabled = false;
-			}
+            mode.GetCapPointForTeam(Team).FlagAtBase = false;
+			Debug.Log ("Picked up flag");
+            player.PickupFlag(Team);
+            Destroy(this.gameObject);
         }
     }
 
-	void Update(){
-		if (entity.isAttached && state.Holder == GameManager.instance.CurrentUserName) {
-			if(Input.GetButtonDown("Fire1")){
-				DropFlag();
-			}
-		}
-	}
+    public static void SpawnFlag(int team, Vector3 position, Quaternion rotation) {
+        if (!BoltNetwork.isServer) throw new System.Exception("Only the server can create flags!");
+        var ent = BoltNetwork.Instantiate(BoltPrefabs.Flag, position, rotation);
+        ent.GetComponent<Flag>().Team = team;
+    }
 }

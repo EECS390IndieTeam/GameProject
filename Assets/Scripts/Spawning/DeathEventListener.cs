@@ -21,8 +21,12 @@ public class DeathEventListener : Bolt.GlobalEventListener {
             Lobby.IncrementStatForPlayer(Lobby.PP_TEAMS[Lobby.GetPlayer(evnt.Player).Team], "Deaths", 1);
         }
 
-        //the server player has died
-        GameManager.instance.GameMode.MovePlayerToSpawnPoint(PlayerRegistry.GetIPlayerForUserName(evnt.Player), true);
+        AbstractPlayer player = PlayerRegistry.GetIPlayerForUserName(evnt.Player) as AbstractPlayer;
+        if (player.HoldingFlag) {
+            Flag.SpawnFlag(player.HeldFlagTeam, player.transform.position, player.transform.rotation);
+            player.DropFlag();
+        }
+
         float nextTime = BoltNetwork.serverTime + GameManager.instance.GameMode.RespawnDelay;
         if (playersToRespawn.Count == 0) {
             nextRespawnTime = nextTime;

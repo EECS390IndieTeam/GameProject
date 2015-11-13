@@ -6,26 +6,7 @@ using System.Collections.Generic;
 public class OwnerPlayer : AbstractPlayer {
     private FPSController fpsController;
 
-    private bool _IsDead = false;
-    /// <summary>
-    /// True of the player is currently dead
-    /// </summary>
-    public bool IsDead {
-        get {
-            return _IsDead;
-        }
-        private set {
-            _IsDead = value;
-            foreach (var o in ObjectsToDisableWhileDead) o.SetActive(!value);
-        }
-    }
-
-	public MeshRenderer[] materials;
-
-    /// <summary>
-    /// These objects will be disabled when the player dies and re-enabled when the player respawns
-    /// </summary>
-    public GameObject[] ObjectsToDisableWhileDead;
+    public MeshRenderer[] materials;
 
     /// <summary>
     /// Set to false to disable the player's controls
@@ -44,17 +25,16 @@ public class OwnerPlayer : AbstractPlayer {
         GameManager.instance.SetCurrentPlayer(this);
     }
 
-    void Start()
-    {
+    void Start() {
         this.Health = 100;
         this.MaxHealth = 100;
-		SetColor(Teams.Colors[this.Team]);
+        SetColor(Teams.Colors[this.Team]);
     }
 
     public override void Die(string killer, int weaponID) {
-		//TODO check comments on Death
-		//I thought death was a simple death animation combined with being moved around to your new spawn location.
-        Debug.Log("Player " + Username + " was killed by "+killer+" using weapon #"+weaponID);
+        //TODO check comments on Death
+        //I thought death was a simple death animation combined with being moved around to your new spawn location.
+        Debug.Log("Player " + Username + " was killed by " + killer + " using weapon #" + weaponID);
         //we need to tell the server that we died so that it can respawn us
         DeathEvent evnt = DeathEvent.Create(Bolt.GlobalTargets.OnlyServer, Bolt.ReliabilityModes.ReliableOrdered);
         evnt.Killer = killer;
@@ -86,9 +66,9 @@ public class OwnerPlayer : AbstractPlayer {
         }
     }
 
-	public override void SetColor(Color color) {
-		foreach (MeshRenderer renderer in materials) {
-			renderer.material.SetColor ("_EmissionColor", color);
-		}
-	}
+    public override void SetColor(Color color) {
+        foreach (MeshRenderer renderer in materials) {
+            renderer.material.SetColor("_EmissionColor", color);
+        }
+    }
 }

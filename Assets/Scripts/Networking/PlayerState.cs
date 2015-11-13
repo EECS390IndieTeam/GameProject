@@ -96,14 +96,43 @@ public class PlayerState : Bolt.EntityBehaviour<IPlayerState> {
 
 	public bool HoldingFlag {
 		get {
-			return state.HoldingFlag;
-		}
-		set {
-			state.HoldingFlag = value;
+            return state.HeldFlag != 0;
 		}
 	}
 
+    public Color HeldFlagColor {
+        get {
+            return Teams.Colors[state.HeldFlag];
+        }
+    }
+
+    public int HeldFlagTeam {
+        get {
+            return state.HeldFlag;
+        }
+        set {
+            state.HeldFlag = value;
+        }
+    }
+
+    public bool IsDead {
+        get {
+            return state.Dead;
+        }
+        set {
+            state.Dead = value;
+        }
+    }
+
+    private void DeathCallback() {
+        if (DeathChangeCallback != null) DeathChangeCallback(state.Dead);
+    }
+
+    public delegate void DeathChangeEvent(bool isDead);
+    public event DeathChangeEvent DeathChangeCallback;
+
     public override void Attached() {
+        state.AddCallback("Dead", new Bolt.PropertyCallbackSimple(DeathCallback));
         if (entity.isOwner) {
             GameObject prefab = Instantiate(OwnerPrefab);
             state.Transform.SetTransforms(prefab.transform);

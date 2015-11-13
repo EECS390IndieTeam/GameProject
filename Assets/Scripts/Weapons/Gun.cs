@@ -154,7 +154,6 @@ public class Gun : MonoBehaviour, IWeapon
 
     public void Firing()
 	{
-		Debug.Log ("Hey I should start shooting now");
         if(muzzleFlash != null)
         {
             //StartCoroutine(MuzzleFlash());

@@ -8,14 +8,42 @@ using System.Collections.Generic;
 /// be synchronized by simply forwarding the gets and sets to the corresponding fields in the
 /// PlayerState.  
 /// </summary>
-public abstract class AbstractPlayer : MonoBehaviour, IPlayer {
+public abstract class AbstractPlayer : Bolt.GlobalEventListener, IPlayer {
 
     /// <summary>
     /// A reference to the attached PlayerState
     /// </summary>
-    private PlayerState state;
+    protected PlayerState state;
 
     public Transform HandPoint;
+
+    /// <summary>
+    /// The flag that this player can carry
+    /// </summary>
+    public GameObject flag;
+
+    /// <summary>
+    /// The object that needs to be hidden when carrying a flag
+    /// </summary>
+    public GameObject gun;
+
+    /// <summary>
+    /// These objects will be disabled when the player dies and re-enabled when the player respawns
+    /// </summary>
+    public GameObject[] ObjectsToDisableWhileDead;
+
+    /// <summary>
+    /// True of the player is currently dead
+    /// </summary>
+    public bool IsDead {
+        get {
+            return state.IsDead;
+        }
+        protected set {
+            state.IsDead = value;
+            foreach (var o in ObjectsToDisableWhileDead) o.SetActive(!value);
+        }
+    }
 
     /// <summary>
     /// Sets the PlayerState to use.  We can't simply use GetComponent because when the prefab
@@ -126,10 +154,27 @@ public abstract class AbstractPlayer : MonoBehaviour, IPlayer {
 		get {
 			return state.HoldingFlag;
 		}
-		set {
-			state.HoldingFlag = value;
-		}
 	}
+
+    public Color HeldFlagColor {
+        get {
+            return state.HeldFlagColor;
+        }
+    }
+
+    public int HeldFlagTeam {
+        get {
+            return state.HeldFlagTeam;
+        }
+    }
+
+    /// <summary>
+    /// Sets the flag that this player is carrying for networking purposes
+    /// </summary>
+    /// <param name="team"></param>
+    protected void SetHeldFlagTeam(int team) {
+        state.HeldFlagTeam = team;
+    }
 
     public abstract void Die(string killer, int weaponID);
 
@@ -148,4 +193,59 @@ public abstract class AbstractPlayer : MonoBehaviour, IPlayer {
     public abstract void TakeDamage(float Damage, string DamageSource, Vector3 direction, int weaponID);
 
 	public abstract void SetColor(Color color);
+
+    public void DropFlag() {
+        if (!BoltNetwork.isServer) {
+            throw new System.Exception("Only the server can take flags from other players");
+        }
+        FlagDroppedEvent evnt = FlagDroppedEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.ReliableOrdered);
+        evnt.FlagTeam = this.HeldFlagTeam;
+        evnt.Carrier = Username;
+        evnt.Send();
+    }
+
+    public void PickupFlag(int team) {
+        if (!BoltNetwork.isServer) {
+            throw new System.Exception("Only the server can give flags to other players");
+        }
+        FlagGrabbedEvent evnt = FlagGrabbedEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.ReliableOrdered);
+        evnt.FlagTeam = team;
+        evnt.PlayerTeam = Team;
+        evnt.CarrierName = Username;
+        evnt.Send();
+    }
+
+    public override void OnEvent(FlagGrabbedEvent evnt) {
+        if (evnt.CarrierName == this.Username) {
+            SetHeldFlagTeam(evnt.FlagTeam);
+            flag.SetActive(true);
+            flag.GetComponentInChildren<Renderer>().materials[1].SetColor("_EmissionColor", Teams.Colors[evnt.FlagTeam] * 2);
+            flag.GetComponentInChildren<Light>().color = Teams.Colors[evnt.FlagTeam];
+            gun.SetActive(false);
+        }
+    }
+
+    public override void OnEvent(FlagDroppedEvent evnt) {
+        if (evnt.Carrier == this.Username) {
+            dropFlag();
+        }
+    }
+
+    private void dropFlag() {
+        SetHeldFlagTeam(0);
+        flag.SetActive(false);
+        gun.SetActive(true);
+    }
+
+    public override void OnEvent(FlagCapturedEvent evnt) {
+        if (evnt.Player == this.Username) {
+            dropFlag();
+        }
+    }
+
+    public override void OnEvent(FlagReturnedEvent evnt) {
+        if (evnt.Team == Team && evnt.Team == HeldFlagTeam) {
+            dropFlag();
+        }
+    }
 }

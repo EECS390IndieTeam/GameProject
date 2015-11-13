@@ -33,6 +33,7 @@ public class GameManager : Bolt.GlobalEventListener
 			//If a Singleton already exists and you find
 			//another reference in scene, destroy it!
 			if (this != _instance) {
+                BoltNetwork.RemoveGlobalEventListener(this);
 				Destroy (this);
 			}
 		}

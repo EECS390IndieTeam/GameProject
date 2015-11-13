@@ -12,17 +12,19 @@ public class StatUpdateToken : Bolt.IProtocolToken {
         List<Change> list = Changes[player];
         if (list.Count >= 256) throw new Exception("Error, cannot send more than 256 changes per player in a single StatUpdateToken");
         list.Add(new Change(stat, value));
+        //Debug.Log("Added change: " + player + ", " + stat + ", " + value);
     }
 
     public void Read(UdpKit.UdpPacket packet) {
-        int playerCount = packet.ReadByte();
-        for (int p = 0; p < playerCount; p++) {
+        byte playerCount = packet.ReadByte();
+        for (byte p = 0; p < playerCount; p++) {
             string name = packet.ReadString();
-            int statCount = packet.ReadByte();
-            for (int i = 0; i < statCount; i++) {
+            byte statCount = packet.ReadByte();
+            for (byte i = 0; i < statCount; i++) {
                 byte statId = packet.ReadByte();
                 int statValue = packet.ReadInt();
                 AddChange(name, statId, statValue);
+                Debug.Log("Read change: " + name + ", " + statId + ", " + statValue);
             }
         }
     }
@@ -35,6 +37,7 @@ public class StatUpdateToken : Bolt.IProtocolToken {
             foreach (Change c in pair.Value) {
                 packet.WriteByte(c.Stat);
                 packet.WriteInt(c.NewValue);
+                Debug.Log("Wrote change: " + pair.Key + ", " + c.Stat + ", " + c.NewValue);
             }
         }
     }
@@ -44,7 +47,7 @@ public class StatUpdateToken : Bolt.IProtocolToken {
         public int NewValue { get; private set; }
         public Change(byte stat, int newValue) {
             this.Stat = stat;
-            this.NewValue = NewValue;
+            this.NewValue = newValue;
         }
     }
 }

@@ -4,53 +4,53 @@ using System.Collections;
 [RequireComponent(typeof(Collider))]
 public class FlagCapturePoint : MonoBehaviour {
     void Awake() {
+        if (GameManager.instance.GameMode.Mode != GameModes.CAPTURE_THE_FLAG) Destroy(this.gameObject);
+        ReturnFlag();
         if (!BoltNetwork.isServer) {
-			enabled = false;
-		} else {
-			if(teamID == 1) BoltNetwork.Instantiate(BoltPrefabs.Flag1,transform.position, Quaternion.identity);
-			if(teamID == 2) BoltNetwork.Instantiate(BoltPrefabs.Flag2,transform.position, Quaternion.identity);
-
-		}
+            GetComponent<Collider>().enabled = false;
+        }
     }
     
     public int teamID; //Team who owns this capture point and can score points here
 
-    void OnTriggerEnter(Collider other)
-    {
+    public bool FlagAtBase {
+        get;
+        set;
+    }
+
+    public void ReturnFlag() {
+        if (!BoltNetwork.isServer || FlagAtBase) return;
+        Flag.SpawnFlag(teamID, transform.position, transform.rotation);
+        FlagAtBase = true;
+    }
+
+    void OnTriggerEnter(Collider other) {
         if (!BoltNetwork.isServer) return;
-		Debug.Log ("Collided with a capture point.");
-        IGameMode currentGameMode = GameManager.instance.GameMode;
-        if(GameManager.instance.GameMode.Mode == GameModes.CAPTURE_THE_FLAG)
-        {
-            CaptureTheFlagMode mode = (CaptureTheFlagMode)currentGameMode;
-            Flag f = other.gameObject.GetComponentInParent<Flag>();
-			Debug.Log ("Getting flag.");
-            if (f != null)
-            {
-				if(f.player != null && f.player.Team == teamID)
-				{
-					
-					if(f.teamID == teamID)
-                    {
-						Debug.Log ("Returning a flag");
-                        //We are returning the flag to our base
-                        mode.setFlagAtBase(teamID,true);
-                        f.ReturnFlag();
-                    } else
-                    {
-						Debug.Log ("Trying to capture a Flag.");
-                        //The flag we are returning is not ours. Check and see if ours is returned and if so, you score!
-                        if (mode.isFlagAtBaseForTeam(teamID))
-                        {
-							Debug.Log ("Flag Captured!!");
-                            //update scores
-                            Lobby.IncrementStatForPlayer(f.player.Username, "Flags", 1);
-                            Lobby.IncrementStatForPlayer(Lobby.PP_TEAMS[f.player.Team], "Flags", 1);
-                            f.ReturnFlag();
-                        }
-                    }
-                }
+        Debug.Log("Collided with a capture point.");
+        CaptureTheFlagMode mode = GameManager.instance.GameMode as CaptureTheFlagMode;
+        AbstractPlayer player = other.GetComponentInParent<AbstractPlayer>();
+        if (player != null && player.HoldingFlag && player.Team == teamID) {//a player with a flag hit the capture point
+            Debug.Log("A player carrying a flag triggered their capture point");
+            if (player.HeldFlagTeam == teamID) {
+                Debug.Log("Player returned flag");
+                //the player is returning their team's flag
+                FlagReturnedEvent evnt = FlagReturnedEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.ReliableOrdered);
+                evnt.Team = teamID;
+                evnt.Send();
+                ReturnFlag();
+            } else if (player.HeldFlagTeam != teamID && FlagAtBase) {
+                //the player is capturing another team's flag
+                FlagCapturedEvent evnt = FlagCapturedEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.ReliableOrdered);
+                evnt.FlagTeam = player.HeldFlagTeam;
+                evnt.Player = player.Username;
+                evnt.Send();
+                mode.GetCapPointForTeam(player.HeldFlagTeam).ReturnFlag();
+
+                //update scores
+                Lobby.IncrementStatForPlayer(evnt.Player, "Flags", 1);
+                Lobby.IncrementStatForPlayer(Lobby.PP_TEAMS[teamID], "Flags", 1);
             }
         }
+        //we don't care about players who are not carrying flags, the flag itself will take care of that case
     }
 }

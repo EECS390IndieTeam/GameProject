@@ -11,7 +11,13 @@ public class ProxyPlayer : AbstractPlayer {
 
 	void Start() {
 		SetColor(Teams.Colors[this.Team]);
+        state.DeathChangeCallback += state_DeathChangeCallback;
 	}
+
+    void state_DeathChangeCallback(bool isDead) {
+        foreach (var obj in ObjectsToDisableWhileDead) obj.SetActive(!isDead);
+        GetComponent<Collider>().enabled = !isDead;
+    }
 
     public override void Die(string killer, int weaponID) {
         if (!BoltNetwork.isServer) {

@@ -49,7 +49,7 @@ MonoBehaviour:
   debugPlayAsServer: 1
   showDebugInfo: 1
   overrideTimeScale: 1
-  logUncaughtExceptions: 0
+  logUncaughtExceptions: 1
   clientCanInstantiateAll: 1
   debugEditorMode: 1
   consoleToggleKey: 9

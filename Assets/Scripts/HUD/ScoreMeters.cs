@@ -50,7 +50,7 @@ public class ScoreMeters : MonoBehaviour {
             }
         } else {
             int currentPlayerScore = Lobby.GetStatForPlayer(GameManager.instance.CurrentUserName, currentGameMode.StatToDisplay);
-            PlayerScore.text = "" + currentGameMode;
+            PlayerScore.text = "" + currentPlayerScore;
 
             int maxOtherScore = -1;
             foreach (var player in Lobby.AllPlayers) {
