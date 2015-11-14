@@ -4,7 +4,7 @@ using System.Collections;
 public class ThrowGrenade : MonoBehaviour {
 	//Variables for Grenade
 	public int grenadeAmmo;
-
+    private int maxGrenades;
     public float ThrowForce = 10.0f;
 
 	public AudioSource grenadeThrow;
@@ -15,6 +15,7 @@ public class ThrowGrenade : MonoBehaviour {
 
 	void Start() {
 		player = (AbstractPlayer)GameManager.instance.CurrentPlayer;
+        this.maxGrenades = grenadeAmmo;
 	}
 
 	// Returns bool for success
@@ -43,4 +44,9 @@ public class ThrowGrenade : MonoBehaviour {
 		heldGrenade = null;
 		return true;
 	}
+
+    public void RefillGrenades()
+    {
+        this.grenadeAmmo = maxGrenades;
+    }
 }

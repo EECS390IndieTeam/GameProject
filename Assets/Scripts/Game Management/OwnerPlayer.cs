@@ -5,6 +5,8 @@ using System.Collections.Generic;
 [RequireComponent(typeof(FPSController))]
 public class OwnerPlayer : AbstractPlayer {
     private FPSController fpsController;
+    private Collider coll;
+    private Rigidbody rb;
 
     public MeshRenderer[] materials;
 
@@ -23,6 +25,8 @@ public class OwnerPlayer : AbstractPlayer {
     void Awake() {
         this.fpsController = GetComponent<FPSController>();
         GameManager.instance.SetCurrentPlayer(this);
+        this.rb = GetComponent<Rigidbody>();
+        this.coll = GetComponent<Collider>();
     }
 
     void Start() {
@@ -44,15 +48,19 @@ public class OwnerPlayer : AbstractPlayer {
         this.Health = MaxHealth;
         this.IsDead = true;
         ControlEnabled = false;
-        GetComponent<Collider>().enabled = false;
+        coll.enabled = false;
+        rb.velocity = Vector3.zero;
+        rb.isKinematic = true;
     }
 
     public override void RespawnAt(Vector3 position, Quaternion rotation) {
         MoveTo(position, rotation);
         Health = MaxHealth;
+        fpsController.grenade.RefillGrenades();
         IsDead = false;
         ControlEnabled = true;
-        GetComponent<Collider>().enabled = true;
+        this.coll.enabled = true;
+        rb.isKinematic = false;
     }
 
     public override void MoveTo(Vector3 position, Quaternion rotation) {
