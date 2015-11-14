@@ -31,6 +31,11 @@ public class MenuActions : MonoBehaviour
     private Canvas currentCanvas;
 
     /// <summary>
+    /// Gets the current instance for the scene.
+    /// </summary>
+    public static MenuActions Instance { get; private set; }
+
+    /// <summary>
     /// Navigates to a new canvas and pushes the previous one to the navigation stack.
     /// </summary>
     /// <param name="canvas">The canvas to navigate to.</param>
@@ -86,6 +91,16 @@ public class MenuActions : MonoBehaviour
     /// </summary>
     void Start()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.LogError("Multiple MenuActions present in the scene.");
+            return;
+        }
+
         if (initialCanvas == null)
         {
             Debug.LogError("Must set MenuActions.initialCanvas for menu system to function.");
