@@ -96,7 +96,6 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
 
             this.launchButton.interactable = false;
 
-            this.launchButton.interactable = true;
             this.nextMapButton.interactable = true;
             this.prevMapButton.interactable = true;
             this.nextModeButton.interactable = true;
@@ -104,13 +103,12 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
         }
         else
         {
-            this.launchButton.interactable = true;
-
             this.launchButton.interactable = false;
+
+            this.prevModeButton.interactable = false;
             this.nextMapButton.interactable = false;
             this.prevMapButton.interactable = false;
             this.nextModeButton.interactable = false;
-            this.prevModeButton.interactable = false;
         }
     }
 
@@ -129,7 +127,7 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             this.currentHostGameMode = 0;
         }
 
-        this.UpdateGameMode();
+        this.SetGameMode();
     }
 
     /// <summary>
@@ -142,12 +140,12 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             return;
         }
 
-        if (--this.currentHostGameMode <= 0)
+        if (--this.currentHostGameMode < 0)
         {
-            this.currentHostGameMode = this.gameModesList.Count;
+            this.currentHostGameMode = this.gameModesList.Count - 1;
         }
 
-        this.UpdateGameMode();
+        this.SetGameMode();
     }
 
     /// <summary>
@@ -165,7 +163,7 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             this.currentHostMap = 0;
         }
 
-        this.UpdateMap();
+        this.SetMap();
     }
 
     /// <summary>
@@ -178,20 +176,20 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             return;
         }
 
-        if (--this.currentHostMap <= 0)
+        if (--this.currentHostMap < 0)
         {
-            this.currentHostMap = this.mapNamesList.Count;
+            this.currentHostMap = this.mapNamesList.Count - 1;
         }
 
-        this.UpdateMap();
+        this.SetMap();
     }
 
     /// <summary>
     /// Updates the Map in Bolt.
     /// </summary>
-    private void UpdateMap()
+    private void SetMap()
     {
-        if (this.currentHostGameMode >= 0 && this.currentHostMap < this.mapNamesList.Count)
+        if (this.currentHostMap >= 0 && this.currentHostMap < this.mapNamesList.Count)
         {
             Lobby.MapName = this.mapNamesList[this.currentHostMap];
         }
@@ -204,7 +202,7 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     /// <summary>
     /// Updates the GameMode in Bolt.
     /// </summary>
-    private void UpdateGameMode()
+    private void SetGameMode()
     {
         if (this.currentHostGameMode >= 0 && this.currentHostGameMode < this.gameModesList.Count)
         {
@@ -305,29 +303,43 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
 
         this.gameModesList.AddRange(GameModeManager.GameModes);
 
-        Lobby.LobbyUpdatedEvent += (change) =>
+        Lobby.LobbyUpdatedEvent += Lobby_LobbyUpdatedEvent;
+
+    }
+
+    private void Lobby_LobbyUpdatedEvent(Lobby.LobbyChange change)
+    {
+        switch (change)
         {
-            switch (change)
-            {
-                case Lobby.LobbyChange.PLAYER_ADDED:
-                case Lobby.LobbyChange.PLAYER_CHANGED:
-                case Lobby.LobbyChange.PLAYER_REMOVED:
-                    this.ReloadPlayersList();
-                    break;
-                case Lobby.LobbyChange.MODE_CHANGED:
-                    this.UpdateMode();
-                    break;
-                case Lobby.LobbyChange.MAP_CHANGED:
-                    this.UpdateMapLabel();
-                    break;
-            }
-        };
+            case Lobby.LobbyChange.ALL:
+                this.ReloadPlayersList();
+                this.UpdateModeLabel();
+                this.UpdateMapLabel();
+                break;
+            case Lobby.LobbyChange.PLAYER_ADDED:
+            case Lobby.LobbyChange.PLAYER_CHANGED:
+            case Lobby.LobbyChange.PLAYER_REMOVED:
+                this.ReloadPlayersList();
+                break;
+            case Lobby.LobbyChange.MAP_CHANGED:
+                this.UpdateMapLabel();
+                break;
+            case Lobby.LobbyChange.MODE_CHANGED:
+                this.UpdateModeLabel();
+                break;
+        }
+    }
+
+    public override void SceneLoadLocalBegin(string map)
+    {
+        // Deregister event listener at scene exit.
+        Lobby.LobbyUpdatedEvent -= Lobby_LobbyUpdatedEvent;
     }
 
     /// <summary>
     /// Updates the game mode UI on change.
     /// </summary>
-    private void UpdateMode()
+    private void UpdateModeLabel()
     {
         this.gameModelLabel.text = Lobby.GameModeName;
 
@@ -336,7 +348,7 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
         if (this.currentHostGameMode >= 0 && this.currentHostGameMode < this.gameModesList.Count)
         {
             this.mapNamesList.AddRange(
-            GameModeManager.GetSupportedMapsForGameMode(this.gameModesList[this.currentHostGameMode]));
+                GameModeManager.GetSupportedMapsForGameMode(this.gameModesList[this.currentHostGameMode]));
         }
         
         this.currentHostMap = 0;
@@ -362,7 +374,11 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
         if (Lobby.MapName != null)
         {
             this.mapLabel.text = Lobby.MapName;
-            this.launchButton.interactable = true;
+
+            if (!BoltNetwork.isClient)
+            {
+                this.launchButton.interactable = true;
+            }
         }
         else
         {
@@ -382,13 +398,9 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             Destroy(((Transform)childTransform).gameObject);
         }
 
-        // Populate list with connected players,
-        // group players by teams sorted alphabetically by name.
+        // Populate list with connected players.
         int nextY = -(this.listItemHeight / 2);
-        foreach (var player in Lobby.AllPlayers
-            .Where(x => x.Connected)
-            .OrderBy(y => y.Team)
-            .ThenBy(z => z.Name))
+        foreach (var player in Lobby.AllPlayers)
         {
             var newItem = Instantiate(this.listItemPrefab);
             var textComponent = newItem.GetComponentInChildren<Text>();
