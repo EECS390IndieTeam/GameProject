@@ -44,6 +44,7 @@ public class OwnerPlayer : AbstractPlayer {
         this.Health = MaxHealth;
         this.IsDead = true;
         ControlEnabled = false;
+        GetComponent<Collider>().enabled = false;
     }
 
     public override void RespawnAt(Vector3 position, Quaternion rotation) {
@@ -51,6 +52,7 @@ public class OwnerPlayer : AbstractPlayer {
         Health = MaxHealth;
         IsDead = false;
         ControlEnabled = true;
+        GetComponent<Collider>().enabled = true;
     }
 
     public override void MoveTo(Vector3 position, Quaternion rotation) {
