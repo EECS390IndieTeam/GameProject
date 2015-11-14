@@ -23,10 +23,10 @@ public static class Teams {
     /// </summary>
     public static string[] Names = {
         "White Team",   //team 0
-        "Yellow Team",  //team 1
-        "Blue Team",    //team 2
+        "Red Team",  //team 1
+        "Yellow Team",    //team 2
         "Green Team",   //team 3
-        "Red Team",     //team 4
+        "Blue Team",     //team 4
         "Orange Team",  //team 5
         "Pink Team",    //team 6
         "Purple Team"   //team 7

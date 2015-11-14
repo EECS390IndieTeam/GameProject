@@ -54,7 +54,7 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
     }
 
 	public void SetFlagColor(Color c){
-		flagRenderer.materials [1].SetColor ("_EmissionColor", c * 2);
+		flagRenderer.materials [1].SetColor ("_EmissionColor", c);
 		flagLight.color = c;
 	}
 

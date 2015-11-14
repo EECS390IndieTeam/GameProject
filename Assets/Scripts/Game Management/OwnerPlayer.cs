@@ -59,10 +59,14 @@ public class OwnerPlayer : AbstractPlayer {
     }
 
     public override void TakeDamage(float Damage, string OtherUser, Vector3 direction, int weaponID) {
-        Health -= Damage;
-        if (Health <= 0) {
-            Debug.Log(OtherUser + " killed " + Username);
-            Die(OtherUser, weaponID);
+        if (!IsDead)
+        {
+            Health -= Damage;
+            if (Health <= 0)
+            {
+                Debug.Log(OtherUser + " killed " + Username);
+                Die(OtherUser, weaponID);
+            }
         }
     }
 

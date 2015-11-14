@@ -5,6 +5,7 @@ using System.Collections;
 public class FlagCapturePoint : MonoBehaviour {
     void Awake() {
         if (GameManager.instance.GameMode.Mode != GameModes.CAPTURE_THE_FLAG) Destroy(this.gameObject);
+        SetColor(Teams.Colors[teamID]);
         ReturnFlag();
         if (!BoltNetwork.isServer) {
             GetComponent<Collider>().enabled = false;
@@ -52,5 +53,10 @@ public class FlagCapturePoint : MonoBehaviour {
             }
         }
         //we don't care about players who are not carrying flags, the flag itself will take care of that case
+    }
+
+    private void SetColor(Color color)
+    {
+        GetComponent<Renderer>().material.SetColor("_EmissionColor", color);
     }
 }
