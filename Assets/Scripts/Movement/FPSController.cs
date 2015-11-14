@@ -87,11 +87,11 @@ public class FPSController : MonoBehaviour {
 		}
 		if(Input.GetKey(KeyCode.Q))
 		{
-			rotator.rotateCharacter(rotationSpeed);
+			rotator.rotateCharacter(rotationSpeed * Time.deltaTime);
 		}
 		if (Input.GetKey(KeyCode.E))
 		{
-			rotator.rotateCharacter(-rotationSpeed);
+			rotator.rotateCharacter(-rotationSpeed * Time.deltaTime);
 		}
 		
 		// -------------------------------------------------------------------------- //
