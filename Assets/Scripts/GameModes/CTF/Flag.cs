@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(bouncySpinnyCubeScript), typeof(Collider))]
 public class Flag : Bolt.EntityBehaviour<IFlagState> {
     public int Team {
         get {
@@ -8,7 +9,6 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
         }
         private set {
             state.Team = value;
-            SetFlagColor(Teams.Colors[value]);
         }
     }
 	public Renderer flagRenderer;
@@ -21,18 +21,19 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
 
     void Awake() {
         c = GetComponent<Collider>();
-        if (!BoltNetwork.isServer) c.enabled = false;
+        if (!BoltNetwork.isServer) {
+            c.enabled = false;
+            GetComponent<bouncySpinnyCubeScript>().enabled = false;
+        }
     }
 
     public override void Attached() {
         state.Transform.SetTransforms(this.transform);
         if (!BoltNetwork.isServer) c.enabled = false;
+        state.AddCallback("Team", new Bolt.PropertyCallbackSimple(() => {
+            SetFlagColor(Teams.Colors[Team]);
+        }));
     }
-
-	// Use this for initialization
-	void Start () {
-		SetFlagColor (Teams.Colors[Team]);
-	}
 
     void Update() {
         if (!BoltNetwork.isServer) return;

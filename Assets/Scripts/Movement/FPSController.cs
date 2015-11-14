@@ -98,8 +98,9 @@ public class FPSController : MonoBehaviour {
 
         // Firing weapon / dropping flag
         if (player.HoldingFlag) {
-            if (Input.GetButton("Fire1")) {
+            if (Input.GetButtonDown("Fire1")) {
                 //I might change this later so that the OwnerPlayer can drop the flag immediately without having to go through Bolt first
+                Debug.Log("Dropping flag");
                 FlagDroppedEvent evnt = FlagDroppedEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.ReliableOrdered);
                 evnt.FlagTeam = player.HeldFlagTeam;
                 evnt.Carrier = player.Username;
