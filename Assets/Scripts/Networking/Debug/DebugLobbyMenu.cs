@@ -30,6 +30,7 @@ public class DebugLobbyMenu : Bolt.GlobalEventListener {
         //updateMapList(GameManager.instance.gameMode.GetType().Name);
         mapList = new string[0];
         humanReadableMapList = new string[0];
+        updateMapList(GameModeManager.GameModeNames[0]);
     }
 
     private void updateMapList(string gameModeName) {
