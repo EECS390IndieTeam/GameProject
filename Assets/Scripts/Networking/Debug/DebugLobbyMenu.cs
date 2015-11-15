@@ -8,7 +8,7 @@ public class DebugLobbyMenu : Bolt.GlobalEventListener {
 
     private float width = 300f;
 
-    private const int SERVER_MENU_LINE_COUNT = 7;
+    private const int SERVER_MENU_LINE_COUNT = 8;
     private const int CLIENT_MENU_LINE_COUNT = 5;
 
     private const float LINE_HEIGHT = 27.3f;
@@ -18,6 +18,8 @@ public class DebugLobbyMenu : Bolt.GlobalEventListener {
 
     private string[] mapList;
     private string[] humanReadableMapList;
+
+    private string ipAddress = "Unknown";
     void Update() {
         DebugHUD.setValue("IsSever", BoltNetwork.isServer);
         if (BoltNetwork.isClient) {
@@ -27,10 +29,14 @@ public class DebugLobbyMenu : Bolt.GlobalEventListener {
     }
 
     void Start() {
-        //updateMapList(GameManager.instance.gameMode.GetType().Name);
         mapList = new string[0];
         humanReadableMapList = new string[0];
         updateMapList(GameModeManager.GameModeNames[0]);
+        if (BoltNetwork.isServer) {
+            try {
+                ipAddress = ""+System.Net.Dns.GetHostAddresses(System.Net.Dns.GetHostName())[0];
+            } catch { }
+        }
     }
 
     private void updateMapList(string gameModeName) {
@@ -62,6 +68,13 @@ public class DebugLobbyMenu : Bolt.GlobalEventListener {
     }
 
     private void DrawServerMenu() {
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUILayout.Label("IP Address: " + ipAddress);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+
+
         GUILayout.BeginHorizontal(GUILayout.ExpandHeight(false), GUILayout.ExpandWidth(false));
         GUILayout.Label("Lobby Password:", GUILayout.ExpandWidth(false), GUILayout.ExpandHeight(false));
         tempPassword = GUILayout.TextField(tempPassword, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(false));
