@@ -23,7 +23,7 @@ public class FPSController : MonoBehaviour {
 	public ThrowGrenade grenade;
 	public MeshRenderer gunModel;
 
-    private bool isAttachedToSurface = false;
+    public bool isAttachedToSurface = false;
 	private bool prepGrenade;
 	
 	private float debounceTime = 0.1f;

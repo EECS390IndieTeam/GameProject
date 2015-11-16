@@ -160,6 +160,11 @@ ModelImporter:
     100304: HAND_L_poly
     100306: HAND_R_poly
     100308: Main_Control
+    100310: Mesh_Only:Chestplate
+    100312: New_body
+    100314: New_chest_plate
+    100316: New_left_hand
+    100318: New_right_hand
     400000: Body_Mesh
     400002: BODY_poly
     400004: Body_Rig
@@ -315,6 +320,11 @@ ModelImporter:
     400304: HAND_L_poly
     400306: HAND_R_poly
     400308: Main_Control
+    400310: Mesh_Only:Chestplate
+    400312: New_body
+    400314: New_chest_plate
+    400316: New_left_hand
+    400318: New_right_hand
     2300000: BODY_poly
     2300002: Chestplate
     2300004: HAND_L_poly
@@ -327,8 +337,16 @@ ModelImporter:
     4300002: HAND_L_poly
     4300004: BODY_poly
     4300006: HAND_R_poly
+    4300008: Mesh_Only:Chestplate
+    4300010: New_right_hand
+    4300012: New_body
+    4300014: New_left_hand
     7400000: Take 001
     9500000: //RootNode
+    13700000: Mesh_Only:Chestplate
+    13700002: New_body
+    13700004: New_left_hand
+    13700006: New_right_hand
   materials:
     importMaterials: 1
     materialName: 0
@@ -339,7 +357,42 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nDefault bone length found in this file is different
+      form the one found in the source avatar:\n\t'Character1_LeftUpLeg' : position
+      error = 9062.216797 mm\n\t'Character1_LeftLeg' : position error = 32828.707031
+      mm\n\t'Character1_LeftFoot' : position error = 33008.890625 mm\n\t'Character1_LeftToeBase'
+      : position error = 23870.878906 mm\n\t'Character1_RightUpLeg' : position error
+      = 9062.216797 mm\n\t'Character1_RightLeg' : position error = 32828.703125 mm\n\t'Character1_RightFoot'
+      : position error = 33008.890625 mm\n\t'Character1_RightToeBase' : position error
+      = 23870.878906 mm\n\t'Character1_Spine' : position error = 6707.973145 mm\n\t'Character1_Spine1'
+      : position error = 11060.029297 mm\n\t'Character1_Spine2' : position error =
+      11101.170898 mm\n\t'Character1_LeftShoulder' : position error = 14061.127930
+      mm\n\t'Character1_LeftArm' : position error = 11264.783203 mm\n\t'Character1_LeftForeArm'
+      : position error = 29092.105469 mm\n\t'Character1_LeftHand' : position error
+      = 38699.769531 mm\n\t'Character1_LeftHandThumb1' : position error = 7986.380371
+      mm\n\t'Character1_LeftHandThumb2' : position error = 5272.268066 mm\n\t'Character1_LeftHandThumb3'
+      : position error = 5619.260742 mm\n\t'Character1_LeftHandIndex1' : position
+      error = 7740.383301 mm\n\t'Character1_LeftHandIndex2' : position error = 5639.445801
+      mm\n\t'Character1_LeftHandIndex3' : position error = 7370.397949 mm\n\t'Character1_LeftHandMiddle1'
+      : position error = 7423.564453 mm\n\t'Character1_LeftHandMiddle2' : position
+      error = 7894.032715 mm\n\t'Character1_LeftHandMiddle3' : position error = 7992.464355
+      mm\n\t'Character1_LeftHandRing1' : position error = 7424.382812 mm\n\t'Character1_LeftHandRing2'
+      : position error = 5473.201172 mm\n\t'Character1_LeftHandRing3' : position error
+      = 5301.465332 mm\n\t'Character1_RightShoulder' : position error = 14061.127930
+      mm\n\t'Character1_RightArm' : position error = 11264.783203 mm\n\t'Character1_RightForeArm'
+      : position error = 29092.117188 mm\n\t'Character1_RightHand' : position error
+      = 38699.695312 mm\n\t'Character1_RightHandThumb1' : position error = 7986.383301
+      mm\n\t'Character1_RightHandThumb2' : position error = 5272.260254 mm\n\t'Character1_RightHandThumb3'
+      : position error = 5619.269531 mm\n\t'Character1_RightHandIndex1' : position
+      error = 7740.387207 mm\n\t'Character1_RightHandIndex2' : position error = 5639.441406
+      mm\n\t'Character1_RightHandIndex3' : position error = 7370.391602 mm\n\t'Character1_RightHandMiddle1'
+      : position error = 7423.562500 mm\n\t'Character1_RightHandMiddle2' : position
+      error = 7894.040527 mm\n\t'Character1_RightHandMiddle3' : position error = 7992.467773
+      mm\n\t'Character1_RightHandRing1' : position error = 7424.376953 mm\n\t'Character1_RightHandRing2'
+      : position error = 5473.200684 mm\n\t'Character1_RightHandRing3' : position
+      error = 5301.468262 mm\n\t'Character1_Neck' : position error = 14585.185547
+      mm\n\t'Character1_Neck1' : position error = 11215.143555 mm\n\t'Character1_Head'
+      : position error = 9582.797852 mm\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     animationCompression: 3

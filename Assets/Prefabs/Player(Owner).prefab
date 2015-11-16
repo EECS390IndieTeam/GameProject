@@ -1664,12 +1664,12 @@ MonoBehaviour:
   HandPoint: {fileID: 425972}
   flag: {fileID: 128764}
   gun: {fileID: 158946}
-  materials: []
   ObjectsToDisableWhileDead:
   - {fileID: 120052}
   - {fileID: 165130}
   - {fileID: 155274}
   - {fileID: 189980}
+  materials: []
 --- !u!114 &11412604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2289,7 +2289,7 @@ MonoBehaviour:
   maxXSpeedSurface: 8
   maxYSpeedSurface: 8
   velocityQuantum: .100000001
-  rotationSpeed: 1
+  rotationSpeed: 100
   surfaceMovementMask:
     serializedVersion: 2
     m_Bits: 513
@@ -4338,7 +4338,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: rotationSpeed
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Layer

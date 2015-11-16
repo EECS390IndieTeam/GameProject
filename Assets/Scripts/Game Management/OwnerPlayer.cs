@@ -57,6 +57,8 @@ public class OwnerPlayer : AbstractPlayer {
         MoveTo(position, rotation);
         Health = MaxHealth;
         fpsController.grenade.RefillGrenades();
+		fpsController.grappleGun.detach();
+		fpsController.isAttachedToSurface = false;
         IsDead = false;
         ControlEnabled = true;
         this.coll.enabled = true;
