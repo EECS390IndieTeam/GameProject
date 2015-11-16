@@ -501,10 +501,10 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 224: {fileID: 22412418}
-  - 222: {fileID: 22207972}
+  - 4: {fileID: 450266}
   - 20: {fileID: 2037402}
   - 114: {fileID: 11403614}
+  - 222: {fileID: 22207972}
   m_Layer: 5
   m_Name: MiniMap
   m_TagString: Untagged
@@ -819,6 +819,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 22450712}
   m_RootOrder: 3
+--- !u!4 &450266
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165130}
+  m_LocalRotation: {x: .0763709992, y: 0, z: 0, w: .997079492}
+  m_LocalPosition: {x: 0, y: 9264, z: -60000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 22450712}
+  m_RootOrder: 2
 --- !u!4 &456824
 Transform:
   m_ObjectHideFlags: 1
@@ -945,7 +957,7 @@ Camera:
     height: .224999994
   near clip plane: 75
   far clip plane: 1000
-  field of view: 2
+  field of view: 3
   orthographic: 0
   orthographic size: 5
   m_Depth: 1
@@ -3870,23 +3882,6 @@ RectTransform:
   m_AnchoredPosition: {x: -18, y: -22}
   m_SizeDelta: {x: 35, y: 35}
   m_Pivot: {x: .5, y: 1}
---- !u!224 &22412418
-RectTransform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165130}
-  m_LocalRotation: {x: .382683456, y: 0, z: 0, w: .923879504}
-  m_LocalPosition: {x: 0, y: 0, z: -60000}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 22450712}
-  m_RootOrder: 2
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 60000}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: .5, y: .5}
 --- !u!224 &22418254
 RectTransform:
   m_ObjectHideFlags: 1
@@ -4040,7 +4035,7 @@ RectTransform:
   m_Children:
   - {fileID: 22444826}
   - {fileID: 22454580}
-  - {fileID: 22412418}
+  - {fileID: 450266}
   - {fileID: 448822}
   - {fileID: 415994}
   - {fileID: 22487154}
