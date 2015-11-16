@@ -68,8 +68,11 @@ public class FPSController : MonoBehaviour {
 
 		if (previousHolding != player.HoldingFlag) {
 			previousHolding = player.HoldingFlag;
-			gun.canShoot = !previousHolding;
-			gunModel.enabled = !previousHolding;
+			if (previousHolding) {
+				DisableGun();
+			} else {
+				EnableGun();
+			}
 		}
 		//if (previousHolding && !player.HoldingFlag) previousHolding = false;
     }
@@ -153,15 +156,15 @@ public class FPSController : MonoBehaviour {
 		// Grenades
         if (!player.HoldingFlag && Input.GetButtonDown("Grenade") && !previousHolding) {
 			bool success = grenade.PrepGrenade();
-			gun.canShoot = !success;
-			gunModel.enabled = !success;
+			if (success) {
+				DisableGun ();
+			}
 			prepGrenade = true;
 		}
 		if (Input.GetButtonUp("Grenade") && !previousHolding) {
 			grenade.GrenadeThrow();
 			if (!gunModel.enabled && prepGrenade) {
-				gun.canShoot = true;
-				gunModel.enabled = true;
+				EnableGun();
 				prepGrenade = false;
 			}
 		}
@@ -173,6 +176,16 @@ public class FPSController : MonoBehaviour {
 			character.velocity = GrapplePhysics.calculateVelocity(character.position, character.velocity);
 		}
     }
+
+	public void EnableGun() {
+		gun.canShoot = true;
+		gunModel.enabled = true;
+	}
+
+	public void DisableGun() {
+		gun.canShoot = false;
+		gunModel.enabled = false;
+	}
 
     void OnCollisionStay(Collision c)
     {

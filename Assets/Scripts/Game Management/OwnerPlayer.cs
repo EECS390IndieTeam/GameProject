@@ -59,6 +59,7 @@ public class OwnerPlayer : AbstractPlayer {
         fpsController.grenade.RefillGrenades();
 		fpsController.grappleGun.detach();
 		fpsController.isAttachedToSurface = false;
+		fpsController.EnableGun();
         IsDead = false;
         ControlEnabled = true;
         this.coll.enabled = true;
