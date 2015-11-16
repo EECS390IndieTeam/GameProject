@@ -6,15 +6,16 @@ using System.Collections.Generic;
 public class Scoreboard : MonoBehaviour {
 
 	public Text Players;
-    public GameObject textElement;
 
-    private Dictionary<Lobby.LobbyPlayer, string> players;
+    private Dictionary<Lobby.LobbyPlayer, GameObject> players;
 	
 	public Text Kills;
 
     public Text Deaths;
 
     public Text Scores;
+
+
 	
 	public Color[] teamColors = {
 		Color.white,                               //team 0
@@ -48,6 +49,7 @@ public class Scoreboard : MonoBehaviour {
         Lobby.LobbyUpdatedEvent -= Lobby_LobbyUpdatedEvent;
     }
 	void Start() {
+        players = new Dictionary<Lobby.LobbyPlayer, GameObject>();
 		UpdateScoreBoard();
 	}
 	
@@ -58,24 +60,23 @@ public class Scoreboard : MonoBehaviour {
     public void UpdateScoreBoard()
     {
         IGameMode currentGameMode = GameManager.instance.GameMode;
-        //Players.text = "<b>Players</b>\n";
-        //Kills.text = "<b>Kills</b>\n";
 
         //assume teams are used
         //TODO: not assume teams are used
+        int index = 4; //used to find row number for player
         for(int i = 1; i <= currentGameMode.MaxTeams; i++)
         {
             //int teamScore = Lobby.GetStatForPlayer(Lobby.PP_TEAMS[i], GameManager.instance.GameMode.StatToDisplay);
             foreach (var player in Lobby.GetPlayersOnTeam(i))
             {
-                Players.text += "\n\n" + player.Name;
-                
-                /*Text newText =  Instantiate(textElement, Vector3.zero, Players.transform.rotation) as Text;
-                newText.rectTransform.SetParent(Players.transform, false);
-                newText.rectTransform.position = Vector3.zero;
-                //Text blah = newText.GetComponentInChildren<Text>();
-                newText.text = player.Name;
-                //newText.GetComponent(Text).text = player.Name;*/
+                GameObject player_info = this.transform.GetChild(index).gameObject;
+                players.Add(player, player_info);
+                player_info.SetActive(true);
+                player_info.transform.GetChild(0).GetComponent<Text>().text = player.Name;
+                player_info.transform.GetChild(1).GetComponent<Text>().text = Lobby.GetStatForPlayer(player.Name, "Kills").ToString();
+                //player_info.transform.GetChild(2).GetComponent<Text>().text = Lobby.GetStatForPlayer(player.Name, "Death").ToString();
+                player_info.transform.GetChild(3).GetComponent<Text>().text = Lobby.GetStatForPlayer(player.Name, currentGameMode.StatToDisplay).ToString();
+                index++;
             }
 
         }
