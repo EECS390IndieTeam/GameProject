@@ -22,7 +22,7 @@ public class DebugLobbyDrawer : MonoBehaviour {
             GUILayout.BeginHorizontal(boxSkin);
             Color retColor = GUI.contentColor;
             GUI.contentColor = p.Connected ? Teams.Colors[p.Team] : Color.grey;
-            GUILayout.Label(p.Team + " - " + p.Name + (p.Host ? " [H]" : ""));
+            GUILayout.Label((GameManager.instance.GameMode.UsesTeams ? p.Team + " - " : "") + p.Name + (p.Host ? " [H]" : ""));
             GUI.contentColor = retColor;
             GUILayout.EndHorizontal();
         }

@@ -20,6 +20,8 @@ public class DebugLobbyMenu : Bolt.GlobalEventListener {
     private string[] humanReadableMapList;
 
     private string ipAddress = "Unknown";
+
+    public Texture buttonBG;
     void Update() {
         DebugHUD.setValue("IsSever", BoltNetwork.isServer);
         if (BoltNetwork.isClient) {
@@ -158,16 +160,33 @@ public class DebugLobbyMenu : Bolt.GlobalEventListener {
     }
 
     private void DrawTeamChangeButtons() {
+        bool teams = GameManager.instance.GameMode.UsesTeams;
         GUILayout.BeginHorizontal();
-        GUILayout.Label("Set team:");
+        if (teams) {
+            GUILayout.Label("Set team:");
+        } else {
+            GUILayout.Label("Set color:");
+        }
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
         for (int i = 0; i <= 7; i++) {
-            if (GUILayout.Button(i + "")) {
+            Color bgRestore = GUI.backgroundColor;
+            Color restore = GUI.contentColor;
+            GUIContent content;
+            if (teams) {
+                content = new GUIContent(i + "");
+            } else {
+                GUI.contentColor = Teams.Colors[i];
+                content = new GUIContent(buttonBG);
+            }
+            GUI.backgroundColor = Teams.Colors[i];
+            if ((!teams && GUILayout.Button(content, GUIStyle.none)) || (teams && GUILayout.Button(content))) {
                 TeamChangeEvent evnt = TeamChangeEvent.Create(Bolt.GlobalTargets.OnlyServer, Bolt.ReliabilityModes.ReliableOrdered);
                 evnt.NewTeam = i;
                 evnt.Send();
             }
+            GUI.backgroundColor = bgRestore;
+            GUI.contentColor = restore;
         }
         GUILayout.EndHorizontal();
     }
