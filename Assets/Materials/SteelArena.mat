@@ -6,13 +6,12 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: MainMenuMaterial
-  m_Shader: {fileID: 104, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _ALPHABLEND_ON
+  m_Name: SteelArena
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -20,8 +19,8 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
+          m_Texture: {fileID: 2800000, guid: 676dfb1858b32f2458e374f051942486, type: 3}
+          m_Scale: {x: 20, y: 20}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -56,7 +55,7 @@ Material:
           name: _EmissionMap
         second:
           m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
+          m_Scale: {x: 20, y: 20}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -70,7 +69,7 @@ Material:
           name: _DetailAlbedoMap
         second:
           m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
+          m_Scale: {x: 0, y: 0}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -79,65 +78,19 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _FrontTex
-        second:
-          m_Texture: {fileID: 2800000, guid: 9e2699b5cc33d2748953cd6be5f626f8, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _BackTex
-        second:
-          m_Texture: {fileID: 2800000, guid: 9e2699b5cc33d2748953cd6be5f626f8, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _LeftTex
-        second:
-          m_Texture: {fileID: 2800000, guid: 9e2699b5cc33d2748953cd6be5f626f8, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _RightTex
-        second:
-          m_Texture: {fileID: 2800000, guid: 9e2699b5cc33d2748953cd6be5f626f8, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _UpTex
-        second:
-          m_Texture: {fileID: 2800000, guid: 9e2699b5cc33d2748953cd6be5f626f8, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _DownTex
-        second:
-          m_Texture: {fileID: 2800000, guid: 9e2699b5cc33d2748953cd6be5f626f8, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
           name: _SrcBlend
-        second: 5
+        second: 1
       data:
         first:
           name: _DstBlend
-        second: 10
+        second: 0
       data:
         first:
           name: _Cutoff
         second: .5
-      data:
-        first:
-          name: _Exposure
-        second: 1.07000005
       data:
         first:
           name: _Parallax
@@ -145,11 +98,11 @@ Material:
       data:
         first:
           name: _ZWrite
-        second: 0
+        second: 1
       data:
         first:
           name: _Glossiness
-        second: .5
+        second: .191
       data:
         first:
           name: _BumpScale
@@ -169,15 +122,11 @@ Material:
       data:
         first:
           name: _Mode
-        second: 2
+        second: 0
       data:
         first:
           name: _Metallic
-        second: .303000003
-      data:
-        first:
-          name: _Rotation
-        second: 0
+        second: .182999998
     m_Colors:
       data:
         first:
@@ -186,8 +135,4 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0, g: 0, b: 0, a: 1}
-      data:
-        first:
-          name: _Tint
-        second: {r: .5, g: .5, b: .5, a: .5}
+        second: {r: .647058845, g: .647058845, b: .647058845, a: 1}

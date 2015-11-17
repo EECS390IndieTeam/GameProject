@@ -64,7 +64,7 @@ public class GameManager : Bolt.GlobalEventListener
         private set;
     }
 
-    private IGameMode _GameMode;
+    private IGameMode _GameMode = GameModeManager.GameModes.First();
     public IGameMode GameMode {
         get { return _GameMode; }
         set {
@@ -153,6 +153,7 @@ public class GameManager : Bolt.GlobalEventListener
         }
     }
 
+
     private void GameOver() {
         if (BoltNetwork.isServer) {
             GameMode.OnGameEnd();
@@ -193,7 +194,22 @@ public class GameManager : Bolt.GlobalEventListener
 
     //Tells clients to end the game
     public override void OnEvent(GameOverEvent evnt) {
-        if (!BoltNetwork.isClient) return;
-        GameOver();
+		if (!BoltNetwork.isClient)
+			return;
+		GameOver ();
+	}
+
+    /// <summary>
+    /// Jank-ASS disconnect network and go to MainMenu function.
+    /// </summary>
+    public void QuitToMainMenu()
+    {
+        // Disconnect network.
+        if (BoltNetwork.isRunning)
+        {
+            BoltLauncher.Shutdown();
+        }
+
+        Application.LoadLevel(BoltScenes.MainMenu);
     }
 }

@@ -27,6 +27,11 @@ public class SetupGameMenuActions : MonoBehaviour
     public Button launchButton;
 
     /// <summary>
+    /// Default host port number.
+    /// </summary>
+    public int defaultPort = 54321;
+
+    /// <summary>
     /// Initial setup.
     /// </summary>
     void Start()
@@ -51,6 +56,9 @@ public class SetupGameMenuActions : MonoBehaviour
             Debug.LogError("SetupGameMenuActions.launchButton cannot be null.");
         }
 
+        // Set default port number in input box.
+        this.portInputField.text = this.defaultPort.ToString();
+
         // Setup input validation. Deactivate launch button if the input values are bad.
         var validateAction = new UnityEngine.Events.UnityAction<string>((newValue) =>
         {
@@ -69,7 +77,10 @@ public class SetupGameMenuActions : MonoBehaviour
             GameManager.instance.CurrentUserName = this.screenNameInputField.text;
             GameManager.instance.GameMode = new TeamDeathmatchMode();
             ServerSideData.Password = this.lobbyPasswordInputField.text;
-            Cursor.visible = false;
+
+            // IMPORTANT: If you are planning on hiding the mouse cursor here, DON'T.
+            // There is another UI page after this one.
+
             if (BoltNetwork.isRunning && BoltNetwork.isClient)
             {
                 BoltLauncher.Shutdown();
@@ -77,6 +88,7 @@ public class SetupGameMenuActions : MonoBehaviour
 
             // We validate this on edit, we shouldn't need to again.
             BoltLauncher.StartServer(int.Parse(this.portInputField.text));
+            GameObject.Find("LobbyPanel").GetComponent<LobbyGameMenuActions>().PrepareMenu();
         }));
     }
 
@@ -87,14 +99,8 @@ public class SetupGameMenuActions : MonoBehaviour
     {
         int port;
 
-        if (int.TryParse(this.portInputField.text, out port) &&
-            this.screenNameInputField.text.Length != 0)
-        {
-            this.launchButton.interactable = true;
-        }
-        else
-        {
-            this.launchButton.interactable = false;
-        }
+        this.launchButton.interactable
+            = (int.TryParse(this.portInputField.text, out port) &&
+            this.screenNameInputField.text.Length != 0);
     }
 }

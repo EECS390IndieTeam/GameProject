@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Bolt;
+using UdpKit;
 
 public class NetworkErrorReporter : Bolt.GlobalEventListener {
     const int windowHeight = 150;
@@ -49,7 +51,6 @@ public class NetworkErrorReporter : Bolt.GlobalEventListener {
         messageDisplayed = true;
         
     }
-
 
     void OnGUI() {
         if (!messageDisplayed) return;
