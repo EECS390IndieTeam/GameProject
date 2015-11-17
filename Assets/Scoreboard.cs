@@ -15,7 +15,7 @@ public class Scoreboard : MonoBehaviour {
 
     public Text Scores;
 
-
+    public GameObject panel; 
 	
 	public Color[] teamColors = {
 		Color.white,                               //team 0
@@ -52,6 +52,11 @@ public class Scoreboard : MonoBehaviour {
         players = new Dictionary<Lobby.LobbyPlayer, GameObject>();
 		UpdateScoreBoard();
 	}
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab)) { panel.SetActive(!panel.active); }
+    }
 	
 	void Lobby_LobbyUpdatedEvent(Lobby.LobbyChange change) {
 		UpdateScoreBoard();
@@ -69,13 +74,18 @@ public class Scoreboard : MonoBehaviour {
             //int teamScore = Lobby.GetStatForPlayer(Lobby.PP_TEAMS[i], GameManager.instance.GameMode.StatToDisplay);
             foreach (var player in Lobby.GetPlayersOnTeam(i))
             {
-                GameObject player_info = this.transform.GetChild(index).gameObject;
+                GameObject player_info = panel.transform.GetChild(index).gameObject;
                 players.Add(player, player_info);
                 player_info.SetActive(true);
+                
                 player_info.transform.GetChild(0).GetComponent<Text>().text = player.Name;
+                player_info.transform.GetChild(0).GetComponent<Text>().color = teamColors[player.Team];
                 player_info.transform.GetChild(1).GetComponent<Text>().text = Lobby.GetStatForPlayer(player.Name, "Kills").ToString();
-                //player_info.transform.GetChild(2).GetComponent<Text>().text = Lobby.GetStatForPlayer(player.Name, "Death").ToString();
+                player_info.transform.GetChild(1).GetComponent<Text>().color = teamColors[player.Team];
+                player_info.transform.GetChild(2).GetComponent<Text>().text = Lobby.GetStatForPlayer(player.Name, "Deaths").ToString();
+                player_info.transform.GetChild(2).GetComponent<Text>().color = teamColors[player.Team];
                 player_info.transform.GetChild(3).GetComponent<Text>().text = Lobby.GetStatForPlayer(player.Name, currentGameMode.StatToDisplay).ToString();
+                player_info.transform.GetChild(3).GetComponent<Text>().color = teamColors[player.Team];
                 index++;
             }
 
