@@ -39,6 +39,8 @@ public class FPSController : MonoBehaviour {
 
 	private OwnerPlayer player;
 
+    private bool debugMouseFree = false;
+
 	// Use this for initialization
 	void Awake ()
     {
@@ -74,20 +76,19 @@ public class FPSController : MonoBehaviour {
 				EnableGun();
 			}
 		}
-		//if (previousHolding && !player.HoldingFlag) previousHolding = false;
     }
 
 	private void CheckForInput() {
-		
 		DebugHUD.setValue("gunModel.enabled", gunModel.enabled);
 
-		// Mouse look and character rotation
-		float mouseX = Input.GetAxis("Mouse X");
-		float mouseY = Input.GetAxis("Mouse Y");
-		if (Mathf.Abs(mouseX) > float.Epsilon || Mathf.Abs(mouseY) > float.Epsilon)
-		{
-			mouseLook.rotateView(mouseX, mouseY);
-		}
+        // Mouse look and character rotation
+        if (!debugMouseFree) {
+            float mouseX = Input.GetAxis("Mouse X");
+            float mouseY = Input.GetAxis("Mouse Y");
+            if (Mathf.Abs(mouseX) > float.Epsilon || Mathf.Abs(mouseY) > float.Epsilon) {
+                mouseLook.rotateView(mouseX, mouseY);
+            }
+        }
 		if(Input.GetKey(KeyCode.Q))
 		{
 			rotator.rotateCharacter(rotationSpeed * Time.deltaTime);
@@ -96,6 +97,13 @@ public class FPSController : MonoBehaviour {
 		{
 			rotator.rotateCharacter(-rotationSpeed * Time.deltaTime);
 		}
+
+        //debugMouseFree
+        if (Input.GetKeyDown(KeyCode.Backslash)) {
+            debugMouseFree = !debugMouseFree;
+            Cursor.lockState = debugMouseFree ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.visible = debugMouseFree;
+        }
 		
 		// -------------------------------------------------------------------------- //
 

@@ -55,6 +55,8 @@ public class DebugLauncherMenu : MonoBehaviour {
                 break;
             case State.LAUNCH_SERVER:
                 if (BoltNetwork.isRunning) {
+                    BoltNetwork.EnableLanBroadcast();
+                    //BoltNetwork.EnableUPnP();
                     GameManager.instance.GameMode = GameModeManager.GameModes[0];
                     GameManager.instance.ChangeGameState(GameManager.GameState.LOBBY);
                     BoltNetwork.LoadScene(BoltScenes.lobby);
