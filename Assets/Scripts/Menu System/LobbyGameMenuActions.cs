@@ -239,7 +239,13 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     public void StartGame()
     {
         Cursor.visible = false;
-        BoltNetwork.LoadScene("ingame");
+
+        // Uhhhh...hmmmmmm.
+        // You may refer to the code in this class by it's official name "Thomas the Jank-Engine"
+        BoltNetwork.LoadScene(
+            string.Format("ingame_{0}_{1}",
+            this.mapNamesList[this.currentHostMap],
+            GameManager.instance.GameMode.GetType().Name));
     }
 
     /// <summary>
