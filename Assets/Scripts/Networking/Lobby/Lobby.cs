@@ -147,7 +147,8 @@ public class Lobby : Bolt.GlobalEventListener {
                     return 0;
                 }
             } else {
-                throw new Exception("Requested stat \"" + stat + "\" from unknown player \"" + playerName + "\"");
+                return 0;
+                //throw new Exception("Requested stat \"" + stat + "\" from unknown player \"" + playerName + "\"");
             }
         } else {
             return player.GetStat(statid);
