@@ -82,14 +82,17 @@ public class Scoreboard : MonoBehaviour {
     public void UpdateScoreBoard()
     {
         IGameMode currentGameMode = GameManager.instance.GameMode;
+        bool flags = currentGameMode.ToString() == "CaptureTheFlagMode";
 
         int index = 4; //used to find row number for player, first four elements are for headers
         if (currentGameMode.UsesTeams) //if teams are used
         {
             //I feel like this shouldn't work if Team 1 is skipped but somehow it works fine. Magic.
             //nevermind, works for team 1 and 2 but not 3 and up when only 1 player exists. Wonky.
+            int teamNum = 0; //keep track of current team since a given team might be unused.
             for (int i = 1; i <= currentGameMode.MaxTeams; i++)
             {
+                teamNum++;
                 if (Lobby.GetPlayersOnTeam(i).Count() != 0)
                 {
                     GameObject team_info = panel.transform.GetChild(index).gameObject;
@@ -100,11 +103,25 @@ public class Scoreboard : MonoBehaviour {
                     team_info.transform.GetChild(1).GetComponent<Text>().color = teamColors[i];
                     team_info.transform.GetChild(2).GetComponent<Text>().text = boldText(Lobby.GetStatForPlayer(Lobby.PP_TEAMS[i], "Deaths").ToString());
                     team_info.transform.GetChild(2).GetComponent<Text>().color = teamColors[i];
-                    team_info.transform.GetChild(3).GetComponent<Text>().text = boldText(Lobby.GetStatForPlayer(Lobby.PP_TEAMS[i], currentGameMode.StatToDisplay).ToString());
-                    team_info.transform.GetChild(3).GetComponent<Text>().color = teamColors[i];
+                    if (flags)
+                    {
+                        team_info.transform.GetChild(3).GetComponent<Text>().text = boldText(Lobby.GetStatForPlayer(Lobby.PP_TEAMS[i], currentGameMode.StatToDisplay).ToString());
+                        team_info.transform.GetChild(3).GetComponent<Text>().color = teamColors[i];
+                    } else
+                    {
+                        team_info.transform.GetChild(3).gameObject.SetActive(false);
+                    }
                     index++;
                 }
-                else { continue; } //if the team has no players, dont display info for it, not sure this is needed
+                else {
+                    print(teamNum + ": Best go again.");
+                    if (teamNum == 7) { break; }  //the last team has no players so we done fools
+                    else
+                    {
+                        i--; //we need to rerun iteration, teamNum will be one more
+                        continue;
+                    }
+                }
                 //int kills = 0; int deaths = 0; int score = 0;
                 foreach (var player in Lobby.GetPlayersOnTeam(i))
                 {
@@ -121,8 +138,11 @@ public class Scoreboard : MonoBehaviour {
                     player_info.transform.GetChild(2).GetComponent<Text>().text = Lobby.GetStatForPlayer(player.Name, "Deaths").ToString();
                     player_info.transform.GetChild(2).GetComponent<Text>().color = teamColors[player.Team];
                     //score += Lobby.GetStatForPlayer(player.Name, currentGameMode.StatToDisplay);
-                    player_info.transform.GetChild(3).GetComponent<Text>().text = Lobby.GetStatForPlayer(player.Name, currentGameMode.StatToDisplay).ToString(); //I'm a bad person
-                    player_info.transform.GetChild(3).GetComponent<Text>().color = teamColors[player.Team];
+                    if (flags)
+                    {
+                        player_info.transform.GetChild(3).GetComponent<Text>().text = Lobby.GetStatForPlayer(player.Name, currentGameMode.StatToDisplay).ToString(); //I'm a bad person
+                        player_info.transform.GetChild(3).GetComponent<Text>().color = teamColors[player.Team];
+                    } else { player_info.transform.GetChild(3).gameObject.SetActive(false); }
                     index++;
                 }
 
@@ -141,8 +161,10 @@ public class Scoreboard : MonoBehaviour {
                 //player_info.transform.GetChild(1).GetComponent<Text>().color = teamColors[player.Team];
                 player_info.transform.GetChild(2).GetComponent<Text>().text = Lobby.GetStatForPlayer(player.Name, "Deaths").ToString();
                 //player_info.transform.GetChild(2).GetComponent<Text>().color = teamColors[player.Team];
-                player_info.transform.GetChild(3).GetComponent<Text>().text = Lobby.GetStatForPlayer(player.Name, currentGameMode.StatToDisplay).ToString(); //I should rethink my life
-                //player_info.transform.GetChild(3).GetComponent<Text>().color = teamColors[player.Team];
+                if (flags) {
+                    player_info.transform.GetChild(3).GetComponent<Text>().text = Lobby.GetStatForPlayer(player.Name, currentGameMode.StatToDisplay).ToString(); //I should rethink my life
+                    //player_info.transform.GetChild(3).GetComponent<Text>().color = teamColors[player.Team];
+                } else { player_info.transform.GetChild(3).gameObject.SetActive(false); }
                 index++;
             }
         }
