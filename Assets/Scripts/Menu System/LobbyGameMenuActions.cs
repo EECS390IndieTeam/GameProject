@@ -59,6 +59,11 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     public Text teamLabel;
 
     /// <summary>
+    /// Team UI panel.
+    /// </summary>
+    public Image teamPanel;
+
+    /// <summary>
     /// The height of the list item prefab. There is probably a way to get it in code
     /// but Unity sucks and I can't find it. AGH!
     /// </summary>
@@ -384,6 +389,12 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             return;
         }
 
+        if (this.teamPanel == null)
+        {
+            Debug.LogError("LobbyGameMenuActions expects teamPanel to be non-null.");
+            return;
+        }
+
         // Make a local copy of all game modes since the GameManager.GameModes is IEnumerable
         // and cannot be indexed.
         this.gameModesList.AddRange(GameModeManager.GameModes);
@@ -482,6 +493,7 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
         }
 
         this.teamLabel.text = Teams.Names[currentLobbyPlayer.Team];
+        this.teamPanel.color = ColorFromTeam(currentLobbyPlayer.Team);
     }
 
     /// <summary>
@@ -550,9 +562,7 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             var imageComponent = newItem.GetComponentInChildren<Image>();
 
             // Team colors.
-            var teamColor = ColorFromTeam(player.Team);
-            teamColor.a = 0.5f;
-            imageComponent.color = teamColor;
+            imageComponent.color = ColorFromTeam(player.Team);
 			
 			// Add new item to the list box.
 			newItem.transform.SetParent(this.scrollPanel.transform);
@@ -575,14 +585,21 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     /// <returns>A color for the team.</returns>
     private static Color ColorFromTeam(int team)
     {
+        var color = Color.gray;
+
         // Not exhaustive error checking, just superficial for helping with merge.
         // Will break if Teams.Colors is length 0.
-        if (team < 0 || team >= Teams.Colors.Length)
+        if (team >= 0 || team < Teams.Colors.Length)
+        {
+            color = Teams.Colors[team];
+        }
+        else
         {
             Debug.LogError("Unknown team color.");
-            return Color.gray;
         }
 
-        return Teams.Colors[team];
+        color.a = 0.75f;
+
+        return color;
     }
 }
