@@ -105,20 +105,15 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             this.mapLabel.text = "Map";
 
             this.launchButton.interactable = false;
-
-            this.nextMapButton.interactable = true;
-            this.prevMapButton.interactable = true;
-            this.nextModeButton.interactable = true;
-            this.prevModeButton.interactable = true;
         }
         else
         {
-            this.launchButton.interactable = false;
+            this.launchButton.GetComponent<Text>().enabled = false;
 
-            this.prevModeButton.interactable = false;
-            this.nextMapButton.interactable = false;
-            this.prevMapButton.interactable = false;
-            this.nextModeButton.interactable = false;
+            this.prevModeButton.GetComponent<Text>().enabled = false;
+            this.nextMapButton.GetComponent<Text>().enabled = false; 
+            this.prevMapButton.GetComponent<Text>().enabled = false;
+            this.nextModeButton.GetComponent<Text>().enabled = false;
         }
 
         GameManager.instance.ChangeGameState(GameManager.GameState.LOBBY);
@@ -295,16 +290,22 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     {
         if (BoltNetwork.isRunning)
         {
+            var isServer = BoltNetwork.isServer;
+
             BoltLauncher.Shutdown();
 
-            // Jankily remove all players.
-            // Hopefully this enumerable is a list and not something that has to be
-            // reloaded each time :3
-            while (Lobby.PlayerCount > 0)
+            if (isServer)
             {
-                Lobby.RemovePlayer(Lobby.AllPlayers.First().Name);
+                Lobby.RemoveAllDisconnectedPlayers();
             }
         }
+
+        this.launchButton.GetComponent<Text>().enabled = true;
+
+        this.prevModeButton.GetComponent<Text>().enabled = true;
+        this.nextMapButton.GetComponent<Text>().enabled = true;
+        this.prevMapButton.GetComponent<Text>().enabled = true;
+        this.nextModeButton.GetComponent<Text>().enabled = true;
 
         GameManager.instance.ChangeGameState(GameManager.GameState.MENU);
     }
