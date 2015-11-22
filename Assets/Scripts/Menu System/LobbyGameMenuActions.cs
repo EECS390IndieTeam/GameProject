@@ -54,6 +54,16 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     public Text mapLabel;
 
     /// <summary>
+    /// Current player current team label.
+    /// </summary>
+    public Text teamLabel;
+
+    /// <summary>
+    /// Team UI panel.
+    /// </summary>
+    public Image teamPanel;
+
+    /// <summary>
     /// The height of the list item prefab. There is probably a way to get it in code
     /// but Unity sucks and I can't find it. AGH!
     /// </summary>
@@ -95,21 +105,18 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             this.mapLabel.text = "Map";
 
             this.launchButton.interactable = false;
-
-            this.nextMapButton.interactable = true;
-            this.prevMapButton.interactable = true;
-            this.nextModeButton.interactable = true;
-            this.prevModeButton.interactable = true;
         }
         else
         {
-            this.launchButton.interactable = false;
+            this.launchButton.GetComponent<Text>().enabled = false;
 
-            this.prevModeButton.interactable = false;
-            this.nextMapButton.interactable = false;
-            this.prevMapButton.interactable = false;
-            this.nextModeButton.interactable = false;
+            this.prevModeButton.GetComponent<Text>().enabled = false;
+            this.nextMapButton.GetComponent<Text>().enabled = false; 
+            this.prevMapButton.GetComponent<Text>().enabled = false;
+            this.nextModeButton.GetComponent<Text>().enabled = false;
         }
+
+        GameManager.instance.ChangeGameState(GameManager.GameState.LOBBY);
     }
 
     /// <summary>
@@ -185,6 +192,68 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     }
 
     /// <summary>
+    /// Switches to the previous team in the teams enumerables.
+    /// </summary>
+    public void PrevTeam()
+    {
+        var currentLobbyPlayer = GetCurrentLobbyPlayer();
+
+        // LogErrors printed in GetCurrentLobbyPlayer().
+        if (currentLobbyPlayer == null)
+        {
+            return;
+        }
+
+        var newTeam = 0;
+
+        // NOTE: this breaks if there are zero teams but there should NEVER be zero teams
+        // and besides there are separate arrays of Colors and Names so there are MANY more
+        // potential sources of bugs. This is a minor assumption in comparison.
+        // YOLO SWAG THUG-LYFE 5-EVA Fo shizzle ma nizzle.
+        if ((currentLobbyPlayer.Team - 1) < 0)
+        {
+            newTeam = Teams.Colors.Length - 1;
+        }
+        else
+        {
+            newTeam = currentLobbyPlayer.Team - 1;
+        }
+
+        Lobby.SetPlayerTeam(currentLobbyPlayer.Name, newTeam);
+    }
+
+    /// <summary>
+    /// Switches to the previous team in the teams enumerables.
+    /// </summary>
+    public void NextTeam()
+    {
+        var currentLobbyPlayer = GetCurrentLobbyPlayer();
+
+        // LogErrors printed in GetCurrentLobbyPlayer().
+        if (currentLobbyPlayer == null)
+        {
+            return;
+        }
+
+        var newTeam = 0;
+
+        // NOTE: this breaks if there are zero teams but there should NEVER be zero teams
+        // and besides there are separate arrays of Colors and Names so there are MANY more
+        // potential sources of bugs. This is a minor assumption in comparison.
+        // YOLO SWAG THUG-LYFE 5-EVA Fo shizzle ma nizzle.
+        if ((currentLobbyPlayer.Team + 1) >= Teams.Colors.Length)
+        {
+            newTeam = 0;
+        }
+        else
+        {
+            newTeam = currentLobbyPlayer.Team + 1;
+        }
+
+        Lobby.SetPlayerTeam(currentLobbyPlayer.Name, newTeam);
+    }
+
+    /// <summary>
     /// Updates the Map in Bolt.
     /// </summary>
     private void SetMap()
@@ -221,16 +290,24 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     {
         if (BoltNetwork.isRunning)
         {
+            var isServer = BoltNetwork.isServer;
+
             BoltLauncher.Shutdown();
 
-            // Jankily remove all players.
-            // Hopefully this enumerable is a list and not something that has to be
-            // reloaded each time :3
-            while (Lobby.PlayerCount > 0)
+            if (isServer)
             {
-                Lobby.RemovePlayer(Lobby.AllPlayers.First().Name);
+                Lobby.RemoveAllDisconnectedPlayers();
             }
         }
+
+        this.launchButton.GetComponent<Text>().enabled = true;
+
+        this.prevModeButton.GetComponent<Text>().enabled = true;
+        this.nextMapButton.GetComponent<Text>().enabled = true;
+        this.prevMapButton.GetComponent<Text>().enabled = true;
+        this.nextModeButton.GetComponent<Text>().enabled = true;
+
+        GameManager.instance.ChangeGameState(GameManager.GameState.MENU);
     }
 
     /// <summary>
@@ -289,6 +366,12 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             return;
         }
 
+        if (this.teamLabel == null)
+        {
+            Debug.LogError("LobbyGameMenuActions expects a non-null teamLabel.");
+            return;
+        }
+
         if (this.mapLabel == null)
         {
             Debug.LogError("LobbyGameMenuActions expects a non-null mapLabel.");
@@ -307,12 +390,24 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             return;
         }
 
+        if (this.teamPanel == null)
+        {
+            Debug.LogError("LobbyGameMenuActions expects teamPanel to be non-null.");
+            return;
+        }
+
+        // Make a local copy of all game modes since the GameManager.GameModes is IEnumerable
+        // and cannot be indexed.
         this.gameModesList.AddRange(GameModeManager.GameModes);
 
+        // Subscribe to lobby events.
         Lobby.LobbyUpdatedEvent += Lobby_LobbyUpdatedEvent;
-
     }
 
+    /// <summary>
+    /// Lobby events handler.
+    /// </summary>
+    /// <param name="change">What change happened.</param>
     private void Lobby_LobbyUpdatedEvent(Lobby.LobbyChange change)
     {
         switch (change)
@@ -326,6 +421,7 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             case Lobby.LobbyChange.PLAYER_CHANGED:
             case Lobby.LobbyChange.PLAYER_REMOVED:
                 this.ReloadPlayersList();
+                this.UpdateTeamLabel();
                 break;
             case Lobby.LobbyChange.MAP_CHANGED:
                 this.UpdateMapLabel();
@@ -336,6 +432,11 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
         }
     }
 
+    /// <summary>
+    /// Intercept scene change event and unregister event handler so we aren't causing
+    /// problems across scene. For more info talk to Stephen, he seems to understand Bolt.
+    /// </summary>
+    /// <param name="map">The new scene.</param>
     public override void SceneLoadLocalBegin(string map)
     {
         // Deregister event listener at scene exit.
@@ -370,6 +471,55 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
                 Lobby.MapName = null;
             }
         }
+    }
+
+    /// <summary>
+    /// Updates the current user's team label in the GUI from the
+    /// LobbyPlayer's current team.
+    /// </summary>
+    private void UpdateTeamLabel()
+    {
+        var currentLobbyPlayer = GetCurrentLobbyPlayer();
+
+        // GetCurrentLobbyPlayer() prints to log, just return.
+        if (currentLobbyPlayer == null)
+        {
+            return;
+        }
+
+        if (currentLobbyPlayer.Team < 0 || currentLobbyPlayer.Team >= Teams.Names.Length)
+        {
+            Debug.LogError("Current user has invalid team number.");
+            return;
+        }
+
+        this.teamLabel.text = Teams.Names[currentLobbyPlayer.Team];
+        this.teamPanel.color = ColorFromTeam(currentLobbyPlayer.Team);
+    }
+
+    /// <summary>
+    /// Gets the Lobby.LobbyPlayer for the current user. Log messages are written on error.
+    /// </summary>
+    /// <returns>The lobby player or null if an error occurs.</returns>
+    private Lobby.LobbyPlayer GetCurrentLobbyPlayer()
+    {
+        var currentUsername = GameManager.instance.CurrentUserName;
+
+        if (string.IsNullOrEmpty(currentUsername))
+        {
+            Debug.LogError("Cannot update team label, current username is null or empty.");
+            return null;
+        }
+
+        var currentLobbyPlayer = Lobby.GetPlayer(currentUsername);
+
+        if (currentLobbyPlayer == null)
+        {
+            Debug.LogError("Current user is not a member of the current game.");
+            return null;
+        }
+
+        return currentLobbyPlayer;
     }
 
     /// <summary>
@@ -413,9 +563,7 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             var imageComponent = newItem.GetComponentInChildren<Image>();
 
             // Team colors.
-            var teamColor = ColorFromTeam(player.Team);
-            teamColor.a = 0.5f;
-            imageComponent.color = teamColor;
+            imageComponent.color = ColorFromTeam(player.Team);
 			
 			// Add new item to the list box.
 			newItem.transform.SetParent(this.scrollPanel.transform);
@@ -438,27 +586,21 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     /// <returns>A color for the team.</returns>
     private static Color ColorFromTeam(int team)
     {
-        switch (team)
+        var color = Color.gray;
+
+        // Not exhaustive error checking, just superficial for helping with merge.
+        // Will break if Teams.Colors is length 0.
+        if (team >= 0 || team < Teams.Colors.Length)
         {
-            case 0:
-                return Color.red;
-            case 1:
-                return Color.blue;
-            case 2:
-                return Color.green;
-            case 3:
-                return Color.yellow;
-            case 4:
-                return Color.cyan;
-            case 5:
-                return Color.magenta;
-            case 6:
-                return Color.white;
-            default:
-                Debug.LogWarning(string.Format(
-                    "LobbyGameMenuActions does not have a definition for colors for team {0}",
-                    team));
-                return Color.grey;
+            color = Teams.Colors[team];
         }
+        else
+        {
+            Debug.LogError("Unknown team color.");
+        }
+
+        color.a = 0.75f;
+
+        return color;
     }
 }
