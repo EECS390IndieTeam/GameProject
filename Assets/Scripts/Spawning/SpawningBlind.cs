@@ -20,9 +20,10 @@ public class SpawningBlind : MonoBehaviour {
         } else {
             instance = this;
             DontDestroyOnLoad(this);
+            enabled = false;
+            Hide();
         }
-        enabled = false;
-        Hide();
+
     }
 
     /// <summary>
