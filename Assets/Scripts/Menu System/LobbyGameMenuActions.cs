@@ -605,14 +605,12 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
         // Will break if Teams.Colors is length 0.
         if (team >= 0 || team < Teams.Colors.Length)
         {
-            color = Teams.Colors[team];
+            color = Teams.MenuColors[team];
         }
         else
         {
             Debug.LogError("Unknown team color.");
         }
-
-        color.a = 0.75f;
 
         return color;
     }
