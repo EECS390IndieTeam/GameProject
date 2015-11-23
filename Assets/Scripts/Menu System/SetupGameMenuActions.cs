@@ -26,6 +26,20 @@ public class SetupGameMenuActions : MonoBehaviour
     /// </summary>
     public Button launchButton;
 
+    public LobbyGameMenuActions lobbyActions;
+
+    public MenuActions menuActions;
+
+    public Canvas lobbyCanvas;
+
+    /// <summary>
+    /// Default host port number.
+    /// </summary>
+    public int defaultPort = 54321;
+
+    private bool loading = false;
+    private bool shuttingDown = false;
+
     /// <summary>
     /// Initial setup.
     /// </summary>
@@ -51,6 +65,9 @@ public class SetupGameMenuActions : MonoBehaviour
             Debug.LogError("SetupGameMenuActions.launchButton cannot be null.");
         }
 
+        // Set default port number in input box.
+        this.portInputField.text = this.defaultPort.ToString();
+
         // Setup input validation. Deactivate launch button if the input values are bad.
         var validateAction = new UnityEngine.Events.UnityAction<string>((newValue) =>
         {
@@ -69,15 +86,36 @@ public class SetupGameMenuActions : MonoBehaviour
             GameManager.instance.CurrentUserName = this.screenNameInputField.text;
             GameManager.instance.GameMode = new TeamDeathmatchMode();
             ServerSideData.Password = this.lobbyPasswordInputField.text;
-            Cursor.visible = false;
+
+            // IMPORTANT: If you are planning on hiding the mouse cursor here, DON'T.
+            // There is another UI page after this one.
+
             if (BoltNetwork.isRunning && BoltNetwork.isClient)
             {
                 BoltLauncher.Shutdown();
+                shuttingDown = true;
+            } else {
+                // We validate this on edit, we shouldn't need to again.
+                BoltLauncher.StartServer(int.Parse(this.portInputField.text));
+                loading = true;
             }
+            EnableInputs(false);
+        }));
+    }
 
+
+    void Update() {
+        if (!loading) return;
+        if (shuttingDown && !BoltNetwork.isRunning) {
+            shuttingDown = false;
             // We validate this on edit, we shouldn't need to again.
             BoltLauncher.StartServer(int.Parse(this.portInputField.text));
-        }));
+        } else if (!shuttingDown && BoltNetwork.isRunning) {
+            lobbyActions.PrepareMenu();
+            loading = false;
+            EnableInputs(true);
+            menuActions.NavigateAndPushCanvas(lobbyCanvas);
+        }
     }
 
     /// <summary>
@@ -87,14 +125,15 @@ public class SetupGameMenuActions : MonoBehaviour
     {
         int port;
 
-        if (int.TryParse(this.portInputField.text, out port) &&
-            this.screenNameInputField.text.Length != 0)
-        {
-            this.launchButton.interactable = true;
-        }
-        else
-        {
-            this.launchButton.interactable = false;
-        }
+        this.launchButton.interactable
+            = (int.TryParse(this.portInputField.text, out port) &&
+            this.screenNameInputField.text.Length != 0);
+    }
+
+    private void EnableInputs(bool enable) {
+        portInputField.interactable = enable;
+        lobbyPasswordInputField.interactable = enable;
+        screenNameInputField.interactable = enable;
+        launchButton.interactable = enable;
     }
 }

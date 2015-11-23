@@ -12,7 +12,7 @@ public abstract class SimpleFFAGameMode : IGameMode {
     }
 
     public int MaxTeams {
-        get { return 1; }
+        get { return 8; }
     }
 
     public void MovePlayersToStartPoints(List<IPlayer> players) {

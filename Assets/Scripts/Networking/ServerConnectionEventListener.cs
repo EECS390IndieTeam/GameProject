@@ -7,7 +7,7 @@ public class ServerConnectionEventListener : Bolt.GlobalEventListener {
     public override void BoltStartDone() {
         if (GameManager.instance.CurrentUserName == "") GameManager.instance.CurrentUserName = "Server Player";
         PlayerRegistry.CreatePlayer(null, GameManager.instance.CurrentUserName);
-        Lobby.AddPlayer(GameManager.instance.CurrentUserName, 0);
+        Lobby.AddPlayer(GameManager.instance.CurrentUserName, GameManager.instance.GameMode.UsesTeams ? 1 : 0);
         Lobby.SetPlayerIsHost(GameManager.instance.CurrentUserName, true);
     }
 

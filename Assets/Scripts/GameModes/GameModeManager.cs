@@ -49,10 +49,10 @@ public class GameModeManager {
     /// </summary>
     /// <param name="gameModeClassName"></param>
     /// <returns></returns>
-    public static IEnumerable<string> GetSupportedMapsForGameMode(string gameModeClassName) {
+    public static List<string> GetSupportedMapsForGameMode(string gameModeClassName) {
         if(supportedMaps.ContainsKey(gameModeClassName))
             return supportedMaps[gameModeClassName];
-        return new string[0];
+        return new List<String>();
     }
 
     /// <summary>
@@ -60,7 +60,7 @@ public class GameModeManager {
     /// </summary>
     /// <param name="gameMode"></param>
     /// <returns></returns>
-    public static IEnumerable<string> GetSupportedMapsForGameMode(IGameMode gameMode) {
+    public static List<string> GetSupportedMapsForGameMode(IGameMode gameMode) {
         return GetSupportedMapsForGameMode(gameMode.GetType().Name);
     }
 
@@ -69,10 +69,10 @@ public class GameModeManager {
     /// </summary>
     /// <param name="mapClassName"></param>
     /// <returns></returns>
-    public static IEnumerable<IGameMode> GetSupportedGameModesForMap(string mapClassName) {
+    public static List<IGameMode> GetSupportedGameModesForMap(string mapClassName) {
         if(supportedGameModes.ContainsKey(mapClassName))
             return supportedGameModes[mapClassName].ConvertAll<IGameMode>(s => GetGameModeFromClassName(s));
-        return new IGameMode[0];
+        return new List<IGameMode>();
     }
 
     /// <summary>

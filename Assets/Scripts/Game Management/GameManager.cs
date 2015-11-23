@@ -64,7 +64,7 @@ public class GameManager : Bolt.GlobalEventListener
         private set;
     }
 
-    private IGameMode _GameMode;
+    private IGameMode _GameMode = GameModeManager.GameModes.First();
     public IGameMode GameMode {
         get { return _GameMode; }
         set {
@@ -153,6 +153,7 @@ public class GameManager : Bolt.GlobalEventListener
         }
     }
 
+
     private void GameOver() {
         if (BoltNetwork.isServer) {
             GameMode.OnGameEnd();
@@ -172,6 +173,7 @@ public class GameManager : Bolt.GlobalEventListener
 
     void Update() {
         DebugHUD.setValue("GameState", System.Enum.GetName(typeof(GameState), CurrentGameState));
+        DebugHUD.setValue("GameMode", GameMode == null ? "NULL" : GameMode.GetType().Name);
         //only the server needs to do this because it will change the scene and bring the clients along for the ride
         if (BoltNetwork.isServer && CurrentGameState == GameState.POST_GAME_FADE) {
             if (fadeTime < 3f) {
@@ -193,7 +195,22 @@ public class GameManager : Bolt.GlobalEventListener
 
     //Tells clients to end the game
     public override void OnEvent(GameOverEvent evnt) {
-        if (!BoltNetwork.isClient) return;
-        GameOver();
+		if (!BoltNetwork.isClient)
+			return;
+		GameOver ();
+	}
+
+    /// <summary>
+    /// Jank-ASS disconnect network and go to MainMenu function.
+    /// </summary>
+    public void QuitToMainMenu()
+    {
+        // Disconnect network.
+        if (BoltNetwork.isRunning)
+        {
+            BoltLauncher.Shutdown();
+        }
+
+        Application.LoadLevel(BoltScenes.MainMenu);
     }
 }

@@ -93,6 +93,7 @@ public class JoinGameMenuActions : MonoBehaviour
             } else {
                 BoltNetwork.Connect(UdpKit.UdpEndPoint.Parse(this.ipInputField.text),
                     new ConnectionRequestData(GameManager.instance.CurrentUserName, this.lobbyPasswordInputField.text));
+                GameObject.Find("LobbyPanel").GetComponent<LobbyGameMenuActions>().PrepareMenu();
                 connect = false;
             }
         }
@@ -104,7 +105,6 @@ public class JoinGameMenuActions : MonoBehaviour
     private void ValidateInputs()
     {
         if (this.IsIPAndPortValid() &&
-            this.lobbyPasswordInputField.text.Length >= 6 &&
             this.screenNameInputField.text.Length != 0)
         {
             this.lobbyButton.interactable = true;

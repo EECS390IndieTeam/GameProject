@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Contains common logic required by all game menus. To use this script simply add as
@@ -28,6 +29,11 @@ public class MenuActions : MonoBehaviour
     /// The current menu canvas.
     /// </summary>
     private Canvas currentCanvas;
+
+    /// <summary>
+    /// Gets the current instance for the scene.
+    /// </summary>
+    public static MenuActions Instance { get; private set; }
 
     /// <summary>
     /// Navigates to a new canvas and pushes the previous one to the navigation stack.
@@ -71,13 +77,18 @@ public class MenuActions : MonoBehaviour
     /// </summary>
     public void ExitApplication()
     {
+#if UNITY_EDITOR
         // Application.Quit() function does not function in editor.
         if (Application.isEditor)
         {
-            Debug.LogWarning("Cannot exit game while in editor. Deploy to test this feature.");
+            UnityEditor.EditorApplication.isPlaying = false;
+        } else {
+            Debug.LogWarning("Error; somehow code was compiled for the editor, but we are not in the editor.  This is impossible and/or unimportant");
         }
-
+#else
         Application.Quit();
+
+#endif
     }
 
     /// <summary>
@@ -85,6 +96,16 @@ public class MenuActions : MonoBehaviour
     /// </summary>
     void Start()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.LogError("Multiple MenuActions present in the scene.");
+            return;
+        }
+
         if (initialCanvas == null)
         {
             Debug.LogError("Must set MenuActions.initialCanvas for menu system to function.");

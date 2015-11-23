@@ -11,8 +11,6 @@ public class PlayerSyncEventListener : Bolt.GlobalEventListener {
         get;
         private set;
     }
-
-    private SpawningBlind blind;
     private OwnerPlayer player;
 
     private bool running = false;
@@ -21,12 +19,11 @@ public class PlayerSyncEventListener : Bolt.GlobalEventListener {
         GameManager.instance.ChangeGameState(GameManager.GameState.PRE_GAME);
         DebugHUD.setValue("load state", "Loading scene");
         //display loading screen
-        blind = SpawningBlind.instance;
-        if (blind == null) {
+        if (SpawningBlind.instance == null) {
             Debug.LogWarning("Warning: could not find spawning blind!");
         } else {
-            blind.Text = "Loading...";
-            blind.Show();
+            SpawningBlind.instance.Text = "Loading...";
+            SpawningBlind.instance.Show();
         }
     }
 
@@ -44,8 +41,8 @@ public class PlayerSyncEventListener : Bolt.GlobalEventListener {
         DebugHUD.setValue("load state", "Scene loaded, unsynced");
         //the scene has now been loaded for this player, but we have not synchronized the players yet 
         player.ControlEnabled = false;
-        blind.Show();
-        blind.Text = "Waiting for other players...";
+        SpawningBlind.instance.Show();
+        SpawningBlind.instance.Text = "Waiting for other players...";
     }
 
     //Sync Event handler (client and server)
@@ -61,8 +58,8 @@ public class PlayerSyncEventListener : Bolt.GlobalEventListener {
         }
         DebugHUD.setValue("load state", "Sync message recieved");
         running = true;
-        blind.Text = "Synchronized!\nGame will begin in " + (StartTime - BoltNetwork.serverTime).ToString("F2") + " seconds";
-        blind.FadeOut(StartTime - BoltNetwork.serverTime);
+        SpawningBlind.instance.Text = "Synchronized!\nGame will begin in " + (StartTime - BoltNetwork.serverTime).ToString("F2") + " seconds";
+        SpawningBlind.instance.FadeOut(StartTime - BoltNetwork.serverTime);
     }
 
     void Update() {
@@ -76,7 +73,7 @@ public class PlayerSyncEventListener : Bolt.GlobalEventListener {
             Destroy(this);
         } else {
             DebugHUD.setValue("load state", "Sync message recieved, game starts in " + (StartTime - BoltNetwork.serverTime));
-            blind.Text = "Synchronized!\nGame will begin in " + (StartTime - BoltNetwork.serverTime).ToString("F2") + " seconds";
+            SpawningBlind.instance.Text = "Synchronized!\nGame will begin in " + (StartTime - BoltNetwork.serverTime).ToString("F2") + " seconds";
         }
         DebugHUD.setValue("server time", BoltNetwork.serverTime);
         DebugHUD.setValue("start time", StartTime);
