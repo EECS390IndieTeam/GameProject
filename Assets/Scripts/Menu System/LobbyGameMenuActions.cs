@@ -70,22 +70,11 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     public int listItemHeight = 30;
 
     /// <summary>
-    /// List of Game modes.
-    /// </summary>
-    private List<IGameMode> gameModesList = new List<IGameMode>();
-
-    /// <summary>
     /// Current Game mode index in the buttons on the host.
     /// Not used by client since client has no buttons but is purely reactive
     /// to Bolt changes.
     /// </summary>
     private int currentHostGameMode = 0;
-
-    /// <summary>
-    /// List of Map names as strings. Not used on client since client just receives
-    /// the map name and has no buttons.
-    /// </summary>
-    private List<string> mapNamesList = new List<string>();
     
     /// <summary>
     /// Current map index for the host. Not used on client.
@@ -101,17 +90,27 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
         {
             this.currentHostGameMode = 0;
 
-            this.gameModelLabel.text = "Game Mode";
-            this.mapLabel.text = "Map";
+            this.SetGameMode();
+
+            //this.gameModelLabel.text = "Game Mode";
+            //this.mapLabel.text = "Map";
 
             this.launchButton.interactable = false;
+
+            if (GameModeManager.GameModes.Length > 1) {
+                prevModeButton.interactable = true;
+                nextModeButton.interactable = true;
+            } else {
+                prevModeButton.interactable = false;
+                nextModeButton.interactable = false;
+            }
         }
         else
         {
             this.launchButton.GetComponent<Text>().enabled = false;
 
             this.prevModeButton.GetComponent<Text>().enabled = false;
-            this.nextMapButton.GetComponent<Text>().enabled = false; 
+            this.nextMapButton.GetComponent<Text>().enabled = false;
             this.prevMapButton.GetComponent<Text>().enabled = false;
             this.nextModeButton.GetComponent<Text>().enabled = false;
         }
@@ -129,7 +128,9 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             return;
         }
 
-        if (++this.currentHostGameMode >= this.gameModesList.Count)
+        this.currentHostGameMode++;
+
+        if (this.currentHostGameMode >= GameModeManager.GameModes.Length)
         {
             this.currentHostGameMode = 0;
         }
@@ -147,9 +148,11 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             return;
         }
 
-        if (--this.currentHostGameMode < 0)
+        this.currentHostGameMode--;
+
+        if (this.currentHostGameMode < 0)
         {
-            this.currentHostGameMode = this.gameModesList.Count - 1;
+            this.currentHostGameMode = GameModeManager.GameModes.Length - 1;
         }
 
         this.SetGameMode();
@@ -160,12 +163,13 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     /// </summary>
     public void NextMap()
     {
-        if (BoltNetwork.isClient)
-        {
+        if (BoltNetwork.isClient) {
             return;
         }
 
-        if (++this.currentHostMap >= this.mapNamesList.Count)
+        this.currentHostMap++;
+
+        if (this.currentHostMap >= GameModeManager.GetSupportedMapsForGameMode(GameModeManager.GameModeNames[this.currentHostGameMode]).Count)
         {
             this.currentHostMap = 0;
         }
@@ -183,9 +187,11 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             return;
         }
 
-        if (--this.currentHostMap < 0)
+        this.currentHostMap--;
+
+        if (this.currentHostMap < 0)
         {
-            this.currentHostMap = this.mapNamesList.Count - 1;
+            this.currentHostMap = GameModeManager.GetSupportedMapsForGameMode(GameModeManager.GameModeNames[this.currentHostGameMode]).Count - 1;
         }
 
         this.SetMap();
@@ -204,19 +210,17 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             return;
         }
 
-        var newTeam = 0;
+        var newTeam = currentLobbyPlayer.Team - 1;
 
-        // NOTE: this breaks if there are zero teams but there should NEVER be zero teams
-        // and besides there are separate arrays of Colors and Names so there are MANY more
-        // potential sources of bugs. This is a minor assumption in comparison.
         // YOLO SWAG THUG-LYFE 5-EVA Fo shizzle ma nizzle.
-        if ((currentLobbyPlayer.Team - 1) < 0)
-        {
-            newTeam = Teams.Colors.Length - 1;
-        }
-        else
-        {
-            newTeam = currentLobbyPlayer.Team - 1;
+        if (GameManager.instance.GameMode.UsesTeams) {
+            if (newTeam < 1) {
+                newTeam = GameManager.instance.GameMode.MaxTeams;
+            }
+        } else {
+            if (newTeam < 0) {
+                newTeam = 7;
+            }
         }
 
         Lobby.SetPlayerTeam(currentLobbyPlayer.Name, newTeam);
@@ -235,19 +239,18 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             return;
         }
 
-        var newTeam = 0;
+        int newTeam = currentLobbyPlayer.Team + 1;
 
-        // NOTE: this breaks if there are zero teams but there should NEVER be zero teams
-        // and besides there are separate arrays of Colors and Names so there are MANY more
-        // potential sources of bugs. This is a minor assumption in comparison.
         // YOLO SWAG THUG-LYFE 5-EVA Fo shizzle ma nizzle.
-        if ((currentLobbyPlayer.Team + 1) >= Teams.Colors.Length)
-        {
-            newTeam = 0;
-        }
-        else
-        {
-            newTeam = currentLobbyPlayer.Team + 1;
+        if (GameManager.instance.GameMode.UsesTeams) {
+            if (newTeam >= (GameManager.instance.GameMode.MaxTeams + 1 )) {
+                Debug.Log("Wrapped around from team " + newTeam + "to team " + (GameManager.instance.GameMode.UsesTeams ? 1 : 0));
+                newTeam = 1;
+            }
+        } else {
+            if (newTeam >= 8) {
+                newTeam = 0;
+            }
         }
 
         Lobby.SetPlayerTeam(currentLobbyPlayer.Name, newTeam);
@@ -258,9 +261,9 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     /// </summary>
     private void SetMap()
     {
-        if (this.currentHostMap >= 0 && this.currentHostMap < this.mapNamesList.Count)
+        if (this.currentHostMap >= 0 && this.currentHostMap < GameModeManager.GetSupportedMapsForGameMode(Lobby.GameModeName).Count)
         {
-            Lobby.MapName = this.mapNamesList[this.currentHostMap];
+            Lobby.MapName = GameModeManager.GetSupportedMapsForGameMode(Lobby.GameModeName)[this.currentHostMap];
         }
         else
         {
@@ -273,9 +276,23 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     /// </summary>
     private void SetGameMode()
     {
-        if (this.currentHostGameMode >= 0 && this.currentHostGameMode < this.gameModesList.Count)
+        Debug.Log("Setting GameMode to " + this.currentHostGameMode + " (" + GameModeManager.GameModes[this.currentHostGameMode].GetType().Name + ")");
+        if (this.currentHostGameMode >= 0 && this.currentHostGameMode < GameModeManager.GameModes.Length)
         {
-            Lobby.GameModeName = this.gameModesList[this.currentHostGameMode].GameModeName;
+            GameManager.instance.GameMode = GameModeManager.GameModes[this.currentHostGameMode];
+
+            var maps = GameModeManager.GetSupportedMapsForGameMode(Lobby.GameModeName);
+            if (maps.Count > 0) {
+                currentHostMap = 0;
+                nextMapButton.interactable = maps.Count > 1;
+                prevMapButton.interactable = maps.Count > 1;
+            } else {
+                currentHostMap = -1;
+                nextMapButton.interactable = false;
+                prevMapButton.interactable = false;
+            }
+            SetMap();
+
         }
         else
         {
@@ -321,7 +338,7 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
         // You may refer to the code in this class by it's official name "Thomas the Jank-Engine"
         BoltNetwork.LoadScene(
             string.Format("ingame_{0}_{1}",
-            this.mapNamesList[this.currentHostMap],
+            GameModeManager.GetSupportedMapsForGameMode(Lobby.GameModeName)[this.currentHostMap],
             GameManager.instance.GameMode.GetType().Name));
     }
 
@@ -396,10 +413,6 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             return;
         }
 
-        // Make a local copy of all game modes since the GameManager.GameModes is IEnumerable
-        // and cannot be indexed.
-        this.gameModesList.AddRange(GameModeManager.GameModes);
-
         // Subscribe to lobby events.
         Lobby.LobbyUpdatedEvent += Lobby_LobbyUpdatedEvent;
     }
@@ -430,6 +443,7 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
                 this.UpdateModeLabel();
                 break;
         }
+        VerifyGameCanStart();
     }
 
     /// <summary>
@@ -448,28 +462,23 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     /// </summary>
     private void UpdateModeLabel()
     {
-        this.gameModelLabel.text = Lobby.GameModeName;
-
-        // Populate maps list.
-        this.mapNamesList.Clear();
-        if (this.currentHostGameMode >= 0 && this.currentHostGameMode < this.gameModesList.Count)
-        {
-            this.mapNamesList.AddRange(
-                GameModeManager.GetSupportedMapsForGameMode(this.gameModesList[this.currentHostGameMode]));
-        }
+        IGameMode mode = GameManager.instance.GameMode;
+        this.gameModelLabel.text = mode.GameModeName;
         
-        this.currentHostMap = 0;
-
-        if (BoltNetwork.isServer)
-        {
-            if (this.mapNamesList.Count != 0)
-            {
-                Lobby.MapName = this.mapNamesList[this.currentHostMap];
+        var player = this.GetCurrentLobbyPlayer();
+        if (mode.UsesTeams) {
+            if (player.Team < 1) {
+                Lobby.SetPlayerTeam(player.Name, 1);
+                UpdateTeamLabel();
+                ReloadPlayersList();
+            } else if (player.Team >= mode.MaxTeams + 1) {
+                Lobby.SetPlayerTeam(player.Name, mode.MaxTeams);
+                UpdateTeamLabel();
+                ReloadPlayersList();
             }
-            else
-            {
-                Lobby.MapName = null;
-            }
+            teamLabel.enabled = true;
+        } else {
+            teamLabel.enabled = false;
         }
     }
 
@@ -487,14 +496,18 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             return;
         }
 
-        if (currentLobbyPlayer.Team < 0 || currentLobbyPlayer.Team >= Teams.Names.Length)
+        if (!VerifyValidTeam(currentLobbyPlayer.Team))
         {
-            Debug.LogError("Current user has invalid team number.");
+            //Debug.LogWarning("Current user has invalid team number.");
             return;
         }
 
         this.teamLabel.text = Teams.Names[currentLobbyPlayer.Team];
         this.teamPanel.color = ColorFromTeam(currentLobbyPlayer.Team);
+    }
+
+    private static bool VerifyValidTeam(int team) {
+        return team >= (GameManager.instance.GameMode.UsesTeams ? 1 : 0) && team < (GameManager.instance.GameMode.UsesTeams ? (GameManager.instance.GameMode.MaxTeams + 1) : 8);
     }
 
     /// <summary>
@@ -515,7 +528,7 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
 
         if (currentLobbyPlayer == null)
         {
-            Debug.LogError("Current user is not a member of the current game.");
+            //Debug.LogError("Current user is not a member of the current game.");
             return null;
         }
 
@@ -529,7 +542,7 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
     {
         if (Lobby.MapName != null)
         {
-            this.mapLabel.text = Lobby.MapName;
+            this.mapLabel.text = GameModeManager.GetHumanReadableNameForMap(Lobby.MapName);
 
             if (!BoltNetwork.isClient)
             {
@@ -602,5 +615,19 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
         color.a = 0.75f;
 
         return color;
+    }
+
+    private bool GameCanStart() {
+        if (!BoltNetwork.isServer) return false;
+        foreach (var p in Lobby.AllPlayers) {
+            if (!VerifyValidTeam(p.Team)) return false;
+        }
+        if (Lobby.GameModeName == null) return false;
+        if (Lobby.MapName == null) return false;
+        return true;
+    }
+
+    private void VerifyGameCanStart() {
+        launchButton.interactable = GameCanStart();
     }
 }

@@ -32,7 +32,7 @@ public class DebugGoHome : MonoBehaviour {
     void Update() {
         if (!pressed) return;
         if (BoltNetwork.isRunning) return;
-        Application.LoadLevel("launcher");
+        Application.LoadLevel(0);
         GameManager.instance.ChangeGameState(GameManager.GameState.MENU);
     }
 }

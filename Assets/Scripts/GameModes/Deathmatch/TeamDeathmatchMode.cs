@@ -14,7 +14,7 @@ public class TeamDeathmatchMode : SimpleTeamGameMode {
     }
 
     public override int MaxTeams {
-        get { return 8; }
+        get { return 7; }
     }
 
 

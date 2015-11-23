@@ -173,6 +173,7 @@ public class GameManager : Bolt.GlobalEventListener
 
     void Update() {
         DebugHUD.setValue("GameState", System.Enum.GetName(typeof(GameState), CurrentGameState));
+        DebugHUD.setValue("GameMode", GameMode == null ? "NULL" : GameMode.GetType().Name);
         //only the server needs to do this because it will change the scene and bring the clients along for the ride
         if (BoltNetwork.isServer && CurrentGameState == GameState.POST_GAME_FADE) {
             if (fadeTime < 3f) {

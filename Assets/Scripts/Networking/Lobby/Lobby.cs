@@ -705,8 +705,8 @@ public class Lobby : Bolt.GlobalEventListener {
     /// </summary>
     private class Sorter : IComparer<LobbyPlayer> {
         public int Compare(LobbyPlayer x, LobbyPlayer y) {
-            if (x.Team != y.Team) return x.Team - y.Team;
-            return 0;
+            if (x.Team != y.Team && GameManager.instance.GameMode.UsesTeams) return x.Team - y.Team;
+            return x.Name.CompareTo(y.Name);
         }
     }
 

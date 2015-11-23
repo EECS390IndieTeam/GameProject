@@ -77,13 +77,18 @@ public class MenuActions : MonoBehaviour
     /// </summary>
     public void ExitApplication()
     {
+#if UNITY_EDITOR
         // Application.Quit() function does not function in editor.
         if (Application.isEditor)
         {
-            Debug.LogWarning("Cannot exit game while in editor. Deploy to test this feature.");
+            UnityEditor.EditorApplication.isPlaying = false;
+        } else {
+            Debug.LogWarning("Error; somehow code was compiled for the editor, but we are not in the editor.  This is impossible and/or unimportant");
         }
-
+#else
         Application.Quit();
+
+#endif
     }
 
     /// <summary>

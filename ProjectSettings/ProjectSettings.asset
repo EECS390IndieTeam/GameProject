@@ -80,11 +80,11 @@ PlayerSettings:
   wiiUAllowScreenCapture: 1
   wiiUControllerCount: 0
   m_SupportedAspectRatios:
-    4:3: 1
-    5:4: 1
+    4:3: 0
+    5:4: 0
     16:10: 1
     16:9: 1
-    Others: 1
+    Others: 0
   bundleIdentifier: com.Company.ProductName
   bundleVersion: 1.0
   preloadedAssets: []
@@ -115,6 +115,7 @@ PlayerSettings:
   iPhoneTargetOSVersion: 22
   uIPrerenderedIcon: 0
   uIRequiresPersistentWiFi: 0
+  uIRequiresFullScreen: 1
   uIStatusBarHidden: 1
   uIExitOnSuspend: 0
   uIStatusBarStyle: 0
@@ -262,6 +263,8 @@ PlayerSettings:
   ps4ReprojectionSupport: 0
   ps4UseAudio3dBackend: 0
   ps4Audio3dVirtualSpeakerCount: 14
+  ps4attribCpuUsage: 0
+  ps4SocialScreenEnabled: 0
   ps4attribUserManagement: 0
   ps4attribMoveSupport: 0
   ps4attrib3DSupport: 0

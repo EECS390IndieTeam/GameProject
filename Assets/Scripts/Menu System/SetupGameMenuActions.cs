@@ -26,10 +26,19 @@ public class SetupGameMenuActions : MonoBehaviour
     /// </summary>
     public Button launchButton;
 
+    public LobbyGameMenuActions lobbyActions;
+
+    public MenuActions menuActions;
+
+    public Canvas lobbyCanvas;
+
     /// <summary>
     /// Default host port number.
     /// </summary>
     public int defaultPort = 54321;
+
+    private bool loading = false;
+    private bool shuttingDown = false;
 
     /// <summary>
     /// Initial setup.
@@ -84,12 +93,29 @@ public class SetupGameMenuActions : MonoBehaviour
             if (BoltNetwork.isRunning && BoltNetwork.isClient)
             {
                 BoltLauncher.Shutdown();
+                shuttingDown = true;
+            } else {
+                // We validate this on edit, we shouldn't need to again.
+                BoltLauncher.StartServer(int.Parse(this.portInputField.text));
+                loading = true;
             }
+            EnableInputs(false);
+        }));
+    }
 
+
+    void Update() {
+        if (!loading) return;
+        if (shuttingDown && !BoltNetwork.isRunning) {
+            shuttingDown = false;
             // We validate this on edit, we shouldn't need to again.
             BoltLauncher.StartServer(int.Parse(this.portInputField.text));
-            GameObject.Find("LobbyPanel").GetComponent<LobbyGameMenuActions>().PrepareMenu();
-        }));
+        } else if (!shuttingDown && BoltNetwork.isRunning) {
+            lobbyActions.PrepareMenu();
+            loading = false;
+            EnableInputs(true);
+            menuActions.NavigateAndPushCanvas(lobbyCanvas);
+        }
     }
 
     /// <summary>
@@ -102,5 +128,12 @@ public class SetupGameMenuActions : MonoBehaviour
         this.launchButton.interactable
             = (int.TryParse(this.portInputField.text, out port) &&
             this.screenNameInputField.text.Length != 0);
+    }
+
+    private void EnableInputs(bool enable) {
+        portInputField.interactable = enable;
+        lobbyPasswordInputField.interactable = enable;
+        screenNameInputField.interactable = enable;
+        launchButton.interactable = enable;
     }
 }
