@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class GameManager : Bolt.GlobalEventListener
+public class GameManager : MonoBehaviour
 {
 
 	private static GameManager _instance;
@@ -33,7 +33,6 @@ public class GameManager : Bolt.GlobalEventListener
 			//If a Singleton already exists and you find
 			//another reference in scene, destroy it!
 			if (this != _instance) {
-                BoltNetwork.RemoveGlobalEventListener(this);
 				Destroy (this);
 			}
 		}
@@ -154,7 +153,7 @@ public class GameManager : Bolt.GlobalEventListener
     }
 
 
-    private void GameOver() {
+    internal void GameOver() {
         if (BoltNetwork.isServer) {
             GameMode.OnGameEnd();
 
@@ -192,13 +191,6 @@ public class GameManager : Bolt.GlobalEventListener
             }
         }
     }
-
-    //Tells clients to end the game
-    public override void OnEvent(GameOverEvent evnt) {
-		if (!BoltNetwork.isClient)
-			return;
-		GameOver ();
-	}
 
     /// <summary>
     /// Jank-ASS disconnect network and go to MainMenu function.
