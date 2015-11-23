@@ -4932,7 +4932,8 @@ MonoBehaviour:
   flag: {fileID: 115758}
   gun: {fileID: 122188}
   ObjectsToDisableWhileDead:
-  - {fileID: 0}
+  - {fileID: 164558}
+  - {fileID: 122188}
   materials:
   - {fileID: 2311876}
   - {fileID: 2365426}
