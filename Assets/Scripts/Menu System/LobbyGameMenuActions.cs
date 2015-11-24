@@ -95,7 +95,7 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
             //this.gameModelLabel.text = "Game Mode";
             //this.mapLabel.text = "Map";
 
-            this.launchButton.interactable = false;
+            this.launchButton.interactable = true;
 
             if (GameModeManager.GameModes.Length > 1) {
                 prevModeButton.interactable = true;

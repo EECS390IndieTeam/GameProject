@@ -4868,7 +4868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightningMaterial: {fileID: 2100000, guid: 34812b32841a255459f39511c1280354, type: 2}
-  maxLength: 0
+  maxLength: 100
   framesPerUpdate: 1
   curve:
     serializedVersion: 2
@@ -5090,6 +5090,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxLength
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

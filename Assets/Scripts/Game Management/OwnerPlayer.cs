@@ -41,6 +41,12 @@ public class OwnerPlayer : AbstractPlayer {
         Debug.Log("Player " + Username + " was killed by " + killer + " using weapon #" + weaponID);
         //we need to tell the server that we died so that it can respawn us
         DeathEvent evnt = DeathEvent.Create(Bolt.GlobalTargets.OnlyServer, Bolt.ReliabilityModes.ReliableOrdered);
+		if (Username != killer) {
+			SpawningBlind.instance.Text = "Killed by " + killer + "\nRespawing...";
+		} else {
+			SpawningBlind.instance.Text = "You killed yourself.\nRespawing...";
+		}
+		SpawningBlind.instance.FadeIn (3.5f);
         evnt.Killer = killer;
         evnt.Player = Username;
         evnt.WeaponID = weaponID;
@@ -53,7 +59,7 @@ public class OwnerPlayer : AbstractPlayer {
         rb.isKinematic = true;
     }
 
-    public override void RespawnAt(Vector3 position, Quaternion rotation) {
+	public override void RespawnAt(Vector3 position, Quaternion rotation) {
         MoveTo(position, rotation);
         Health = MaxHealth;
         fpsController.grenade.RefillGrenades();
@@ -63,7 +69,8 @@ public class OwnerPlayer : AbstractPlayer {
         IsDead = false;
         ControlEnabled = true;
         this.coll.enabled = true;
-        rb.isKinematic = false;
+		rb.isKinematic = false;
+		SpawningBlind.instance.Hide ();
     }
 
     public override void MoveTo(Vector3 position, Quaternion rotation) {
