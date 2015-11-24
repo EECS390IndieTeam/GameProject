@@ -46,7 +46,7 @@ public class OwnerPlayer : AbstractPlayer {
 		} else {
 			SpawningBlind.instance.Text = "You killed yourself.\nRespawing...";
 		}
-		SpawningBlind.instance.FadeIn (3.5f);
+		SpawningBlind.instance.FadeIn (1.5f);
         evnt.Killer = killer;
         evnt.Player = Username;
         evnt.WeaponID = weaponID;

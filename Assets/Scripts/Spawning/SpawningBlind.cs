@@ -129,7 +129,8 @@ public class SpawningBlind : MonoBehaviour {
     void Update() {
         fadeTime += Time.deltaTime;
         if (fadeTime >= targetFadeTime) {
-            Hide();
+			Alpha = endingAlpha;
+			this.enabled = false;;
         } else {
             float percent = fadeTime / targetFadeTime;
             Alpha = Mathf.Lerp(startingAlpha, endingAlpha, percent);
