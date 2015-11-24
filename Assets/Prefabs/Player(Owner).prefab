@@ -2362,8 +2362,8 @@ MonoBehaviour:
   CooldownRate: 40
   CooldownDelay: .100000001
   MaxTemperature: 100
-  HeatPerShot: 70
-  DamagePerShot: 10
+  HeatPerShot: 100
+  DamagePerShot: 120
   OverheatedCooldownMultiplier: 1.5
   Automatic: 0
   MinDelayBetweenShots: .100000001

@@ -41,7 +41,8 @@ public class MenuEffects : MonoBehaviour
     /// </summary>
     void Start()
     {
-        this.originalRotation = gameObject.transform.rotation.eulerAngles;
+        Cursor.visible = true;
+		this.originalRotation = gameObject.transform.rotation.eulerAngles;
     }
 
     /// <summary>

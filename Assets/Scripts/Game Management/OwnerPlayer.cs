@@ -60,6 +60,7 @@ public class OwnerPlayer : AbstractPlayer {
     }
 
 	public override void RespawnAt(Vector3 position, Quaternion rotation) {
+		SpawningBlind.instance.FadeOut(1.5f);
         MoveTo(position, rotation);
         Health = MaxHealth;
         fpsController.grenade.RefillGrenades();
@@ -70,7 +71,6 @@ public class OwnerPlayer : AbstractPlayer {
         ControlEnabled = true;
         this.coll.enabled = true;
 		rb.isKinematic = false;
-		SpawningBlind.instance.Hide ();
     }
 
     public override void MoveTo(Vector3 position, Quaternion rotation) {

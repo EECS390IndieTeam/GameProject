@@ -125,6 +125,7 @@ public class FindGameMenuActions : Bolt.GlobalEventListener
         destroyAllEntries();
         foreach (var entry in sessionList)
         {
+			Debug.Log ("found host");
             createEntryForSession(entry.Value);
         }
         refreshButton.interactable = true;
