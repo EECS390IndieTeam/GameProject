@@ -175,7 +175,7 @@ public class Gun : MonoBehaviour, IWeapon
 				//Add in check for friendly fire here.
 				if (target != null && (target.Team != player.Team && GameManager.instance.GameMode.UsesTeams))
 				{
-					target.TakeDamage(DamagePerShot * Time.deltaTime, target.Username, -SourceTransform.forward, WeaponID);
+					target.TakeDamage(DamagePerShot * Time.deltaTime, player.Username, -SourceTransform.forward, WeaponID);
 				}
 			}
 			player.MuzzlePoint = GunShotStartTransform.position;

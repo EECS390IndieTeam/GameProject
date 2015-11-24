@@ -41,6 +41,7 @@ public class MenuEffects : MonoBehaviour
     /// </summary>
     void Start()
     {
+		SpawningBlind.instance.Hide ();
         Cursor.visible = true;
 		this.originalRotation = gameObject.transform.rotation.eulerAngles;
     }
