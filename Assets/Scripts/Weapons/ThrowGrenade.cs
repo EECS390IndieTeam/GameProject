@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ThrowGrenade : MonoBehaviour {
 	//Variables for Grenade
@@ -8,6 +9,13 @@ public class ThrowGrenade : MonoBehaviour {
     public float ThrowForce = 10.0f;
 
     private Grenade heldGrenade;
+    // public GameObject GrenadesObject;
+    public List<GameObject> GrenadeList;
+    // private PlayerGrenades grenadeUI; 
+
+    void Start(){
+        // grenadeUI = GrenadesObject.GetComponent<PlayerGrenades>();
+    }
 
     void Update() {
         if (Input.GetButtonDown("Grenade") && heldGrenade == null && grenadeAmmo > 0) {
@@ -19,6 +27,7 @@ public class ThrowGrenade : MonoBehaviour {
             heldGrenade.transform.localScale = Vector3.one;
             heldGrenade.GetComponent<Rigidbody>().isKinematic = true;
             grenadeAmmo--;
+            setActiveGrenades(grenadeAmmo);
         }
         if (Input.GetButtonUp("Grenade") && heldGrenade != null) {
             Rigidbody rgb = heldGrenade.GetComponent<Rigidbody>();
@@ -27,6 +36,13 @@ public class ThrowGrenade : MonoBehaviour {
             heldGrenade.transform.parent = null;
             heldGrenade.GetComponent<Collider>().enabled = true;
             heldGrenade = null;
+        }
+    }
+
+    public void setActiveGrenades(int grenadeAmmo){
+        for (int i = 0; i < grenadeAmmo; i++){
+            print(grenadeAmmo);
+            GrenadeList[i].SetActive(false);
         }
     }
 }
