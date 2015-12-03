@@ -56,6 +56,7 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
 
     public override void OnPreGame() {
         Lobby.AddStat("Kills");
+        Lobby.AddStat("Deaths");
         Lobby.AddStat("Flags");
     }
 
