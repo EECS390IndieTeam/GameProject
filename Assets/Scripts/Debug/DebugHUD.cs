@@ -6,6 +6,7 @@ public class DebugHUD : MonoBehaviour {
 	private static Dictionary<string,System.Object> list;
 
     private static bool initalized = false;
+    public bool startEnabled = true;
 
 	static DebugHUD(){
 		list = new Dictionary<string,System.Object>();
@@ -33,7 +34,7 @@ public class DebugHUD : MonoBehaviour {
 		GetComponent<GUIText>().alignment = TextAlignment.Left;
 		GetComponent<GUIText>().anchor = TextAnchor.UpperLeft;
 		GetComponent<GUIText>().richText = true;
-		GetComponent<GUIText>().enabled = Application.isEditor||Debug.isDebugBuild;
+		GetComponent<GUIText>().enabled = startEnabled && (Application.isEditor||Debug.isDebugBuild);
 	}
 
 	void LateUpdate () {
