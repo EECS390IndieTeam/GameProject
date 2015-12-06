@@ -1691,6 +1691,7 @@ MonoBehaviour:
   asteroidTemplates:
   - {fileID: 198312, guid: db14e381214a1564aa0271ec0c6d4010, type: 2}
   - {fileID: 143464, guid: ff705ed7b390af944a0fe9e932f15645, type: 2}
+  - {fileID: 172724, guid: fea37f9e8fe86e44694b87839374ec6e, type: 2}
   negativeZTrajectory: 0
   positiveZTrajectory: 0
   positiveYTrajectory: 1
@@ -8214,7 +8215,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 968263193}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
