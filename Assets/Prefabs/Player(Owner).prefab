@@ -2748,7 +2748,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &197326
 GameObject:
   m_ObjectHideFlags: 1
@@ -4971,7 +4971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d547e4f511313456c956df3612e02248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 102286}
   currentHealth: 0
   healthSlider: {fileID: 11441984}
   damageImage: {fileID: 11498572}
@@ -7347,9 +7347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fc79734fcbf06a4795b219706f60aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCam: {fileID: 0}
+  playerCam: {fileID: 171062}
   grenadeCount: 5
-  nadeScript: {fileID: 0}
+  nadeScript: {fileID: 11421868}
 --- !u!114 &11484622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7650,7 +7650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownSlider: {fileID: 11418846}
-  gun: {fileID: 0}
+  gun: {fileID: 11481790}
   overheatColor: {r: 1, g: 0, b: 0, a: 1}
   normalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11495716

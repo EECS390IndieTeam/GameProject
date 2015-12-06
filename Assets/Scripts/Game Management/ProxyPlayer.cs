@@ -66,7 +66,11 @@ public class ProxyPlayer : AbstractPlayer {
 	
 	public override void SetColor(Color color) {
 		foreach (MeshRenderer renderer in materials) {
-			renderer.material.SetColor ("_EmissionColor", color);
+            Debug.Log("There are " + renderer.materials.Length + " Materials.");
+            foreach (Material mat in renderer.materials)
+            {
+                mat.SetColor("_EmissionColor", color);
+            }
 		}
 	}
 }
