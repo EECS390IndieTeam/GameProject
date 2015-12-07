@@ -10,7 +10,8 @@ GameObject:
   - 4: {fileID: 422200}
   - 33: {fileID: 3340786}
   - 23: {fileID: 2370284}
-  m_Layer: 0
+  - 64: {fileID: 6412208}
+  m_Layer: 9
   m_Name: HALL_West_Poly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +59,8 @@ GameObject:
   - 4: {fileID: 432638}
   - 33: {fileID: 3365668}
   - 23: {fileID: 2392980}
-  m_Layer: 0
+  - 64: {fileID: 6437054}
+  m_Layer: 9
   m_Name: Asteroid_1_Poly4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +93,7 @@ GameObject:
   - 4: {fileID: 491614}
   - 33: {fileID: 3363016}
   - 23: {fileID: 2368560}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Decals:pPlane4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +110,8 @@ GameObject:
   - 4: {fileID: 499700}
   - 33: {fileID: 3364462}
   - 23: {fileID: 2311116}
-  m_Layer: 0
+  - 64: {fileID: 6466928}
+  m_Layer: 9
   m_Name: DONUT_Poly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +128,8 @@ GameObject:
   - 4: {fileID: 464900}
   - 33: {fileID: 3363930}
   - 23: {fileID: 2398584}
-  m_Layer: 0
+  - 64: {fileID: 6483804}
+  m_Layer: 9
   m_Name: DOME_Poly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +146,7 @@ GameObject:
   - 4: {fileID: 428830}
   - 33: {fileID: 3370404}
   - 23: {fileID: 2398480}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Decals:pPlane6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +163,8 @@ GameObject:
   - 4: {fileID: 409976}
   - 33: {fileID: 3308198}
   - 23: {fileID: 2398032}
-  m_Layer: 0
+  - 64: {fileID: 6438066}
+  m_Layer: 9
   m_Name: Asteroid_3_Poly4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +181,7 @@ GameObject:
   - 4: {fileID: 417324}
   - 33: {fileID: 3332102}
   - 23: {fileID: 2372040}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Decals:pPlane5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +198,8 @@ GameObject:
   - 4: {fileID: 475744}
   - 33: {fileID: 3359952}
   - 23: {fileID: 2327924}
-  m_Layer: 0
+  - 64: {fileID: 6470530}
+  m_Layer: 9
   m_Name: Asteroid_1_Poly2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +216,8 @@ GameObject:
   - 4: {fileID: 412254}
   - 33: {fileID: 3356462}
   - 23: {fileID: 2358560}
-  m_Layer: 0
+  - 64: {fileID: 6499748}
+  m_Layer: 9
   m_Name: Asteroid_2_Final_151118:Asteroid_2_Poly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +234,8 @@ GameObject:
   - 4: {fileID: 485800}
   - 33: {fileID: 3362072}
   - 23: {fileID: 2336496}
-  m_Layer: 0
+  - 64: {fileID: 6402248}
+  m_Layer: 9
   m_Name: HALL_North_Poly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +252,8 @@ GameObject:
   - 4: {fileID: 465672}
   - 33: {fileID: 3377940}
   - 23: {fileID: 2327810}
-  m_Layer: 0
+  - 64: {fileID: 6484686}
+  m_Layer: 9
   m_Name: Asteroid_2_Poly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +270,8 @@ GameObject:
   - 4: {fileID: 401662}
   - 33: {fileID: 3366778}
   - 23: {fileID: 2341884}
-  m_Layer: 0
+  - 64: {fileID: 6432428}
+  m_Layer: 9
   m_Name: Asteroid_3_Poly2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +320,8 @@ GameObject:
   - 4: {fileID: 444230}
   - 33: {fileID: 3328322}
   - 23: {fileID: 2303748}
-  m_Layer: 0
+  - 64: {fileID: 6458576}
+  m_Layer: 9
   m_Name: Asteroid_3_Poly5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +338,8 @@ GameObject:
   - 4: {fileID: 476494}
   - 33: {fileID: 3315372}
   - 23: {fileID: 2389570}
-  m_Layer: 0
+  - 64: {fileID: 6416532}
+  m_Layer: 9
   m_Name: Asteroid_2_Poly4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +356,8 @@ GameObject:
   - 4: {fileID: 431582}
   - 33: {fileID: 3376696}
   - 23: {fileID: 2356192}
-  m_Layer: 0
+  - 64: {fileID: 6481166}
+  m_Layer: 9
   m_Name: HALL_East_Poly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +374,8 @@ GameObject:
   - 4: {fileID: 404076}
   - 33: {fileID: 3344486}
   - 23: {fileID: 2342118}
-  m_Layer: 0
+  - 64: {fileID: 6416124}
+  m_Layer: 9
   m_Name: Asteroid_3_Final_151118:Asteroid_3_Poly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +392,8 @@ GameObject:
   - 4: {fileID: 463688}
   - 33: {fileID: 3348724}
   - 23: {fileID: 2310986}
-  m_Layer: 0
+  - 64: {fileID: 6495218}
+  m_Layer: 9
   m_Name: Asteroid_1_Poly3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +410,8 @@ GameObject:
   - 4: {fileID: 468008}
   - 33: {fileID: 3304888}
   - 23: {fileID: 2316460}
-  m_Layer: 0
+  - 64: {fileID: 6420632}
+  m_Layer: 9
   m_Name: Asteroid_1_Poly1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,7 +428,7 @@ GameObject:
   - 4: {fileID: 490474}
   - 33: {fileID: 3373582}
   - 23: {fileID: 2383990}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CUBE_Poly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,7 +445,8 @@ GameObject:
   - 4: {fileID: 403308}
   - 33: {fileID: 3391796}
   - 23: {fileID: 2340452}
-  m_Layer: 0
+  - 64: {fileID: 6461622}
+  m_Layer: 9
   m_Name: Asteroid_3_Poly3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,7 +463,8 @@ GameObject:
   - 4: {fileID: 487698}
   - 33: {fileID: 3304588}
   - 23: {fileID: 2366478}
-  m_Layer: 0
+  - 64: {fileID: 6414436}
+  m_Layer: 9
   m_Name: Asteroid_3_Poly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +481,8 @@ GameObject:
   - 4: {fileID: 437192}
   - 33: {fileID: 3306898}
   - 23: {fileID: 2367336}
-  m_Layer: 0
+  - 64: {fileID: 6456790}
+  m_Layer: 9
   m_Name: Asteroid_3_Poly6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,7 +499,8 @@ GameObject:
   - 4: {fileID: 461908}
   - 33: {fileID: 3315436}
   - 23: {fileID: 2373912}
-  m_Layer: 0
+  - 64: {fileID: 6498750}
+  m_Layer: 9
   m_Name: Asteroid_1_Final_151118:Asteroid_1_Poly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -497,7 +517,8 @@ GameObject:
   - 4: {fileID: 465702}
   - 33: {fileID: 3395308}
   - 23: {fileID: 2398486}
-  m_Layer: 0
+  - 64: {fileID: 6469682}
+  m_Layer: 9
   m_Name: Asteroid_2_Poly5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -530,7 +551,8 @@ GameObject:
   - 4: {fileID: 482694}
   - 33: {fileID: 3308548}
   - 23: {fileID: 2354720}
-  m_Layer: 0
+  - 64: {fileID: 6409322}
+  m_Layer: 9
   m_Name: Asteroid_2_Poly3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -547,7 +569,8 @@ GameObject:
   - 4: {fileID: 490622}
   - 33: {fileID: 3309438}
   - 23: {fileID: 2387242}
-  m_Layer: 0
+  - 64: {fileID: 6495052}
+  m_Layer: 9
   m_Name: Asteroid_2_Poly2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -564,7 +587,8 @@ GameObject:
   - 4: {fileID: 423442}
   - 33: {fileID: 3332638}
   - 23: {fileID: 2363830}
-  m_Layer: 0
+  - 64: {fileID: 6487340}
+  m_Layer: 9
   m_Name: Asteroid_3_Poly1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -580,7 +604,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 407750}
   - 95: {fileID: 9573562}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LEVEL_Final_151204
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -597,7 +621,8 @@ GameObject:
   - 4: {fileID: 427734}
   - 33: {fileID: 3384736}
   - 23: {fileID: 2361406}
-  m_Layer: 0
+  - 64: {fileID: 6406734}
+  m_Layer: 9
   m_Name: HALL_South_Poly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -614,7 +639,8 @@ GameObject:
   - 4: {fileID: 400366}
   - 33: {fileID: 3343058}
   - 23: {fileID: 2353520}
-  m_Layer: 0
+  - 64: {fileID: 6411908}
+  m_Layer: 9
   m_Name: Asteroid_1_Poly5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -631,7 +657,8 @@ GameObject:
   - 4: {fileID: 456670}
   - 33: {fileID: 3317070}
   - 23: {fileID: 2383592}
-  m_Layer: 0
+  - 64: {fileID: 6457384}
+  m_Layer: 9
   m_Name: Asteroid_2_Poly1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -648,7 +675,8 @@ GameObject:
   - 4: {fileID: 429610}
   - 33: {fileID: 3393204}
   - 23: {fileID: 2319744}
-  m_Layer: 0
+  - 64: {fileID: 6479210}
+  m_Layer: 9
   m_Name: Asteroid_1_Poly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -665,7 +693,7 @@ GameObject:
   - 4: {fileID: 494612}
   - 33: {fileID: 3332006}
   - 23: {fileID: 2386358}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Decals:pPlane7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2337,6 +2365,342 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174118}
   m_Mesh: {fileID: 4300036, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6402248
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 132458}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300004, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6406734
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 183924}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300006, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6409322
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176454}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300032, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6411908
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184558}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300024, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6412208
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100848}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300010, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6414436
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 167874}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300038, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6416124
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157776}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300060, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6416532
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 152188}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300034, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6420632
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160104}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300016, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6432428
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136012}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300042, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6437054
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109912}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300022, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6438066
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120902}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300046, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6456790
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168386}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300050, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6457384
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 185960}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300028, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6458576
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150122}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300048, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6461622
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162588}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300044, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6466928
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117540}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6469682
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174118}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300036, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6470530
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 126146}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300018, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6479210
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 188714}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300014, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6481166
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157186}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300008, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6483804
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119070}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300002, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6484686
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134936}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300026, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6487340
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179842}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300040, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6495052
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178392}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300030, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6495218
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 159718}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300020, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6498750
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 170064}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300064, guid: 40386a78bae259c49bb23093024f3925, type: 3}
+--- !u!64 &6499748
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 132174}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300062, guid: 40386a78bae259c49bb23093024f3925, type: 3}
 --- !u!95 &9573562
 Animator:
   serializedVersion: 3
