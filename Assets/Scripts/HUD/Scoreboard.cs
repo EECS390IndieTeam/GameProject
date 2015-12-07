@@ -126,7 +126,7 @@ public class Scoreboard : MonoBehaviour {
                 foreach (var player in Lobby.GetPlayersOnTeam(i))
                 {
                     GameObject player_info = panel.transform.GetChild(index).gameObject;
-                    players.Add(player, player_info);
+                    players[player] = player_info;
                     player_info.SetActive(true);
                     //begin ungodly mess
                     player_info.transform.GetChild(0).GetComponent<Text>().text = player.Name;

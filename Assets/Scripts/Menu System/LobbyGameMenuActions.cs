@@ -467,7 +467,10 @@ public class LobbyGameMenuActions : Bolt.GlobalEventListener
         
         var player = this.GetCurrentLobbyPlayer();
         if (mode.UsesTeams) {
-            if (player.Team < 1) {
+            if(player == null)
+            {
+                ReloadPlayersList();
+            } else if (player.Team < 1) {
                 Lobby.SetPlayerTeam(player.Name, 1);
                 UpdateTeamLabel();
                 ReloadPlayersList();

@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3314646}
   - 23: {fileID: 2323288}
   - 95: {fileID: 9521068}
+  - 54: {fileID: 5491848}
   m_Layer: 0
   m_Name: Asteroid3
   m_TagString: Untagged
@@ -63,6 +64,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172724}
   m_Mesh: {fileID: 4300000, guid: be9f767bc748d4640b3b2e9f2365d2f4, type: 3}
+--- !u!54 &5491848
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172724}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!95 &9521068
 Animator:
   serializedVersion: 3
