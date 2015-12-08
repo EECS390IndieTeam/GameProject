@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if false
+using UnityEngine;
 using System.Collections;
 using System.Reflection;
 
@@ -23,3 +24,5 @@ public class BoltDebugInfoAutoHide : MonoBehaviour {
         debugInfo.enabled = (bool)field.GetValue(console);
 	}
 }
+
+#endif
