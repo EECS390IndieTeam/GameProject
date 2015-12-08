@@ -31,6 +31,7 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
 
     //Hardcoded team limit here.
     private FlagCapturePoint[] capPoints = new FlagCapturePoint[2];
+	private Flag[] flags = new Flag[2];
 
     public override GameModes Mode {
         get { return GameModes.CAPTURE_THE_FLAG; }
@@ -85,5 +86,13 @@ public class CaptureTheFlagMode : SimpleTeamGameMode {
 
     private void SetCapPointForTeam(int team, FlagCapturePoint point) {
         capPoints[team - 1] = point;
-    }
+	}
+	
+	public Flag GetFlagForTeam(int team) {
+		return flags[team - 1];
+	}
+
+	public void SetFlagForTeam(int team, Flag flag) {
+		flags[team - 1] = flag;
+	}
 }

@@ -25,6 +25,8 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
             c.enabled = false;
             GetComponent<bouncySpinnyCubeScript>().enabled = false;
         }
+		CaptureTheFlagMode mode = (CaptureTheFlagMode)GameManager.instance.GameMode;
+		mode.SetFlagForTeam(Team, this);
     }
 
     public override void Attached() {

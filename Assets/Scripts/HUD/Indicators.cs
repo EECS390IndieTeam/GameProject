@@ -27,6 +27,8 @@ public class Indicators : MonoBehaviour {
 		crt = canvas.GetComponent<RectTransform>();
 		friendlyBase = ctf.GetCapPointForTeam(player.Team);
 		enemyBase = ctf.GetCapPointForTeam(player.Team==1?2:1);
+		friendlyFlag = ctf.GetFlagForTeam(player.Team);
+		enemyFlag = ctf.GetFlagForTeam(player.Team==1?2:1);
 		friendlyBaseIndicator.GetComponent<Image>().color = Teams.Colors[player.Team];
 		friendlyFlagIndicator.GetComponent<Image>().color = Teams.Colors[player.Team];
 		enemyBaseIndicator.GetComponent<Image>().color = Teams.Colors[player.Team==1?2:1];
@@ -38,19 +40,31 @@ public class Indicators : MonoBehaviour {
 		if (!friendlyBase) {
 			friendlyBase = ctf.GetCapPointForTeam(player.Team);
 		} else {
-			if (!friendlyBase.FlagAtBase) {
-				updateIndicator(friendlyBaseIndicator, friendlyBase.transform);
-			}
+			updateIndicator(friendlyBaseIndicator, friendlyBase.transform);
 		}
 		if (!enemyBase) {
 			enemyBase = ctf.GetCapPointForTeam(player.Team==1?2:1);
 		} else {
-			if (!enemyBase.FlagAtBase) {
-				updateIndicator(enemyBaseIndicator, enemyBase.transform);
+			updateIndicator(enemyBaseIndicator, enemyBase.transform);
+		}
+		if (!friendlyFlag) {
+			friendlyFlag = ctf.GetFlagForTeam(player.Team);
+		} else {
+			if (!friendlyBase.FlagAtBase) {
+				updateIndicator(friendlyFlagIndicator, friendlyFlag.transform);
+			} else {
+				friendlyFlagIndicator.SetActive(false);
 			}
 		}
-		//friendlyFlagIndicator.transform.position = Camera.WorldToScreenPoint(friendlyFlag.transform.position);
-
+		if (!enemyFlag) {
+			enemyFlag = ctf.GetFlagForTeam(player.Team==1?2:1);
+		} else {
+			if (!enemyBase.FlagAtBase) {
+				updateIndicator(enemyFlagIndicator, enemyFlag.transform);
+			} else {
+				enemyFlagIndicator.SetActive(false);
+			}
+		}
 	}
 
 	private void updateIndicator(GameObject indicator, Transform source) {
