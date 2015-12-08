@@ -74,14 +74,14 @@ public class Indicators : MonoBehaviour {
 		} else {
 			enemyFlagIndicator.SetActive(false);
 		}
-        //DebugHUD.setValue("friendly base", friendlyBase);
-        //DebugHUD.setValue("enemy base", enemyBase);
-        //DebugHUD.setValue("friendly flag", friendlyFlag);
-        //DebugHUD.setValue("enemy flag", enemyFlag);
+        DebugHUD.setValue("friendly base", friendlyBase);
+        DebugHUD.setValue("enemy base", enemyBase);
+        DebugHUD.setValue("friendly flag", friendlyFlag);
+        DebugHUD.setValue("enemy flag", enemyFlag);
         DebugHUD.setValue("friendly holder", fHolder);
         DebugHUD.setValue("enemy holder", eHolder);
-        DebugHUD.setValue("friendly flag base", friendlyBase.FlagAtBase);
-        //DebugHUD.setValue("enemy flag base", enemyBase.FlagAtBase);
+        DebugHUD.setValue("friendly flag base", friendlyBase?friendlyBase.FlagAtBase:false);
+        DebugHUD.setValue("enemy flag base", enemyBase?enemyBase.FlagAtBase:false);
     }
 
 	private void updateIndicator(GameObject indicator, Transform source) {

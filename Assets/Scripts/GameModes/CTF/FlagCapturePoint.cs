@@ -20,9 +20,12 @@ public class FlagCapturePoint : MonoBehaviour {
     }
 
     public void ReturnFlag() {
+        //If the flag is not already at the base, spawn it.
+        if (BoltNetwork.isServer && !FlagAtBase)
+        {
+            Flag.SpawnFlag(teamID, transform.position, transform.rotation);
+        }
         FlagAtBase = true;
-        if (!BoltNetwork.isServer || FlagAtBase) return;
-        Flag.SpawnFlag(teamID, transform.position, transform.rotation);
     }
 
     void OnTriggerEnter(Collider other) {
