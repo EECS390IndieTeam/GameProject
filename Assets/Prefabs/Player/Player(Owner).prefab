@@ -4167,11 +4167,7 @@ MonoBehaviour:
   HandPoint: {fileID: 425972}
   flag: {fileID: 128764}
   gun: {fileID: 158946}
-  ObjectsToDisableWhileDead:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  ObjectsToDisableWhileDead: []
   materials:
   - {fileID: 2374304}
 --- !u!114 &11412216
