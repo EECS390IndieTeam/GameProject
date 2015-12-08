@@ -20,9 +20,9 @@ public class FlagCapturePoint : MonoBehaviour {
     }
 
     public void ReturnFlag() {
+        FlagAtBase = true;
         if (!BoltNetwork.isServer || FlagAtBase) return;
         Flag.SpawnFlag(teamID, transform.position, transform.rotation);
-        FlagAtBase = true;
     }
 
     void OnTriggerEnter(Collider other) {
