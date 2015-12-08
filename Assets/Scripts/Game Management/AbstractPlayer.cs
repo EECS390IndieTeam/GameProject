@@ -224,6 +224,9 @@ public abstract class AbstractPlayer : Bolt.GlobalEventListener, IPlayer {
             flag.GetComponentInChildren<Renderer>().materials[1].SetColor("_EmissionColor", Teams.Colors[evnt.FlagTeam] * 2);
             flag.GetComponentInChildren<Light>().color = Teams.Colors[evnt.FlagTeam];
             gun.SetActive(false);
+            CaptureTheFlagMode mode = (CaptureTheFlagMode)GameManager.instance.GameMode;
+            mode.GetCapPointForTeam(evnt.FlagTeam).FlagAtBase = false;
+            mode.SetFlagHolderForTeam(evnt.FlagTeam, this);
         }
     }
 

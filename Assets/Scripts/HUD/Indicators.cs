@@ -37,7 +37,6 @@ public class Indicators : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-		DebugHUD.setValue("friendly base", friendlyBase);
 		if (!friendlyBase) {
 			friendlyBase = ctf.GetCapPointForTeam(player.Team);
 		} else {
@@ -75,7 +74,15 @@ public class Indicators : MonoBehaviour {
 		} else {
 			enemyFlagIndicator.SetActive(false);
 		}
-	}
+        //DebugHUD.setValue("friendly base", friendlyBase);
+        //DebugHUD.setValue("enemy base", enemyBase);
+        //DebugHUD.setValue("friendly flag", friendlyFlag);
+        //DebugHUD.setValue("enemy flag", enemyFlag);
+        DebugHUD.setValue("friendly holder", fHolder);
+        DebugHUD.setValue("enemy holder", eHolder);
+        DebugHUD.setValue("friendly flag base", friendlyBase.FlagAtBase);
+        //DebugHUD.setValue("enemy flag base", enemyBase.FlagAtBase);
+    }
 
 	private void updateIndicator(GameObject indicator, Transform source) {
 		RectTransform rt = (RectTransform)indicator.transform;

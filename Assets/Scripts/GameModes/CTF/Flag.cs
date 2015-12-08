@@ -78,11 +78,9 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
         //    - on the enemy team, so you can pick it up wherever
         //    - or your a friendly player but the flag is not at spawn
         if(player != null && (!player.HoldingFlag) && (player.Team != Team || (player.Team == Team && !mode.isFlagAtBaseForTeam(Team))))
-        {
-            mode.GetCapPointForTeam(Team).FlagAtBase = false;
+        {          
 			Debug.Log ("Picked up flag");
 			player.PickupFlag(Team);
-			mode.SetFlagHolderForTeam(Team, player);
             Destroy(this.gameObject);
         }
     }
