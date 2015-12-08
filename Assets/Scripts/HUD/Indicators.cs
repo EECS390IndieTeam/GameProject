@@ -50,7 +50,7 @@ public class Indicators : MonoBehaviour {
 		if (!friendlyFlag) {
 			friendlyFlag = ctf.GetFlagForTeam(player.Team);
 		} else {
-			if (!friendlyBase.FlagAtBase) {
+			if (!friendlyBase || !friendlyBase.FlagAtBase) {
 				updateIndicator(friendlyFlagIndicator, friendlyFlag.transform);
 			} else {
 				friendlyFlagIndicator.SetActive(false);
@@ -59,7 +59,7 @@ public class Indicators : MonoBehaviour {
 		if (!enemyFlag) {
 			enemyFlag = ctf.GetFlagForTeam(player.Team==1?2:1);
 		} else {
-			if (!enemyBase.FlagAtBase) {
+			if (!enemyBase || !enemyBase.FlagAtBase) {
 				updateIndicator(enemyFlagIndicator, enemyFlag.transform);
 			} else {
 				enemyFlagIndicator.SetActive(false);

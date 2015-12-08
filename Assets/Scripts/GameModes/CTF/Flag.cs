@@ -25,8 +25,7 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
             c.enabled = false;
             GetComponent<bouncySpinnyCubeScript>().enabled = false;
         }
-		CaptureTheFlagMode mode = (CaptureTheFlagMode)GameManager.instance.GameMode;
-		mode.SetFlagForTeam(Team, this);
+		
     }
 
     public override void Attached() {
@@ -34,6 +33,8 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
         if (!BoltNetwork.isServer) c.enabled = false;
         state.AddCallback("Team", new Bolt.PropertyCallbackSimple(() => {
             SetFlagColor(Teams.Colors[Team]);
+            CaptureTheFlagMode mode = (CaptureTheFlagMode)GameManager.instance.GameMode;
+            mode.SetFlagForTeam(Team, this);
         }));
     }
 
