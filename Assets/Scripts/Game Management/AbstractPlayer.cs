@@ -200,7 +200,7 @@ public abstract class AbstractPlayer : Bolt.GlobalEventListener, IPlayer {
         }
         FlagDroppedEvent evnt = FlagDroppedEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.ReliableOrdered);
         evnt.FlagTeam = this.HeldFlagTeam;
-        evnt.Carrier = Username;
+		evnt.Carrier = Username;
         evnt.Send();
     }
 
@@ -211,7 +211,9 @@ public abstract class AbstractPlayer : Bolt.GlobalEventListener, IPlayer {
         FlagGrabbedEvent evnt = FlagGrabbedEvent.Create(Bolt.GlobalTargets.Everyone, Bolt.ReliabilityModes.ReliableOrdered);
         evnt.FlagTeam = team;
         evnt.PlayerTeam = Team;
-        evnt.CarrierName = Username;
+		evnt.CarrierName = Username;
+//		CaptureTheFlagMode mode = (CaptureTheFlagMode)GameManager.instance.GameMode;
+//		mode.SetFlagHolderForTeam(team, this);
         evnt.Send();
     }
 
@@ -231,7 +233,10 @@ public abstract class AbstractPlayer : Bolt.GlobalEventListener, IPlayer {
         }
     }
 
-    private void dropFlag() {
+	private void dropFlag() {
+		Debug.Log ("nulling out flag");
+		CaptureTheFlagMode mode = (CaptureTheFlagMode)GameManager.instance.GameMode;
+		mode.SetFlagHolderForTeam(this.HeldFlagTeam, null);
         SetHeldFlagTeam(0);
         flag.SetActive(false);
         gun.SetActive(true);

@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.IN_GAME:
                 GameStartTime = BoltNetwork.serverTime;
-                if(BoltNetwork.isServer) GameMode.OnGameStart();
+                /*if(BoltNetwork.isServer)*/ GameMode.OnGameStart();
                 break;
             case GameState.POST_GAME_FADE:
                 if (BoltNetwork.isServer) {

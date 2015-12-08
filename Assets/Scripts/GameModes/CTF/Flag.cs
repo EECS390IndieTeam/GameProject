@@ -81,7 +81,8 @@ public class Flag : Bolt.EntityBehaviour<IFlagState> {
         {
             mode.GetCapPointForTeam(Team).FlagAtBase = false;
 			Debug.Log ("Picked up flag");
-            player.PickupFlag(Team);
+			player.PickupFlag(Team);
+			mode.SetFlagHolderForTeam(Team, player);
             Destroy(this.gameObject);
         }
     }

@@ -37,6 +37,7 @@ public class Indicators : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
+		DebugHUD.setValue("friendly base", friendlyBase);
 		if (!friendlyBase) {
 			friendlyBase = ctf.GetCapPointForTeam(player.Team);
 		} else {
@@ -47,23 +48,32 @@ public class Indicators : MonoBehaviour {
 		} else {
 			updateIndicator(enemyBaseIndicator, enemyBase.transform);
 		}
-		if (!friendlyFlag) {
+		AbstractPlayer fHolder = ctf.GetFlagHolderForTeam(player.Team);
+
+		if (!friendlyFlag && !fHolder) {
 			friendlyFlag = ctf.GetFlagForTeam(player.Team);
-		} else {
-			if (!friendlyBase || !friendlyBase.FlagAtBase) {
-				updateIndicator(friendlyFlagIndicator, friendlyFlag.transform);
-			} else {
-				friendlyFlagIndicator.SetActive(false);
-			}
 		}
-		if (!enemyFlag) {
-			enemyFlag = ctf.GetFlagForTeam(player.Team==1?2:1);
+
+		if (fHolder && !(player.Username == fHolder.Username)) {
+			updateIndicator(friendlyFlagIndicator, fHolder.transform);
+		} else if (friendlyBase && !friendlyBase.FlagAtBase && friendlyFlag) {
+			updateIndicator(friendlyFlagIndicator, friendlyFlag.transform);
 		} else {
-			if (!enemyBase || !enemyBase.FlagAtBase) {
-				updateIndicator(enemyFlagIndicator, enemyFlag.transform);
-			} else {
-				enemyFlagIndicator.SetActive(false);
-			}
+			friendlyFlagIndicator.SetActive(false);
+		}
+		
+		AbstractPlayer eHolder = ctf.GetFlagHolderForTeam(player.Team==1?2:1);
+
+		if (!enemyFlag && !eHolder) {
+			enemyFlag = ctf.GetFlagForTeam(player.Team==1?2:1);
+		}
+
+		if (eHolder && !(player.Username == eHolder.Username)) {
+			updateIndicator(enemyFlagIndicator, eHolder.transform);
+		} else if (enemyBase && !enemyBase.FlagAtBase && enemyFlag) {
+			updateIndicator(enemyFlagIndicator, enemyFlag.transform);
+		} else {
+			enemyFlagIndicator.SetActive(false);
 		}
 	}
 
